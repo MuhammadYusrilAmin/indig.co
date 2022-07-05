@@ -32,37 +32,39 @@
 
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
-                    <a href="dashboard-admin" class="nav-link">
+                    <a href="{{ url('dashboard') }}" class="nav-link">
                         <i class="bx bxs-dashboard"></i>
                         <span>
-                            @lang('translation.dashboards')
+                            Dashboard
                         </span>
                     </a>
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="apps-ecommerce-products">
+                    <a class="nav-link" href="{{ url('products') }}">
                         <i class="lab la-product-hunt"></i>
-                        <span>@lang('translation.products')</span>
+                        <span>
+                            Products
+                        </span>
                     </a>
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="apps-ecommerce-orders">
+                    <a class="nav-link" href="{{ url('orders') }}">
                         <i class="lab la-first-order"></i>
                         <span>@lang('translation.orders')</span>
                     </a>
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="apps-ecommerce-customers">
+                    <a class="nav-link" href="{{ url('customers') }}">
                         <i class="las la-users-cog"></i>
                         <span>@lang('translation.customers')</span>
                     </a>
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="apps-ecommerce-cart">
+                    <a class="nav-link" href="{{ url('cart') }}">
                         <i class="las la-shopping-cart"></i>
                         <span>@lang('translation.transactions')</span>
                     </a>

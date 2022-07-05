@@ -81,7 +81,7 @@ setTimeout(function () {
 var removeItem = document.getElementById('removeItemModal');
 removeItem.addEventListener('show.bs.modal', function (event) {
 	isSelected = 0;
-	
+
 	document.getElementById("delete-product").addEventListener("click", function () {
 		if (event.relatedTarget.closest('.gridjs-tr')) {
 			event.relatedTarget.closest('.gridjs-tr').remove();
@@ -122,7 +122,7 @@ new gridjs.Grid({
 						'<div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/' + cell[0] + '" alt="" class="img-fluid d-block"></div>' +
 						'</div>' +
 						'<div class="flex-grow-1">' +
-						'<h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">' + cell[1] + '</a></h5>' +
+						'<h5 class="fs-14 mb-1"><a href="products/detail.html" class="text-dark">' + cell[1] + '</a></h5>' +
 						'<p class="text-muted mb-0">Category : <span class="fw-medium">' + cell[2] + '</span></p>' +
 						'</div>' +
 						'</div>');
@@ -167,7 +167,7 @@ new gridjs.Grid({
 						'<i class="ri-more-fill"></i>' +
 						'</button>' +
 						'<ul class="dropdown-menu dropdown-menu-end">' +
-						'<li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>' +
+						'<li><a class="dropdown-item" href="products/detail.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>' +
 						'<li><a class="dropdown-item" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>' +
 						'<li class="dropdown-divider"></li>' +
 						'<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li>' +
@@ -231,7 +231,7 @@ new gridjs.Grid({
 						'<div class="avatar-sm bg-light rounded p-1"><img src="assets/images/products/' + cell[0] + '" alt="" class="img-fluid d-block"></div>' +
 						'</div>' +
 						'<div class="flex-grow-1">' +
-						'<h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-dark">' + cell[1] + '</a></h5>' +
+						'<h5 class="fs-14 mb-1"><a href="products/detail.html" class="text-dark">' + cell[1] + '</a></h5>' +
 						'<p class="text-muted mb-0">Category : <span class="fw-medium">' + cell[2] + '</span></p>' +
 						'</div>' +
 						'</div>');
@@ -275,7 +275,7 @@ new gridjs.Grid({
 						'<i class="ri-more-fill"></i>' +
 						'</button>' +
 						'<ul class="dropdown-menu dropdown-menu-end">' +
-						'<li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>' +
+						'<li><a class="dropdown-item" href="products/detail.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>' +
 						'<li><a class="dropdown-item" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>' +
 						'<li class="dropdown-divider"></li>' +
 						'<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li>' +

@@ -1,11 +1,11 @@
 @extends('layouts.master-without-nav')
 @section('title')
-    @lang('translation.lock-screen')
+@lang('translation.lock-screen')
 @endsection
 @section('content')
 <div class="auth-page-wrapper pt-5">
     <!-- auth page bg -->
-    <div class="auth-one-bg-position auth-one-bg"  id="auth-particles">
+    <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
         <div class="bg-overlay"></div>
 
         <div class="shape">
@@ -52,7 +52,7 @@
                                         <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
                                     </div>
                                     <div class="mb-2 mt-4">
-                                        <button class="btn btn-success w-100" type="submit">Unlock</button>
+                                        <a href="{{ url('/') }}" class="btn btn-success w-100">Unlock</a>
                                     </div>
                                 </form><!-- end form -->
 
@@ -80,7 +80,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                        <p class="mb-0 text-muted">&copy; <script>
+                                document.write(new Date().getFullYear())
+                            </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
                     </div>
                 </div>
             </div>
@@ -90,8 +92,8 @@
 </div>
 <!-- end auth-page-wrapper -->
 @section('script')
-    <script src="{{ URL::asset('assets/libs/particles.js/particles.js.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/pages/particles.app.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/particles.js/particles.js.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/pages/particles.app.js') }}"></script>
 @endsection
 
 </html>

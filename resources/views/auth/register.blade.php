@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <button class="btn btn-success w-100" type="submit">Sign Up</button>
+                                        <a href="{{ url('login') }}" class="btn btn-success w-100">Sign Up</a>
                                     </div>
 
                                     <div class="mt-4 text-center">
@@ -134,7 +134,7 @@
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Already have an account ? <a href="auth-signin-basic" class="fw-semibold text-primary text-decoration-underline"> Signin </a> </p>
+                        <p class="mb-0">Already have an account ? <a href="{{ url('login') }}" class="fw-semibold text-primary text-decoration-underline"> Signin </a> </p>
                     </div>
 
                 </div>

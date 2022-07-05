@@ -62,8 +62,8 @@
                 <h4 class="card-title mb-2">Half Sleeve Round Neck T-Shirts</h4>
             </div>
             <div class="card-footer">
-                <a href="apps-ecommerce-product-details" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="apps-ecommerce-cart" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a href="{{ url('products-detail') }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <a href="{{ url('cart') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
             </div>
         </div><!-- end card -->
     </div>
@@ -75,8 +75,8 @@
                 <h4 class="card-title mb-2">Urban Ladder Pashe Chair</h4>
             </div>
             <div class="card-footer">
-                <a href="apps-ecommerce-product-details" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="apps-ecommerce-cart" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a href="{{ url('products-detail') }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <a href="{{ url('cart') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
             </div>
         </div><!-- end card -->
     </div>
@@ -88,8 +88,8 @@
                 <h4 class="card-title mb-2">350 ml Glass Grocery Container</h4>
             </div>
             <div class="card-footer">
-                <a href="apps-ecommerce-product-details" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="apps-ecommerce-cart" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a href="{{ url('products-detail') }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <a href="{{ url('cart') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
             </div>
         </div><!-- end card -->
     </div>
@@ -101,8 +101,8 @@
                 <h4 class="card-title mb-2">Fabric Dual Tone Living Room Chair</h4>
             </div>
             <div class="card-footer">
-                <a href="apps-ecommerce-product-details" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="apps-ecommerce-cart" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a href="{{ url('products-detail') }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <a href="{{ url('cart') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
             </div>
         </div><!-- end card -->
     </div>
@@ -114,8 +114,8 @@
                 <h4 class="card-title mb-2">Crux Motorsports Helmet</h4>
             </div>
             <div class="card-footer">
-                <a href="apps-ecommerce-product-details" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="apps-ecommerce-cart" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a href="{{ url('products-detail') }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <a href="{{ url('cart') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
             </div>
         </div><!-- end card -->
     </div>
@@ -166,7 +166,7 @@
             <div class="card-body text-center p-4">
                 <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
                 <img src="{{ URL::asset('assets/images/companies/img-1.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">Force Medicines</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Force Medicines</a></h5>
                 <p class="text-muted mb-4">David Marshall</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
@@ -194,7 +194,7 @@
         <div class="card">
             <div class="card-body text-center p-4">
                 <img src="{{ URL::asset('assets/images/companies/img-2.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">Micro Design</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Micro Design</a></h5>
                 <p class="text-muted mb-4">Katia Stapleton</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -212,7 +212,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
         <div class="card">
             <div class="card-body text-center p-4">
                 <img src="{{ URL::asset('assets/images/companies/img-3.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">Nesta Technologies</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Nesta Technologies</a></h5>
                 <p class="text-muted mb-4">Harley Fuller</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -240,7 +240,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
@@ -251,7 +251,7 @@
             <div class="card-body text-center p-4">
                 <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
                 <img src="{{ URL::asset('assets/images/companies/img-4.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">iTest Factory</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">iTest Factory</a></h5>
                 <p class="text-muted mb-4">Oliver Tyler</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -269,7 +269,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
@@ -279,7 +279,7 @@
         <div class="card">
             <div class="card-body text-center p-4">
                 <img src="{{ URL::asset('assets/images/companies/img-5.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">Meta4Systems</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Meta4Systems</a></h5>
                 <p class="text-muted mb-4">Zoe Dennis</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -297,7 +297,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
@@ -308,7 +308,7 @@
             <div class="card-body text-center p-4">
                 <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
                 <img src="{{ URL::asset('assets/images/companies/img-6.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">Digitech Galaxy</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Digitech Galaxy</a></h5>
                 <p class="text-muted mb-4">John Roberts</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -326,7 +326,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
@@ -337,7 +337,7 @@
             <div class="card-body text-center p-4">
                 <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
                 <img src="{{ URL::asset('assets/images/companies/img-7.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">Syntyce Solutions</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Syntyce Solutions</a></h5>
                 <p class="text-muted mb-4">Demi Allen</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -355,7 +355,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
@@ -365,7 +365,7 @@
         <div class="card">
             <div class="card-body text-center p-4">
                 <img src="{{ URL::asset('assets/images/companies/img-8.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="apps-ecommerce-seller-details" class="link-primary">Zoetic Fashion</a></h5>
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Zoetic Fashion</a></h5>
                 <p class="text-muted mb-4">James Bowen</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -383,7 +383,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="apps-ecommerce-seller-details" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>

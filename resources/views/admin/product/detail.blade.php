@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') @lang('translation.product-Details') @endsection
+@section('title') Product Detail @endsection
 @section('css')
 <link href="assets/libs/swiper/swiper.min.css" rel="stylesheet" type="text/css" />
 

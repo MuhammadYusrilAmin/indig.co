@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function root()
     {
-        return view('index');
+        return view('user.index');
     }
 
     /*Language Translation*/
@@ -89,7 +89,6 @@ class HomeController extends Controller
             //     'Message' => "Something went wrong!"
             // ], 200); // Status code here
             return redirect()->back();
-
         }
     }
 

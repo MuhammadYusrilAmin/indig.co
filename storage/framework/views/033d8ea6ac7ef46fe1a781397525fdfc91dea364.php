@@ -1,15 +1,14 @@
-@extends('layouts.master')
-@section('title') @lang('translation.products') @endsection
-@section('css')
-<link href="{{ URL::asset('assets/libs/nouislider/nouislider.min.css') }}" rel="stylesheet">
+<?php $__env->startSection('title'); ?> Products <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(URL::asset('assets/libs/nouislider/nouislider.min.css')); ?>" rel="stylesheet">
 <link rel="stylesheet" href="assets/libs/gridjs/gridjs.min.css">
 
-@endsection
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title')Products @endslot
-@endcomponent
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?>Products <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 <div class="row">
     <div class="col-xl-3 col-lg-4">
         <div class="card">
@@ -24,8 +23,7 @@
                 </div>
 
                 <div class="filter-choices-input">
-                    <input class="form-control" data-choices data-choices-removeItem type="text"
-                        value="Watches, Headset, Sweatshirt, 20% Off, 4 Star" />
+                    <input class="form-control" data-choices data-choices-removeItem type="text" value="Watches, Headset, Sweatshirt, 20% Off, 4 Star" />
                 </div>
             </div>
 
@@ -43,9 +41,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="d-flex py-1" data-bs-toggle="collapse"
-                                    href="#filterlist-fashion" role="button" aria-expanded="true"
-                                    aria-controls="filterlist-fashion">
+                                <a class="d-flex py-1" data-bs-toggle="collapse" href="#filterlist-fashion" role="button" aria-expanded="true" aria-controls="filterlist-fashion">
                                     <div class="flex-grow-1">
                                         <h5 class="fs-12 mb-0">Fashion</h5>
                                     </div>
@@ -75,9 +71,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="d-flex py-1" data-bs-toggle="collapse"
-                                    href="#filterlist-electronics" role="button" aria-expanded="false"
-                                    aria-controls="filterlist-electronics">
+                                <a class="d-flex py-1" data-bs-toggle="collapse" href="#filterlist-electronics" role="button" aria-expanded="false" aria-controls="filterlist-electronics">
                                     <div class="flex-grow-1">
                                         <h5 class="fs-12 mb-0">Electronics</h5>
                                     </div>
@@ -99,9 +93,7 @@
                             </li>
 
                             <li>
-                                <a class="d-flex py-1" data-bs-toggle="collapse"
-                                    href="#filterlist-furniture" role="button" aria-expanded="false"
-                                    aria-controls="filterlist-furniture">
+                                <a class="d-flex py-1" data-bs-toggle="collapse" href="#filterlist-furniture" role="button" aria-expanded="false" aria-controls="filterlist-furniture">
                                     <div class="flex-grow-1">
                                         <h5 class="fs-12 mb-0">Home & Furniture</h5>
                                     </div>
@@ -129,9 +121,7 @@
                             </li>
 
                             <li>
-                                <a class="d-flex py-1" data-bs-toggle="collapse"
-                                    href="#filterlist-appliances" role="button" aria-expanded="false"
-                                    aria-controls="filterlist-appliances">
+                                <a class="d-flex py-1" data-bs-toggle="collapse" href="#filterlist-appliances" role="button" aria-expanded="false" aria-controls="filterlist-appliances">
                                     <div class="flex-grow-1">
                                         <h5 class="fs-12 mb-0">Appliances</h5>
                                     </div>
@@ -176,23 +166,18 @@
 
                     <div id="product-price-range"></div>
                     <div class="formCost d-flex gap-2 align-items-center mt-3">
-                        <input class="form-control form-control-sm" type="text" id="minCost" value="0" /> <span class="fw-semibold text-muted">to</span> <input
-                            class="form-control form-control-sm" type="text" id="maxCost" value="1000" />
+                        <input class="form-control form-control-sm" type="text" id="minCost" value="0" /> <span class="fw-semibold text-muted">to</span> <input class="form-control form-control-sm" type="text" id="maxCost" value="1000" />
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingBrands">
-                        <button class="accordion-button bg-transparent shadow-none" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#flush-collapseBrands"
-                            aria-expanded="true" aria-controls="flush-collapseBrands">
-                            <span class="text-muted text-uppercase fs-12 fw-semibold">Brands</span> <span
-                                class="badge bg-success rounded-pill align-middle ms-1">2</span>
+                        <button class="accordion-button bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBrands" aria-expanded="true" aria-controls="flush-collapseBrands">
+                            <span class="text-muted text-uppercase fs-12 fw-semibold">Brands</span> <span class="badge bg-success rounded-pill align-middle ms-1">2</span>
                         </button>
                     </h2>
 
-                    <div id="flush-collapseBrands" class="accordion-collapse collapse show"
-                        aria-labelledby="flush-headingBrands">
+                    <div id="flush-collapseBrands" class="accordion-collapse collapse show" aria-labelledby="flush-headingBrands">
                         <div class="accordion-body text-body pt-0">
                             <div class="search-box search-box-sm">
                                 <input type="text" class="form-control bg-light border-0" placeholder="Search Brands...">
@@ -200,38 +185,28 @@
                             </div>
                             <div class="d-flex flex-column gap-2 mt-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productBrandRadio5" checked>
-                                    <label class="form-check-label"
-                                        for="productBrandRadio5">Boat</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="productBrandRadio5" checked>
+                                    <label class="form-check-label" for="productBrandRadio5">Boat</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productBrandRadio4">
-                                    <label class="form-check-label"
-                                        for="productBrandRadio4">OnePlus</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="productBrandRadio4">
+                                    <label class="form-check-label" for="productBrandRadio4">OnePlus</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productBrandRadio3">
-                                    <label class="form-check-label"
-                                        for="productBrandRadio3">Realme</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="productBrandRadio3">
+                                    <label class="form-check-label" for="productBrandRadio3">Realme</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productBrandRadio2">
-                                    <label class="form-check-label"
-                                        for="productBrandRadio2">Sony</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="productBrandRadio2">
+                                    <label class="form-check-label" for="productBrandRadio2">Sony</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productBrandRadio1" checked>
+                                    <input class="form-check-input" type="checkbox" value="" id="productBrandRadio1" checked>
                                     <label class="form-check-label" for="productBrandRadio1">JBL</label>
                                 </div>
 
                                 <div>
-                                    <button type="button"
-                                        class="btn btn-link text-decoration-none text-uppercase fw-medium p-0">1,235
+                                    <button type="button" class="btn btn-link text-decoration-none text-uppercase fw-medium p-0">1,235
                                         More</button>
                                 </div>
                             </div>
@@ -242,55 +217,45 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingDiscount">
-                        <button class="accordion-button bg-transparent shadow-none collapsed" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#flush-collapseDiscount"
-                            aria-expanded="true" aria-controls="flush-collapseDiscount">
-                            <span class="text-muted text-uppercase fs-12 fw-semibold">Discount</span> <span
-                                class="badge bg-success rounded-pill align-middle ms-1">1</span>
+                        <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseDiscount" aria-expanded="true" aria-controls="flush-collapseDiscount">
+                            <span class="text-muted text-uppercase fs-12 fw-semibold">Discount</span> <span class="badge bg-success rounded-pill align-middle ms-1">1</span>
                         </button>
                     </h2>
-                    <div id="flush-collapseDiscount" class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingDiscount">
+                    <div id="flush-collapseDiscount" class="accordion-collapse collapse" aria-labelledby="flush-headingDiscount">
                         <div class="accordion-body text-body pt-1">
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productdiscountRadio6">
+                                    <input class="form-check-input" type="checkbox" value="" id="productdiscountRadio6">
                                     <label class="form-check-label" for="productdiscountRadio6">
                                         50% or more
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productdiscountRadio5">
+                                    <input class="form-check-input" type="checkbox" value="" id="productdiscountRadio5">
                                     <label class="form-check-label" for="productdiscountRadio5">
                                         40% or more
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productdiscountRadio4">
+                                    <input class="form-check-input" type="checkbox" value="" id="productdiscountRadio4">
                                     <label class="form-check-label" for="productdiscountRadio4">
                                         30% or more
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productdiscountRadio3" checked>
+                                    <input class="form-check-input" type="checkbox" value="" id="productdiscountRadio3" checked>
                                     <label class="form-check-label" for="productdiscountRadio3">
                                         20% or more
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productdiscountRadio2">
+                                    <input class="form-check-input" type="checkbox" value="" id="productdiscountRadio2">
                                     <label class="form-check-label" for="productdiscountRadio2">
                                         10% or more
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productdiscountRadio1">
+                                    <input class="form-check-input" type="checkbox" value="" id="productdiscountRadio1">
                                     <label class="form-check-label" for="productdiscountRadio1">
                                         Less than 10%
                                     </label>
@@ -303,22 +268,16 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingRating">
-                        <button class="accordion-button bg-transparent shadow-none collapsed"
-                            type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseRating" aria-expanded="false"
-                            aria-controls="flush-collapseRating">
-                            <span class="text-muted text-uppercase fs-12 fw-semibold">Rating</span> <span
-                                class="badge bg-success rounded-pill align-middle ms-1">1</span>
+                        <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRating" aria-expanded="false" aria-controls="flush-collapseRating">
+                            <span class="text-muted text-uppercase fs-12 fw-semibold">Rating</span> <span class="badge bg-success rounded-pill align-middle ms-1">1</span>
                         </button>
                     </h2>
 
-                    <div id="flush-collapseRating" class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingRating">
+                    <div id="flush-collapseRating" class="accordion-collapse collapse" aria-labelledby="flush-headingRating">
                         <div class="accordion-body text-body">
                             <div class="d-flex flex-column gap-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productratingRadio4" checked>
+                                    <input class="form-check-input" type="checkbox" value="" id="productratingRadio4" checked>
                                     <label class="form-check-label" for="productratingRadio4">
                                         <span class="text-muted">
                                             <i class="mdi mdi-star text-warning"></i>
@@ -330,8 +289,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productratingRadio3">
+                                    <input class="form-check-input" type="checkbox" value="" id="productratingRadio3">
                                     <label class="form-check-label" for="productratingRadio3">
                                         <span class="text-muted">
                                             <i class="mdi mdi-star text-warning"></i>
@@ -343,8 +301,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productratingRadio2">
+                                    <input class="form-check-input" type="checkbox" value="" id="productratingRadio2">
                                     <label class="form-check-label" for="productratingRadio2">
                                         <span class="text-muted">
                                             <i class="mdi mdi-star text-warning"></i>
@@ -356,8 +313,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="productratingRadio1">
+                                    <input class="form-check-input" type="checkbox" value="" id="productratingRadio1">
                                     <label class="form-check-label" for="productratingRadio1">
                                         <span class="text-muted">
                                             <i class="mdi mdi-star text-warning"></i>
@@ -386,8 +342,7 @@
                     <div class="row g-4">
                         <div class="col-sm-auto">
                             <div>
-                                <a href="apps-ecommerce-add-product" class="btn btn-success"><i
-                                        class="ri-add-line align-bottom me-1"></i> Add Product</a>
+                                <a href="<?php echo e(url('products/add')); ?>" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Add Product</a>
                             </div>
                         </div>
                         <div class="col-sm">
@@ -406,20 +361,17 @@
                         <div class="col">
                             <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all"
-                                        role="tab">
+                                    <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all" role="tab">
                                         All <span class="badge badge-soft-danger align-middle rounded-pill ms-1">12</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published"
-                                        role="tab">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published" role="tab">
                                         Published <span class="badge badge-soft-danger align-middle rounded-pill ms-1">5</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-draft"
-                                        role="tab">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-draft" role="tab">
                                         Draft
                                     </a>
                                 </li>
@@ -451,9 +403,7 @@
                         <div class="tab-pane" id="productnav-draft" role="tabpanel">
                             <div class="py-4 text-center">
                                 <div>
-                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json"
-                                        trigger="loop" colors="primary:#405189,secondary:#0ab39c"
-                                        style="width:72px;height:72px">
+                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:72px;height:72px">
                                     </lord-icon>
                                 </div>
 
@@ -476,45 +426,44 @@
 </div>
 <!-- end row -->
 
-    <!-- END layout-wrapper -->
+<!-- END layout-wrapper -->
 
 
-    <!-- removeItemModal -->
-    <div id="removeItemModal" class="modal fade zoomIn" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mt-2 text-center">
-                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
-                            colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
-                        <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                            <h4>Are you Sure ?</h4>
-                            <p class="text-muted mx-4 mb-0">Are you Sure You want to Remove this Product ?</p>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                        <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button>
+<!-- removeItemModal -->
+<div id="removeItemModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                        <h4>Are you Sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you Sure You want to Remove this Product ?</p>
                     </div>
                 </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button>
+                </div>
+            </div>
 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-
-    @endsection
-    @section('script')
-    <script src="{{ URL::asset('assets/libs/nouislider/nouislider.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/libs/wnumb/wnumb.min.js') }}"></script>
-    <script src="assets/libs/gridjs/gridjs.min.js"></script>
-    <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
-    <script src="{{ URL::asset('assets/js/pages/ecommerce-product-list.init.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-    @endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('assets/libs/nouislider/nouislider.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/libs/wnumb/wnumb.min.js')); ?>"></script>
+<script src="assets/libs/gridjs/gridjs.min.js"></script>
+<script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
+
+
+<script src="<?php echo e(URL::asset('assets/js/pages/ecommerce-product-list.init.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\saas\resources\views/admin/product/index.blade.php ENDPATH**/ ?>
