@@ -1,0 +1,1 @@
+<?php /**PATH D:\laragon\www\saas\resources\views/layouts/horizontal.blade.php ENDPATH**/ ?>
