@@ -8,28 +8,48 @@
 @slot('li_1') Ecommerce @endslot
 @slot('title') Create Product @endslot
 @endcomponent
-<div class="row">
-    <div class="col-lg-8">
-        <form>
+<form action="{{ url('products/') }}" method="POST">
+    @csrf
+
+    <div class="row">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
                         <label class="form-label" for="product-title-input">Product Title</label>
-                        <input type="text" class="form-control" id="product-title-input"
-                            placeholder="Enter product title">
+                        <input type="text" class="form-control {{ $errors->get('title') ? 'is-invalid' : '' }}" id="product-title-input" placeholder="Enter product title" name="title">
+                        @foreach ($errors->get('title') as $msg)
+                        <div class="invalid-feed text-danger">
+                            {{ $msg }}
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="product-price-input">Price</label>
+                        <input type="number" class="form-control {{ $errors->get('price') ? 'is-invalid' : '' }}" id="product-price-input" placeholder="Enter price" name="price">
+                        @foreach ($errors->get('price') as $msg)
+                        <div class="invalid-feed text-danger">
+                            {{ $msg }}
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="product-weight-input">Weight</label>
+                        <input type="number" class="form-control {{ $errors->get('weight') ? 'is-invalid' : '' }}" id="product-weight-input" placeholder="Enter weight (gram)" name="weight">
+                        @foreach ($errors->get('weight') as $msg)
+                        <div class="invalid-feed text-danger">
+                            {{ $msg }}
+                        </div>
+                        @endforeach
                     </div>
                     <div>
-                        <label>Product Description</label>
-
-                        <div id="ckeditor-classic">
-                            <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>
-                            <ul>
-                                <li>Full Sleeve</li>
-                                <li>Cotton</li>
-                                <li>All Sizes available</li>
-                                <li>4 Different Color</li>
-                            </ul>
+                        <label class="form-label" for="product-stock-input">Stock</label>
+                        <input type="number" class="form-control {{ $errors->get('stock') ? 'is-invalid' : '' }}" id="product-stock-input" placeholder="Enter stock" name="stock">
+                        @foreach ($errors->get('stock') as $msg)
+                        <div class="invalid-feed text-danger">
+                            {{ $msg }}
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -43,7 +63,12 @@
                     <div class="mb-4">
                         <h5 class="fs-13 mb-1">Product Image</h5>
                         <p class="text-muted">Add Product main Image.</p>
-                        <input class="form-control" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg">
+                        <input class="form-control {{ $errors->get('galleries_id') ? 'is-invalid' : '' }}" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="galleries_id">
+                        @foreach ($errors->get('galleries_id') as $msg)
+                        <div class="invalid-feed text-danger">
+                            {{ $msg }}
+                        </div>
+                        @endforeach
                     </div>
                     <div>
                         <h5 class="fs-13 mb-1">Product Gallery</h5>
@@ -51,7 +76,7 @@
 
                         <div class="dropzone">
                             <div class="fallback">
-                                <input name="file" type="file" multiple="multiple">
+                                <input name="file" type="file" multiple="multiple" name="galleries_id">
                             </div>
                             <div class="dz-message needsclick">
                                 <div class="mb-3">
@@ -62,9 +87,8 @@
                             </div>
                         </div>
 
-                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                        <!-- <ul class="list-unstyled mb-0" id="dropzone-preview">
                             <li class="mt-2" id="dropzone-preview-list">
-                                <!-- This is used as the file preview template -->
                                 <div class="border rounded">
                                     <div class="d-flex p-2">
                                         <div class="flex-shrink-0 me-3">
@@ -85,218 +109,107 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                         <!-- end dropzon-preview -->
                     </div>
                 </div>
             </div>
             <!-- end card -->
+        </div>
+        <!-- end col -->
 
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info"
-                                role="tab">
-                                General Info
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata"
-                                role="tab">
-                                Meta Data
-                            </a>
-                        </li>
-                    </ul>
+                    <h5 class="card-title mb-0">Publish</h5>
                 </div>
-                <!-- end card header -->
                 <div class="card-body">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
-                            <div class="mb-3">
-                                <label class="form-label" for="manufacturer-name-input">Manufacturer Name</label>
-                                <input type="text" class="form-control" id="manufacturer-name-input"
-                                    placeholder="Enter manufacturer name">
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="manufacturer-brand-input">Manufacturer
-                                            Brand</label>
-                                        <input type="text" class="form-control" id="manufacturer-brand-input"
-                                            placeholder="Enter manufacturer brand">
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-lg-6">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="product-price-input">Price</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="product-price-addon">$</span>
-                                                    <input type="text" class="form-control" id="product-price-input"
-                                                        placeholder="Enter price" aria-label="Price"
-                                                        aria-describedby="product-price-addon">
+                    <div>
+                        <label for="choices-publish-status-input" class="form-label">Status</label>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"
-                                                    for="product-discount-input">Discount</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text"
-                                                        id="product-discount-addon">%</span>
-                                                    <input type="text" class="form-control"
-                                                        id="product-discount-input" placeholder="Enter discount"
-                                                        aria-label="discount"
-                                                        aria-describedby="product-discount-addon">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                            </div>
-                            <!-- end row -->
+                        <select class="form-select {{ $errors->get('publish') ? 'is-invalid' : '' }}" id="choices-publish-status-input" data-choices data-choices-search-false name="publish">
+                            <option value="Published" selected>Published</option>
+                            <option value="Draft">Draft</option>
+                        </select>
+                        @foreach ($errors->get('publish') as $msg)
+                        <div class="invalid-feed text-danger">
+                            {{ $msg }}
                         </div>
-                        <!-- end tab-pane -->
-
-                        <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="meta-title-input">Meta title</label>
-                                        <input type="text" class="form-control" placeholder="Enter meta title" id="meta-title-input">
-                                    </div>
-                                </div>
-                                <!-- end col -->
-
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="meta-keywords-input">Meta Keywords</label>
-                                        <input type="text" class="form-control" placeholder="Enter meta keywords" id="meta-keywords-input">
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                            </div>
-                            <!-- end row -->
-
-                            <div>
-                                <label class="form-label" for="meta-description-input">Meta Description</label>
-                                <textarea class="form-control" id="meta-description-input" placeholder="Enter meta description" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <!-- end tab pane -->
+                        @endforeach
                     </div>
-                    <!-- end tab content -->
                 </div>
                 <!-- end card body -->
             </div>
             <!-- end card -->
-            <div class="text-end mb-3">
-                <button type="submit" class="btn btn-success w-sm">Submit</button>
-            </div>
-        </form>
 
-
-    </div>
-    <!-- end col -->
-
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Publish</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="choices-publish-status-input" class="form-label">Status</label>
-
-                    <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
-                        <option value="Published" selected>Published</option>
-                        <option value="Scheduled">Scheduled</option>
-                        <option value="Draft">Draft</option>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Product Categories</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add New</a>Select product category</p>
+                    <select class="form-select {{ $errors->get('category_id') ? 'is-invalid' : '' }}" name="choices-category-input" data-choices data-choices-search-false name="category_id">
+                        <option value="1" selected>All</option>
+                        <option value="2">Appliances</option>
+                        <option value="3">Fashion</option>
+                        <option value="4">Electronics</option>
+                        <option value="5">Grocery</option>
+                        <option value="6">Home & Furniture</option>
+                        <option value="7">Kids</option>
+                        <option value="8">Mobiles</option>
                     </select>
+                    @foreach ($errors->get('category_id') as $msg)
+                    <div class="invalid-feed text-danger">
+                        {{ $msg }}
+                    </div>
+                    @endforeach
                 </div>
-
-                <div>
-                    <label for="choices-publish-visibility-input" class="form-label">Visibility</label>
-                    <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
-                        <option value="Public" selected>Public</option>
-                        <option value="Hidden">Hidden</option>
-                    </select>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Product Tags</h5>
                 </div>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Publish Schedule</h5>
-            </div>
-            <!-- end card body -->
-            <div class="card-body">
-                <div>
-                    <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
-                    <input type="text" id="datepicker-publish-input" class="form-control" placeholder="Enter publish date" data-provider="flatpickr" data-date-format="d.m.y" data-enable-time>
-                </div>
-            </div>
-        </div>
-        <!-- end card -->
-
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Product Categories</h5>
-            </div>
-            <div class="card-body">
-                <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add New</a>Select product category</p>
-                <select class="form-select" name="choices-category-input" data-choices data-choices-search-false>
-                    <option value="All">All</option>
-                    <option value="Appliances">Appliances</option>
-                    <option value="Fashion" selected>Fashion</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Grocery">Grocery</option>
-                    <option value="Home & Furniture">Home & Furniture</option>
-                    <option value="Kids">Kids</option>
-                    <option value="Mobiles">Mobiles</option>
-                </select>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Product Tags</h5>
-            </div>
-            <div class="card-body">
-                <div class="hstack gap-3 align-items-start">
-                    <div class="flex-grow-1">
-                        <input class="form-control" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text"
-                    value="Cotton" />
+                <div class="card-body">
+                    <div class="hstack gap-3 align-items-start">
+                        <div class="flex-grow-1">
+                            <input class="form-control {{ $errors->get('tags') ? 'is-invalid' : '' }}" data-choices data-choices-multiple-remove="true" placeholder="Enter tags (example: Cotton)" type="text" name="tags">
+                            @foreach ($errors->get('tags') as $msg)
+                            <div class="invalid-feed text-danger">
+                                {{ $msg }}
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
+                <!-- end card body -->
             </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
+            <!-- end card -->
 
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Product Short Description</h5>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Product Short Description</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-2">Add short description for product</p>
+                    <textarea class="form-control {{ $errors->get('description') ? 'is-invalid' : '' }}" placeholder="Enter short description for product" rows="3" name="description"></textarea>
+                    @foreach ($errors->get('description') as $msg)
+                    <div class="invalid-feed text-danger">
+                        {{ $msg }}
+                    </div>
+                    @endforeach
+                </div>
+                <!-- end card body -->
             </div>
-            <div class="card-body">
-                <p class="text-muted mb-2">Add short description for product</p>
-                <textarea class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
+            <!-- end card -->
 
+            <div class="text-end mb-3">
+                <button type="submit" class="btn btn-success w-sm w-100">Submit</button>
+            </div>
+        </div>
     </div>
-</div>
+</form>
 <!-- end row -->
 @endsection
 @section('script')
@@ -307,4 +220,3 @@
 
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection
-

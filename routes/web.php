@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -35,15 +36,7 @@ Route::get('/dashboard', function () {
 });
 
 // PRODUCT
-Route::get('/products', function () {
-    return view('admin.product.index');
-});
-Route::get('/products/add', function () {
-    return view('admin.product.add');
-});
-Route::get('/products-detail', function () {
-    return view('admin.product.detail');
-});
+Route::resource('/products', ProductController::class);
 
 // ORDER
 Route::get('/orders', function () {
@@ -82,3 +75,12 @@ Route::get('/chat', function () {
 Route::get('/lockscreen', function () {
     return view('profile.lockscreen');
 });
+
+// beberapa fungsi endpoint resource yang perlu kita ketahui:
+// 1. Route get => nama_route => menjalankan fungsi index
+// 2. Route get => nama_route/create => menjalankan fungsi create
+// 3. Route post => nama_route => menjalankan fungsi store
+// 4. Route get => nama_route/{ id } => menjalankan fungsi show
+// 5. Route put/patch => nama_route/{ id } => menjalankan fungsi update
+// 6. Route delete => nama_route/{ id } => menjalankan fungsi delete
+// 7. Route get => nama_route/{ id }/edit => menjalankan fungsi edit

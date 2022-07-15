@@ -346,9 +346,7 @@
                                     <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#25a0e2,secondary:#00bd9d" style="width:120px;height:120px"></lord-icon>
                                 </div>
                                 <h5>Thank you ! Your Order is Completed !</h5>
-                                <p class="text-muted">You will receive an order confirmation email
-                                    with
-                                    details of your order.</p>
+                                <p class="text-muted">You will receive an order confirmation email with details of your order.</p>
 
                                 <h3 class="fw-semibold">Order ID: <a href="<?php echo e(url('orders/detail')); ?>" class="text-decoration-underline">VZ2451</a></h3>
                             </div>

@@ -67,7 +67,7 @@
                         <div class="mt-xl-0 mt-5">
                             <div class="d-flex">
                                 <div class="flex-grow-1">
-                                    <h4>Full Sleeve Sweatshirt for Men (Pink)</h4>
+                                    <h4><?php echo e($showDetail->title); ?></h4>
                                     <div class="hstack gap-3 flex-wrap">
                                         <div><a href="#" class="text-primary d-block">Tommy
                                                 Hilfiger</a></div>

@@ -343,7 +343,7 @@
                     <div class="row g-4">
                         <div class="col-sm-auto">
                             <div>
-                                <a href="{{ url('products/add') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Add Product</a>
+                                <a href="{{ url('products/create') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Add Product</a>
                             </div>
                         </div>
                         <div class="col-sm">
@@ -363,7 +363,7 @@
                             <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all" role="tab">
-                                        All <span class="badge badge-soft-danger align-middle rounded-pill ms-1">12</span>
+                                        All <span class="badge badge-soft-danger align-middle rounded-pill ms-1">{{ count($datas) }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -389,10 +389,81 @@
                 </div>
                 <!-- end card header -->
                 <div class="card-body">
-
                     <div class="tab-content text-muted">
                         <div class="tab-pane active" id="productnav-all" role="tabpanel">
-                            <div id="table-product-list-all" class="table-card gridjs-border-none"></div>
+                            <div class="table-responsive table-card mb-1">
+                                <table class="table table-nowrap align-middle" id="orderTable">
+                                    <thead class="text-muted table-light">
+                                        <tr class="text-uppercase">
+                                            <th class="sort" data-sort="">#</th>
+                                            <th class="sort" data-sort="">Image</th>
+                                            <th class="sort" data-sort="">Product</th>
+                                            <th class="sort" data-sort="">Stock</th>
+                                            <th class="sort" data-sort="">Price</th>
+                                            <th class="sort" data-sort="">Orders</th>
+                                            <th class="sort" data-sort="">Rating</th>
+                                            <th class="sort" data-sort="">Published</th>
+                                            <th class="sort" data-sort="">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list form-check-all">
+                                        <?php $i = 1 ?>
+                                        @foreach ($datas as $data)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>
+                                                <a href="{{ url('products/'.$data->id) }}">
+                                                    <img src="{{ $data->galleries[0]->photo_url }}" alt="{{ $data->title }}" width="60">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ url('products/'.$data->id) }}" class="fw-medium link-primary">{{ $data->title }}</a>
+                                                <br>
+                                                <small>Category: {{ $data->category->name }}</small>
+                                            </td>
+                                            <td>{{ $data->stock }}</td>
+                                            <td>{{ "Rp" . number_format($data->price, 2, ",", ".") }}</td>
+                                            <td>48</td>
+                                            <td>
+                                                <div class="fw-normal badge bg-light text-dark fs-6">
+                                                    <i class="lab las la-star text-warning"></i>
+                                                    4.5
+                                                </div>
+                                            </td>
+                                            <?php
+                                            $timestamp = 1615226965;
+                                            $dateFormat = 'd M, Y';
+                                            $timeFormat = 'h:i A';
+
+                                            $date = new DateTime();
+                                            $date = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+                                            $date->setTimestamp($timestamp);
+                                            ?>
+                                            <td>{{ $date->format($dateFormat) }} <small class="text-muted">{{ $date->format($timeFormat) }}</small></td>
+                                            <td>
+                                                <ul class="list-inline hstack gap-2 mb-0">
+                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
+                                                        <a href="{{ url('products/'.$data->id) }}" class="text-primary d-inline-block">
+                                                            <i class="ri-eye-fill fs-16"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                        <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
+                                                            <i class="ri-pencil-fill fs-16"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteOrder">
+                                                            <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- end tab pane -->
 
@@ -464,6 +535,6 @@
 <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
 
 
-<script src="{{ URL::asset('assets/js/pages/ecommerce-product-list.init.js') }}"></script>
+<!-- <script src="{{ URL::asset('assets/js/pages/ecommerce-product-list.init.js') }}"></script> -->
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection
