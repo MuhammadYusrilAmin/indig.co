@@ -14,11 +14,7 @@
 
                         <ul class="nav nav-pills nav-justified custom-nav" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link fs-15 p-3 active" id="pills-bill-info-tab" data-bs-toggle="pill" data-bs-target="#pills-bill-info" type="button" role="tab" aria-controls="pills-bill-info" aria-selected="true"><i class="ri-user-2-line fs-16 p-2 bg-soft-primary text-primary rounded-circle align-middle me-2"></i>
-                                    Personal Info</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link fs-15 p-3" id="pills-bill-address-tab" data-bs-toggle="pill" data-bs-target="#pills-bill-address" type="button" role="tab" aria-controls="pills-bill-address" aria-selected="false"><i class="ri-truck-line fs-16 p-2 bg-soft-primary text-primary rounded-circle align-middle me-2"></i>
+                                <button class="nav-link fs-15 p-3 active" id="pills-bill-info-tab" data-bs-toggle="pill" data-bs-target="#pills-bill-info" type="button" role="tab" aria-controls="pills-bill-info" aria-selected="false"><i class="ri-truck-line fs-16 p-2 bg-soft-primary text-primary rounded-circle align-middle me-2"></i>
                                     Shipping Info</button>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -33,110 +29,6 @@
 
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="pills-bill-info" role="tabpanel" aria-labelledby="pills-bill-info-tab">
-                            <div>
-                                <h5 class="mb-1">Billing Information</h5>
-                                <p class="text-muted mb-4">Please fill all information below</p>
-                            </div>
-
-                            <div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label for="billinginfo-firstName" class="form-label">First
-                                                Name</label>
-                                            <input type="text" class="form-control" id="billinginfo-firstName" placeholder="Enter first name" value="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label for="billinginfo-lastName" class="form-label">Last
-                                                Name</label>
-                                            <input type="text" class="form-control" id="billinginfo-lastName" placeholder="Enter last name" value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label for="billinginfo-email" class="form-label">Email
-                                                <span class="text-muted">(Optional)</span></label>
-                                            <input type="email" class="form-control" id="billinginfo-email" placeholder="Enter email">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label for="billinginfo-phone" class="form-label">Phone</label>
-                                            <input type="text" class="form-control" id="billinginfo-phone" placeholder="Enter phone no.">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="billinginfo-address" class="form-label">Address</label>
-                                    <textarea class="form-control" id="billinginfo-address" placeholder="Enter address" rows="3"></textarea>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="country" class="form-label">Country</label>
-                                            <select class="form-select" id="country" data-plugin="choices">
-                                                <option value="">Select Country...</option>
-                                                <option selected>United States</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="state" class="form-label">State</label>
-                                            <select class="form-select" id="state" data-plugin="choices">
-                                                <option value="">Select State...</option>
-                                                <option value="Alabama">Alabama</option>
-                                                <option value="Alaska">Alaska</option>
-                                                <option value="American Samoa">American Samoa
-                                                </option>
-                                                <option value="California" selected>California
-                                                </option>
-                                                <option value="Colorado">Colorado</option>
-                                                <option value="District Of Columbia">District Of
-                                                    Columbia</option>
-                                                <option value="Florida">Florida</option>
-                                                <option value="Georgia">Georgia</option>
-                                                <option value="Guam">Guam</option>
-                                                <option value="Hawaii">Hawaii</option>
-                                                <option value="Idaho">Idaho</option>
-                                                <option value="Kansas">Kansas</option>
-                                                <option value="Louisiana">Louisiana</option>
-                                                <option value="Montana">Montana</option>
-                                                <option value="Nevada">Nevada</option>
-                                                <option value="New Jersey">New Jersey</option>
-                                                <option value="New Mexico">New Mexico</option>
-                                                <option value="New York">New York</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="zip" class="form-label">Zip Code</label>
-                                            <input type="text" class="form-control" id="zip" placeholder="Enter zip code">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex align-items-start gap-3 mt-3">
-                                    <button type="button" class="btn btn-primary btn-label right ms-auto nexttab" data-nexttab="pills-bill-address-tab"><i class="ri-truck-line label-icon align-middle fs-16 ms-2"></i>Proceed
-                                        to Shipping</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end tab pane -->
-
-                        <div class="tab-pane fade" id="pills-bill-address" role="tabpanel" aria-labelledby="pills-bill-address-tab">
                             <div>
                                 <h5 class="mb-1">Shipping Information</h5>
                                 <p class="text-muted mb-4">Please fill all information below</p>
@@ -155,19 +47,15 @@
                                     </div>
                                 </div>
                                 <div class="row gy-3">
+                                    <?php $__currentLoopData = $addresses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $address): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col-lg-4 col-sm-6">
                                         <div class="form-check card-radio">
-                                            <input id="shippingAddress01" name="shippingAddress" type="radio" class="form-check-input" checked>
-                                            <label class="form-check-label" for="shippingAddress01">
-                                                <span class="mb-4 fw-semibold d-block text-muted text-uppercase">Home
-                                                    Address</span>
-
-                                                <span class="fs-14 mb-2 d-block">Marcus
-                                                    Alfaro</span>
-                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">4739
-                                                    Bubby Drive Austin, TX 78729</span>
-                                                <span class="text-muted fw-normal d-block">Mo.
-                                                    012-345-6789</span>
+                                            <input id="shippingAddress01<?php echo e($address->id); ?>" name="shippingAddress" type="radio" class="form-check-input" checked>
+                                            <label class="form-check-label" for="shippingAddress01<?php echo e($address->id); ?>">
+                                                <span class="mb-4 fw-semibold d-block text-muted text-uppercase"><?php echo e($address->location); ?></span>
+                                                <span class="fs-14 mb-2 d-block"><?php echo e($address->name); ?></span>
+                                                <span class="text-muted fw-normal text-wrap mb-1 d-block"><?php echo e($address->address . ', RT ' . $address->rt . 'RW ' . $address->rw); ?></span>
+                                                <span class="text-muted fw-normal d-block"><?php echo e($address->phone); ?></span>
                                             </label>
                                         </div>
                                         <div class="d-flex flex-wrap p-2 py-1 bg-light rounded-bottom border mt-n1">
@@ -181,32 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="form-check card-radio">
-                                            <input id="shippingAddress02" name="shippingAddress" type="radio" class="form-check-input">
-                                            <label class="form-check-label" for="shippingAddress02">
-                                                <span class="mb-4 fw-semibold d-block text-muted text-uppercase">Office
-                                                    Address</span>
-
-                                                <span class="fs-14 mb-2 d-block">James Honda</span>
-                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">1246
-                                                    Virgil Street Pensacola, FL 32501
-                                                </span>
-                                                <span class="text-muted fw-normal d-block">Mo.
-                                                    012-345-6789</span>
-                                            </label>
-                                        </div>
-                                        <div class="d-flex flex-wrap p-2 py-1 bg-light rounded-bottom border mt-n1">
-                                            <div>
-                                                <a href="#" class="d-block text-body p-1 px-2" data-bs-toggle="modal" data-bs-target="#addAddressModal"><i class="ri-pencil-fill text-muted align-bottom me-1"></i>
-                                                    Edit</a>
-                                            </div>
-                                            <div>
-                                                <a href="#" class="d-block text-body p-1 px-2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill text-muted align-bottom me-1"></i>
-                                                    Remove</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
 
                                 <div class="mt-4">
@@ -242,10 +105,7 @@
                             </div>
 
                             <div class="d-flex align-items-start gap-3 mt-4">
-                                <button type="button" class="btn btn-light btn-label previestab" data-previous="pills-bill-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back
-                                    to Personal Info</button>
-                                <button type="button" class="btn btn-primary btn-label right ms-auto nexttab" data-nexttab="pills-payment-tab"><i class="ri-bank-card-line label-icon align-middle fs-16 ms-2"></i>Continue
-                                    to Payment</button>
+                                <button type="button" class="btn btn-primary btn-label right ms-auto nexttab" data-nexttab="pills-payment-tab"><i class="ri-bank-card-line label-icon align-middle fs-16 ms-2"></i>Continue to Payment</button>
                             </div>
                         </div>
                         <!-- end tab pane -->
@@ -331,8 +191,7 @@
                             </div>
 
                             <div class="d-flex align-items-start gap-3 mt-4">
-                                <button type="button" class="btn btn-light btn-label previestab" data-previous="pills-bill-address-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back
-                                    to Shipping</button>
+                                <button type="button" class="btn btn-light btn-label previestab" data-previous="pills-bill-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back to Shipping</button>
                                 <button type="button" class="btn btn-primary btn-label right ms-auto nexttab" data-nexttab="pills-finish-tab"><i class="ri-shopping-basket-line label-icon align-middle fs-16 ms-2"></i>Complete
                                     Order</button>
                             </div>
@@ -382,66 +241,50 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td>
                                     <div class="avatar-md bg-light rounded p-1">
-                                        <img src="<?php echo e(URL::asset('assets/images/products/img-8.png')); ?>" alt="" class="img-fluid d-block">
+                                        <img src="<?php echo e($cart->product->galleries[0]->photo_url); ?>" alt="" class="img-fluid d-block">
                                     </div>
                                 </td>
                                 <td>
-                                    <h5 class="fs-14"><a href="apps-ecommerce-product-details" class="text-dark">Sweatshirt for Men (Pink)</a>
+                                    <h5 class="fs-14"><a href="apps-ecommerce-product-details" class="text-dark"><?php echo e($cart->product->title); ?></a>
                                     </h5>
-                                    <p class="text-muted mb-0">$ 119.99 x 2</p>
+                                    <p class="text-muted mb-0"><?php echo e($cart->price . ' x ' . $cart->quantity); ?></p>
                                 </td>
-                                <td class="text-end">$ 239.98</td>
+                                <td class="text-end"><?php echo e("Rp" . number_format($cart->price * $cart->quantity, 2, ",", ".")); ?></td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="avatar-md bg-light rounded p-1">
-                                        <img src="<?php echo e(URL::asset('assets/images/products/img-7.png')); ?>" alt="" class="img-fluid d-block">
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="fs-14"><a href="apps-ecommerce-product-details" class="text-dark">Noise Evolve Smartwatch</a></h5>
-                                    <p class="text-muted mb-0">$ 94.99 x 1</p>
-                                </td>
-                                <td class="text-end">$ 94.99</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="avatar-md bg-light rounded p-1">
-                                        <img src="<?php echo e(URL::asset('assets/images/products/img-3.png')); ?>" alt="" class="img-fluid d-block">
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="fs-14"><a href="apps-ecommerce-product-details" class="text-dark">350 ml Glass Grocery Container</a>
-                                    </h5>
-                                    <p class="text-muted mb-0">$ 24.99 x 1</p>
-                                </td>
-                                <td class="text-end">$ 24.99</td>
-                            </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td class="fw-semibold" colspan="2">Sub Total :</td>
-                                <td class="fw-semibold text-end">$ 359.96</td>
+                                <?php
+                                $subTotal = 0;
+                                $shippingCharge = 22000;
+
+                                foreach ($carts as $cart) {
+                                    $subTotal += $cart->price * $cart->quantity;
+                                }
+
+                                $discount = $subTotal * 10.1 / 100;
+                                $totalPayment = $subTotal + $shippingCharge - $discount;
+                                ?>
+                                <td class="fw-semibold text-end"><?php echo e("Rp" . number_format($subTotal, 2, ",", ".")); ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2">Discount <span class="text-muted">(VELZON15)</span>
-                                    : </td>
-                                <td class="text-end">- $ 50.00</td>
+                                <td colspan="2">Discount : </td>
+                                <td class="text-end">- <?php echo e("Rp" . number_format($discount, 2, ",", ".")); ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2">Shipping Charge :</td>
-                                <td class="text-end">$ 24.99</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Estimated Tax (12%): </td>
-                                <td class="text-end">$ 18.20</td>
+                                <td class="text-end"><?php echo e("Rp" . number_format($shippingCharge, 2, ",", ".")); ?></td>
                             </tr>
                             <tr class="table-active">
-                                <th colspan="2">Total (USD) :</th>
+                                <th colspan="2">Total Payment (IDR) :</th>
                                 <td class="text-end">
                                     <span class="fw-semibold">
-                                        $353.15
+                                        <?php echo e("Rp" . number_format($totalPayment, 2, ",", ".")); ?>
+
                                     </span>
                                 </td>
                             </tr>
@@ -499,21 +342,62 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="addaddress-textarea" class="form-label">Address</label>
-                        <textarea class="form-control" id="addaddress-textarea" placeholder="Enter address" rows="2"></textarea>
-                    </div>
-
-                    <div class="mb-3">
                         <label for="addaddress-Name" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="addaddress-Name" placeholder="Enter phone No.">
+                        <input type="text" class="form-control" id="addaddress-Name" placeholder="Enter phone number">
                     </div>
 
                     <div class="mb-3">
-                        <label for="state" class="form-label">Address Type</label>
-                        <select class="form-select" id="state" data-choices data-choices-search-false>
-                            <option value="homeAddress">Home (7am to 10pm)</option>
-                            <option value="officeAddress">Office (11am to 7pm)</option>
-                        </select>
+                        <label for="addaddress-textarea" class="form-label">Address</label>
+                        <textarea class="form-control" id="addaddress-textarea" placeholder="Enter address (your street name)" rows="2"></textarea>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="addaddress-Name" class="form-label">RT</label>
+                            <input type="text" class="form-control" id="addaddress-Name" placeholder="Enter rt">
+                        </div>
+                        <div class="col">
+                            <label for="addaddress-Name" class="form-label">RW</label>
+                            <input type="text" class="form-control" id="addaddress-Name" placeholder="Enter rw">
+                        </div>
+                        <div class="col">
+                            <label for="addaddress-Name" class="form-label">Zip Code</label>
+                            <input type="text" class="form-control" id="addaddress-Name" placeholder="Enter zip code">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="state" class="form-label">Province</label>
+                            <select class="form-select" id="state" data-choices data-choices-search-false>
+                                <option selected disabled>Choose..</option>
+                                <option value="aaaaa">aaaaa</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="state" class="form-label">Regency</label>
+                            <select class="form-select" id="state" data-choices data-choices-search-false>
+                                <option selected disabled>Choose..</option>
+                                <option value="aaaaa">aaaaa</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="state" class="form-label">District</label>
+                            <select class="form-select" id="state" data-choices data-choices-search-false>
+                                <option selected disabled>Choose..</option>
+                                <option value="aaaaa">aaaaa</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="state" class="form-label">Village</label>
+                            <select class="form-select" id="state" data-choices data-choices-search-false>
+                                <option selected disabled>Choose..</option>
+                                <option value="aaaaa">aaaaa</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -54,8 +54,8 @@
 </div><!-- end card -->
 
 <h1 class="card-title mt-5 mb-4">Popular Products</h1>
-<div class="row mb-5 pb-4">
-    @for ($i = 0; $i <= 5; $i++) <div class="col">
+<div class="row row-cols-1 row-cols-md-5 g-4 mb-5 pb-4">
+    @for ($i = 1; $i <= 5; $i++) <div class="col">
         <div class="card" style="height: 350px;">
             <img class="card-img-top img-fluid" src="{{ URL::asset('assets/images/products/img-1.png') }}" alt="Card image cap">
             <div class="card-body">
@@ -63,7 +63,7 @@
             </div>
             <div class="card-footer">
                 <a href="{{ url('products-detail') }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="{{ url('cart') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a href="{{ url('transaction') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
             </div>
         </div>
 </div>

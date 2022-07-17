@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductGallery;
@@ -17,12 +18,14 @@ class ProductController extends Controller
         $user = User::all();
         $category = ProductCategory::all();
         $galleries = ProductGallery::get();
+        $orderdetails = OrderDetail::get();
 
         return view(
             'admin.product.index',
             compact('datas'),
             compact('user'),
             compact('category'),
+            compact('orderdetails'),
         );
     }
 
@@ -41,7 +44,7 @@ class ProductController extends Controller
             'price' => 'required',
             'weight' => 'required',
             'stock' => 'required',
-            'publish' => 'required',
+            'status' => 'required',
             'tags' => 'required',
             'description' => 'required'
         ]);
@@ -56,7 +59,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'weight' => $request->weight,
             'stock' => $request->stock,
-            'publish' => $request->publish,
+            'status' => $request->status,
             'tags' => $request->tags,
             'description' => $request->description
         ]);
@@ -71,7 +74,7 @@ class ProductController extends Controller
         // $product->price = $request->price;
         // $product->weight = $request->weight;
         // $product->stock = $request->stock;
-        // $product->publish = $request->publish;
+        // $product->status = $request->status;
         // $product->tags = $request->tags;
         // $product->description = $request->description;
         // dd($product);

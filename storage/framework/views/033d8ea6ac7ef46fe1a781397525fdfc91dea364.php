@@ -422,23 +422,22 @@
                                             </td>
                                             <td><?php echo e($data->stock); ?></td>
                                             <td><?php echo e("Rp" . number_format($data->price, 2, ",", ".")); ?></td>
-                                            <td>48</td>
+                                            <?php
+                                            $orders = 0;
+
+                                            // foreach ($orderdetails as $orderdetail) {
+                                            //     $orders += $orderdetail->quantity;
+                                            // }
+                                            ?>
+                                            <td><?php echo e($orders); ?> (belum dibenerin)</td>
                                             <td>
                                                 <div class="fw-normal badge bg-light text-dark fs-6">
                                                     <i class="lab las la-star text-warning"></i>
-                                                    4.5
+                                                    <?php echo e('belum diperbarui'); ?>
+
                                                 </div>
                                             </td>
-                                            <?php
-                                            $timestamp = 1615226965;
-                                            $dateFormat = 'd M, Y';
-                                            $timeFormat = 'h:i A';
-
-                                            $date = new DateTime();
-                                            $date = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
-                                            $date->setTimestamp($timestamp);
-                                            ?>
-                                            <td><?php echo e($date->format($dateFormat)); ?> <small class="text-muted"><?php echo e($date->format($timeFormat)); ?></small></td>
+                                            <td><?php echo e($data->created_at); ?></td>
                                             <td>
                                                 <ul class="list-inline hstack gap-2 mb-0">
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">

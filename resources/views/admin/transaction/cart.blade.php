@@ -11,39 +11,39 @@
         <div class="row align-items-center gy-3 mb-3">
             <div class="col-sm">
                 <div>
-                    <h5 class="fs-14 mb-0">Your Cart (03 items)</h5>
+                    <h5 class="fs-14 mb-0">Your Cart ({{ count($carts) }} items)</h5>
                 </div>
             </div>
             <div class="col-sm-auto">
-                <a href="apps-ecommerce-products" class="link-primary text-decoration-underline">Continue Shopping</a>
+                <a href="#" class="d-block p-1 px-2 btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove All</a>
             </div>
         </div>
 
+        @foreach ($carts as $cart)
         <div class="card product">
             <div class="card-body">
                 <div class="row gy-3">
                     <div class="col-sm-auto">
                         <div class="avatar-lg bg-light rounded p-1">
-                            <img src="{{ URL::asset('assets/images/products/img-8.png') }}" alt="" class="img-fluid d-block">
+                            <img src="{{ $cart->product->galleries[0]->photo_url }}" alt="" class="img-fluid d-block">
                         </div>
                     </div>
                     <div class="col-sm">
-                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">Sweatshirt for Men (Pink)</a></h5>
+                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">{{ $cart->product->title }}</a></h5>
                         <ul class="list-inline text-muted">
-                            <li class="list-inline-item">Color : <span class="fw-medium">Pink</span></li>
-                            <li class="list-inline-item">Size : <span class="fw-medium">M</span></li>
+                            <li class="list-inline-item">Request : <span class="fw-medium">{{ $cart->request }}</span></li>
                         </ul>
 
                         <div class="input-step">
                             <button type="button" class="minus">–</button>
-                            <input type="number" class="product-quantity" value="2" min="0" max="100">
+                            <input type="number" class="product-quantity" value="{{ $cart->quantity }}" min="0" max="100">
                             <button type="button" class="plus">+</button>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="text-lg-end">
                             <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14">$<span id="ticket_price" class="product-price">119.99</span></h5>
+                            <h5 class="fs-14"><span id="ticket_price" class="product-price">{{ "Rp" . number_format($cart->price, 2, ",", ".") }}</span></h5>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="col-sm">
                         <div class="d-flex flex-wrap my-n1">
                             <div>
-                                <a href="#" class="d-block text-body p-1 px-2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill text-muted align-bottom me-1"></i> Remove</a>
+                                <a href="#" class="d-block text-danger p-1 px-2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
                             </div>
                             <div>
                                 <a href="#" class="d-block text-body p-1 px-2"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</a>
@@ -64,128 +64,43 @@
                     <div class="col-sm-auto">
                         <div class="d-flex align-items-center gap-2 text-muted">
                             <div>Total :</div>
-                            <h5 class="fs-14 mb-0">$<span class="product-line-price">239.98</span></h5>
+                            <h5 class="fs-14 mb-0"><span class="product-line-price">{{ "Rp" . number_format($cart->price*$cart->quantity, 2, ",", ".") }}</span></h5>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- end card footer -->
         </div>
+        @endforeach
         <!-- end card -->
-
-        <div class="card product">
-            <div class="card-body">
-                <div class="row gy-3">
-                    <div class="col-sm-auto">
-                        <div class="avatar-lg bg-light rounded p-1">
-                            <img src="{{ URL::asset('assets/images/products/img-7.png') }}" alt="" class="img-fluid d-block">
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">Noise NoiseFit Endure Smart Watch</a></h5>
-
-                        <ul class="list-inline text-muted">
-                            <li class="list-inline-item">Color : <span class="fw-medium">Black</span></li>
-                            <li class="list-inline-item">Size : <span class="fw-medium">32.5mm</span></li>
-                        </ul>
-
-                        <div class="input-step">
-                            <button type="button" class="minus">–</button>
-                            <input type="number" class="product-quantity" value="1" min="0" max="100">
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-auto">
-                        <div class="text-lg-end">
-                            <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14">$<span class="product-price">94.99</span></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- card body -->
-            <div class="card-footer">
-                <div class="row align-items-center gy-3">
-                    <div class="col-sm">
-                        <div class="d-flex flex-wrap my-n1">
-                            <div>
-                                <a href="#" class="d-block text-body p-1 px-2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill text-muted align-bottom me-1"></i> Remove</a>
-                            </div>
-                            <div>
-                                <a href="#" class="d-block text-body p-1 px-2"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-auto">
-                        <div class="d-flex align-items-center gap-2 text-muted">
-                            <div>Total :</div>
-                            <h5 class="fs-14 mb-0">$<span class="product-line-price">94.99</span></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end card footer -->
-        </div>
-        <!-- end card -->
-
-        <div class="card product">
-            <div class="card-body">
-                <div class="row gy-3">
-                    <div class="col-sm-auto">
-                        <div class="avatar-lg bg-light rounded p-1">
-                            <img src="{{ URL::asset('assets/images/products/img-3.png') }}" alt="" class="img-fluid d-block">
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">350 ml Glass Grocery Container</a></h5>
-
-                        <ul class="list-inline text-muted">
-                            <li class="list-inline-item">Color : <span class="fw-medium">White</span></li>
-                            <li class="list-inline-item">Size : <span class="fw-medium">350 ml</span></li>
-                        </ul>
-
-                        <div class="input-step">
-                            <button type="button" class="minus">–</button>
-                            <input type="number" class="product-quantity" value="1" min="0" max="100">
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-auto">
-                        <div class="text-lg-end">
-                            <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14">$<span class="product-price">24.99</span></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- card body -->
-            <div class="card-footer">
-                <div class="row align-items-center gy-3">
-                    <div class="col-sm">
-                        <div class="d-flex flex-wrap my-n1">
-                            <div>
-                                <a href="#" class="d-block text-body p-1 px-2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill text-muted align-bottom me-1"></i> Remove</a>
-                            </div>
-                            <div>
-                                <a href="#" class="d-block text-body p-1 px-2"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-auto">
-                        <div class="d-flex align-items-center gap-2 text-muted">
-                            <div>Total :</div>
-                            <h5 class="fs-14 mb-0">$<span class="product-line-price">24.99</span></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end card footer -->
-        </div>
-        <!-- end card -->
-
 
         <div class="text-end mb-4">
-            <a href="{{ url('checkout') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <a href="{{ url('transaction/create') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+        </div>
+
+        <!-- WISHLIST -->
+        <div class="mt-5 pt-5">
+            <div class="mb-4">
+                <h5 class="fs-14 mb-0">Add your favorite product to cart?</h5>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 pb-4">
+                @foreach ($wishlists as $wishlist)
+                <div class="col">
+                    <div class="card" style="height: 450px;">
+                        <img class="card-img-top img-fluid" src="{{ $wishlist->product->galleries[0]->photo_url }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title mb-2"><a href="{{ url('products-detail') }}" class="link-dark">{{ $wishlist->product->title }}</a></h4>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-link link-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
+                            <a href="{{ url('transaction') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <!-- end card -->
         </div>
     </div>
     <!-- end col -->
@@ -193,6 +108,21 @@
     <div class="col-xl-4">
         <div class="sticky-side-div">
             <div class="card">
+                <div class="card-header border-bottom-dashed">
+                    <h5 class="card-title mb-0">Add another product</h5>
+                </div>
+                <div class="card-header bg-soft-light border-bottom-dashed">
+                    <div class="text-center">
+                        <h6 class="mb-2">Scan the product or enter the item code</h6>
+                    </div>
+                    <div class="hstack gap-3 px-3 mx-n3">
+                        <input class="form-control me-auto" type="text" placeholder="Enter item code" aria-label="Add product here...">
+                        <button type="button" class="btn btn-success w-xs">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
                 <div class="card-header border-bottom-dashed">
                     <h5 class="card-title mb-0">Order Summary</h5>
                 </div>
@@ -211,25 +141,32 @@
                             <tbody>
                                 <tr>
                                     <td>Sub Total :</td>
-                                    <td class="text-end" id="cart-subtotal">$ 359.96</td>
+                                    <?php
+                                    $subTotal = 0;
+                                    $shippingCharge = 22000;
+
+                                    foreach ($carts as $cart) {
+                                        $subTotal += $cart->price * $cart->quantity;
+                                    }
+
+                                    $discount = $subTotal * 10.1 / 100;
+                                    $totalPayment = $subTotal + $shippingCharge - $discount;
+                                    ?>
+                                    <td class="text-end" id="cart-subtotal">{{ "Rp" . number_format($subTotal, 2, ",", ".") }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Discount <span class="text-muted">(VELZON15)</span> : </td>
-                                    <td class="text-end" id="cart-discount">- $ 53.99</td>
+                                    <td>Discount : </td>
+                                    <td class="text-end" id="cart-discount">- {{ "Rp" . number_format($discount, 2, ",", ".") }}</td>
                                 </tr>
                                 <tr>
                                     <td>Shipping Charge :</td>
-                                    <td class="text-end" id="cart-shipping">$ 65.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Estimated Tax (12.5%) : </td>
-                                    <td class="text-end" id="cart-tax">$ 44.99</td>
+                                    <td class="text-end" id="cart-shipping">{{ "Rp" . number_format($shippingCharge, 2, ",", ".") }}</td>
                                 </tr>
                                 <tr class="table-active">
-                                    <th>Total (USD) :</th>
+                                    <th>Total Payment (IDR) :</th>
                                     <td class="text-end">
                                         <span class="fw-semibold" id="cart-total">
-                                            $415.96
+                                            {{ "Rp" . number_format($totalPayment, 2, ",", ".") }}
                                         </span>
                                     </td>
                                 </tr>
@@ -237,18 +174,6 @@
                         </table>
                     </div>
                     <!-- end table-responsive -->
-                </div>
-            </div>
-
-            <div class="alert border-dashed alert-danger" role="alert">
-                <div class="d-flex align-items-center">
-                    <lord-icon src="https://cdn.lordicon.com/nkmsrxys.json" trigger="loop" colors="primary:#121331,secondary:#f06548" style="width:80px;height:80px">
-                    </lord-icon>
-                    <div class="ms-2">
-                        <h5 class="fs-14 text-danger fw-semibold"> Buying for a loved one?</h5>
-                        <p class="text-black mb-1">Gift wrap and personalised message on card, <br />Only for <span class="fw-semibold">$9.99</span> USD</p>
-                        <button type="button" class="btn ps-0 btn-sm btn-link text-danger text-uppercase">Add Gift Wrap</button>
-                    </div>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title') | Velzon - Admin & Dashboard Template</title>
+    <title>@yield('title') | Indig.co - Indonesian Digital Cooperative</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -15,28 +15,30 @@
 {{-- @section('body')
     @include('layouts.body')
 @show --}}
+
 <body data-topbar="light">
 
     <!-- Begin page -->
     <div id="layout-wrapper">
- <body >
-     @include('layouts.topbar')
-     @include('layouts.sidebar')
-        <!-- ============================================================== -->
-        <!-- Start right Content here -->
-        <!-- ============================================================== -->
-        <div class="main-content">
-            <div class="page-content">
-                <!-- Start content -->
-                <div class="container-fluid">
-                    @yield('content')
-                </div> <!-- content -->
+
+        <body>
+            @include('layouts.topbar')
+            @include('layouts.sidebar')
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+                <div class="page-content">
+                    <!-- Start content -->
+                    <div class="container-fluid">
+                        @yield('content')
+                    </div> <!-- content -->
+                </div>
+                @include('layouts.footer')
             </div>
-            @include('layouts.footer')
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Right content here -->
-        <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
     </div>
     <!-- END wrapper -->
 

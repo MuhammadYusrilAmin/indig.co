@@ -11,8 +11,7 @@
                 <div class="d-flex align-items-center">
                     <h5 class="card-title mb-0 flex-grow-1">Order History</h5>
                     <div class="flex-shrink-0">
-                        <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Create
-                            Order</button>
+                        <a href="<?php echo e(url('cart')); ?>" type="button" class="btn btn-primary add-btn"><i class="las la-shopping-cart align-middle me-1"></i> Add Order</a>
                         <button type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
                     </div>
                 </div>
@@ -88,7 +87,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Pickups" data-bs-toggle="tab" id="Pickups" href="#pickups" role="tab" aria-selected="false">
-                                <i class="ri-truck-line me-1 align-bottom"></i> Pickups <span class="badge bg-secondary align-middle ms-1">2</span>
+                                <i class="ri-truck-line me-1 align-bottom"></i> Pickups <span class="badge bg-secondary align-middle ms-1"><?php echo e(count($datas->where('status', 'Pickups'))); ?></span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -123,25 +122,25 @@
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
-                                <tr>
+                                <?php $__currentLoopData = $datas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <tr>
                                     <th scope="row">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="checkAll" value="option1">
                                         </div>
                                     </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2101</a></td>
-                                    <td class="customer_name">Frank Hook</td>
-                                    <td class="product_name">Puma Tshirt</td>
-                                    <td class="date">20 Dec, 2021, <small class="text-muted">02:21
-                                            AM</small></td>
-                                    <td class="amount">$654</td>
-                                    <td class="payment">Mastercard</td>
-                                    <td class="status"><span class="badge badge-soft-warning text-uppercase">Pending</span>
+                                    <td class="id"><a href="<?php echo e(url('orders/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->order_id); ?></a></td>
+                                    <td class="customer_name"><?php echo e($data->user->name); ?></td>
+                                    <td class="product_name"><?php echo e($data->items[0]->product->title); ?></td>
+                                    <td><?php echo e($data->created_at); ?></td>
+                                    <td class="amount"><?php echo e("Rp" . number_format($data->total_payment, 2, ",", ".")); ?></td>
+                                    <td class="payment"><?php echo e($data->payment_method); ?></td>
+                                    <td class="status">
+                                        <span class="badge <?php echo e($data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-secondary' : ($data->status == 'Delivered' ? 'badge-soft-success' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : 'badge-soft-danger'))))); ?> text-uppercase"><?php echo e($data->status); ?></span>
                                     </td>
                                     <td>
                                         <ul class="list-inline hstack gap-2 mb-0">
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
+                                                <a href="<?php echo e(url('orders/'.$data->id)); ?>" class="text-primary d-inline-block">
                                                     <i class="ri-eye-fill fs-16"></i>
                                                 </a>
                                             </li>
@@ -158,392 +157,7 @@
                                         </ul>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option2">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2102</a></td>
-                                    <td class="customer_name">Rickey Teran</td>
-                                    <td class="product_name">Adidas Sneakers</td>
-                                    <td class="date">16 Dec, 2021, <small class="text-muted">03:41
-                                            PM</small></td>
-                                    <td class="amount">$354</td>
-                                    <td class="payment">Paypal</td>
-                                    <td class="status"><span class="badge badge-soft-danger text-uppercase">Cancelled</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option3">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2103</a></td>
-                                    <td class="customer_name">James Price</td>
-                                    <td class="product_name">350 ml Glass Grocery Container</td>
-                                    <td class="date">28 Nov, 2021, <small class="text-muted">11:33
-                                            AM</small></td>
-                                    <td class="amount">$829</td>
-                                    <td class="payment">Visa</td>
-                                    <td class="status"><span class="badge badge-soft-secondary text-uppercase">Inprogress</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class=" ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option4">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2104</a></td>
-                                    <td class="customer_name">Nettie Deloatch</td>
-                                    <td class="product_name">American egale outfitters Shirt</td>
-                                    <td class="date">22 Nov, 2021, <small class="text-muted">07:45
-                                            PM</small></td>
-                                    <td class="amount">$142</td>
-                                    <td class="payment">COD</td>
-                                    <td class="status"><span class="badge badge-soft-warning text-uppercase">Pending</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option5">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2105</a></td>
-                                    <td class="customer_name">Thomas Taylor</td>
-                                    <td class="product_name">Galaxy Watch4</td>
-                                    <td class="date">12 Nov, 2021, <small class="text-muted">10:19
-                                            PM</small></td>
-                                    <td class="amount">$408</td>
-                                    <td class="payment">Mastercard</td>
-                                    <td class="status"><span class="badge badge-soft-info text-uppercase">Pickups</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option6">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2106</a></td>
-                                    <td class="customer_name">James Price</td>
-                                    <td class="product_name">Apple iPhone 12</td>
-                                    <td class="date">05 Nov, 2021, <small class="text-muted">11:47
-                                            AM</small></td>
-                                    <td class="amount">$1240</td>
-                                    <td class="payment">Visa</td>
-                                    <td class="status"><span class="badge badge-soft-secondary text-uppercase">Inprogress</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" data-bs-toggle="modal" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option7">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2107</a></td>
-                                    <td class="customer_name">Nancy Martino</td>
-                                    <td class="product_name">Funky Prints T-shirt</td>
-                                    <td class="date">31 Oct, 2021, <small class="text-muted">08:55
-                                            PM</small></td>
-                                    <td class="amount">$180</td>
-                                    <td class="payment">COD</td>
-                                    <td class="status"><span class="badge badge-soft-primary text-uppercase">Returns</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option8">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2108</a></td>
-                                    <td class="customer_name">Alexis Clarke</td>
-                                    <td class="product_name">USB Flash Drive Personalized with 3D
-                                        Print </td>
-                                    <td class="date">25 Oct, 2021, <small class="text-muted">05:33
-                                            AM</small></td>
-                                    <td class="amount">$247</td>
-                                    <td class="payment">Paypal</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Delivered</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option9">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2109</a></td>
-                                    <td class="customer_name">Donald Palmer</td>
-                                    <td class="product_name">Oxford Button-Down Shirt</td>
-                                    <td class="date">19 Oct, 2021, <small class="text-muted">12:43
-                                            AM</small></td>
-                                    <td class="amount">$373</td>
-                                    <td class="payment">Visa</td>
-                                    <td class="status"><span class="badge badge-soft-info text-uppercase">Pickups</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option10">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2110</a></td>
-                                    <td class="customer_name">Henry Baird</td>
-                                    <td class="product_name">Classic Short Sleeve Shirt</td>
-                                    <td class="date">13 Oct, 2021, <small class="text-muted">01:20
-                                            PM</small></td>
-                                    <td class="amount">$342</td>
-                                    <td class="payment">Mastercard</td>
-                                    <td class="status"><span class="badge badge-soft-secondary text-uppercase">Inprogress</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option11">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2111</a></td>
-                                    <td class="customer_name">Diana Kohler</td>
-                                    <td class="product_name">Half Sleeve T-Shirts (Blue)</td>
-                                    <td class="date">01 Oct, 2021, <small class="text-muted">03:08
-                                            AM</small></td>
-                                    <td class="amount">$874</td>
-                                    <td class="payment">Visa</td>
-                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Delivered</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="checkAll" value="option12">
-                                        </div>
-                                    </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/detail')); ?>" class="fw-medium link-primary">#VZ2112</a></td>
-                                    <td class="customer_name">Alexis Clarke</td>
-                                    <td class="product_name">Noise Evolve Smartwatch</td>
-                                    <td class="date">29 Sep, 2021, <small class="text-muted">04:24
-                                            AM</small></td>
-                                    <td class="amount">$1021</td>
-                                    <td class="payment">Mastercard</td>
-                                    <td class="status"><span class="badge badge-soft-danger text-uppercase">Cancelled</span>
-                                    </td>
-                                    <td>
-                                        <ul class="list-inline hstack gap-2 mb-0">
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                                <a href="<?php echo e(url('orders/detail')); ?>" class="text-primary d-inline-block">
-                                                    <i class="ri-eye-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
-                                                    <i class="ri-pencil-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item remove" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a data-bs-toggle="modal" href="#deleteOrder" class="text-danger d-inline-block remove-item-btn">
-                                                    <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                         <div class="noresult" style="display: none">

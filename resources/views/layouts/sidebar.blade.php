@@ -64,7 +64,7 @@
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="{{ url('cart') }}">
+                    <a class="nav-link" href="{{ url('transaction') }}">
                         <i class="las la-shopping-cart"></i>
                         <span>@lang('translation.transactions')</span>
                     </a>

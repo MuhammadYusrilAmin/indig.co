@@ -15,13 +15,14 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
+            'item_code' => 'INDIGCO1607224321',
             'seller_id' => 1,
             'category_id' => 1,
-            'title' => $this->faker->title(),
+            'title' => 'Sweatshirt for Men (Pink)',
             'price' => '159000',
             'weight' => 140,
             'stock' => 50,
-            'publish' => 'Published',
+            'status' => 'Published',
             'tags' => 'Cotton',
             'description' => 'Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.'
         ];

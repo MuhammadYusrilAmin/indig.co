@@ -64,7 +64,7 @@
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="<?php echo e(url('cart')); ?>">
+                    <a class="nav-link" href="<?php echo e(url('transaction')); ?>">
                         <i class="las la-shopping-cart"></i>
                         <span><?php echo app('translator')->get('translation.transactions'); ?></span>
                     </a>

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -31,48 +33,31 @@ Route::get('/seller-details', function () {
 });
 
 // DASHBOARD
-Route::get('/dashboard', function () {
+Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
-// PRODUCT
-Route::resource('/products', ProductController::class);
-
-// ORDER
-Route::get('/orders', function () {
-    return view('admin.order.index');
-});
-Route::get('/orders/detail', function () {
-    return view('admin.order.detail');
-});
-
-// CUSTOMER
-Route::get('/customers', function () {
+Route::resource('products', ProductController::class);
+Route::resource('orders', OrderController::class);
+Route::get('customers', function () {
     return view('admin.customer.index');
 });
-
-// TRANSACTION
-Route::get('/cart', function () {
-    return view('admin.transaction.cart');
-});
-Route::get('/checkout', function () {
-    return view('admin.transaction.checkout');
-});
+Route::resource('transaction', TransactionController::class);
 
 // PROFILE
-Route::get('/profile', function () {
+Route::get('profile', function () {
     return view('profile.index');
 });
-Route::get('/settings', function () {
+Route::get('settings', function () {
     return view('profile.settings');
 });
-Route::get('/faqs', function () {
+Route::get('faqs', function () {
     return view('profile.faqs');
 });
-Route::get('/chat', function () {
+Route::get('chat', function () {
     return view('profile.chat');
 });
-Route::get('/lockscreen', function () {
+Route::get('lockscreen', function () {
     return view('profile.lockscreen');
 });
 
