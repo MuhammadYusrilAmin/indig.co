@@ -57,9 +57,9 @@
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="{{ url('customers') }}">
+                    <a class="nav-link" href="{{ url('employees') }}">
                         <i class="las la-users-cog"></i>
-                        <span>@lang('translation.customers')</span>
+                        <span>Employees</span>
                     </a>
                 </li>
 

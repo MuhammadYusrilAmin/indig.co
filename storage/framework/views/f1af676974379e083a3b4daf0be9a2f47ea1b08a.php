@@ -16,43 +16,43 @@
                 <div>
                     <div class="flex-shrink-0 avatar-md mx-auto">
                         <div class="avatar-title bg-light rounded">
-                            <img src="<?php echo e(URL::asset('assets/images/companies/img-2.png')); ?>" alt="" height="50" />
+                            <img src="<?php echo e(url($cooperative->avatar)); ?>" alt="" height="50" />
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h5 class="mb-1">Force Medicines</h5>
-                        <p class="text-muted">Since 1987</p>
+                        <h5 class="mb-1"><?php echo e($cooperative->name); ?></h5>
+                        <p class="text-muted">Since <?php echo e($cooperative->since_year); ?></p>
                     </div>
                     <div class="table-responsive">
                         <table class="table mb-0 table-borderless">
                             <tbody>
                                 <tr>
                                     <th><span class="fw-medium">Owner Name</span></th>
-                                    <td>David Marshall</td>
+                                    <td><?php echo e($cooperative->owner_name); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Company Type</span></th>
-                                    <td>Partnership</td>
+                                    <td><?php echo e($cooperative->company_name); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Email</span></th>
-                                    <td>forcemedicines@gamil.com</td>
+                                    <td><?php echo e($cooperative->email); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Website</span></th>
-                                    <td><a href="javascript:void(0);" class="link-primary">www.forcemedicines.com</a></td>
+                                    <td><a href="<?php echo e($cooperative->website); ?>" class="link-primary"><?php echo e($cooperative->website); ?></a></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Contact No.</span></th>
-                                    <td>+(123) 9876 654 321</td>
+                                    <td><?php echo e($cooperative->contact); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Fax</span></th>
-                                    <td>+1 999 876 5432</td>
+                                    <td><?php echo e($cooperative->fax); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Location</span></th>
-                                    <td>United Kingdom</td>
+                                    <td><?php echo e($cooperative->location); ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -356,7 +356,58 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div id="table-product-list-all" class="table-card gridjs-border-none"></div>
+                <div class="table-responsive table-card mb-1">
+                    <table class="table table-nowrap align-middle" id="orderTable">
+                        <thead class="text-muted table-light">
+                            <tr class="text-uppercase">
+                                <th class="sort" data-sort="">#</th>
+                                <th class="sort" data-sort="">Image</th>
+                                <th class="sort" data-sort="">Product</th>
+                                <th class="sort" data-sort="">Stock</th>
+                                <th class="sort" data-sort="">Price</th>
+                                <th class="sort" data-sort="">Orders</th>
+                                <th class="sort" data-sort="">Rating</th>
+                                <th class="sort" data-sort="">Published</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all">
+                            <?php $i = 1 ?>
+                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr>
+                                <td><?php echo e($i++); ?></td>
+                                <td>
+                                    <a href="<?php echo e(url('products/'.$data->id)); ?>">
+                                        <img src="<?php echo e(url($data->galleries[0]->photo_url)); ?>" alt="<?php echo e($data->title); ?>" width="60">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo e(url('products/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->title); ?></a>
+                                    <br>
+                                    <small>Category: <?php echo e($data->category->name); ?></small>
+                                </td>
+                                <td><?php echo e($data->stock); ?></td>
+                                <td><?php echo e("Rp" . number_format($data->price, 2, ",", ".")); ?></td>
+                                <?php
+                                $orders = 0;
+
+                                // foreach ($orderdetails as $orderdetail) {
+                                //     $orders += $orderdetail->quantity;
+                                // }
+                                ?>
+                                <td><?php echo e($orders); ?> (belum dibenerin)</td>
+                                <td>
+                                    <div class="fw-normal badge bg-light text-dark fs-6">
+                                        <i class="lab las la-star text-warning"></i>
+                                        <?php echo e('belum diperbarui'); ?>
+
+                                    </div>
+                                </td>
+                                <td><?php echo e($data->updated_at); ?></td>
+                            </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -372,7 +423,6 @@
 <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
 <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 <script src="assets/libs/swiper/swiper.min.js"></script>
-<script src="<?php echo e(URL::asset('assets/js/pages/seller-details.init.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\saas\resources\views/user/seller-details.blade.php ENDPATH**/ ?>

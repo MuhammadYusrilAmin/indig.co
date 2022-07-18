@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cooperative;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,10 +28,27 @@ class HomeController extends Controller
 
     public function root()
     {
+        $products = Product::limit(5)->get()->sortByDesc('updated_at');
+        $cooperatives = Cooperative::limit(8)->get()->sortByDesc('updated_at');
+        $productcoops = Product::all();
 
-        // dd($data);
+        return view(
+            'user.index',
+            compact('products'),
+            compact('cooperatives'),
+        );
+    }
 
-        return view('user.index');
+    public function showSeller($id)
+    {
+        $cooperative = Cooperative::find($id);
+        $products = Product::where('cooperative_id', $id)->get()->sortByDesc('updated_at');
+
+        return view(
+            'user.seller-details',
+            compact('cooperative'),
+            compact('products'),
+        );
     }
 
     /*Language Translation*/

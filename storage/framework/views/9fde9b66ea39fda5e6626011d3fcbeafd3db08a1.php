@@ -24,7 +24,7 @@
                 <div class="row gy-3">
                     <div class="col-sm-auto">
                         <div class="avatar-lg bg-light rounded p-1">
-                            <img src="<?php echo e($cart->product->galleries[0]->photo_url); ?>" alt="<?php echo e($cart->product->title); ?>" class="img-fluid d-block">
+                            <img src="<?php echo e($cart->product->galleries[0]->photo_url); ?>" alt="" class="img-fluid d-block">
                         </div>
                     </div>
                     <div class="col-sm">

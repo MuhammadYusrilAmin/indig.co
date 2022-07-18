@@ -57,9 +57,9 @@
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="<?php echo e(url('customers')); ?>">
+                    <a class="nav-link" href="<?php echo e(url('employees')); ?>">
                         <i class="las la-users-cog"></i>
-                        <span><?php echo app('translator')->get('translation.customers'); ?></span>
+                        <span>Employees</span>
                     </a>
                 </li>
 

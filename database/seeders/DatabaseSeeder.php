@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\Cooperative;
+use App\Models\Employee;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
@@ -32,5 +34,7 @@ class DatabaseSeeder extends Seeder
         Rating::factory(1)->create();
         Cart::factory(1)->create();
         Wishlist::factory(1)->create();
+        Employee::factory(5)->create();
+        Cooperative::factory(1)->create();
     }
 }

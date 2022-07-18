@@ -17,43 +17,43 @@
                 <div>
                     <div class="flex-shrink-0 avatar-md mx-auto">
                         <div class="avatar-title bg-light rounded">
-                            <img src="{{ URL::asset('assets/images/companies/img-2.png') }}" alt="" height="50" />
+                            <img src="{{ url($cooperative->avatar) }}" alt="" height="50" />
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h5 class="mb-1">Force Medicines</h5>
-                        <p class="text-muted">Since 1987</p>
+                        <h5 class="mb-1">{{ $cooperative->name }}</h5>
+                        <p class="text-muted">Since {{ $cooperative->since_year }}</p>
                     </div>
                     <div class="table-responsive">
                         <table class="table mb-0 table-borderless">
                             <tbody>
                                 <tr>
                                     <th><span class="fw-medium">Owner Name</span></th>
-                                    <td>David Marshall</td>
+                                    <td>{{ $cooperative->owner_name }}</td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Company Type</span></th>
-                                    <td>Partnership</td>
+                                    <td>{{ $cooperative->company_name }}</td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Email</span></th>
-                                    <td>forcemedicines@gamil.com</td>
+                                    <td>{{ $cooperative->email }}</td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Website</span></th>
-                                    <td><a href="javascript:void(0);" class="link-primary">www.forcemedicines.com</a></td>
+                                    <td><a href="{{ $cooperative->website }}" class="link-primary">{{ $cooperative->website }}</a></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Contact No.</span></th>
-                                    <td>+(123) 9876 654 321</td>
+                                    <td>{{ $cooperative->contact }}</td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Fax</span></th>
-                                    <td>+1 999 876 5432</td>
+                                    <td>{{ $cooperative->fax }}</td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Location</span></th>
-                                    <td>United Kingdom</td>
+                                    <td>{{ $cooperative->location }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -357,7 +357,57 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div id="table-product-list-all" class="table-card gridjs-border-none"></div>
+                <div class="table-responsive table-card mb-1">
+                    <table class="table table-nowrap align-middle" id="orderTable">
+                        <thead class="text-muted table-light">
+                            <tr class="text-uppercase">
+                                <th class="sort" data-sort="">#</th>
+                                <th class="sort" data-sort="">Image</th>
+                                <th class="sort" data-sort="">Product</th>
+                                <th class="sort" data-sort="">Stock</th>
+                                <th class="sort" data-sort="">Price</th>
+                                <th class="sort" data-sort="">Orders</th>
+                                <th class="sort" data-sort="">Rating</th>
+                                <th class="sort" data-sort="">Published</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all">
+                            <?php $i = 1 ?>
+                            @foreach ($products as $data)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>
+                                    <a href="{{ url('products/'.$data->id) }}">
+                                        <img src="{{ url($data->galleries[0]->photo_url) }}" alt="{{ $data->title }}" width="60">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('products/'.$data->id) }}" class="fw-medium link-primary">{{ $data->title }}</a>
+                                    <br>
+                                    <small>Category: {{ $data->category->name }}</small>
+                                </td>
+                                <td>{{ $data->stock }}</td>
+                                <td>{{ "Rp" . number_format($data->price, 2, ",", ".") }}</td>
+                                <?php
+                                $orders = 0;
+
+                                // foreach ($orderdetails as $orderdetail) {
+                                //     $orders += $orderdetail->quantity;
+                                // }
+                                ?>
+                                <td>{{ $orders }} (belum dibenerin)</td>
+                                <td>
+                                    <div class="fw-normal badge bg-light text-dark fs-6">
+                                        <i class="lab las la-star text-warning"></i>
+                                        {{ 'belum diperbarui' }}
+                                    </div>
+                                </td>
+                                <td>{{ $data->updated_at }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -373,6 +423,5 @@
 <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
 <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 <script src="assets/libs/swiper/swiper.min.js"></script>
-<script src="{{ URL::asset('assets/js/pages/seller-details.init.js') }}"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

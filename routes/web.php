@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
@@ -18,19 +20,16 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 //Language Translation
-Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
+Route::get('index/{locale}', [HomeController::class, 'lang']);
 
 //Update User Details
-Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
-Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
+Route::post('/update-profile/{id}', [HomeController::class, 'updateProfile'])->name('updateProfile');
+Route::post('/update-password/{id}', [HomeController::class, 'updatePassword'])->name('updatePassword');
 
-// Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+// Route::get('{any}', [HomeController::class, 'index'])->name('index');
 
-// BERANDA
-Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
-Route::get('/seller-details', function () {
-    return view('user.seller-details');
-});
+Route::get('/', [HomeController::class, 'root'])->name('root');
+Route::get('/sellers/{id}', [HomeController::class, 'showSeller'])->name('showSeller');
 
 // DASHBOARD
 Route::get('dashboard', function () {
@@ -39,9 +38,7 @@ Route::get('dashboard', function () {
 
 Route::resource('products', ProductController::class);
 Route::resource('orders', OrderController::class);
-Route::get('customers', function () {
-    return view('admin.customer.index');
-});
+Route::resource('employees', EmployeeController::class);
 Route::resource('transaction', TransactionController::class);
 
 // PROFILE

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') @lang('translation.sellers') @endsection
+@section('title') Home @endsection
 @section('content')
 
 <div class="card mb-5">
@@ -55,19 +55,20 @@
 
 <h1 class="card-title mt-5 mb-4">Popular Products</h1>
 <div class="row row-cols-1 row-cols-md-5 g-4 mb-5 pb-4">
-    @for ($i = 1; $i <= 5; $i++) <div class="col">
+    @foreach ($products as $product)
+    <div class="col">
         <div class="card" style="height: 350px;">
-            <img class="card-img-top img-fluid" src="{{ URL::asset('assets/images/products/img-1.png') }}" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="{{ $product->galleries[0]->photo_url }}" alt="Card image cap">
             <div class="card-body">
                 <h4 class="card-title mb-2">Half Sleeve Round Neck T-Shirts</h4>
             </div>
             <div class="card-footer">
-                <a href="{{ url('products-detail') }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <a href="{{ url('products/'.$product->id) }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
                 <a href="{{ url('transaction') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
             </div>
         </div>
-</div>
-@endfor
+    </div>
+    @endforeach
 </div>
 
 @component('components.breadcrumb')
@@ -110,234 +111,47 @@
 </div>
 
 <div class="row mt-4">
+    @foreach ($cooperatives as $coop)
     <div class="col-xl-3 col-lg-6">
         <div class="card ribbon-box right overflow-hidden">
             <div class="card-body text-center p-4">
-                <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
-                <img src="{{ URL::asset('assets/images/companies/img-1.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Force Medicines</a></h5>
-                <p class="text-muted mb-4">David Marshall</p>
+                <!-- <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div> -->
+
+                <img src="{{ $coop->avatar }}" alt="" height="45">
+                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">{{ $coop->name }}</a></h5>
+                <p class="text-muted mb-4">{{ $coop->owner_name }}</p>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
+                        <div id="chart-seller1" data-colors='["--vz-info"]'></div>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>452</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
                     <div class="col-lg-6">
-                        <h5>$45,415</h5>
-                        <span class="text-muted">Wallet Balance</span>
+                        <h5>{{ count($coop->productcoops->where('cooperative_id', $coop->id)) }}</h5>
+                        <span class="text-muted">Products</span>
+                    </div>
+                    <div class="col-lg-6 border-end-dashed border-end">
+                        <h5>
+                            <?php
+                            $totalstock = 0;
+                            foreach ($coop->productcoops as $product) {
+                                if ($product->cooperative_id = $coop->id) {
+                                    $totalstock += $product->stock;
+                                }
+                            }
+                            ?>
+                            {{ $totalstock }}
+                        </h5>
+                        <span class="text-muted">Item Stock</span>
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
+                    <a href="{{ url('sellers/'.$coop->id) }}" class="btn btn-light w-100">View Details</a>
                 </div>
             </div>
         </div>
     </div>
-    <!--end col-->
-    <div class="col-xl-3 col-lg-6">
-        <div class="card">
-            <div class="card-body text-center p-4">
-                <img src="{{ URL::asset('assets/images/companies/img-2.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Micro Design</a></h5>
-                <p class="text-muted mb-4">Katia Stapleton</p>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div id="chart-seller2" data-colors='["--vz-success"]'></div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>784</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5>$97,642</h5>
-                        <span class="text-muted">Wallet Balance</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
-    <div class="col-xl-3 col-lg-6">
-        <div class="card">
-            <div class="card-body text-center p-4">
-                <img src="{{ URL::asset('assets/images/companies/img-3.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Nesta Technologies</a></h5>
-                <p class="text-muted mb-4">Harley Fuller</p>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div id="chart-seller3" data-colors='["--vz-warning"]'></div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>320</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5>$27,102</h5>
-                        <span class="text-muted">Wallet Balance</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
-    <div class="col-xl-3 col-lg-6">
-        <div class="card ribbon-box right overflow-hidden">
-            <div class="card-body text-center p-4">
-                <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
-                <img src="{{ URL::asset('assets/images/companies/img-4.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">iTest Factory</a></h5>
-                <p class="text-muted mb-4">Oliver Tyler</p>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div id="chart-seller4" data-colors='["--vz-success"]'></div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>159</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5>$14,933</h5>
-                        <span class="text-muted">Wallet Balance</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
-    <div class="col-xl-3 col-lg-6">
-        <div class="card">
-            <div class="card-body text-center p-4">
-                <img src="{{ URL::asset('assets/images/companies/img-5.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Meta4Systems</a></h5>
-                <p class="text-muted mb-4">Zoe Dennis</p>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div id="chart-seller5" data-colors='["--vz-warning"]'></div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>363</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5>$73,426</h5>
-                        <span class="text-muted">Wallet Balance</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
-    <div class="col-xl-3 col-lg-6">
-        <div class="card ribbon-box right overflow-hidden">
-            <div class="card-body text-center p-4">
-                <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
-                <img src="{{ URL::asset('assets/images/companies/img-6.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Digitech Galaxy</a></h5>
-                <p class="text-muted mb-4">John Roberts</p>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div id="chart-seller6" data-colors='["--vz-success"]'></div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>412</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5>$34,241</h5>
-                        <span class="text-muted">Wallet Balance</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
-    <div class="col-xl-3 col-lg-6">
-        <div class="card ribbon-box right overflow-hidden">
-            <div class="card-body text-center p-4">
-                <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div>
-                <img src="{{ URL::asset('assets/images/companies/img-7.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Syntyce Solutions</a></h5>
-                <p class="text-muted mb-4">Demi Allen</p>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div id="chart-seller7" data-colors='["--vz-danger"]'></div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>945</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5>$17,200</h5>
-                        <span class="text-muted">Wallet Balance</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
-    <div class="col-xl-3 col-lg-6">
-        <div class="card">
-            <div class="card-body text-center p-4">
-                <img src="{{ URL::asset('assets/images/companies/img-8.png') }}" alt="" height="45">
-                <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">Zoetic Fashion</a></h5>
-                <p class="text-muted mb-4">James Bowen</p>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div id="chart-seller8" data-colors='["--vz-warning"]'></div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 border-end-dashed border-end">
-                        <h5>784</h5>
-                        <span class="text-muted">Item Stock</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5>$97,642</h5>
-                        <span class="text-muted">Wallet Balance</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <a href="{{ url('seller-details') }}" class="btn btn-light w-100">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
+    @endforeach
 </div>
 <!--end row-->
 
