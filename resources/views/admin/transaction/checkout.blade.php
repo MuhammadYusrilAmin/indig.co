@@ -246,7 +246,7 @@
                             <tr>
                                 <td>
                                     <div class="avatar-md bg-light rounded p-1">
-                                        <img src="{{ $cart->product->galleries[0]->photo_url }}" alt="" class="img-fluid d-block">
+                                        <img src="{{ url($cart->product->galleries[0]->photo_url) }}" alt="" class="img-fluid d-block">
                                     </div>
                                 </td>
                                 <td>
@@ -336,6 +336,13 @@
             </div>
             <div class="modal-body">
                 <div>
+                    <div class="mb-3">
+                        <label for="state" class="form-label">Your Location</label>
+                        <select class="form-select" id="state" data-choices data-choices-search-false>
+                            <option value="Home Address" selected>Home Address</option>
+                            <option value="Office Address">Office Address</option>
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="addaddress-Name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="addaddress-Name" placeholder="Enter name">

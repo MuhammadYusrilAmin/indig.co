@@ -16,7 +16,7 @@ class ProductFactory extends Factory
     {
         return [
             'item_code' => 'INDIGCO1607224321',
-            'seller_id' => 1,
+            'cooperative_id' => 1,
             'category_id' => 1,
             'title' => 'Sweatshirt for Men (Pink)',
             'price' => '159000',
