@@ -58,7 +58,7 @@
     @foreach ($products as $product)
     <div class="col">
         <div class="card" style="height: 350px;">
-            <img class="card-img-top img-fluid" src="{{ $product->galleries[0]->photo_url }}" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="{{ $product->galleries[0]->photo_url }}" alt="Card image cap" style="height: 50% !important; object-fit: cover;">
             <div class="card-body">
                 <h4 class="card-title mb-2">Half Sleeve Round Neck T-Shirts</h4>
             </div>

@@ -57,7 +57,7 @@
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="col">
         <div class="card" style="height: 350px;">
-            <img class="card-img-top img-fluid" src="<?php echo e($product->galleries[0]->photo_url); ?>" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="<?php echo e($product->galleries[0]->photo_url); ?>" alt="Card image cap" style="height: 50% !important; object-fit: cover;">
             <div class="card-body">
                 <h4 class="card-title mb-2">Half Sleeve Round Neck T-Shirts</h4>
             </div>

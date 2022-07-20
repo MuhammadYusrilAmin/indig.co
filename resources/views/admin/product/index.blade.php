@@ -124,8 +124,8 @@
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
                                         </li>
-                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                            <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                            <a href="{{ url('products/'.$data->id.'/edit') }}" class="text-secondary d-inline-block edit-item-btn">
                                                 <i class="ri-pencil-fill fs-16"></i>
                                             </a>
                                         </li>
@@ -212,12 +212,12 @@
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                            <a href="{{ url('products/'.$data->id) }}" class="text-primary d-inline-block">
+                                            <a href="{{ url('products/'.$data->id.'/edit') }}" class="text-primary d-inline-block">
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
                                         </li>
-                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                            <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                            <a href="{{ url('products/'.$data->id.'/edit') }}" class="text-secondary d-inline-block edit-item-btn">
                                                 <i class="ri-pencil-fill fs-16"></i>
                                             </a>
                                         </li>
@@ -308,8 +308,8 @@
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
                                         </li>
-                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                            <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                            <a href="{{ url('products/'.$data->id.'/edit') }}" class="text-secondary d-inline-block edit-item-btn">
                                                 <i class="ri-pencil-fill fs-16"></i>
                                             </a>
                                         </li>

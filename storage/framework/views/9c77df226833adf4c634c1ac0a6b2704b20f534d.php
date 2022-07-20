@@ -18,7 +18,9 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
     <?php echo $__env->make('layouts.topbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php if(Auth::user()->role == 'Admin'): ?>
     <?php echo $__env->make('layouts.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php endif; ?>
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
