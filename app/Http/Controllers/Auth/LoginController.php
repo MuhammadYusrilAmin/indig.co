@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -20,6 +22,31 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|string',
+            'password' => 'required|string|min:6'
+        ]);
+
+        $loginType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'email';
+        $data = User::where('email', $request->email)->first();
+
+        $login = [
+            $loginType => $request->email,
+            'password' => $request->password
+        ];
+
+        if (auth()->attempt($login)) {
+            if ($data->role == "Admin") {
+                return redirect('dashboard');
+            } else {
+                return redirect('/');
+            }
+        }
+
+        return redirect()->route('login')->with(['error' => 'Email/Password salah!']);
+    }
 
     /**
      * Where to redirect users after login.

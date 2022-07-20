@@ -25,11 +25,13 @@
                 <div class="row gy-3">
                     <div class="col-sm-auto">
                         <div class="avatar-lg bg-light rounded p-1">
-                            <img src="{{ $cart->product->galleries[0]->photo_url }}" alt="" class="img-fluid d-block">
+                            <?php $galleries = \App\Models\ProductGallery::where('product_id', $cart->product_id)->first(); ?>
+                            <img src="{{ $galleries->photo_url }}" alt="" class="img-fluid d-block">
                         </div>
                     </div>
                     <div class="col-sm">
-                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">{{ $cart->product->title }}</a></h5>
+                        <?php $product = \App\Models\Product::where('id', $cart->product_id)->first(); ?>
+                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">{{ $product->title }}</a></h5>
                         <ul class="list-inline text-muted">
                             <li class="list-inline-item">Request : <span class="fw-medium">{{ $cart->request }}</span></li>
                         </ul>
@@ -88,9 +90,11 @@
                 @foreach ($wishlists as $wishlist)
                 <div class="col">
                     <div class="card" style="height: 450px;">
-                        <img class="card-img-top img-fluid" src="{{ $wishlist->product->galleries[0]->photo_url }}" alt="Card image cap">
+                        <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
+                        <img class="card-img-top img-fluid" src="src=" {{ $galleries->photo_url }}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title mb-2"><a href="{{ url('products-detail') }}" class="link-dark">{{ $wishlist->product->title }}</a></h4>
+                            <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
+                            <h5 class="card-title mb-2"><a href="{{ url('products-detail') }}" class="link-dark">{{ $product->title }}</a></h4>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="card-link link-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>

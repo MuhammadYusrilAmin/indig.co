@@ -76,7 +76,7 @@
                                         <div class="text-muted">Seller : <span class="text-body fw-medium">Zoetic Fashion</span>
                                         </div>
                                         <div class="vr"></div>
-                                        <div class="text-muted">Published : <span class="text-body fw-medium">26 Mar, 2021</span>
+                                        <div class="text-muted">Published : <span class="text-body fw-medium">{{ $showDetail->tanggal }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <p class="text-muted mb-1">Price :</p>
-                                                <h5 class="mb-0">$120.40</h5>
+                                                <h5 class="mb-0">{{ "Rp " . number_format($showDetail->price , 2, ",", ".") }}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <p class="text-muted mb-1">Available Stocks :</p>
-                                                <h5 class="mb-0">1,230</h5>
+                                                <h5 class="mb-0">{{$showDetail->stock}}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -246,11 +246,7 @@
 
                             <div class="mt-4 text-muted">
                                 <h5 class="fs-14">Description :</h5>
-                                <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton.
-                                    Material composition is 100% organic cotton. This is one of the
-                                    world’s leading designer lifestyle brands and is internationally
-                                    recognized for celebrating the essence of classic American cool
-                                    style, featuring preppy with a twist designs.</p>
+                                <p>{{ $showDetail->description }}</p>
                             </div>
 
                             <div class="row">
@@ -301,7 +297,8 @@
                                                     <tr>
                                                         <th scope="row" style="width: 200px;">
                                                             Category</th>
-                                                        <td>T-Shirt</td>
+                                                        <?php $kategory = \App\Models\ProductCategory::where('id', $showDetail->category_id)->first(); ?>
+                                                        <td>{{$kategory->name}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Brand</th>
@@ -317,7 +314,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Weight</th>
-                                                        <td>140 Gram</td>
+                                                        <td>{{$showDetail->weight}} Gram</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -504,7 +501,8 @@
                                                                 <div class="hstack gap-3">
                                                                     <div class="badge rounded-pill bg-primary mb-0">
                                                                         <i class="mdi mdi-star"></i>
-                                                                        4.2</div>
+                                                                        4.2
+                                                                    </div>
                                                                     <div class="vr"></div>
                                                                     <div class="flex-grow-1">
                                                                         <p class="text-muted mb-0">
@@ -546,7 +544,8 @@
                                                                 <div class="hstack gap-3">
                                                                     <div class="badge rounded-pill bg-primary mb-0">
                                                                         <i class="mdi mdi-star"></i>
-                                                                        4.0</div>
+                                                                        4.0
+                                                                    </div>
                                                                     <div class="vr"></div>
                                                                     <div class="flex-grow-1">
                                                                         <p class="text-muted mb-0">
@@ -576,7 +575,8 @@
                                                                 <div class="hstack gap-3">
                                                                     <div class="badge rounded-pill bg-primary mb-0">
                                                                         <i class="mdi mdi-star"></i>
-                                                                        4.2</div>
+                                                                        4.2
+                                                                    </div>
                                                                     <div class="vr"></div>
                                                                     <div class="flex-grow-1">
                                                                         <p class="text-muted mb-0">
@@ -605,7 +605,8 @@
                                                                 <div class="hstack gap-3">
                                                                     <div class="badge rounded-pill bg-primary mb-0">
                                                                         <i class="mdi mdi-star"></i>
-                                                                        4.1</div>
+                                                                        4.1
+                                                                    </div>
                                                                     <div class="vr"></div>
                                                                     <div class="flex-grow-1">
                                                                         <p class="text-muted mb-0">

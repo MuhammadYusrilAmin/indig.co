@@ -43,7 +43,7 @@
                                 <p class="text-muted">Get your free velzon account now</p>
                             </div>
                             <div class="p-2 mt-4">
-                                <form class="needs-validation" novalidate method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                <form class="needs-validation" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="fullname" class="form-label">Name <span class="text-danger">*</span></label>
@@ -71,8 +71,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" id="username" placeholder="Enter username" required>
-                                        @error('name')
+                                        <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" id="username" placeholder="Enter username" required>
+                                        @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <a href="{{ url('login') }}" class="btn btn-success w-100">Sign Up</a>
+                                        <button type="submit" class="btn btn-success w-100">Sign Up</button>
                                     </div>
 
                                     <div class="mt-4 text-center">

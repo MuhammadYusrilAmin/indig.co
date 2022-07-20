@@ -36,10 +36,11 @@ Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
-Route::resource('products', ProductController::class);
-Route::resource('orders', OrderController::class);
-Route::resource('employees', EmployeeController::class);
-Route::resource('transaction', TransactionController::class);
+Route::resource('products', ProductController::class)->middleware('auth');
+Route::resource('orders', OrderController::class)->middleware('auth');
+Route::resource('employees', EmployeeController::class)->middleware('auth');
+Route::resource('transaction', TransactionController::class)->middleware('auth');
+Route::resource('cart',  \App\Http\Controllers\CartController::class);
 
 // PROFILE
 Route::get('profile', function () {

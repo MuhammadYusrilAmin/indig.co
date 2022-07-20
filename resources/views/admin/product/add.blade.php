@@ -8,7 +8,7 @@
 @slot('li_1') Ecommerce @endslot
 @slot('title') Create Product @endslot
 @endcomponent
-<form action="{{ url('products/') }}" method="POST">
+<form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <div class="row">
@@ -63,7 +63,7 @@
                     <div class="mb-4">
                         <h5 class="fs-13 mb-1">Product Image</h5>
                         <p class="text-muted">Add Product main Image.</p>
-                        <input class="form-control {{ $errors->get('galleries_id') ? 'is-invalid' : '' }}" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="galleries_id">
+                        <input class="form-control {{ $errors->get('galleries_id') ? 'is-invalid' : '' }}" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="foto">
                         @foreach ($errors->get('galleries_id') as $msg)
                         <div class="invalid-feed text-danger">
                             {{ $msg }}
@@ -76,7 +76,7 @@
 
                         <div class="dropzone">
                             <div class="fallback">
-                                <input name="file" type="file" multiple="multiple" name="galleries_id">
+                                <input type="file" multiple name="files[]" type="file">
                             </div>
                             <div class="dz-message needsclick">
                                 <div class="mb-3">
@@ -148,15 +148,13 @@
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add New</a>Select product category</p>
-                    <select class="form-select {{ $errors->get('category_id') ? 'is-invalid' : '' }}" name="choices-category-input" data-choices data-choices-search-false name="category_id">
-                        <option value="1" selected>All</option>
-                        <option value="2">Appliances</option>
-                        <option value="3">Fashion</option>
-                        <option value="4">Electronics</option>
-                        <option value="5">Grocery</option>
-                        <option value="6">Home & Furniture</option>
-                        <option value="7">Kids</option>
-                        <option value="8">Mobiles</option>
+                    <select class="form-select {{ $errors->get('category_id') ? 'is-invalid' : '' }}" id="choices-category-input" data-choices data-choices-search-false name="category_id">
+                        @foreach($category as $value)
+                        @if($value->name == 'All')
+                        <option value="{{$value->id}}" selected>{{$value->name}}</option>
+                        @endif
+                        <option value="{{$value->id}}">{{$value->name}}</option>
+                        @endforeach
                     </select>
                     @foreach ($errors->get('category_id') as $msg)
                     <div class="invalid-feed text-danger">
@@ -205,12 +203,13 @@
             <!-- end card -->
 
             <div class="text-end mb-3">
-                <button type="submit" class="btn btn-success w-sm w-100">Submit</button>
+                <input type="submit" class="btn btn-success w-sm w-100" value="Simpan">
             </div>
         </div>
     </div>
 </form>
-<!-- end row -->
+<!-- end row 
+-->
 @endsection
 @section('script')
 <script src="assets/libs/@ckeditor/@ckeditor.min.js"></script>
