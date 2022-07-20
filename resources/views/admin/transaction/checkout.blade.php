@@ -252,7 +252,8 @@
                                 <td>
                                     <h5 class="fs-14"><a href="apps-ecommerce-product-details" class="text-dark">{{ $cart->product->title }}</a>
                                     </h5>
-                                    <p class="text-muted mb-0">{{ $cart->price . ' x ' . $cart->quantity }}</p>
+                                    <?php $product = \App\Models\Product::where('id', $cart->product_id)->first(); ?>
+                                    <p class="text-muted mb-0">{{ $product->price . ' x ' . $cart->quantity }}</p>
                                 </td>
                                 <td class="text-end">{{ "Rp" . number_format($cart->price * $cart->quantity, 2, ",", ".") }}</td>
                             </tr>
@@ -275,6 +276,10 @@
                             <tr>
                                 <td colspan="2">Discount : </td>
                                 <td class="text-end">- {{ "Rp" . number_format($discount, 2, ",", ".") }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Midtrans fee : </td>
+                                <td class="text-end text-success">{{ "Rp" . number_format(7000, 2, ",", ".") }}</td>
                             </tr>
                             <tr>
                                 <td colspan="2">Shipping Charge :</td>

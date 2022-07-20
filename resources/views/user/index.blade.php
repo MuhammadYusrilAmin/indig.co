@@ -63,8 +63,18 @@
                 <h4 class="card-title mb-2">Half Sleeve Round Neck T-Shirts</h4>
             </div>
             <div class="card-footer">
-                <a href="{{ url('products/'.$product->id) }}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="{{ url('transaction') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <form action="{{url('detail_products')}}" id="show-detail_{{$product->id}}" method="POST" style="display: none;">
+                    <input type="hidden" name="id" value="{{$product->id}}">>
+                    @csrf
+                </form>
+                <a onclick="event.preventDefault(); document.getElementById('input-cart_{{$product->id}}').submit();" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+
+                <form action="{{route('cart.store')}}" id="input-cart_{{$product->id}}" method="POST" style="display: none;">
+                    <input type="hidden" name="id" value="{{$product->id}}">
+                    <input type="hidden" name="price" value="{{$product->price}}">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>

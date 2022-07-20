@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.create-product'); ?> <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="<?php echo e(URL::asset('assets/libs/dropzone/dropzone.min.css')); ?>" rel="stylesheet">
@@ -8,7 +7,7 @@
 <?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Create Product <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
-<form action="<?php echo e(route('products.store')); ?>" method="POST" enctype="multipart/form-data">
+<form action="<?php echo e(url('products/')); ?>" method="POST">
     <?php echo csrf_field(); ?>
 
     <div class="row">
@@ -67,7 +66,7 @@
                     <div class="mb-4">
                         <h5 class="fs-13 mb-1">Product Image</h5>
                         <p class="text-muted">Add Product main Image.</p>
-                        <input class="form-control <?php echo e($errors->get('galleries_id') ? 'is-invalid' : ''); ?>" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="foto">
+                        <input class="form-control <?php echo e($errors->get('galleries_id') ? 'is-invalid' : ''); ?>" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="galleries_id">
                         <?php $__currentLoopData = $errors->get('galleries_id'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
                             <?php echo e($msg); ?>
@@ -81,7 +80,7 @@
 
                         <div class="dropzone">
                             <div class="fallback">
-                                <input type="file" multiple name="files[]" type="file">
+                                <input name="file" type="file" multiple="multiple" name="galleries_id">
                             </div>
                             <div class="dz-message needsclick">
                                 <div class="mb-3">
@@ -153,14 +152,16 @@
                     <h5 class="card-title mb-0">Product Categories</h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-2">Select product category</p>
-                    <select class="form-select <?php echo e($errors->get('category_id') ? 'is-invalid' : ''); ?>" id="choices-category-input" data-choices data-choices-search-false name="category_id">
-                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($value->name == 'All'): ?>
-                        <option value="<?php echo e($value->id); ?>" selected><?php echo e($value->name); ?></option>
-                        <?php endif; ?>
-                        <option value="<?php echo e($value->id); ?>"><?php echo e($value->name); ?></option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add New</a>Select product category</p>
+                    <select class="form-select <?php echo e($errors->get('category_id') ? 'is-invalid' : ''); ?>" name="choices-category-input" data-choices data-choices-search-false name="category_id">
+                        <option value="1" selected>All</option>
+                        <option value="2">Appliances</option>
+                        <option value="3">Fashion</option>
+                        <option value="4">Electronics</option>
+                        <option value="5">Grocery</option>
+                        <option value="6">Home & Furniture</option>
+                        <option value="7">Kids</option>
+                        <option value="8">Mobiles</option>
                     </select>
                     <?php $__currentLoopData = $errors->get('category_id'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="invalid-feed text-danger">
@@ -212,13 +213,12 @@
             <!-- end card -->
 
             <div class="text-end mb-3">
-                <input type="submit" class="btn btn-success w-sm w-100" value="Simpan">
+                <button type="submit" class="btn btn-success w-sm w-100">Submit</button>
             </div>
         </div>
     </div>
 </form>
-<!-- end row 
--->
+<!-- end row -->
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <script src="assets/libs/@ckeditor/@ckeditor.min.js"></script>

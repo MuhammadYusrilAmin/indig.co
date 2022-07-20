@@ -37,15 +37,16 @@
                         </ul>
 
                         <div class="input-step">
-                            <button type="button" class="minus">–</button>
-                            <input type="number" class="product-quantity" value="<?php echo e($cart->quantity); ?>" min="0" max="100">
-                            <button type="button" class="plus">+</button>
+                            <input type="hidden" id="id_cart_<?php echo e($cart->id); ?>" value="<?php echo e($cart->id); ?>">
+                            <button type="button" id="minus_<?php echo e($cart->id); ?>" class="minus">–</button>
+                            <input type="number" id="quantity_<?php echo e($cart->id); ?>" value="<?php echo e($cart->quantity); ?>" min="0" max="100">
+                            <button type="button" id="plus_<?php echo e($cart->id); ?>" class="plus">+</button>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="text-lg-end">
                             <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14"><span id="ticket_price" class="product-price"><?php echo e("Rp" . number_format($cart->price, 2, ",", ".")); ?></span></h5>
+                            <h5 class="fs-14"><span id="ticket_price" class="product-price"><?php echo e("Rp " . number_format( $product->price, 2, ",", ".")); ?></span></h5>
                         </div>
                     </div>
                 </div>
@@ -56,7 +57,7 @@
                     <div class="col-sm">
                         <div class="d-flex flex-wrap my-n1">
                             <div>
-                                <a href="#" class="d-block text-danger p-1 px-2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
+                                <a href="<?php echo e(route('cart.destroy',$cart->id)); ?>" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
                             </div>
                             <div>
                                 <a href="#" class="d-block text-body p-1 px-2"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</a>
@@ -66,13 +67,96 @@
                     <div class="col-sm-auto">
                         <div class="d-flex align-items-center gap-2 text-muted">
                             <div>Total :</div>
-                            <h5 class="fs-14 mb-0"><span class="product-line-price"><?php echo e("Rp" . number_format($cart->price*$cart->quantity, 2, ",", ".")); ?></span></h5>
+                            <h5 class="fs-14 mb-0">
+                                <div class="product-line-price" id="total_<?php echo e($cart->id); ?>"><?php echo e("Rp " . number_format($cart->price, 2, ",", ".")); ?></div>
+                            </h5>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- end card footer -->
         </div>
+        <script type="text/javascript">
+            function notificationforDelete2(event, el) {
+                event.preventDefault();
+                $("#delete-form2").attr('action', $(el).attr('href'));
+                $("#delete-form2").submit();
+            }
+
+
+            function formatCurrency(num) {
+
+                num = num.toString().replace(/\Rp|/g, '');
+                if (isNaN(num))
+                    num = "0";
+                sign = (num == (num = Math.abs(num)));
+                num = Math.floor(num * 100 + 0.50000000001);
+                cents = num % 100;
+                num = Math.floor(num / 100).toString();
+                if (cents < 10)
+                    cents = "0" + cents;
+                for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+                    num = num.substring(0, num.length - (4 * i + 3)) + '.' +
+                    num.substring(num.length - (4 * i + 3));
+                return (((sign) ? '' : '-') + 'Rp ' + num + ',' + cents);
+
+            }
+
+            $(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $(function() {
+                    $('#minus_<?= $cart->id ?>').on('click', function() {
+                        let id_cart = $('#id_cart_<?= $cart->id ?>').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?php echo e(url('minus_quantity')); ?>",
+                            data: {
+                                id_cart: id_cart
+                            },
+                            cache: false,
+
+                            success: function(msg) {
+                                $("#quantity_<?= $cart->id ?>").val(msg);
+                                $("#total_<?= $cart->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                            },
+                            error: function(data) {
+                                console.log('error:', data);
+                            }
+                        })
+                    });
+                });
+
+
+                $(function() {
+                    $('#plus_<?= $cart->id ?>').on('click', function() {
+                        let id_cart = $('#id_cart_<?= $cart->id ?>').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?php echo e(url('plus_quantity')); ?>",
+                            data: {
+                                id_cart: id_cart
+                            },
+                            cache: false,
+
+                            success: function(msg) {
+                                $("#quantity_<?= $cart->id ?>").val(msg);
+                                $("#total_<?= $cart->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                            },
+                            error: function(data) {
+                                console.log('error:', data);
+                            }
+                        })
+                    });
+                });
+            });
+        </script>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <!-- end card -->
 
@@ -91,7 +175,7 @@
                 <div class="col">
                     <div class="card" style="height: 450px;">
                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
-                        <img class="card-img-top img-fluid" src="src=" <?php echo e($galleries->photo_url); ?>" alt="Card image cap">
+                        <img class="card-img-top img-fluid" src="<?php echo e($galleries->photo_url); ?>" alt="Card image cap">
                         <div class="card-body">
                             <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
                             <h5 class="card-title mb-2"><a href="<?php echo e(url('products-detail')); ?>" class="link-dark"><?php echo e($product->title); ?></a></h4>
@@ -212,11 +296,11 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+<form action="" id="delete-form2" method="POST">
+    <?php echo method_field('delete'); ?>
+    <?php echo csrf_field(); ?>
+</form>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-<script src="<?php echo e(URL::asset('assets/js/pages/form-input-spin.init.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('assets/js/pages/ecommerce-cart.init.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\KMIPN PROJECT\indigco 2\resources\views/admin/transaction/cart.blade.php ENDPATH**/ ?>

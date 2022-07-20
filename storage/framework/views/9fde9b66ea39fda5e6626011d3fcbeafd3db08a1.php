@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.shopping-cart'); ?> <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -25,13 +24,11 @@
                 <div class="row gy-3">
                     <div class="col-sm-auto">
                         <div class="avatar-lg bg-light rounded p-1">
-                            <?php $galleries = \App\Models\ProductGallery::where('product_id', $cart->product_id)->first(); ?>
-                            <img src="<?php echo e($galleries->photo_url); ?>" alt="" class="img-fluid d-block">
+                            <img src="<?php echo e($cart->product->galleries[0]->photo_url); ?>" alt="" class="img-fluid d-block">
                         </div>
                     </div>
                     <div class="col-sm">
-                        <?php $product = \App\Models\Product::where('id', $cart->product_id)->first(); ?>
-                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark"><?php echo e($product->title); ?></a></h5>
+                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark"><?php echo e($cart->product->title); ?></a></h5>
                         <ul class="list-inline text-muted">
                             <li class="list-inline-item">Request : <span class="fw-medium"><?php echo e($cart->request); ?></span></li>
                         </ul>
@@ -90,11 +87,9 @@
                 <?php $__currentLoopData = $wishlists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wishlist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col">
                     <div class="card" style="height: 450px;">
-                        <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
-                        <img class="card-img-top img-fluid" src="src=" <?php echo e($galleries->photo_url); ?>" alt="Card image cap">
+                        <img class="card-img-top img-fluid" src="<?php echo e($wishlist->product->galleries[0]->photo_url); ?>" alt="Card image cap">
                         <div class="card-body">
-                            <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
-                            <h5 class="card-title mb-2"><a href="<?php echo e(url('products-detail')); ?>" class="link-dark"><?php echo e($product->title); ?></a></h4>
+                            <h5 class="card-title mb-2"><a href="<?php echo e(url('products-detail')); ?>" class="link-dark"><?php echo e($wishlist->product->title); ?></a></h4>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="card-link link-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>

@@ -58,13 +58,23 @@
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="col">
         <div class="card" style="height: 350px;">
-            <img class="card-img-top img-fluid" src="<?php echo e($product->galleries[0]->photo_url); ?>" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="<?php echo e($product->galleries[0]->photo_url); ?>" alt="Card image cap" style="height: 50% !important; object-fit: cover;">
             <div class="card-body">
                 <h4 class="card-title mb-2">Half Sleeve Round Neck T-Shirts</h4>
             </div>
             <div class="card-footer">
-                <a href="<?php echo e(url('products/'.$product->id)); ?>" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
-                <a href="<?php echo e(url('transaction')); ?>" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($product->id); ?>').submit();" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <form action="<?php echo e(url('detail_products')); ?>" id="show-detail_<?php echo e($product->id); ?>" method="POST" style="display: none;">
+                    <input type="hidden" name="id" value="<?php echo e($product->id); ?>">>
+                    <?php echo csrf_field(); ?>
+                </form>
+                <a onclick="event.preventDefault(); document.getElementById('input-cart_<?php echo e($product->id); ?>').submit();" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+
+                <form action="<?php echo e(route('cart.store')); ?>" id="input-cart_<?php echo e($product->id); ?>" method="POST" style="display: none;">
+                    <input type="hidden" name="id" value="<?php echo e($product->id); ?>">
+                    <input type="hidden" name="price" value="<?php echo e($product->price); ?>">
+                    <?php echo csrf_field(); ?>
+                </form>
             </div>
         </div>
     </div>

@@ -18,18 +18,12 @@
                         <div class="product-img-slider sticky-side-div">
                             <div class="swiper product-thumbnail-slider p-2 rounded bg-light">
                                 <div class="swiper-wrapper">
+                                    <?php $kategory = \App\Models\ProductGallery::where('product_id', $showDetail->id)->orderBy('created_at', 'desc')->get(); ?>
+                                    <?php $__currentLoopData = $kategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="swiper-slide">
-                                        <img src="<?php echo e(URL::asset('assets/images/products/img-8.png')); ?>" alt="" class="img-fluid d-block" />
+                                        <img src="<?php echo e($value->photo_url); ?>" alt="" class="img-fluid d-block" />
                                     </div>
-                                    <div class="swiper-slide">
-                                        <img src="<?php echo e(URL::asset('assets/images/products/img-6.png')); ?>" alt="" class="img-fluid d-block" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="<?php echo e(URL::asset('assets/images/products/img-1.png')); ?>" alt="" class="img-fluid d-block" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="<?php echo e(URL::asset('assets/images/products/img-8.png')); ?>" alt="" class="img-fluid d-block" />
-                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                                 <div class="swiper-button-next"></div>
                                 <div class="swiper-button-prev"></div>
@@ -37,26 +31,13 @@
                             <!-- end swiper thumbnail slide -->
                             <div class="swiper product-nav-slider mt-2">
                                 <div class="swiper-wrapper">
+                                    <?php $__currentLoopData = $kategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="swiper-slide">
                                         <div class="nav-slide-item ">
-                                            <img src="<?php echo e(URL::asset('assets/images/products/img-8.png')); ?>" alt="" class="img-fluid d-block" />
+                                            <img src="<?php echo e($value->photo_url); ?>" alt="" class="img-fluid d-block" />
                                         </div>
                                     </div>
-                                    <div class="swiper-slide">
-                                        <div class="nav-slide-item">
-                                            <img src="<?php echo e(URL::asset('assets/images/products/img-6.png')); ?>" alt="" class="img-fluid d-block" />
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="nav-slide-item">
-                                            <img src="<?php echo e(URL::asset('assets/images/products/img-1.png')); ?>" alt="" class="img-fluid d-block" />
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="nav-slide-item">
-                                            <img src="<?php echo e(URL::asset('assets/images/products/img-8.png')); ?>" alt="" class="img-fluid d-block" />
-                                        </div>
-                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
                             <!-- end swiper nav slide -->
@@ -82,7 +63,13 @@
                                 </div>
                                 <div class="flex-shrink-0">
                                     <div>
-                                        <a href="apps-ecommerce-cart" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                                        <a onclick="event.preventDefault(); document.getElementById('input-cart_<?php echo e($showDetail->id); ?>').submit();" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+
+                                        <form action="<?php echo e(route('cart.store')); ?>" id="input-cart_<?php echo e($showDetail->id); ?>" method="POST" style="display: none;">
+                                            <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                            <input type="hidden" name="price" value="<?php echo e($showDetail->price); ?>">
+                                            <?php echo csrf_field(); ?>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

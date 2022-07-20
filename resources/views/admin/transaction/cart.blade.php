@@ -37,15 +37,16 @@
                         </ul>
 
                         <div class="input-step">
-                            <button type="button" class="minus">–</button>
-                            <input type="number" class="product-quantity" value="{{ $cart->quantity }}" min="0" max="100">
-                            <button type="button" class="plus">+</button>
+                            <input type="hidden" id="id_cart_{{$cart->id}}" value="{{$cart->id}}">
+                            <button type="button" id="minus_{{$cart->id}}" class="minus">–</button>
+                            <input type="number" id="quantity_{{$cart->id}}" value="{{ $cart->quantity }}" min="0" max="100">
+                            <button type="button" id="plus_{{$cart->id}}" class="plus">+</button>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="text-lg-end">
                             <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14"><span id="ticket_price" class="product-price">{{ "Rp" . number_format($cart->price, 2, ",", ".") }}</span></h5>
+                            <h5 class="fs-14"><span id="ticket_price" class="product-price">{{ "Rp " . number_format( $product->price, 2, ",", ".") }}</span></h5>
                         </div>
                     </div>
                 </div>
@@ -56,7 +57,7 @@
                     <div class="col-sm">
                         <div class="d-flex flex-wrap my-n1">
                             <div>
-                                <a href="#" class="d-block text-danger p-1 px-2" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
+                                <a href="{{route('cart.destroy',$cart->id)}}" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
                             </div>
                             <div>
                                 <a href="#" class="d-block text-body p-1 px-2"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</a>
@@ -66,13 +67,96 @@
                     <div class="col-sm-auto">
                         <div class="d-flex align-items-center gap-2 text-muted">
                             <div>Total :</div>
-                            <h5 class="fs-14 mb-0"><span class="product-line-price">{{ "Rp" . number_format($cart->price*$cart->quantity, 2, ",", ".") }}</span></h5>
+                            <h5 class="fs-14 mb-0">
+                                <div class="product-line-price" id="total_{{$cart->id}}">{{ "Rp " . number_format($cart->price, 2, ",", ".") }}</div>
+                            </h5>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- end card footer -->
         </div>
+        <script type="text/javascript">
+            function notificationforDelete2(event, el) {
+                event.preventDefault();
+                $("#delete-form2").attr('action', $(el).attr('href'));
+                $("#delete-form2").submit();
+            }
+
+
+            function formatCurrency(num) {
+
+                num = num.toString().replace(/\Rp|/g, '');
+                if (isNaN(num))
+                    num = "0";
+                sign = (num == (num = Math.abs(num)));
+                num = Math.floor(num * 100 + 0.50000000001);
+                cents = num % 100;
+                num = Math.floor(num / 100).toString();
+                if (cents < 10)
+                    cents = "0" + cents;
+                for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+                    num = num.substring(0, num.length - (4 * i + 3)) + '.' +
+                    num.substring(num.length - (4 * i + 3));
+                return (((sign) ? '' : '-') + 'Rp ' + num + ',' + cents);
+
+            }
+
+            $(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $(function() {
+                    $('#minus_<?= $cart->id ?>').on('click', function() {
+                        let id_cart = $('#id_cart_<?= $cart->id ?>').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{url('minus_quantity')}}",
+                            data: {
+                                id_cart: id_cart
+                            },
+                            cache: false,
+
+                            success: function(msg) {
+                                $("#quantity_<?= $cart->id ?>").val(msg);
+                                $("#total_<?= $cart->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                            },
+                            error: function(data) {
+                                console.log('error:', data);
+                            }
+                        })
+                    });
+                });
+
+
+                $(function() {
+                    $('#plus_<?= $cart->id ?>').on('click', function() {
+                        let id_cart = $('#id_cart_<?= $cart->id ?>').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{url('plus_quantity')}}",
+                            data: {
+                                id_cart: id_cart
+                            },
+                            cache: false,
+
+                            success: function(msg) {
+                                $("#quantity_<?= $cart->id ?>").val(msg);
+                                $("#total_<?= $cart->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                            },
+                            error: function(data) {
+                                console.log('error:', data);
+                            }
+                        })
+                    });
+                });
+            });
+        </script>
         @endforeach
         <!-- end card -->
 
@@ -91,7 +175,7 @@
                 <div class="col">
                     <div class="card" style="height: 450px;">
                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
-                        <img class="card-img-top img-fluid" src="src=" {{ $galleries->photo_url }}" alt="Card image cap">
+                        <img class="card-img-top img-fluid" src="{{ $galleries->photo_url }}" alt="Card image cap">
                         <div class="card-body">
                             <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
                             <h5 class="card-title mb-2"><a href="{{ url('products-detail') }}" class="link-dark">{{ $product->title }}</a></h4>
@@ -211,10 +295,10 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+<form action="" id="delete-form2" method="POST">
+    @method('delete')
+    @csrf
+</form>
 @endsection
 @section('script')
-<script src="{{ URL::asset('assets/js/pages/form-input-spin.init.js') }}"></script>
-<script src="{{ URL::asset('assets/js/pages/ecommerce-cart.init.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

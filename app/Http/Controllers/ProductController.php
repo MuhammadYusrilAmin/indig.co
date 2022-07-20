@@ -117,13 +117,12 @@ class ProductController extends Controller
         }
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $showDetail = Product::find($id);
-        return view(
-            'admin.product.detail',
-            compact('showDetail'),
-        );
+        $showDetail = Product::find($request->id);
+        return view('admin.product.detail', compact(
+            'showDetail'
+        ));
     }
 
     /**
@@ -134,13 +133,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $category = ProductCategory::get();
-        $product = Product::find($id);
-        return view(
-            'admin.product.edit',
-            compact('category'),
-            compact('product'),
-        );
+        //
     }
 
     /**

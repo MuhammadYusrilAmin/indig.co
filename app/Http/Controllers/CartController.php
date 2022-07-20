@@ -56,7 +56,8 @@ class CartController extends Controller
             'id'                => $id,
             'user_id'           => Auth::user()->id,
             'product_id'        => $request->id,
-            'quantity'          => $request->quantity,
+            'quantity'          => '1',
+            'price'             => $request->price,
         ]);
 
         if ($order) {
@@ -110,7 +111,7 @@ class CartController extends Controller
     {
         $cart = Cart::find($id);
         $product = Product::find($cart->product_id);
-        $product->stok =  $product->stok + $cart->quantity;
+        $product->stock =  $product->stock + $cart->quantity;
         $product->update();
         $cart->delete();
         return redirect('/cart');
@@ -127,11 +128,12 @@ class CartController extends Controller
             echo "$cart->quantity";
         } else {
             $product = Product::find($cart->product_id);
-            $product->stok = $product->stok + 1;
+            $product->stock = $product->stock + 1;
             $product->update();
             $cart->quantity = $cart->quantity - 1;
+            $cart->price = $cart->price - $product->price;
             $cart->update();
-            echo "$cart->quantity";
+            echo $cart->quantity;
         }
     }
 
@@ -141,16 +143,17 @@ class CartController extends Controller
         $id_cart = $request->id_cart;
         $cart = Cart::where('id', $id_cart)->first();
         $product = Product::find($cart->product_id);
-        if ($cart->quantity == $cart->quantity + $product->stok) {
+        if ($cart->quantity == $cart->quantity + $product->stock) {
             $cart->quantity = $cart->quantity;
             $cart->update();
             echo "$cart->quantity";
         } else {
-            $product->stok = $product->stok - 1;
+            $product->stock = $product->stock - 1;
             $product->update();
             $cart->quantity = $cart->quantity + 1;
+            $cart->price = $cart->price + $product->price;
             $cart->update();
-            echo "$cart->quantity";
+            echo $cart->quantity;
         }
     }
 }

@@ -90,13 +90,13 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>
-                                    <a href="{{ url('products/'.$data->id) }}">
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();">
                                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
                                         <img src="{{ $galleries->photo_url }}" alt="{{ $data->title }}" width="60">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ url('products/'.$data->id) }}" class="fw-medium link-primary">{{ $data->title }}</a>
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();" class="fw-medium link-primary">{{ $data->title }}</a>
                                     <br>
                                     <small>Category: {{ $data->category->name }}</small>
                                 </td>
@@ -120,9 +120,15 @@
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                            <a href="{{ url('products/'.$data->id) }}" class="text-primary d-inline-block">
+                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();" class="text-primary d-inline-block">
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
+
+                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                                            <form action="{{url('detail_products')}}" id="show-detail_{{$product->id}}" method="POST" style="display: none;">
+                                                <input type="hidden" name="id" value="{{$product->id}}">>
+                                                @csrf
+                                            </form>
                                         </li>
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
                                             <a href="{{ url('products/'.$data->id.'/edit') }}" class="text-secondary d-inline-block edit-item-btn">
@@ -182,13 +188,13 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>
-                                    <a href="{{ url('products/'.$data->id) }}">
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();">
                                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
                                         <img src="{{ $galleries->photo_url }}" alt="{{ $data->title }}" width="60">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ url('products/'.$data->id) }}" class="fw-medium link-primary">{{ $data->title }}</a>
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();" class="fw-medium link-primary">{{ $data->title }}</a>
                                     <br>
                                     <small>Category: {{ $data->category->name }}</small>
                                 </td>
@@ -274,13 +280,13 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>
-                                    <a href="{{ url('products/'.$data->id) }}">
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();">
                                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
                                         <img src="{{ $galleries->photo_url }}" alt="{{ $data->title }}" width="60">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ url('products/'.$data->id) }}" class="fw-medium link-primary">{{ $data->title }}</a>
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();" class="fw-medium link-primary">{{ $data->title }}</a>
                                     <br>
                                     <small>Category: {{ $data->category->name }}</small>
                                 </td>
@@ -304,9 +310,13 @@
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                            <a href="{{ url('products/'.$data->id) }}" class="text-primary d-inline-block">
+                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_{{$product->id}}').submit();" class="text-primary d-inline-block">
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
+                                            <form action="{{url('detail_products')}}" id="show-detail_{{$product->id}}" method="POST" style="display: none;">
+                                                <input type="hidden" name="id" value="{{$product->id}}">>
+                                                @csrf
+                                            </form>
                                         </li>
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
                                             <a href="{{ url('products/'.$data->id.'/edit') }}" class="text-secondary d-inline-block edit-item-btn">
