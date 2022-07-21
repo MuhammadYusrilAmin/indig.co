@@ -90,13 +90,12 @@
                             <tr>
                                 <td><?php echo e($i++); ?></td>
                                 <td>
-                                    <a href="<?php echo e(url('products/'.$data->id)); ?>">
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();">
                                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
                                         <img src="<?php echo e($galleries->photo_url); ?>" alt="<?php echo e($data->title); ?>" width="60">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="<?php echo e(url('products/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->title); ?></a>
                                     <br>
                                     <small>Category: <?php echo e($data->category->name); ?></small>
                                 </td>
@@ -121,12 +120,16 @@
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                            <a href="<?php echo e(url('products/'.$data->id)); ?>" class="text-primary d-inline-block">
+                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();" class="text-primary d-inline-block">
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
+                                            <form action="<?php echo e(url('detail_products')); ?>" id="show-detail_<?php echo e($data->id); ?>" method="POST" style="display: none;">
+                                                <input type="hidden" name="id" value="<?php echo e($data->id); ?>">
+                                                <?php echo csrf_field(); ?>
+                                            </form>
                                         </li>
-                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                            <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                            <a href="<?php echo e(url('products/'.$data->id.'/edit')); ?>" class="text-secondary d-inline-block edit-item-btn">
                                                 <i class="ri-pencil-fill fs-16"></i>
                                             </a>
                                         </li>
@@ -183,13 +186,12 @@
                             <tr>
                                 <td><?php echo e($i++); ?></td>
                                 <td>
-                                    <a href="<?php echo e(url('products/'.$data->id)); ?>">
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();">
                                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
                                         <img src="<?php echo e($galleries->photo_url); ?>" alt="<?php echo e($data->title); ?>" width="60">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="<?php echo e(url('products/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->title); ?></a>
                                     <br>
                                     <small>Category: <?php echo e($data->category->name); ?></small>
                                 </td>
@@ -214,12 +216,16 @@
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                            <a href="<?php echo e(url('products/'.$data->id)); ?>" class="text-primary d-inline-block">
+                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();" class="text-primary d-inline-block">
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
+                                            <form action="<?php echo e(url('detail_products')); ?>" id="show-detail_<?php echo e($data->id); ?>" method="POST" style="display: none;">
+                                                <input type="hidden" name="id" value="<?php echo e($data->id); ?>">
+                                                <?php echo csrf_field(); ?>
+                                            </form>
                                         </li>
-                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                            <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                            <a href="<?php echo e(url('products/'.$data->id.'/edit')); ?>" class="text-secondary d-inline-block edit-item-btn">
                                                 <i class="ri-pencil-fill fs-16"></i>
                                             </a>
                                         </li>
@@ -276,13 +282,12 @@
                             <tr>
                                 <td><?php echo e($i++); ?></td>
                                 <td>
-                                    <a href="<?php echo e(url('products/'.$data->id)); ?>">
+                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();">
                                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
                                         <img src="<?php echo e($galleries->photo_url); ?>" alt="<?php echo e($data->title); ?>" width="60">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="<?php echo e(url('products/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->title); ?></a>
                                     <br>
                                     <small>Category: <?php echo e($data->category->name); ?></small>
                                 </td>
@@ -307,12 +312,16 @@
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                            <a href="<?php echo e(url('products/'.$data->id)); ?>" class="text-primary d-inline-block">
+                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();" class="text-primary d-inline-block">
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
+                                            <form action="<?php echo e(url('detail_products')); ?>" id="show-detail_<?php echo e($data->id); ?>" method="POST" style="display: none;">
+                                                <input type="hidden" name="id" value="<?php echo e($data->id); ?>">
+                                                <?php echo csrf_field(); ?>
+                                            </form>
                                         </li>
-                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                            <a href="#showModal" data-bs-toggle="modal" class="text-secondary d-inline-block edit-item-btn">
+                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                            <a href="<?php echo e(url('products/'.$data->id.'/edit')); ?>" class="text-secondary d-inline-block edit-item-btn">
                                                 <i class="ri-pencil-fill fs-16"></i>
                                             </a>
                                         </li>

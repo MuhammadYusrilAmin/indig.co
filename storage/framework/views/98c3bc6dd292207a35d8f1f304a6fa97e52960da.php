@@ -63,12 +63,12 @@
                 <h4 class="card-title mb-2">Half Sleeve Round Neck T-Shirts</h4>
             </div>
             <div class="card-footer">
-                <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($product->id); ?>').submit();" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></a>
+                <button onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($product->id); ?>').submit();" class="btn btn-transparent card-link link-secondary">See More <i class="ri-arrow-right-s-line ms-1 align-middle lh-1"></i></button>
                 <form action="<?php echo e(url('detail_products')); ?>" id="show-detail_<?php echo e($product->id); ?>" method="POST" style="display: none;">
                     <input type="hidden" name="id" value="<?php echo e($product->id); ?>">>
                     <?php echo csrf_field(); ?>
                 </form>
-                <a onclick="event.preventDefault(); document.getElementById('input-cart_<?php echo e($product->id); ?>').submit();" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                <buttonn onclick="event.preventDefault(); document.getElementById('input-cart_<?php echo e($product->id); ?>').submit();" class="btn btn-transparent card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></buttonn>
 
                 <form action="<?php echo e(route('cart.store')); ?>" id="input-cart_<?php echo e($product->id); ?>" method="POST" style="display: none;">
                     <input type="hidden" name="id" value="<?php echo e($product->id); ?>">
