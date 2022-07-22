@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?>
 <?php echo app('translator')->get('translation.signup'); ?>
 <?php $__env->stopSection(); ?>
@@ -23,10 +24,9 @@
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
                         <div>
                             <a href="index" class="d-inline-block auth-logo">
-                                <img src="<?php echo e(URL::asset('assets/images/logo-light.png')); ?>" alt="" height="20">
+                                <h1 style="color: white;" class="mt-3">INDIG.CO</h1>
                             </a>
                         </div>
-                        <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
                     </div>
                 </div>
             </div>
@@ -39,10 +39,10 @@
                         <div class="card-body p-4">
                             <div class="text-center mt-2">
                                 <h5 class="text-primary">Create New Account</h5>
-                                <p class="text-muted">Get your free velzon account now</p>
+                                <p class="text-muted">Get your free indigco account now</p>
                             </div>
                             <div class="p-2 mt-4">
-                                <form class="needs-validation" novalidate method="POST" action="<?php echo e(route('register')); ?>" enctype="multipart/form-data">
+                                <form class="needs-validation" method="POST" action="<?php echo e(route('register')); ?>" enctype="multipart/form-data">
                                     <?php echo csrf_field(); ?>
                                     <div class="mb-3">
                                         <label for="fullname" class="form-label">Name <span class="text-danger">*</span></label>
@@ -98,15 +98,15 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control <?php $__errorArgs = ['name'];
+                                        <input type="text" class="form-control <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="name" value="<?php echo e(old('name')); ?>" id="username" placeholder="Enter username" required>
-                                        <?php $__errorArgs = ['name'];
+unset($__errorArgs, $__bag); ?>" name="username" value="<?php echo e(old('username')); ?>" id="username" placeholder="Enter username" required>
+                                        <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -166,13 +166,11 @@ unset($__errorArgs, $__bag); ?>" name="password_confirmation" id="input-password
                                     </div>
 
                                     <div class="mb-4">
-                                        <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the
-                                            Velzon <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms
-                                                of Use</a></p>
+                                        <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the indigco <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
                                     </div>
 
                                     <div class="mt-4">
-                                        <a href="<?php echo e(url('login')); ?>" class="btn btn-success w-100">Sign Up</a>
+                                        <button type="submit" class="btn btn-success w-100">Sign Up</button>
                                     </div>
 
                                     <div class="mt-4 text-center">
@@ -185,6 +183,10 @@ unset($__errorArgs, $__bag); ?>" name="password_confirmation" id="input-password
                                             <button type="button" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></button>
                                             <button type="button" class="btn btn-dark btn-icon waves-effect waves-light"><i class="ri-github-fill fs-16"></i></button>
                                             <button type="button" class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-twitter-fill fs-16"></i></button>
+                                        </div>
+
+                                        <div class="signin-other-title mt-4">
+                                            <h5><a href="<?php echo e(url('register-cooperative')); ?>" class="fs-13 mb-4 title text-primary">Create account as a cooperative</a></h5>
                                         </div>
                                     </div>
                                 </form>
