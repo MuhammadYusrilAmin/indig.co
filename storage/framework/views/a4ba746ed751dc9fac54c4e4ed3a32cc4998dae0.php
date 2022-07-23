@@ -19,7 +19,8 @@
                         <div class="product-img-slider sticky-side-div">
                             <div class="swiper product-thumbnail-slider p-2 rounded bg-light">
                                 <div class="swiper-wrapper">
-                                    <?php $kategory = \App\Models\ProductGallery::where('product_id', $showDetail->id)->orderBy('created_at', 'desc')->get(); ?>
+                                    <?php
+                                    $kategory = \App\Models\ProductGallery::where('product_id', $showDetail->id)->orderBy('created_at', 'desc')->get(); ?>
                                     <?php $__currentLoopData = $kategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="swiper-slide">
                                         <img src="<?php echo e($value->photo_url); ?>" alt="" class="img-fluid d-block" />
@@ -64,8 +65,24 @@
                                 </div>
                                 <div class="flex-shrink-0">
                                     <div>
-                                        <!-- <a href="apps-ecommerce-cart" class="card-link link-success">Add to Wishlist<i class="bx bx bx-heart align-middle ms-1 lh-1"></i></a> -->
-                                        <a href="apps-ecommerce-cart" class="card-link link-danger">Remove Wishlist<i class="bx bx bx-heart align-middle ms-1 lh-1"></i></a>
+                                        <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
+                                        <?php $favorit = \App\Models\Wishlist::whereRaw('product_id = ' . $showDetail->id . ' AND user_id = ' . Illuminate\Support\Facades\Auth::user()->id)->first(); ?>
+                                        <?php if($favorit != null): ?>
+                                        <form action="<?php echo e(route('whistlist.destroy', $favorit->id)); ?>" method="post" class="d-flex justify-content-center">
+                                            <?php echo method_field('delete'); ?>
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                            <input type="hidden" name="url" value="<?php echo e($url); ?>">
+                                            <button type="submit" class="card-link link-danger btn btn-transparent">Remove Wishlist<i class="bx bx bx-heart align-middle ms-1 lh-1"></i></button>
+                                        </form>
+                                        <?php else: ?>
+                                        <form action="<?php echo e(route('whistlist.store')); ?>" method="post" class="d-flex justify-content-center">
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                            <input type="hidden" name="url" value="<?php echo e($url); ?>">
+                                            <button type="submit" class="card-link link-success btn btn-transparent">Add to Wishlist<i class="bx bx bx-heart align-middle ms-1 lh-1"></i></button>
+                                        </form>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -133,8 +150,10 @@
                             </div>
 
                             <div class=" mt-4">
-                                <h5 class="fs-14">Request :</h5>
-                                <input type="text" class="form-control" id="username" name="request" placeholder="Enter request (size, color, etc)">
+                                <form action="<?php echo e(route('orderDetail.store')); ?>" id="input-cart2" method="post">
+                                    <?php echo csrf_field(); ?>
+                                    <h5 class="fs-14">Request :</h5>
+                                    <input type="text" class="form-control" id="request" name="request2" placeholder="Enter request (size, color, etc)">
                             </div>
 
                             <div class="mt-4 text-muted">
@@ -143,30 +162,41 @@
                             </div>
 
                             <div class="mt-4 text-muted">
-                                <form action="" id="input-cart2_<?php echo e($id); ?>" method="post">
-                                    <div class="input-step">
-                                        <button type="button" class="minus">–</button>
-                                        <input type="number" class="product-quantity" value="1" min="1" max="100">
-                                        <button type="button" class="plus">+</button>
-                                    </div>
+                                <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                <input type="hidden" name="cities_id" value="<?php echo e($showDetail->cooperative->cities_id); ?>">
+                                <input type="hidden" id="price3" name="price" value="<?php echo e($showDetail->price); ?>">
+                                <div class="input-step">
+                                    <?php if($showDetail->stock != 0): ?>
+                                    <button type="button" id="minus">–</button>
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="100">
+                                    <button type="button" id="plus">+</button>
+                                    <?php else: ?>
+                                    <button disabled type="button" id="minus">–</button>
+                                    <input readonly type="number" value="1" min="1" name="quantity" max="100" id="quantity">
+                                    <button disabled type="button" id="plus">+</button>
+                                    <?php endif; ?>
+                                </div>
                             </div>
 
                             <div class="mt-4 text-muted">
                                 <?php if($showDetail->stock != 0): ?>
-                                <button href="#" class="btn btn-success">Buy Now</button>
+                                <button onclick="InputCart2()" class="btn btn-success">Buy Now</button>
                                 </form>
                                 <?php else: ?>
-                                <button class="btn btn-success">Buy Now</button>
+                                <button disabled class="btn btn-success">Buy Now</button>
                                 <?php endif; ?>
                                 <?php if($showDetail->stock != 0): ?>
-                                <button onclick="InputCart_<?= $id ?>()" class="btn btn-primary">Add to Cart</button>
+                                <button onclick="InputCart()" class="btn btn-primary">Add to Cart</button>
                                 <?php else: ?>
                                 <button disabled class="btn btn-primary">Add to Cart</button>
                                 <?php endif; ?>
-                                <form action="<?php echo e(route('cart.store')); ?>" id="input-cart_<?php echo e($id); ?>" method="post">
+                                <form action="<?php echo e(route('cart.store')); ?>" id="input-cart" method="post">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
-                                    <input type="hidden" name="quantity" id="demo2_<?php echo e($id); ?>" value="" required>
+                                    <input type="hidden" name="cities_id" value="<?php echo e($showDetail->cooperative->cities_id); ?>">
+                                    <input type="hidden" id="price2" name="price" value="<?php echo e($showDetail->price); ?>">
+                                    <input type="hidden" name="request2" id="request2" value="">
+                                    <input type="hidden" name="quantity" id="demo2" value="1" required>
                                 </form>
                             </div>
 
@@ -438,8 +468,81 @@
 <!-- end row -->
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-<script src="<?php echo e(URL::asset('assets/js/pages/form-input-spin.init.js')); ?>"></script>
 <script src="assets/libs/swiper/swiper.min.js"></script>
+<script>
+    function InputCart() {
+        event.preventDefault();
+        let weight = $('#quantity').val();
+        let request = $('#request').val();
+        if (weight == '' || weight == 0) {
+            alert('Input jumlah pembelian dengan benar')
+        } else {
+            $('#request2').val(request);
+            $('#demo2').val(weight);
+            $('#price2').val(<?= $showDetail->price ?> * weight);
+            $('#input-cart').submit();
+        }
+
+    }
+
+    function InputCart2() {
+        event.preventDefault();
+        let weight = $('#quantity').val();
+        let request = $('#request').val();
+        if (weight == '' || weight == 0) {
+            alert('Input jumlah pembelian dengan benar')
+        } else {
+            $('#request2').val(request);
+            $('#demo2').val(weight);
+            $('#price3').val(<?= $showDetail->price ?> * weight);
+            $('#input-cart2').submit();
+        }
+
+    }
+
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(function() {
+            $('#quantity').on('keyup', function() {
+                let id = $('#quantity').val();
+                if (id >= <?= $showDetail->stock ?>) {
+                    $("#quantity").val(<?= $showDetail->stock ?>);
+                } else if (id == '') {
+                    $("#quantity").val();
+                }
+            })
+        });
+
+        $(function() {
+            $('#minus').on('click', function() {
+                let stok = $('#quantity').val();
+                if (stok > 1) {
+                    $("#quantity").val(stok -= 1);
+                } else {
+                    $("#quantity").val('1');
+                }
+            });
+        });
+
+        $(function() {
+            $('#plus').on('click', function() {
+                let stok = $('#quantity').val();
+                let plus = parseInt(stok) + 1;
+                if (stok >= <?= $showDetail->stock ?>) {
+                    $("#quantity").val(<?= $showDetail->stock ?>);
+                } else {
+                    $("#quantity").val(plus);
+                }
+            });
+        });
+
+    });
+</script>
 <script src="assets/js/pages/ecommerce-product-details.init.js"></script>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>

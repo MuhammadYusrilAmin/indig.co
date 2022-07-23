@@ -13,12 +13,12 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-sm">
                         <div>
-                            <h5 class="card-title mb-0">Employee List <span class="badge bg-secondary align-middle ms-1">{{ count($datas) }}</span></h5>
+                            <h5 class="card-title mb-0">Customer List <span class="badge bg-secondary align-middle ms-1">{{ count($datas) }}</span></h5>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="hstack gap-2">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="ri-add-line align-bottom me-1"></i> Add Employee</button>
+                            <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button>
                             <button type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <div class="row g-3">
                         <div class="col-xl-6">
                             <div class="search-box">
-                                <input type="text" class="form-control search" placeholder="Search for employee, email, phone, status or something...">
+                                <input type="text" class="form-control search" placeholder="Search for customer, email, phone, status or something...">
                                 <i class="ri-search-line search-icon"></i>
                             </div>
                         </div>
@@ -104,107 +104,18 @@
                                     <td>
                                         <ul class="list-inline hstack gap-2 mb-0">
                                             <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editModal{{ $data->id }}" class="text-primary d-inline-block edit-item-btn">
+                                                <a href="#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
                                                     <i class="ri-pencil-fill fs-16"></i>
                                                 </a>
                                             </li>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                <a class="text-secondary d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal{{ $data->id }}">
+                                                <a class="text-secondary d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">
                                                     <i class="ri-delete-bin-5-fill fs-16"></i>
                                                 </a>
                                             </li>
                                         </ul>
                                     </td>
                                 </tr>
-
-                                <!-- Edit Employee Modal -->
-                                <div class="modal fade" id="editModal{{ $data->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $data->id }}" aria-modal="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editModalLabel{{ $data->id }}">Edit Employee</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <form action="{{ route('employees.update', $data->id) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="customername-field" class="form-label">Employee Name</label>
-                                                        <input type="text" id="customername-field" class="form-control" placeholder="Enter name" required name="name" value="{{ $data->name }}">
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="email-field" class="form-label">Email</label>
-                                                        <input type="email" id="email-field" class="form-control" placeholder="Enter email" required name="email" value="{{ $data->email }}">
-                                                        @foreach ($errors->get('email') as $msg)
-                                                        <div class="invalid-feed text-danger">
-                                                            {{ $msg }}
-                                                        </div>
-                                                        @endforeach
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="phone-field" class="form-label">Phone</label>
-                                                        <input type="text" id="phone-field" class="form-control" placeholder="Enter phone number" required name="phone" value="{{ $data->phone }}">
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="date-field" class="form-label">Joining Date</label>
-                                                        <input type="date" id="date-field" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" required placeholder="Select date" name="joining_date" value="{{ $data->joining_date }}">
-                                                    </div>
-
-                                                    <div>
-                                                        <label for="status-field" class="form-label">Status</label>
-                                                        <select class="form-control" name="status" id="status-field">
-                                                            @if ($data->status == 'Active')
-                                                            <option value="Active" selected>Active</option>
-                                                            <option value="Block">Block</option>
-                                                            @elseif ($data->status == 'Block')
-                                                            <option value="Active">Active</option>
-                                                            <option value="Block" selected>Block</option>
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div class="hstack gap-2 justify-content-end">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="submit" class="btn btn-primary" id="add-btn">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Delete Modal -->
-                                <div class="modal fade zoomIn" id="deleteRecordModal{{ $data->id }}" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="mt-2 text-center">
-                                                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#25a0e2,secondary:#00bd9d" style="width:100px;height:100px"></lord-icon>
-                                                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                                                        <h4>Are you sure ?</h4>
-                                                        <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record ?</p>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                                                    <form action="{{route('employees.destroy', $data->id)}}" method="POST">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -229,20 +140,18 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Add Employee Modal -->
-                <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-modal="true">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addModalLabel">Add Employee</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header bg-light p-3">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                             </div>
-                            <form action="{{ route('employees.store') }}" method="POST">
+                            <form action="" method="POST">
                                 @csrf
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="customername-field" class="form-label">Employee Name</label>
+                                        <label for="customername-field" class="form-label">Customer Name</label>
                                         <input type="text" id="customername-field" class="form-control" placeholder="Enter name" required name="name" />
                                     </div>
 
@@ -268,19 +177,45 @@
 
                                     <div>
                                         <label for="status-field" class="form-label">Status</label>
-                                        <select class="form-control" name="status" id="status-field">
-                                            <option value="Active" selected>Active</option>
+                                        <select class="form-control" data-choices data-choices-search-false name="status-field" id="status-field" name="status">
+                                            <option value="Active">Active</option>
                                             <option value="Block">Block</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div class="hstack gap-2 justify-content-end">
-                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary" id="add-btn">Submit</button>
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="add-btn">Add Customer</button>
+                                        <button type="button" class="btn btn-primary" id="edit-btn">Update</button>
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mt-2 text-center">
+                                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#25a0e2,secondary:#00bd9d" style="width:100px;height:100px"></lord-icon>
+                                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                        <h4>Are you sure ?</h4>
+                                        <p class="text-muted mx-4 mb-0">Are you sure you want to
+                                            remove this record ?</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn w-sm btn-primary " id="delete-record">Yes, Delete It!</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -298,5 +233,7 @@
 <script src="assets/libs/list.pagination.js/list.pagination.js.min.js"></script>
 
 <!--ecommerce-customer init js -->
+<script src="assets/js/pages/ecommerce-customer-list.init.js"></script>
+
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

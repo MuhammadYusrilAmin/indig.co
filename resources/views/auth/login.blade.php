@@ -23,9 +23,10 @@
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
                         <div>
                             <a href="index" class="d-inline-block auth-logo">
-                                <h1 style="color: white;" class="mt-3">INDIG.CO</h1>
+                                <img src="{{ URL::asset('assets/images/logo-light.png')}}" alt="" height="20">
                             </a>
                         </div>
+                        <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
                     </div>
                 </div>
             </div>
@@ -38,7 +39,7 @@
                         <div class="card-body p-4">
                             <div class="text-center mt-2">
                                 <h5 class="text-primary">Welcome Back !</h5>
-                                <p class="text-muted">Sign in to continue to indigco.</p>
+                                <p class="text-muted">Sign in to continue to Velzon.</p>
                             </div>
                             <div class="p-2 mt-4">
                                 <form action="{{ route('login') }}" method="POST">

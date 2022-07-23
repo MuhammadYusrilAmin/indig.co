@@ -33,14 +33,4 @@ class Cooperative extends Model
     {
         return $this->hasMany(Product::class);
     }
-
-    public function city()
-    {
-        return $this->belongsTo(RajaongkirCity::class, 'cities_id', 'id');
-    }
-
-    public function province()
-    {
-        return $this->belongsTo(RajaongkirProvince::class, 'provinces_id', 'id');
-    }
 }

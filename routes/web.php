@@ -1,13 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterCooperativeController;
-use App\Http\Controllers\ChatController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,23 +32,27 @@ Route::post('/update-password/{id}', [HomeController::class, 'updatePassword'])-
 Route::get('/', [HomeController::class, 'root'])->name('root');
 Route::get('/sellers/{id}', [HomeController::class, 'showSeller'])->name('showSeller');
 
-Route::resource('register-cooperative', RegisterCooperativeController::class);
-
 // DASHBOARD
-Route::resource('dashboard', DashboardController::class);
+Route::get('dashboard', function () {
+    return view('admin.dashboard');
+});
 
 Route::resource('products', ProductController::class)->middleware('auth');
-Route::post('detail_products', [ProductController::class, 'show'])->middleware('auth');
+Route::get('detail_products', [ProductController::class, 'show'])->middleware('auth');
 Route::resource('orders', OrderController::class)->middleware('auth');
 Route::resource('employees', EmployeeController::class)->middleware('auth');
 Route::resource('transaction', TransactionController::class)->middleware('auth');
 Route::resource('cart',  \App\Http\Controllers\CartController::class)->middleware('auth');
+Route::resource('orderDetail',  \App\Http\Controllers\OrderDetailController::class)->middleware('auth');
+
 
 Route::post('/minus_quantity',  [\App\Http\Controllers\CartController::class, 'minus_quantity'])->middleware('auth');
 Route::post('/plus_quantity',  [\App\Http\Controllers\CartController::class, 'plus_quantity'])->middleware('auth');
 Route::post('/getkabupaten',  [IndoRegionController::class, 'getkabupaten'])->middleware('auth');
 Route::post('/getkecamatan',  [IndoRegionController::class, 'getkecamatan'])->middleware('auth');
 Route::post('/getdesa',  [IndoRegionController::class, 'getdesa'])->middleware('auth');
+Route::resource('/whistlist', \App\Http\Controllers\WhishlistController::class)->middleware('auth');
+Route::resource('/address',  \App\Http\Controllers\AddressController::class);
 
 // PROFILE
 Route::get('profile', function () {
@@ -63,14 +64,12 @@ Route::get('settings', function () {
 Route::get('faqs', function () {
     return view('profile.faqs');
 });
-Route::resource('chat', ChatController::class);
+Route::get('chat', function () {
+    return view('profile.chat');
+});
 Route::get('lockscreen', function () {
     return view('profile.lockscreen');
 });
-
-// SUPER ADMIN
-Route::resource('dashboard-admin', SuperAdminController::class);
-Route::post('reject-cooperative/{id}', [SuperAdminController::class, 'reject']);
 
 // beberapa fungsi endpoint resource yang perlu kita ketahui:
 // 1. Route get => nama_route => menjalankan fungsi index

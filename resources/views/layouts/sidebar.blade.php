@@ -56,17 +56,15 @@
                     </a>
                 </li>
 
-                @if (Auth::user()->role=='Admin')
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="{{ url('employees') }}">
+                    <a class="nav-link hidden" href="{{ url('employees') }}">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>
                     </a>
                 </li>
-                @endif
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="{{ url('transaction') }}">
+                    <a class="nav-link" href="{{ url('cart') }}">
                         <i class="las la-shopping-cart"></i>
                         <span>@lang('translation.transactions')</span>
                     </a>

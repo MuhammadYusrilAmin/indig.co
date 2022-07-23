@@ -894,6 +894,4 @@
 <!-- chat init js -->
 <script src="assets/js/pages/chat.init.js"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-
-<script src="/js/app.js"></script>
 @endsection

@@ -9,13 +9,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "azishapidin/indoregion": "^3.0",
+        "dipantry/rajaongkir": "^1.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "pusher/pusher-php-server": "^7.0",
         "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {

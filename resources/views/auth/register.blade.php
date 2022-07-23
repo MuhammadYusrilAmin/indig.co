@@ -24,9 +24,10 @@
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
                         <div>
                             <a href="index" class="d-inline-block auth-logo">
-                                <h1 style="color: white;" class="mt-3">INDIG.CO</h1>
+                                <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="20">
                             </a>
                         </div>
+                        <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
                     </div>
                 </div>
             </div>
@@ -39,7 +40,7 @@
                         <div class="card-body p-4">
                             <div class="text-center mt-2">
                                 <h5 class="text-primary">Create New Account</h5>
-                                <p class="text-muted">Get your free indigco account now</p>
+                                <p class="text-muted">Get your free velzon account now</p>
                             </div>
                             <div class="p-2 mt-4">
                                 <form class="needs-validation" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -103,7 +104,9 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the indigco <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
+                                        <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the
+                                            Velzon <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms
+                                                of Use</a></p>
                                     </div>
 
                                     <div class="mt-4">
@@ -120,10 +123,6 @@
                                             <button type="button" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></button>
                                             <button type="button" class="btn btn-dark btn-icon waves-effect waves-light"><i class="ri-github-fill fs-16"></i></button>
                                             <button type="button" class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-twitter-fill fs-16"></i></button>
-                                        </div>
-
-                                        <div class="signin-other-title mt-4">
-                                            <h5><a href="{{ url('register-cooperative') }}" class="fs-13 mb-4 title text-primary">Create account as a cooperative</a></h5>
                                         </div>
                                     </div>
                                 </form>

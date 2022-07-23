@@ -57,14 +57,14 @@
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="<?php echo e(url('employees')); ?>">
+                    <a class="nav-link hidden" href="<?php echo e(url('employees')); ?>">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>
                     </a>
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="<?php echo e(url('transaction')); ?>">
+                    <a class="nav-link" href="<?php echo e(url('cart')); ?>">
                         <i class="las la-shopping-cart"></i>
                         <span><?php echo app('translator')->get('translation.transactions'); ?></span>
                     </a>
