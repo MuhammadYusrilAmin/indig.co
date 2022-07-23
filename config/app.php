@@ -161,6 +161,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
+        Dipantry\Rajaongkir\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,6 +231,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Rajaongkir' => Dipantry\Rajaongkir\Facade::class,
 
     ],
 

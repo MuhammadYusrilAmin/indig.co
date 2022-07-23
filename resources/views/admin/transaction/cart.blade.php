@@ -14,11 +14,19 @@
                     <h5 class="fs-14 mb-0">Your Cart ({{ count($carts) }} items)</h5>
                 </div>
             </div>
+            @if(count($carts) != 0)
             <div class="col-sm-auto">
                 <a href="#" class="d-block p-1 px-2 btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove All</a>
             </div>
+            @endif
         </div>
 
+        @if(count($carts) == 0)
+        <div class="text-center mt-5 pt-3">
+            <h3>Empty Cart</h3>
+            <a href="{{ url('/') }}" class="btn btn-primary mt-2">Go Shopping</a>
+        </div>
+        @else
         @foreach ($carts as $cart)
         <div class="card product">
             <div class="card-body">
@@ -39,7 +47,7 @@
                         <div class="input-step">
                             <input type="hidden" id="id_cart_{{$cart->id}}" value="{{$cart->id}}">
                             <button type="button" id="minus_{{$cart->id}}" class="minus">–</button>
-                            <input type="number" id="quantity_{{$cart->id}}" value="{{ $cart->quantity }}" min="0" max="100">
+                            <input type="number" id="quantity_{{$cart->id}}" readonly value="{{ $cart->quantity }}" min="0" max="100">
                             <button type="button" id="plus_{{$cart->id}}" class="plus">+</button>
                         </div>
                     </div>
@@ -60,7 +68,19 @@
                                 <a href="{{route('cart.destroy',$cart->id)}}" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
                             </div>
                             <div>
-                                <a href="#" class="d-block text-body p-1 px-2"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</a>
+                                <?php $wishlist = \App\Models\Wishlist::where('product_id', $cart->product_id)->get(); ?>
+                                @if(count($wishlist) != 0)
+                                <button class="d-block text-body p-1 px-2 btn btn-transparent " onclick="event.preventDefault(); document.getElementById('remove-whistlist').submit();"><i class="ri-star-fill text-danger align-bottom me-1"></i> <b class="text-danger" style="font-weight: normal;">Remove Wishlist</b></button>
+                                @else
+                                <button class="d-block text-body p-1 px-2 btn btn-transparent" onclick="event.preventDefault(); document.getElementById('add-whistlist').submit();"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</button>
+                                @endif
+
+                                <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
+                                <form action="{{route('whistlist.store')}}" method="post" id="add-whistlist" class="d-flex justify-content-center">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$cart->product_id}}">
+                                    <input type="hidden" name="url" value="{{$url}}">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -82,7 +102,6 @@
                 $("#delete-form2").attr('action', $(el).attr('href'));
                 $("#delete-form2").submit();
             }
-
 
             function formatCurrency(num) {
 
@@ -107,6 +126,17 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                });
+
+                $(function() {
+                    $('#quantity_<?= $cart->id ?>').on('keyup', function() {
+                        let id = $('#quantity_<?= $cart->id ?>').val();
+                        if (id >= <?= $product->stock ?>) {
+                            $("#quantity_<?= $cart->id ?>").val(<?= $product->stock ?>);
+                        } else if (id == '') {
+                            $("#quantity_<?= $cart->id ?>").val();
+                        }
+                    })
                 });
 
                 $(function() {
@@ -158,11 +188,14 @@
             });
         </script>
         @endforeach
+        @endif
         <!-- end card -->
 
+        @if(count($carts) != 0)
         <div class="text-end mb-4">
-            <a href="{{ url('transaction/create') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <a href="{{ url('transaction') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
         </div>
+        @endif
 
         <!-- WISHLIST -->
         <div class="mt-5 pt-5">
@@ -175,15 +208,33 @@
                 <div class="col">
                     <div class="card" style="height: 450px;">
                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
+                        @if($galleries == null)
+                        @else
                         <img class="card-img-top img-fluid" src="{{ $galleries->photo_url }}" alt="Card image cap">
                         <div class="card-body">
                             <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
                             <h5 class="card-title mb-2"><a href="{{ url('products-detail') }}" class="link-dark">{{ $product->title }}</a></h4>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="card-link link-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
-                            <a href="{{ url('transaction') }}" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
+                            <button href="#" class="card-link link-danger btn btn-transparent" onclick="event.preventDefault(); document.getElementById('remove-whistlist').submit();"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</button>
+                            <button onclick="event.preventDefault(); document.getElementById('input-cart_{{$product->id}}').submit();" class="btn btn-transparent card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></button>
+
+                            <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
+                            <form action="{{route('cart.store')}}" id="input-cart_{{$product->id}}" method="POST" style="display: none;">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="url" value="{{$url}}">
+                                <input type="hidden" name="price" value="{{$product->price}}">
+                            </form>
+                            <form action="{{route('whistlist.destroy', $wishlist->id)}}" id="remove-whistlist" method="post" class="d-flex justify-content-center">
+                                @method('delete')
+                                @csrf
+                                <input type="hidden" name="id" value="{{$wishlist->product_id}}">
+                                <input type="hidden" name="url" value="{{$url}}">
+                            </form>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -288,7 +339,11 @@
                 </div>
                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn w-sm btn-danger" id="remove-product">Yes, Delete It!</button>
+                    <form action="{{route('cart.edit', Auth::user()->id)}}" method="POST">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button>
+                    </form>
                 </div>
             </div>
 

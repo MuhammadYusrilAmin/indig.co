@@ -9,7 +9,6 @@ use App\Models\ProductGallery;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Echo_;
 
 class CartController extends Controller
 {
@@ -21,7 +20,7 @@ class CartController extends Controller
     public function index()
     {
         $carts = Cart::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        $wishlists = Wishlist::all()->sortByDesc('updated_at');
+        $wishlists = Wishlist::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'desc')->get();
         $product = Product::all();
         $galleries = ProductGallery::get();
 
@@ -56,14 +55,16 @@ class CartController extends Controller
             'id'                => $id,
             'user_id'           => Auth::user()->id,
             'product_id'        => $request->id,
-            'quantity'          => '1',
+            'quantity'          => $request->quantity,
             'price'             => $request->price,
+            'request'           => $request->request2,
         ]);
+
 
         if ($order) {
             return redirect('/cart');
         } else {
-            return redirect('/dashboard');
+            return redirect('/');
         }
     }
 
@@ -75,7 +76,9 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        //
+        $cart = Cart::where('user_id', $id);
+        $cart->delete();
+        return redirect('/cart');
     }
 
     /**
@@ -86,7 +89,7 @@ class CartController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo "asem lah";
     }
 
     /**

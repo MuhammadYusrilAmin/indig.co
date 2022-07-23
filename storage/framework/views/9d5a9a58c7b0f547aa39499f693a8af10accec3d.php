@@ -153,7 +153,7 @@
                     <h5 class="card-title mb-0">Product Categories</h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add New</a>Select product category</p>
+                    <p class="text-muted mb-2">Select product category</p>
                     <select class="form-select <?php echo e($errors->get('category_id') ? 'is-invalid' : ''); ?>" id="choices-category-input" data-choices data-choices-search-false name="category_id">
                         <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($value->name == 'All'): ?>

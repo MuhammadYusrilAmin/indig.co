@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "667858c325a810b0699d42a0892d7f2c",
+    "content-hash": "db5daca8401b93afcf7c52a5d8c9c792",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,76 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
             },
             "time": "2022-01-18T09:12:03+00:00"
+        },
+        {
+            "name": "azishapidin/indoregion",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/azishapidin/indoregion.git",
+                "reference": "95874c8b89ae8216fad11ec0f8e81de544331ded"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/azishapidin/indoregion/zipball/95874c8b89ae8216fad11ec0f8e81de544331ded",
+                "reference": "95874c8b89ae8216fad11ec0f8e81de544331ded",
+                "shasum": ""
+            },
+            "require": {
+                "parsecsv/php-parsecsv": "^1.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AzisHapidin\\IndoRegion\\IndoRegionServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/RawDataGetter.php"
+                ],
+                "psr-4": {
+                    "AzisHapidin\\IndoRegion\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Azis Hapidin",
+                    "email": "azishapidin@gmail.com"
+                },
+                {
+                    "name": "cacing69",
+                    "email": "cacingworm69@gmail.com"
+                }
+            ],
+            "description": "Package containing region of Indonesia (provinces, regencies, districts, and villages) for Laravel",
+            "homepage": "https://azishapidin.com/",
+            "keywords": [
+                "csv",
+                "districts",
+                "indonesia",
+                "laravel",
+                "php",
+                "provinces",
+                "regencies",
+                "region",
+                "villages"
+            ],
+            "support": {
+                "issues": "https://github.com/azishapidin/indoregion/issues",
+                "source": "https://github.com/azishapidin/indoregion/tree/3.0.3"
+            },
+            "time": "2021-04-23T12:16:58+00:00"
         },
         {
             "name": "brick/math",
@@ -196,6 +266,56 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.1"
             },
             "time": "2021-08-13T13:06:58+00:00"
+        },
+        {
+            "name": "dipantry/rajaongkir",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dipantry/rajaongkir.git",
+                "reference": "316e2f5e9cda945354ee229a7f98d5be3f20a908"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dipantry/rajaongkir/zipball/316e2f5e9cda945354ee229a7f98d5be3f20a908",
+                "reference": "316e2f5e9cda945354ee229a7f98d5be3f20a908",
+                "shasum": ""
+            },
+            "require": {
+                "flynsarmy/csv-seeder": "^2.0",
+                "illuminate/support": "^9.0.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "ext-openssl": "*",
+                "orchestra/testbench": "^7.0",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^9.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dipantry\\Rajaongkir\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Auriga Aristo",
+                    "email": "aurigaaristo@gmail.com",
+                    "homepage": "https://aurigaaristo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "RajaOngkir API wrapper for PHP 8.0+",
+            "support": {
+                "issues": "https://github.com/Dipantry/rajaongkir/issues",
+                "source": "https://github.com/Dipantry/rajaongkir/tree/v1.2"
+            },
+            "time": "2022-04-24T17:27:59+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -492,6 +612,66 @@
                 }
             ],
             "time": "2021-10-11T09:18:27+00:00"
+        },
+        {
+            "name": "flynsarmy/csv-seeder",
+            "version": "v2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Flynsarmy/laravel-csv-seeder.git",
+                "reference": "b98d4ae2e9521bb5e9784b61febf59b4501a5a56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Flynsarmy/laravel-csv-seeder/zipball/b98d4ae2e9521bb5e9784b61febf59b4501a5a56",
+                "reference": "b98d4ae2e9521bb5e9784b61febf59b4501a5a56",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.1.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "nunomaduro/larastan": "^0.6.0@dev",
+                "orchestra/testbench": "6.*",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Flynsarmy\\CsvSeeder\\CsvSeederServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flynsarmy\\CsvSeeder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Flyn San",
+                    "email": "flynsarmy@gmail.com"
+                }
+            ],
+            "description": "Allows seeding of the database with CSV files",
+            "keywords": [
+                "csv",
+                "laravel",
+                "seed",
+                "seeding",
+                "seeds"
+            ],
+            "support": {
+                "issues": "https://github.com/Flynsarmy/laravel-csv-seeder/issues",
+                "source": "https://github.com/Flynsarmy/laravel-csv-seeder/tree/v2.0.6"
+            },
+            "time": "2021-02-09T23:48:06+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2118,6 +2298,70 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.2"
             },
             "time": "2021-11-30T19:35:32+00:00"
+        },
+        {
+            "name": "parsecsv/php-parsecsv",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parsecsv/parsecsv-for-php.git",
+                "reference": "2d6236cae09133e0533d34ed45ba1e1ecafffebb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parsecsv/parsecsv-for-php/zipball/2d6236cae09133e0533d34ed45ba1e1ecafffebb",
+                "reference": "2d6236cae09133e0533d34ed45ba1e1ecafffebb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "suggest": {
+                "illuminate/support": "Fluent array interface for map functions"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ParseCsv\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Myhrberg",
+                    "email": "contact@jimeh.me"
+                },
+                {
+                    "name": "William Knauss",
+                    "email": "will.knauss@gmail.com"
+                },
+                {
+                    "name": "Susann Sgorzaly",
+                    "homepage": "https://github.com/susgo"
+                },
+                {
+                    "name": "Christian Bläul",
+                    "homepage": "https://github.com/Fonata"
+                }
+            ],
+            "description": "CSV data parser for PHP",
+            "support": {
+                "issues": "https://github.com/parsecsv/parsecsv-for-php/issues",
+                "source": "https://github.com/parsecsv/parsecsv-for-php"
+            },
+            "time": "2021-11-07T14:15:46+00:00"
         },
         {
             "name": "phpoption/phpoption",

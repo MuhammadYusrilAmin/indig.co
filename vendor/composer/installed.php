@@ -19,6 +19,15 @@
             'reference' => '73e5b88775c64ccc0b84fb60836b30dc9d92ac4a',
             'dev_requirement' => false,
         ),
+        'azishapidin/indoregion' => array(
+            'pretty_version' => '3.0.3',
+            'version' => '3.0.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../azishapidin/indoregion',
+            'aliases' => array(),
+            'reference' => '95874c8b89ae8216fad11ec0f8e81de544331ded',
+            'dev_requirement' => false,
+        ),
         'brick/math' => array(
             'pretty_version' => '0.9.3',
             'version' => '0.9.3.0',
@@ -47,6 +56,15 @@
             'install_path' => __DIR__ . '/../dflydev/dot-access-data',
             'aliases' => array(),
             'reference' => '0992cc19268b259a39e86f296da5f0677841f42c',
+            'dev_requirement' => false,
+        ),
+        'dipantry/rajaongkir' => array(
+            'pretty_version' => 'v1.2',
+            'version' => '1.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../dipantry/rajaongkir',
+            'aliases' => array(),
+            'reference' => '316e2f5e9cda945354ee229a7f98d5be3f20a908',
             'dev_requirement' => false,
         ),
         'doctrine/inflector' => array(
@@ -120,6 +138,15 @@
             'aliases' => array(),
             'reference' => 'a63e5e8f26ebbebf8ed3c5c691637325512eb0dc',
             'dev_requirement' => true,
+        ),
+        'flynsarmy/csv-seeder' => array(
+            'pretty_version' => 'v2.0.6',
+            'version' => '2.0.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../flynsarmy/csv-seeder',
+            'aliases' => array(),
+            'reference' => 'b98d4ae2e9521bb5e9784b61febf59b4501a5a56',
+            'dev_requirement' => false,
         ),
         'fruitcake/laravel-cors' => array(
             'pretty_version' => 'v2.0.5',
@@ -552,6 +579,15 @@
             'aliases' => array(),
             'reference' => 'df09e21a5e5d5a7d51a8b9ecd44d3dd150d97fec',
             'dev_requirement' => true,
+        ),
+        'parsecsv/php-parsecsv' => array(
+            'pretty_version' => '1.3.2',
+            'version' => '1.3.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../parsecsv/php-parsecsv',
+            'aliases' => array(),
+            'reference' => '2d6236cae09133e0533d34ed45ba1e1ecafffebb',
+            'dev_requirement' => false,
         ),
         'phar-io/manifest' => array(
             'pretty_version' => '2.0.3',
