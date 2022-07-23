@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?> Dashboard <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -137,246 +138,51 @@
             </div><!-- end col -->
         </div><!-- end row -->
     </div><!-- end col -->
-
-    <div class="col-xxl-4">
-        <div class="card">
-            <div class="card-header border-0">
-                <h4 class="card-title mb-0">Upcoming Schedules</h4>
-            </div><!-- end cardheader -->
-            <div class="card-body pt-0">
-                <div class="upcoming-scheduled">
-                    <input type="text" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" data-deafult-date="today" data-inline-date="true">
-                </div>
-
-                <h6 class="text-uppercase fw-semibold mt-4 mb-3 text-muted">Events:</h6>
-                <div class="mini-stats-wid d-flex align-items-center mt-3">
-                    <div class="flex-shrink-0 avatar-sm">
-                        <span class="mini-stat-icon avatar-title rounded-circle text-primary bg-soft-primary fs-4">
-                            09
-                        </span>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1">Development planning</h6>
-                        <p class="text-muted mb-0">iTest Factory </p>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <p class="text-muted mb-0">9:20 <span class="text-uppercase">am</span></p>
-                    </div>
-                </div><!-- end -->
-                <div class="mini-stats-wid d-flex align-items-center mt-3">
-                    <div class="flex-shrink-0 avatar-sm">
-                        <span class="mini-stat-icon avatar-title rounded-circle text-primary bg-soft-primary fs-4">
-                            12
-                        </span>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1">Design new UI and check sales</h6>
-                        <p class="text-muted mb-0">Meta4Systems</p>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <p class="text-muted mb-0">11:30 <span class="text-uppercase">am</span></p>
-                    </div>
-                </div><!-- end -->
-                <div class="mini-stats-wid d-flex align-items-center mt-3">
-                    <div class="flex-shrink-0 avatar-sm">
-                        <span class="mini-stat-icon avatar-title rounded-circle text-primary bg-soft-primary fs-4">
-                            25
-                        </span>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1">Weekly catch-up </h6>
-                        <p class="text-muted mb-0">Nesta Technologies</p>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <p class="text-muted mb-0">02:00 <span class="text-uppercase">pm</span></p>
-                    </div>
-                </div><!-- end -->
-                <div class="mini-stats-wid d-flex align-items-center mt-3">
-                    <div class="flex-shrink-0 avatar-sm">
-                        <span class="mini-stat-icon avatar-title rounded-circle text-primary bg-soft-primary fs-4">
-                            27
-                        </span>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1">James Bangs (Client) Meeting</h6>
-                        <p class="text-muted mb-0">Nesta Technologies</p>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <p class="text-muted mb-0">03:45 <span class="text-uppercase">pm</span></p>
-                    </div>
-                </div><!-- end -->
-
-                <div class="mt-3 text-center">
-                    <a href="javascript:void(0);" class="text-muted text-decoration-underline">View all Events</a>
-                </div>
-
-            </div><!-- end cardbody -->
-        </div><!-- end card -->
-    </div><!-- end col -->
 </div><!-- end row -->
 
 <div class="row">
-    <div class="col-xxl">
+    <div class="col-xxl-4">
         <div class="card card-height-100">
             <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">Team Members</h4>
-                <div class="flex-shrink-0">
-                    <div class="dropdown card-header-dropdown">
-                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fw-semibold text-uppercase fs-12">Sort by: </span><span class="text-muted">Last 30 Days<i class="mdi mdi-chevron-down ms-1"></i></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#">Today</a>
-                            <a class="dropdown-item" href="#">Yesterday</a>
-                            <a class="dropdown-item" href="#">Last 7 Days</a>
-                            <a class="dropdown-item" href="#">Last 30 Days</a>
-                            <a class="dropdown-item" href="#">This Month</a>
-                            <a class="dropdown-item" href="#">Last Month</a>
-                        </div>
-                    </div>
-                </div>
             </div><!-- end card header -->
 
             <div class="card-body">
-
                 <div class="table-responsive table-card">
                     <table class="table table-borderless table-nowrap align-middle mb-0">
                         <thead class="table-light text-muted">
                             <tr>
                                 <th scope="col">Member</th>
-                                <th scope="col">Hours</th>
-                                <th scope="col">Tasks</th>
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="d-flex">
-                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?>" alt="" class="avatar-xs rounded-3 me-2">
+                                    <img src="<?php echo e(url('assets/images/users/'.Auth::user()->avatar)); ?>" alt="" class="avatar-xs rounded-3 me-2">
                                     <div>
-                                        <h5 class="fs-13 mb-0">Donald Risher</h5>
-                                        <p class="fs-12 mb-0 text-muted">Product Manager</p>
+                                        <h5 class="fs-13 mb-0"><?php echo e(Auth::user()->name); ?></h5>
+                                        <p class="fs-12 mb-0 text-muted">Active</p>
                                     </div>
-                                </td>
-                                <td>
-                                    <h6 class="mb-0">110h : <span class="text-muted">150h</span></h6>
-                                </td>
-                                <td>
-                                    258
                                 </td>
                                 <td style="width:5%;">
-                                    <div id="radialBar_chart_1" data-colors='["--vz-primary"]' data-chart-series="50" class="apex-charts" dir="ltr"></div>
+                                    <p>Product Manager</p>
                                 </td>
-                            </tr><!-- end tr -->
+                            </tr>
+                            <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td class="d-flex">
-                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>" alt="" class="avatar-xs rounded-3 me-2">
+                                    <img src="<?php echo e(url($employee->avatar)); ?>" alt="" class="avatar-xs rounded-3 me-2">
                                     <div>
-                                        <h5 class="fs-13 mb-0">Jansh Brown</h5>
-                                        <p class="fs-12 mb-0 text-muted">Lead Developer</p>
+                                        <h5 class="fs-13 mb-0"><?php echo e($employee->name); ?></h5>
+                                        <p class="fs-12 mb-0 text-muted"><?php echo e($employee->status); ?></p>
                                     </div>
                                 </td>
-                                <td>
-                                    <h6 class="mb-0">83h : <span class="text-muted">150h</span></h6>
+                                <td style="width:5%;">
+                                    <p>Employee</p>
                                 </td>
-                                <td>
-                                    105
-                                </td>
-                                <td>
-                                    <div id="radialBar_chart_2" data-colors='["--vz-primary"]' data-chart-series="45" class="apex-charts" dir="ltr"></div>
-                                </td>
-                            </tr><!-- end tr -->
-                            <tr>
-                                <td class="d-flex">
-                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-7.jpg')); ?>" alt="" class="avatar-xs rounded-3 me-2">
-                                    <div>
-                                        <h5 class="fs-13 mb-0">Carroll Adams</h5>
-                                        <p class="fs-12 mb-0 text-muted">Lead Designer</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h6 class="mb-0">58h : <span class="text-muted">150h</span></h6>
-                                </td>
-                                <td>
-                                    75
-                                </td>
-                                <td>
-                                    <div id="radialBar_chart_3" data-colors='["--vz-primary"]' data-chart-series="75" class="apex-charts" dir="ltr"></div>
-                                </td>
-                            </tr><!-- end tr -->
-                            <tr>
-                                <td class="d-flex">
-                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-4.jpg')); ?>" alt="" class="avatar-xs rounded-3 me-2">
-                                    <div>
-                                        <h5 class="fs-13 mb-0">William Pinto</h5>
-                                        <p class="fs-12 mb-0 text-muted">UI/UX Designer</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h6 class="mb-0">96h : <span class="text-muted">150h</span></h6>
-                                </td>
-                                <td>
-                                    85
-                                </td>
-                                <td>
-                                    <div id="radialBar_chart_4" data-colors='["--vz-primary"]' data-chart-series="25" class="apex-charts" dir="ltr"></div>
-                                </td>
-                            </tr><!-- end tr -->
-                            <tr>
-                                <td class="d-flex">
-                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-6.jpg')); ?>" alt="" class="avatar-xs rounded-3 me-2">
-                                    <div>
-                                        <h5 class="fs-13 mb-0">Garry Fournier</h5>
-                                        <p class="fs-12 mb-0 text-muted">Web Designer</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h6 class="mb-0">76h : <span class="text-muted">150h</span></h6>
-                                </td>
-                                <td>
-                                    69
-                                </td>
-                                <td>
-                                    <div id="radialBar_chart_5" data-colors='["--vz-primary"]' data-chart-series="60" class="apex-charts" dir="ltr"></div>
-                                </td>
-                            </tr><!-- end tr -->
-                            <tr>
-                                <td class="d-flex">
-                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-5.jpg')); ?>" alt="" class="avatar-xs rounded-3 me-2">
-                                    <div>
-                                        <h5 class="fs-13 mb-0">Susan Denton</h5>
-                                        <p class="fs-12 mb-0 text-muted">Lead Designer</p>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <h6 class="mb-0">123h : <span class="text-muted">150h</span></h6>
-                                </td>
-                                <td>
-                                    658
-                                </td>
-                                <td>
-                                    <div id="radialBar_chart_6" data-colors='["--vz-primary"]' data-chart-series="85" class="apex-charts" dir="ltr"></div>
-                                </td>
-                            </tr><!-- end tr -->
-                            <tr>
-                                <td class="d-flex">
-                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>" alt="" class="avatar-xs rounded-3 me-2">
-                                    <div>
-                                        <h5 class="fs-13 mb-0">Joseph Jackson</h5>
-                                        <p class="fs-12 mb-0 text-muted">React Developer</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h6 class="mb-0">117h : <span class="text-muted">150h</span></h6>
-                                </td>
-                                <td>
-                                    125
-                                </td>
-                                <td>
-                                    <div id="radialBar_chart_7" data-colors='["--vz-primary"]' data-chart-series="70" class="apex-charts" dir="ltr"></div>
-                                </td>
-                            </tr><!-- end tr -->
+                            </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody><!-- end tbody -->
                     </table><!-- end table -->
                 </div>
