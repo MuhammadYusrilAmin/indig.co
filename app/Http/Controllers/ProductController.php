@@ -59,6 +59,8 @@ class ProductController extends Controller
             'category_id' => 'required',
             'tags' => 'required',
             'foto' => 'required',
+            'files' => 'required',
+            'files.*' => 'required|image',
             'description' => 'required'
         ]);
 
@@ -75,7 +77,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'status' => $request->publish,
             'tags' => $request->tags,
-            'tanggal' => date('Y-m-d'),
+            'tanggal' => date('d-m-Y'),
             'description' => $request->description
         ]);
 
@@ -115,10 +117,9 @@ class ProductController extends Controller
         }
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $id = $_GET['id'];
-        $showDetail = Product::find($id);
+        $showDetail = Product::find($request->id);
         return view('admin.product.detail', compact(
             'showDetail'
         ));

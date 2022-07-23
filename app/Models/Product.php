@@ -39,9 +39,4 @@ class Product extends Model
     {
         return $this->hasMany(ProductGallery::class, 'product_id', 'id');
     }
-
-    public function cooperative()
-    {
-        return $this->belongsTo(Cooperative::class, 'cooperative_id', 'id');
-    }
 }

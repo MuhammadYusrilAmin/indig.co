@@ -377,7 +377,7 @@
                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
 
-                    <form action="{{route('products.show',$value->id)}}" method="POST">
+                    <form action="{{route('products.destroy',$value->id)}}" method="POST">
                         @method('delete')
                         @csrf
                         <button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button>

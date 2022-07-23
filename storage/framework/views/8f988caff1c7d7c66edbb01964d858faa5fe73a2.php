@@ -14,19 +14,11 @@
                     <h5 class="fs-14 mb-0">Your Cart (<?php echo e(count($carts)); ?> items)</h5>
                 </div>
             </div>
-            <?php if(count($carts) != 0): ?>
             <div class="col-sm-auto">
                 <a href="#" class="d-block p-1 px-2 btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove All</a>
             </div>
-            <?php endif; ?>
         </div>
 
-        <?php if(count($carts) == 0): ?>
-        <div class="text-center mt-5 pt-3">
-            <h3>Empty Cart</h3>
-            <a href="<?php echo e(url('/')); ?>" class="btn btn-primary mt-2">Go Shopping</a>
-        </div>
-        <?php else: ?>
         <?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="card product">
             <div class="card-body">
@@ -47,7 +39,7 @@
                         <div class="input-step">
                             <input type="hidden" id="id_cart_<?php echo e($cart->id); ?>" value="<?php echo e($cart->id); ?>">
                             <button type="button" id="minus_<?php echo e($cart->id); ?>" class="minus">–</button>
-                            <input type="number" id="quantity_<?php echo e($cart->id); ?>" readonly value="<?php echo e($cart->quantity); ?>" min="0" max="100">
+                            <input type="number" id="quantity_<?php echo e($cart->id); ?>" value="<?php echo e($cart->quantity); ?>" min="0" max="100">
                             <button type="button" id="plus_<?php echo e($cart->id); ?>" class="plus">+</button>
                         </div>
                     </div>
@@ -68,19 +60,7 @@
                                 <a href="<?php echo e(route('cart.destroy',$cart->id)); ?>" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
                             </div>
                             <div>
-                                <?php $wishlist = \App\Models\Wishlist::where('product_id', $cart->product_id)->get(); ?>
-                                <?php if(count($wishlist) != 0): ?>
-                                <button class="d-block text-body p-1 px-2 btn btn-transparent " onclick="event.preventDefault(); document.getElementById('remove-whistlist').submit();"><i class="ri-star-fill text-danger align-bottom me-1"></i> <b class="text-danger" style="font-weight: normal;">Remove Wishlist</b></button>
-                                <?php else: ?>
-                                <button class="d-block text-body p-1 px-2 btn btn-transparent" onclick="event.preventDefault(); document.getElementById('add-whistlist').submit();"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</button>
-                                <?php endif; ?>
-
-                                <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
-                                <form action="<?php echo e(route('whistlist.store')); ?>" method="post" id="add-whistlist" class="d-flex justify-content-center">
-                                    <?php echo csrf_field(); ?>
-                                    <input type="hidden" name="id" value="<?php echo e($cart->product_id); ?>">
-                                    <input type="hidden" name="url" value="<?php echo e($url); ?>">
-                                </form>
+                                <a href="#" class="d-block text-body p-1 px-2"><i class="ri-star-fill text-muted align-bottom me-1"></i> Add Wishlist</a>
                             </div>
                         </div>
                     </div>
@@ -102,6 +82,7 @@
                 $("#delete-form2").attr('action', $(el).attr('href'));
                 $("#delete-form2").submit();
             }
+
 
             function formatCurrency(num) {
 
@@ -126,17 +107,6 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                });
-
-                $(function() {
-                    $('#quantity_<?= $cart->id ?>').on('keyup', function() {
-                        let id = $('#quantity_<?= $cart->id ?>').val();
-                        if (id >= <?= $product->stock ?>) {
-                            $("#quantity_<?= $cart->id ?>").val(<?= $product->stock ?>);
-                        } else if (id == '') {
-                            $("#quantity_<?= $cart->id ?>").val();
-                        }
-                    })
                 });
 
                 $(function() {
@@ -188,14 +158,11 @@
             });
         </script>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        <?php endif; ?>
         <!-- end card -->
 
-        <?php if(count($carts) != 0): ?>
         <div class="text-end mb-4">
-            <a href="<?php echo e(url('transaction')); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <a href="<?php echo e(url('transaction/create')); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
         </div>
-        <?php endif; ?>
 
         <!-- WISHLIST -->
         <div class="mt-5 pt-5">
@@ -208,33 +175,15 @@
                 <div class="col">
                     <div class="card" style="height: 450px;">
                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
-                        <?php if($galleries == null): ?>
-                        <?php else: ?>
                         <img class="card-img-top img-fluid" src="<?php echo e($galleries->photo_url); ?>" alt="Card image cap">
                         <div class="card-body">
                             <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
                             <h5 class="card-title mb-2"><a href="<?php echo e(url('products-detail')); ?>" class="link-dark"><?php echo e($product->title); ?></a></h4>
                         </div>
                         <div class="card-footer">
-                            <button href="#" class="card-link link-danger btn btn-transparent" onclick="event.preventDefault(); document.getElementById('remove-whistlist').submit();"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</button>
-                            <button onclick="event.preventDefault(); document.getElementById('input-cart_<?php echo e($product->id); ?>').submit();" class="btn btn-transparent card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></button>
-
-                            <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
-                            <form action="<?php echo e(route('cart.store')); ?>" id="input-cart_<?php echo e($product->id); ?>" method="POST" style="display: none;">
-                                <?php echo csrf_field(); ?>
-                                <input type="hidden" name="id" value="<?php echo e($product->id); ?>">
-                                <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="url" value="<?php echo e($url); ?>">
-                                <input type="hidden" name="price" value="<?php echo e($product->price); ?>">
-                            </form>
-                            <form action="<?php echo e(route('whistlist.destroy', $wishlist->id)); ?>" id="remove-whistlist" method="post" class="d-flex justify-content-center">
-                                <?php echo method_field('delete'); ?>
-                                <?php echo csrf_field(); ?>
-                                <input type="hidden" name="id" value="<?php echo e($wishlist->product_id); ?>">
-                                <input type="hidden" name="url" value="<?php echo e($url); ?>">
-                            </form>
+                            <a href="#" class="card-link link-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
+                            <a href="<?php echo e(url('transaction')); ?>" class="card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></a>
                         </div>
-                        <?php endif; ?>
                     </div>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -340,11 +289,7 @@
                 </div>
                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                    <form action="<?php echo e(route('cart.edit', Auth::user()->id)); ?>" method="POST">
-                        <?php echo method_field('delete'); ?>
-                        <?php echo csrf_field(); ?>
-                        <button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button>
-                    </form>
+                    <button type="button" class="btn w-sm btn-danger" id="remove-product">Yes, Delete It!</button>
                 </div>
             </div>
 

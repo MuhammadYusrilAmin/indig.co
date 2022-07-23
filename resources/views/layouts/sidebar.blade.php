@@ -57,7 +57,7 @@
                 </li>
 
                 <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link hidden" href="{{ url('employees') }}">
+                    <a class="nav-link" href="{{ url('employees') }}">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>
                     </a>
