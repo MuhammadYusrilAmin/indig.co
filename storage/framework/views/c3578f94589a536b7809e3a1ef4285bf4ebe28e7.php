@@ -56,12 +56,14 @@
                     </a>
                 </li>
 
+                <?php if(Auth::user()->role=='Admin'): ?>
                 <li class="nav-item" id="navbar-nav">
                     <a class="nav-link" href="<?php echo e(url('employees')); ?>">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>
                     </a>
                 </li>
+                <?php endif; ?>
 
                 <li class="nav-item" id="navbar-nav">
                     <a class="nav-link" href="<?php echo e(url('transaction')); ?>">
