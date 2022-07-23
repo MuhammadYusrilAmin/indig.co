@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" data-layout="vertical" data-layout-style="default" data-layout-position="fixed" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-layout-width="fluid">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" data-layout="twocolumn" data-layout-style="default" data-layout-position="fixed" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-layout-width="fluid">
 
 <head>
     <meta charset="utf-8" />
@@ -14,7 +14,7 @@
 
 
 
-<body data-topbar="light">
+<body>
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -22,7 +22,6 @@
         <body>
             <?php echo $__env->make('layouts.topbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <?php echo $__env->make('layouts.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-            <?php echo $__env->make('layouts.horizontal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -48,4 +47,4 @@
     <?php echo $__env->make('layouts.vendor-scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </body>
 
-</html><?php /**PATH D:\laragon\www\saas\resources\views/layouts/master-layouts.blade.php ENDPATH**/ ?>
+</html><?php /**PATH D:\laragon\www\saas\resources\views/layouts/layouts-two-column.blade.php ENDPATH**/ ?>

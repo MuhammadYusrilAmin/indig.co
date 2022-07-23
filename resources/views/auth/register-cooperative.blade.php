@@ -59,15 +59,15 @@ Register as a Cooperative
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('username') }}" id="username" placeholder="Enter username" required>
-                                                @error('username')
+                                                <label for="name" class="form-label">Cooperative Name<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" id="name" placeholder="Enter cooperative name" required>
+                                                @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
                                                 <div class="invalid-feedback">
-                                                    Please enter full username
+                                                    Please enter cooperative name
                                                 </div>
                                             </div>
                                             <div class="mb-3">

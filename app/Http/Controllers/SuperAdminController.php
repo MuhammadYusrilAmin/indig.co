@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Cooperative;
 use Illuminate\Http\Request;
 
-class RegisterCooperativeController extends Controller
+class SuperAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,14 @@ class RegisterCooperativeController extends Controller
      */
     public function index()
     {
-        return view('auth.register-cooperative');
+        $notverified = Cooperative::where('status', 'notverified')->get();
+        $verified = Cooperative::where('status', 'verified')->get();
+
+        return view(
+            'super-admin.index',
+            compact('notverified'),
+            compact('verified'),
+        );
     }
 
     /**
@@ -35,37 +42,7 @@ class RegisterCooperativeController extends Controller
      */
     public function store(Request $request)
     {
-        $id = mt_rand(1000, 9999);
-
-        $cooperative = Cooperative::create([
-            'id' => $id,
-            'cities_id' => 1,
-            'provinces_id' => 1,
-            'nik' => $request->nik,
-            'name' => $request->name,
-            'since_year' => $request->since_year,
-            'owner_name' => $request->owner_name,
-            'company_name' => $request->company_name,
-            'email' => $request->email,
-            'website' => $request->website,
-            'contact' => $request->contact,
-            'fax' => $request->fax,
-            'location' => $request->location,
-            'status' =>  'notverified',
-            'avatar' =>  'avatar-11.png', // logo cooperative
-        ]);
-
-        $user = User::create([
-            'cooperative_id' => $id,
-            'name' => $request->owner_name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'photo' =>  'avatar-11.png',
-            'avatar' =>  'avatar-11.png',
-            'role' =>  'Admin', // user photo
-        ]);
-
-        return $user;
+        //
     }
 
     /**
@@ -99,7 +76,28 @@ class RegisterCooperativeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cooperative = Cooperative::find($id);
+        $cooperative->status = 'verified';
+        $cooperative->update();
+
+        if ($cooperative) {
+            return redirect('dashboard-admin')->with('successfully', 'Cooperative verified successfully');
+        } else {
+            return redirect('dashboard-admin')->with('error', 'Cooperative failed to verified');
+        }
+    }
+
+    public function reject($id)
+    {
+        $cooperative = Cooperative::find($id);
+        $cooperative->status = 'rejected';
+        $cooperative->update();
+
+        if ($cooperative) {
+            return redirect('dashboard-admin')->with('successfully', 'Cooperative rejected successfully');
+        } else {
+            return redirect('dashboard-admin')->with('error', 'Cooperative failed to rejected');
+        }
     }
 
     /**

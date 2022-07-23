@@ -56,12 +56,14 @@
                     </a>
                 </li>
 
+                @if (Auth::user()->role=='Admin')
                 <li class="nav-item" id="navbar-nav">
                     <a class="nav-link" href="{{ url('employees') }}">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>
                     </a>
                 </li>
+                @endif
 
                 <li class="nav-item" id="navbar-nav">
                     <a class="nav-link" href="{{ url('transaction') }}">
