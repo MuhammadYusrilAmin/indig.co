@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Str;
 
 class OrderController extends Controller
 {
@@ -43,8 +44,18 @@ class OrderController extends Controller
         // ID = ICO - date(ddmmyyhms) - 4 acak - iduser
     }
 
-    public function store()
+    public function store(Request $request, Order $order)
     {
+        $this->getSnapRedirect($order);
         // ID = ICO - date(ddmmyyhms) - 4 acak - iduser
+    }
+
+    public function getSnapRedirect(Order $order)
+    {
+        $orderId = $order->id . '-' . Str::random(5);
+        $order->midtrans_booking_code = $orderId;
+        $transaction_detail = [
+            'order_id' => $order
+        ];
     }
 }

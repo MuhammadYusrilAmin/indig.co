@@ -19,7 +19,9 @@ class Order extends Model
         'sub_total',
         'shipping_charge',
         'total_payment',
-        'payment_method',
+        'payment_status',
+        'midtrans_url',
+        'midtrans_booking code',
         'note',
         'canceled',
     ];
