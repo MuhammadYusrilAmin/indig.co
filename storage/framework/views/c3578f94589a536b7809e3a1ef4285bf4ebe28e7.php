@@ -31,42 +31,50 @@
             </div>
 
             <ul class="navbar-nav" id="navbar-nav">
+                <li class="nav-item" style="display: none;">
+                    <a class="nav-link" href="<?php echo e(url('/')); ?>">
+                        <i class="las la-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="<?php echo e(url('dashboard')); ?>" class="nav-link">
                         <i class="bx bxs-dashboard"></i>
-                        <span>
-                            Dashboard
-                        </span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="nav-item" id="navbar-nav">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo e(url('products')); ?>">
                         <i class="lab la-product-hunt"></i>
-                        <span>
-                            Products
+                        <span>Products</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo e(url('orders-admin')); ?>">
+                        <i class="lab la-first-order"></i>
+                        <?php $history = App\Models\Order::all(); ?>
+                        <span>Orders
+                            <?php if(count($history->where('status', 'Pending')) != 0): ?>
+                            <span class="badge bg-primary align-middle ms-1"><?php echo e(count($history->where('status', 'Pending'))); ?></span>
+                            <?php endif; ?>
                         </span>
                     </a>
                 </li>
 
-                <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="<?php echo e(url('orders')); ?>">
-                        <i class="lab la-first-order"></i>
-                        <span><?php echo app('translator')->get('translation.orders'); ?></span>
-                    </a>
-                </li>
-
-                <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link hidden" href="<?php echo e(url('employees')); ?>">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo e(url('employees')); ?>">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>
                     </a>
                 </li>
 
-                <li class="nav-item" id="navbar-nav">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo e(url('cart')); ?>">
                         <i class="las la-shopping-cart"></i>
-                        <span><?php echo app('translator')->get('translation.transactions'); ?></span>
+                        <span>Transactions</span>
                     </a>
                 </li>
             </ul>

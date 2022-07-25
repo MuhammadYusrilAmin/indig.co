@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -43,11 +44,15 @@ Route::resource('dashboard', DashboardController::class);
 Route::resource('products', ProductController::class)->middleware('auth');
 Route::get('detail_products', [ProductController::class, 'show'])->middleware('auth');
 Route::resource('orders', OrderController::class)->middleware('auth');
+Route::get('orders-admin', [OrderController::class, 'orders'])->middleware('auth');
+Route::post('reject-order/{id}', [OrderController::class, 'reject'])->middleware('auth');
+Route::post('send-order/{id}', [OrderController::class, 'sendOrder'])->middleware('auth');
+Route::post('accept-order/{id}', [OrderController::class, 'acceptOrder'])->middleware('auth');
+Route::post('cancell-order/{id}', [OrderController::class, 'cancellOrder'])->middleware('auth');
 Route::resource('employees', EmployeeController::class)->middleware('auth');
 Route::resource('transaction', TransactionController::class)->middleware('auth');
 Route::resource('cart',  \App\Http\Controllers\CartController::class)->middleware('auth');
 Route::resource('orderDetail',  \App\Http\Controllers\OrderDetailController::class)->middleware('auth');
-
 
 Route::post('/minus_quantity',  [\App\Http\Controllers\CartController::class, 'minus_quantity'])->middleware('auth');
 Route::post('/plus_quantity',  [\App\Http\Controllers\CartController::class, 'plus_quantity'])->middleware('auth');
@@ -58,20 +63,13 @@ Route::resource('/whistlist', \App\Http\Controllers\WhishlistController::class)-
 Route::resource('/address',  \App\Http\Controllers\AddressController::class);
 
 // PROFILE
-Route::get('profile', function () {
-    return view('profile.index');
-});
-Route::get('settings', function () {
-    return view('profile.settings');
-});
+Route::resource('profile', ProfileController::class);
+Route::post('change-password/{id}', [ProfileController::class, 'changePassword']);
 Route::get('faqs', function () {
     return view('profile.faqs');
 });
 Route::get('chat', function () {
     return view('profile.chat');
-});
-Route::get('lockscreen', function () {
-    return view('profile.lockscreen');
 });
 
 // SUPER ADMIN

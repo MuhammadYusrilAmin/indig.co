@@ -31,42 +31,50 @@
             </div>
 
             <ul class="navbar-nav" id="navbar-nav">
+                <li class="nav-item" style="display: none;">
+                    <a class="nav-link" href="{{ url('/') }}">
+                        <i class="las la-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ url('dashboard') }}" class="nav-link">
                         <i class="bx bxs-dashboard"></i>
-                        <span>
-                            Dashboard
-                        </span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="nav-item" id="navbar-nav">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('products') }}">
                         <i class="lab la-product-hunt"></i>
-                        <span>
-                            Products
+                        <span>Products</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('orders-admin') }}">
+                        <i class="lab la-first-order"></i>
+                        <?php $history = App\Models\Order::all(); ?>
+                        <span>Orders
+                            @if (count($history->where('status', 'Pending')) != 0)
+                            <span class="badge bg-primary align-middle ms-1">{{ count($history->where('status', 'Pending')) }}</span>
+                            @endif
                         </span>
                     </a>
                 </li>
 
-                <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link" href="{{ url('orders') }}">
-                        <i class="lab la-first-order"></i>
-                        <span>@lang('translation.orders')</span>
-                    </a>
-                </li>
-
-                <li class="nav-item" id="navbar-nav">
-                    <a class="nav-link hidden" href="{{ url('employees') }}">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('employees') }}">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>
                     </a>
                 </li>
 
-                <li class="nav-item" id="navbar-nav">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('cart') }}">
                         <i class="las la-shopping-cart"></i>
-                        <span>@lang('translation.transactions')</span>
+                        <span>Transactions</span>
                     </a>
                 </li>
             </ul>
