@@ -61,8 +61,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        echo "asem";
-        // ID = ICO - date(ddmmyyhms) - 4 acak - iduser
+        // date(ddmmyyhms) - 4 acak - iduser
     }
 
     /**
