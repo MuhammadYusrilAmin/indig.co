@@ -6,20 +6,10 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductGallery;
-use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\Village;
 use App\Models\Province;
-use App\Models\Regency;
-use App\Models\District;
 use Dipantry\Rajaongkir\Models\RajaongkirCourier;
 use Dipantry\Rajaongkir\Models\ROProvince;
-use Dipantry\Rajaongkir\Models\ROCity;
-use Dipantry\Rajaongkir\Models\ROSubDistrict;
-use Dipantry\Rajaongkir\Models\ROCountry;
-use PhpParser\Node\Stmt\Echo_;
-use PHPUnit\Framework\Constraint\Count;
 use Rajaongkir;
 
 class TransactionController extends Controller
@@ -28,13 +18,34 @@ class TransactionController extends Controller
     {
         // Contoh Starter
         $addresses = Address::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        $carts = Cart::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $carts = Cart::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'asc')->get();
+        $cek_origin = Cart::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'desc')->first();
+        $provinces  = ROProvince::all();
+        $weight2 = null;
+        foreach ($carts as $value) {
+            $product = Product::where('id', $value->product_id)->get();
+            foreach ($product as $key) {
+                $weight2 += $key->weight;
+            }
+        }
 
-        return view(
-            'admin.transaction.checkout',
-            compact('addresses'),
-            compact('carts'),
+        $data = Rajaongkir::getOngkirCost(
+            $origin = $cek_origin->cities_id,
+            $destination =  $_GET['id'],
+            $weight = $weight2,
+            $courier = RajaongkirCourier::JNE
         );
+        $konten = json_encode($data);
+        $data2 = json_decode($konten, true);
+
+        return view('admin.transaction.checkout')->with([
+            'addresses' => $addresses,
+            'carts' => $carts,
+            'cek_origin' => $cek_origin,
+            'weight2' => $weight2,
+            'provinces' => $provinces,
+            'data2' => $data2,
+        ]);
     }
 
     public function cek_ongkir_first()

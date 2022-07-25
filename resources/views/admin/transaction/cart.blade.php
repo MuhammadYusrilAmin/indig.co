@@ -193,7 +193,9 @@
 
         @if(count($carts) != 0)
         <div class="text-end mb-4">
-            <a href="{{ url('transaction') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <?php
+            $cek_destination = App\Models\Address::where('user_id', Illuminate\Support\Facades\Auth::user()->id)->orderBy('created_at', 'desc')->first(); ?>
+            <a href="{{ url('transaction?id='.$cek_destination->regencies_id) }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
         </div>
         @endif
 

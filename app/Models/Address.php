@@ -20,8 +20,6 @@ class Address extends Model
         'zip_code',
         'province_id',
         'regencies_id',
-        'district_id',
-        'village_id',
     ];
 
     public function user()

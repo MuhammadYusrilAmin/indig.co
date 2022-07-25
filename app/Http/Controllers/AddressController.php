@@ -40,34 +40,6 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        $provinsi = Province::where('id', $request->provinsi)->first();
-        $kabupaten = Regency::where('id', $request->kabupaten)->first();
-        $kecamatan = District::where('id', $request->kecamatan)->first();
-        $desa = Village::where('id', $request->desa)->first();
-        if ($provinsi) {
-            $namaProvinsi =   $provinsi->name . ' ';
-        } else {
-            $namaProvinsi =  null;
-        }
-
-        if ($kabupaten) {
-            $namaKabupaten =   $kabupaten->name . ', ';
-        } else {
-            $namaKabupaten =  null;
-        }
-
-        if ($kecamatan) {
-            $namaKecamatan =   $kecamatan->name . ', ';
-        } else {
-            $namaKecamatan =  null;
-        }
-
-        if ($desa) {
-            $namaDesa =   $desa->name . ', ';
-        } else {
-            $namaDesa =  null;
-        }
-
         $address = Address::create([
             'user_id'          => Auth::user()->id,
             'location'         => $request->location,
@@ -78,16 +50,23 @@ class AddressController extends Controller
             'rw'               => $request->rw,
             'zip_code'         => $request->zip_code,
             'province_id'      => $request->provinsi,
-            'regencies_id'     => $request->id_kabupaten,
-            'district_id'      => $request->id_kecamatan,
-            'village_id'       => $request->id_desa,
+            'regencies_id'     => $request->kabupaten
         ]);
 
+        $addresses = Address::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->first();
         $url = $request->url;
-        if ($url != null) {
-            return redirect('transaction/' . $url);
+        if ($addresses == null) {
+            if ($url != null) {
+                return redirect('transaction/' . $url . '?id=' . $request->id_kabupaten);
+            } else {
+                return redirect('transaction?id=' . $request->id_kabupaten);
+            }
         } else {
-            return redirect('transaction');
+            if ($url != null) {
+                return redirect('transaction/' . $url . '?id=' . $addresses->regencies_id);
+            } else {
+                return redirect('transaction?id=' . $addresses->regencies_id);
+            }
         }
     }
 
@@ -131,15 +110,14 @@ class AddressController extends Controller
         $address->rw            = $request->rw;
         $address->zip_code      = $request->zip_code;
         $address->province_id   = $request->provinsi;
-        $address->regencies_id  = $request->id_kabupaten;
-        $address->district_id   = $request->id_kecamatan;
-        $address->village_id   = $request->id_desa;
+        $address->regencies_id  = $request->kabupaten;
         $address->update();
         $url = $request->url;
+        $addresses = Address::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->first();
         if ($url != null) {
-            return redirect('transaction/' . $url);
+            return redirect('transaction/' . $url . '?id=' . $addresses->regencies_id);
         } else {
-            return redirect('transaction');
+            return redirect('transaction?id=' . $addresses->regencies_id);
         }
     }
 
@@ -154,10 +132,20 @@ class AddressController extends Controller
         $address =  Address::find($id);
         $address->delete();
         $url = $request->url;
-        if ($url != null) {
-            return redirect('transaction/' . $url);
+        $addresses = Address::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->first();
+        $url = $request->url;
+        if ($addresses == null) {
+            if ($url != null) {
+                return redirect('transaction/' . $url . '?id=' . 1);
+            } else {
+                return redirect('transaction?id=' . 1);
+            }
         } else {
-            return redirect('transaction');
+            if ($url != null) {
+                return redirect('transaction/' . $url . '?id=' . $addresses->regencies_id);
+            } else {
+                return redirect('transaction?id=' . $addresses->regencies_id);
+            }
         }
     }
 }
