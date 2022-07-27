@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndoRegionController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -38,29 +39,38 @@ Route::get('/sellers/{id}', [HomeController::class, 'showSeller'])->name('showSe
 
 Route::resource('register-cooperative', RegisterCooperativeController::class);
 
-// DASHBOARD
-Route::resource('dashboard', DashboardController::class);
-
-Route::resource('products', ProductController::class)->middleware('auth');
+// Role Admin AND User
 Route::get('detail_products', [ProductController::class, 'show'])->middleware('auth');
 Route::resource('orders', OrderController::class)->middleware('auth');
-Route::get('orders-admin', [OrderController::class, 'orders'])->middleware('auth');
 Route::post('reject-order/{id}', [OrderController::class, 'reject'])->middleware('auth');
-Route::post('send-order/{id}', [OrderController::class, 'sendOrder'])->middleware('auth');
 Route::post('accept-order/{id}', [OrderController::class, 'acceptOrder'])->middleware('auth');
 Route::post('cancell-order/{id}', [OrderController::class, 'cancellOrder'])->middleware('auth');
-Route::resource('employees', EmployeeController::class)->middleware('auth');
 Route::resource('transaction', TransactionController::class)->middleware('auth');
 Route::resource('cart',  \App\Http\Controllers\CartController::class)->middleware('auth');
 Route::resource('orderDetail',  \App\Http\Controllers\OrderDetailController::class)->middleware('auth');
-
 Route::post('/minus_quantity',  [\App\Http\Controllers\CartController::class, 'minus_quantity'])->middleware('auth');
 Route::post('/plus_quantity',  [\App\Http\Controllers\CartController::class, 'plus_quantity'])->middleware('auth');
-Route::post('/getkabupaten',  [IndoRegionController::class, 'getkabupaten'])->middleware('auth');
-Route::post('/getkecamatan',  [IndoRegionController::class, 'getkecamatan'])->middleware('auth');
-Route::post('/getdesa',  [IndoRegionController::class, 'getdesa'])->middleware('auth');
 Route::resource('/whistlist', \App\Http\Controllers\WhishlistController::class)->middleware('auth');
 Route::resource('/address',  \App\Http\Controllers\AddressController::class);
+
+// ROLE Admin
+Route::resource('products', ProductController::class)->middleware('auth');
+Route::get('orders-admin', [OrderController::class, 'orders'])->middleware('auth');
+Route::post('send-order/{id}', [OrderController::class, 'sendOrder'])->middleware('auth');
+Route::resource('employees', EmployeeController::class)->middleware('auth');
+Route::resource('dashboard', DashboardController::class)->middleware('auth');
+Route::resource('kasir', KasirController::class)->middleware('auth');
+Route::post('/kasir_minus_quantity',  [\App\Http\Controllers\KasirController::class, 'minus_quantity'])->middleware('auth');
+Route::post('/kasir_plus_quantity',  [\App\Http\Controllers\KasirController::class, 'plus_quantity'])->middleware('auth');
+
+//midtrans gateway
+Route::get('payment/success', [OrderController::class, 'midtransCallBack'])->middleware('auth');
+Route::post('payment/success', [OrderController::class, 'midtransCallBack'])->middleware('auth');
+
+// get Wilayah
+Route::post('/getkabupaten',  [IndoRegionController::class, 'getkabupaten']);
+Route::post('/getkecamatan',  [IndoRegionController::class, 'getkecamatan']);
+Route::post('/getdesa',  [IndoRegionController::class, 'getdesa']);
 
 // PROFILE
 Route::resource('profile', ProfileController::class);

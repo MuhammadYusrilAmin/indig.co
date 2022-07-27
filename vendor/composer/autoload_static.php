@@ -571,6 +571,7 @@ class ComposerStaticInite1a79fd2864e20439a1358e61874e8c4
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\OrderDetailController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderDetailController.php',
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
+        'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\SuperAdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdminController.php',
         'App\\Http\\Controllers\\TransactionController' => __DIR__ . '/../..' . '/app/Http/Controllers/TransactionController.php',
         'App\\Http\\Controllers\\WhishlistController' => __DIR__ . '/../..' . '/app/Http/Controllers/WhishlistController.php',

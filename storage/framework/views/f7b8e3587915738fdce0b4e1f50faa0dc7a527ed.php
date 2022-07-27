@@ -1,15 +1,15 @@
-@extends('layouts.master')
-@section('title') @lang('translation.sellers-details') @endsection
-@section('css')
-<link href="{{ URL::asset('assets/libs/gridjs/gridjs.min.css') }}" rel="stylesheet">
-<link href="{{ URL::asset('assets/libs/swiper/swiper.min.css') }}" rel="stylesheet">
 
-@endsection
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title')Seller Details @endslot
-@endcomponent
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.sellers-details'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(URL::asset('assets/libs/gridjs/gridjs.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.css')); ?>" rel="stylesheet">
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?>Seller Details <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 <div class="row">
     <div class="col-xxl-3">
         <div class="card">
@@ -17,43 +17,43 @@
                 <div>
                     <div class="flex-shrink-0 avatar-md mx-auto">
                         <div class="avatar-title bg-light rounded">
-                            <img src="{{ url($cooperative->avatar) }}" alt="" height="50" />
+                            <img src="<?php echo e(url($cooperative->avatar)); ?>" alt="" height="50" />
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h5 class="mb-1">{{ $cooperative->name }}</h5>
-                        <p class="text-muted">Since {{ $cooperative->since_year }}</p>
+                        <h5 class="mb-1"><?php echo e($cooperative->name); ?></h5>
+                        <p class="text-muted">Since <?php echo e($cooperative->since_year); ?></p>
                     </div>
                     <div class="table-responsive">
                         <table class="table mb-0 table-borderless">
                             <tbody>
                                 <tr>
                                     <th><span class="fw-medium">Owner Name</span></th>
-                                    <td>{{ $cooperative->owner_name }}</td>
+                                    <td><?php echo e($cooperative->owner_name); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Company Type</span></th>
-                                    <td>{{ $cooperative->company_name }}</td>
+                                    <td><?php echo e($cooperative->company_name); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Email</span></th>
-                                    <td>{{ $cooperative->email }}</td>
+                                    <td><?php echo e($cooperative->email); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Website</span></th>
-                                    <td><a href="{{ $cooperative->website }}" class="link-primary">{{ $cooperative->website }}</a></td>
+                                    <td><a href="<?php echo e($cooperative->website); ?>" class="link-primary"><?php echo e($cooperative->website); ?></a></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Contact No.</span></th>
-                                    <td>{{ $cooperative->contact }}</td>
+                                    <td><?php echo e($cooperative->contact); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Fax</span></th>
-                                    <td>{{ $cooperative->fax }}</td>
+                                    <td><?php echo e($cooperative->fax); ?></td>
                                 </tr>
                                 <tr>
                                     <th><span class="fw-medium">Location</span></th>
-                                    <td>{{ $cooperative->location }}</td>
+                                    <td><?php echo e($cooperative->location); ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -209,7 +209,7 @@
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 avatar-sm">
                                             <div class="avatar-title bg-light rounded">
-                                                <img src="{{ URL::asset('assets/images/companies/img-1.png') }}" alt="" height="30">
+                                                <img src="<?php echo e(URL::asset('assets/images/companies/img-1.png')); ?>" alt="" height="30">
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
@@ -238,7 +238,7 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-shrink-0">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar-sm rounded">
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>" alt="" class="avatar-sm rounded">
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <div>
@@ -267,7 +267,7 @@
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 avatar-sm">
                                             <div class="avatar-title bg-light rounded">
-                                                <img src="{{ URL::asset('assets/images/companies/img-8.png') }}" alt="" height="30">
+                                                <img src="<?php echo e(URL::asset('assets/images/companies/img-8.png')); ?>" alt="" height="30">
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
@@ -297,7 +297,7 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-shrink-0">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-sm rounded">
+                                            <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>" alt="" class="avatar-sm rounded">
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <div>
@@ -373,21 +373,21 @@
                         </thead>
                         <tbody class="list form-check-all">
                             <?php $i = 1 ?>
-                            @foreach ($products as $data)
+                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td>{{ $i++ }}</td>
+                                <td><?php echo e($i++); ?></td>
                                 <td>
-                                    <a href="{{url('detail_products?id='.$data->id)}}">
-                                        <img src="{{ url($data->galleries[0]->photo_url) }}" alt="{{ $data->title }}" width="60">
+                                    <a href="<?php echo e(url('detail_products?id='.$data->id)); ?>">
+                                        <img src="<?php echo e(url($data->galleries[0]->photo_url)); ?>" alt="<?php echo e($data->title); ?>" width="60">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{url('detail_products?id='.$data->id)}}" class="fw-medium link-primary">{{ $data->title }}</a>
+                                    <a href="<?php echo e(url('detail_products?id='.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->title); ?></a>
                                     <br>
-                                    <small>Category: {{ $data->category->name }}</small>
+                                    <small>Category: <?php echo e($data->category->name); ?></small>
                                 </td>
-                                <td>{{ $data->stock }}</td>
-                                <td>{{ "Rp" . number_format($data->price, 2, ",", ".") }}</td>
+                                <td><?php echo e($data->stock); ?></td>
+                                <td><?php echo e("Rp" . number_format($data->price, 2, ",", ".")); ?></td>
                                 <?php
                                 $orders = 0;
 
@@ -395,16 +395,17 @@
                                 //     $orders += $orderdetail->quantity;
                                 // }
                                 ?>
-                                <td>{{ $orders }} (belum dibenerin)</td>
+                                <td><?php echo e($orders); ?> (belum dibenerin)</td>
                                 <td>
                                     <div class="fw-normal badge bg-light text-dark fs-6">
                                         <i class="lab las la-star text-warning"></i>
-                                        {{ 'belum diperbarui' }}
+                                        <?php echo e('belum diperbarui'); ?>
+
                                     </div>
                                 </td>
-                                <td>{{ $data->updated_at }}</td>
+                                <td><?php echo e($data->updated_at); ?></td>
                             </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
@@ -415,13 +416,14 @@
     <!--end col-->
 </div>
 <!--end row-->
-@endsection
-@section('script')
-<script src="{{ URL::asset('assets/libs/nouislider/nouislider.min.js') }}"></script>
-<script src="{{ URL::asset('assets/libs/wnumb/wnumb.min.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('assets/libs/nouislider/nouislider.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/libs/wnumb/wnumb.min.js')); ?>"></script>
 <script src="assets/libs/gridjs/gridjs.min.js"></script>
 <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
 <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 <script src="assets/libs/swiper/swiper.min.js"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\KMIPN PROJECT\indigco4\resources\views/user/seller-details.blade.php ENDPATH**/ ?>

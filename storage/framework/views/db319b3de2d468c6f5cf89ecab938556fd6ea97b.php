@@ -1,15 +1,15 @@
-@extends('layouts.master')
-@section('title') @lang('translation.create-product') @endsection
-@section('css')
-<link href="{{ URL::asset('assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet">
-@endsection
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title') Create Product @endslot
-@endcomponent
-<form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.create-product'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(URL::asset('assets/libs/dropzone/dropzone.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Create Product <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
+<form action="<?php echo e(route('products.store')); ?>" method="POST" enctype="multipart/form-data">
+    <?php echo csrf_field(); ?>
 
     <div class="row">
         <div class="col-lg-8">
@@ -19,7 +19,7 @@
                         <label class="form-label" for="product-title-input">Product Title</label>
                         <div class="row">
                             <div class="col-10">
-                                <input type="text" id="id_barang" name="id_barang" autofocus required class="form-control {{ $errors->get('title') ? 'is-invalid' : '' }}" id="product-title-input" placeholder="Enter product title" name="title">
+                                <input type="text" id="id_barang" name="id_barang" autofocus required class="form-control <?php echo e($errors->get('title') ? 'is-invalid' : ''); ?>" id="product-title-input" placeholder="Enter product title" name="title">
                             </div>
                             <div class="col-2">
                                 <button type="button" onclick="random_code()" class="btn btn-success w-xs">Random Code</button>
@@ -32,47 +32,52 @@
                             }
                         </script>
 
-                        @foreach ($errors->get('title') as $msg)
+                        <?php $__currentLoopData = $errors->get('title'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
-                            {{ $msg }}
+                            <?php echo e($msg); ?>
+
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="product-title-input">Product Title</label>
-                        <input type="text" class="form-control {{ $errors->get('title') ? 'is-invalid' : '' }}" id="product-title-input" placeholder="Enter product title" name="title">
-                        @foreach ($errors->get('title') as $msg)
+                        <input type="text" class="form-control <?php echo e($errors->get('title') ? 'is-invalid' : ''); ?>" id="product-title-input" placeholder="Enter product title" name="title">
+                        <?php $__currentLoopData = $errors->get('title'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
-                            {{ $msg }}
+                            <?php echo e($msg); ?>
+
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="product-price-input">Price</label>
-                        <input type="number" class="form-control {{ $errors->get('price') ? 'is-invalid' : '' }}" id="product-price-input" placeholder="Enter price" name="price">
-                        @foreach ($errors->get('price') as $msg)
+                        <input type="number" class="form-control <?php echo e($errors->get('price') ? 'is-invalid' : ''); ?>" id="product-price-input" placeholder="Enter price" name="price">
+                        <?php $__currentLoopData = $errors->get('price'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
-                            {{ $msg }}
+                            <?php echo e($msg); ?>
+
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="product-weight-input">Weight</label>
-                        <input type="number" class="form-control {{ $errors->get('weight') ? 'is-invalid' : '' }}" id="product-weight-input" placeholder="Enter weight (gram)" name="weight">
-                        @foreach ($errors->get('weight') as $msg)
+                        <input type="number" class="form-control <?php echo e($errors->get('weight') ? 'is-invalid' : ''); ?>" id="product-weight-input" placeholder="Enter weight (gram)" name="weight">
+                        <?php $__currentLoopData = $errors->get('weight'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
-                            {{ $msg }}
+                            <?php echo e($msg); ?>
+
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div>
                         <label class="form-label" for="product-stock-input">Stock</label>
-                        <input type="number" class="form-control {{ $errors->get('stock') ? 'is-invalid' : '' }}" id="product-stock-input" placeholder="Enter stock" name="stock">
-                        @foreach ($errors->get('stock') as $msg)
+                        <input type="number" class="form-control <?php echo e($errors->get('stock') ? 'is-invalid' : ''); ?>" id="product-stock-input" placeholder="Enter stock" name="stock">
+                        <?php $__currentLoopData = $errors->get('stock'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
-                            {{ $msg }}
+                            <?php echo e($msg); ?>
+
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
@@ -86,12 +91,13 @@
                     <div class="mb-4">
                         <h5 class="fs-13 mb-1">Product Image</h5>
                         <p class="text-muted">Add Product main Image.</p>
-                        <input class="form-control {{ $errors->get('galleries_id') ? 'is-invalid' : '' }}" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="foto">
-                        @foreach ($errors->get('galleries_id') as $msg)
+                        <input class="form-control <?php echo e($errors->get('galleries_id') ? 'is-invalid' : ''); ?>" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="foto">
+                        <?php $__currentLoopData = $errors->get('galleries_id'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
-                            {{ $msg }}
+                            <?php echo e($msg); ?>
+
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div>
                         <h5 class="fs-13 mb-1">Product Gallery</h5>
@@ -150,15 +156,16 @@
                     <div>
                         <label for="choices-publish-status-input" class="form-label">Status</label>
 
-                        <select class="form-select {{ $errors->get('publish') ? 'is-invalid' : '' }}" id="choices-publish-status-input" data-choices data-choices-search-false name="publish">
+                        <select class="form-select <?php echo e($errors->get('publish') ? 'is-invalid' : ''); ?>" id="choices-publish-status-input" data-choices data-choices-search-false name="publish">
                             <option value="Published" selected>Published</option>
                             <option value="Draft">Draft</option>
                         </select>
-                        @foreach ($errors->get('publish') as $msg)
+                        <?php $__currentLoopData = $errors->get('publish'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
-                            {{ $msg }}
+                            <?php echo e($msg); ?>
+
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
                 <!-- end card body -->
@@ -171,19 +178,20 @@
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-2">Select product category</p>
-                    <select class="form-select {{ $errors->get('category_id') ? 'is-invalid' : '' }}" id="choices-category-input" data-choices data-choices-search-false name="category_id">
-                        @foreach($category as $value)
-                        @if($value->name == 'All')
-                        <option value="{{$value->id}}" selected>{{$value->name}}</option>
-                        @endif
-                        <option value="{{$value->id}}">{{$value->name}}</option>
-                        @endforeach
+                    <select class="form-select <?php echo e($errors->get('category_id') ? 'is-invalid' : ''); ?>" id="choices-category-input" data-choices data-choices-search-false name="category_id">
+                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($value->name == 'All'): ?>
+                        <option value="<?php echo e($value->id); ?>" selected><?php echo e($value->name); ?></option>
+                        <?php endif; ?>
+                        <option value="<?php echo e($value->id); ?>"><?php echo e($value->name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
-                    @foreach ($errors->get('category_id') as $msg)
+                    <?php $__currentLoopData = $errors->get('category_id'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="invalid-feed text-danger">
-                        {{ $msg }}
+                        <?php echo e($msg); ?>
+
                     </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <!-- end card body -->
             </div>
@@ -195,12 +203,13 @@
                 <div class="card-body">
                     <div class="hstack gap-3 align-items-start">
                         <div class="flex-grow-1">
-                            <input class="form-control {{ $errors->get('tags') ? 'is-invalid' : '' }}" data-choices data-choices-multiple-remove="true" placeholder="Enter tags (example: Cotton)" type="text" name="tags">
-                            @foreach ($errors->get('tags') as $msg)
+                            <input class="form-control <?php echo e($errors->get('tags') ? 'is-invalid' : ''); ?>" data-choices data-choices-multiple-remove="true" placeholder="Enter tags (example: Cotton)" type="text" name="tags">
+                            <?php $__currentLoopData = $errors->get('tags'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="invalid-feed text-danger">
-                                {{ $msg }}
+                                <?php echo e($msg); ?>
+
                             </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
                 </div>
@@ -214,12 +223,13 @@
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-2">Add short description for product</p>
-                    <textarea class="form-control {{ $errors->get('description') ? 'is-invalid' : '' }}" placeholder="Enter short description for product" rows="3" name="description"></textarea>
-                    @foreach ($errors->get('description') as $msg)
+                    <textarea class="form-control <?php echo e($errors->get('description') ? 'is-invalid' : ''); ?>" placeholder="Enter short description for product" rows="3" name="description"></textarea>
+                    <?php $__currentLoopData = $errors->get('description'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="invalid-feed text-danger">
-                        {{ $msg }}
+                        <?php echo e($msg); ?>
+
                     </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <!-- end card body -->
             </div>
@@ -233,12 +243,13 @@
 </form>
 <!-- end row 
 -->
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script src="assets/libs/@ckeditor/@ckeditor.min.js"></script>
 
-<script src="{{ URL::asset('assets/libs/dropzone/dropzone.min.js') }}"></script>
+<script src="<?php echo e(URL::asset('assets/libs/dropzone/dropzone.min.js')); ?>"></script>
 <script src="assets/js/pages/ecommerce-product-create.init.js"></script>
 
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\KMIPN PROJECT\indigco4\resources\views/admin/product/add.blade.php ENDPATH**/ ?>

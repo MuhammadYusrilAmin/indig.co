@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $datas = Product::all()->sortByDesc('updated_at');
+        $datas = Product::where('cooperative_id', Auth::user()->cooperative_id)->orderBy('created_at', 'desc')->get();
         $user = User::all();
         $category = ProductCategory::all();
         $galleries = ProductGallery::get();
@@ -65,9 +65,8 @@ class ProductController extends Controller
         $id = mt_rand(1000, 99999);
         date_default_timezone_set('Asia/Jakarta');
         $product = Product::create([
-            'id' => $id,
-            'item_code' => 'INDIGCO1607224322',
-            'cooperative_id' => 1,
+            'id' => $request->id_barang,
+            'cooperative_id' => Auth::user()->cooperative_id,
             'category_id' => $request->category_id,
             'title' => $request->title,
             'price' => $request->price,
@@ -85,7 +84,7 @@ class ProductController extends Controller
 
             $image->move(public_path('assets/images/products'), $new_image);
             ProductGallery::create([
-                'product_id' => $id,
+                'product_id' =>  $request->id_barang,
                 'photo_url' => 'assets/images/products/' . $new_image,
             ]);
         }
@@ -102,7 +101,7 @@ class ProductController extends Controller
 
 
                 ProductGallery::create([
-                    'product_id' => $id,
+                    'product_id' =>  $request->id_barang,
                     'photo_url' => 'assets/images/products/' . $fileName,
                 ]);
             }
