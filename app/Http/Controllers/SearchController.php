@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\Cooperative;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class DashboardController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +15,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $employees = User::all()->sortBy('created_at');
-        $products = Product::where('cooperative_id', Auth::user()->cooperative_id)->get();
+        $products = Product::all()->sortByDesc('updated_at');
+        $cooperatives = Cooperative::where('status', 'verified')->get()->sortByDesc('updated_at');
 
         return view(
-            'admin.dashboard',
-            compact('employees'),
+            'pages-search-results',
             compact('products'),
+            compact('cooperatives'),
         );
     }
 
@@ -45,7 +43,15 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $search = $request->search;
+
+        $products = Product::where('title', 'like', '%' . $search . '%')->get();
+        $cooperatives = Cooperative::where('name', 'like', '%' . $search . '%')->get();
+
+        return view('pages-search-results', [
+            'products' => $products,
+            'cooperatives' => $cooperatives,
+        ]);
     }
 
     /**

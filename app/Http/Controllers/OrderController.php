@@ -131,7 +131,7 @@ class OrderController extends Controller
     public function sendOrder($id)
     {
         $order = Order::find($id);
-        $order->status = 'Delivered';
+        $order->status = 'Pickups';
         $order->update();
 
         if ($order) {

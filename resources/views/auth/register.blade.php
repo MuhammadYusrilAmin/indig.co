@@ -56,6 +56,20 @@
                                             Please enter full name
                                         </div>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Number Phone <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" id="phone" placeholder="Enter phone" required>
+                                        @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <div class="invalid-feedback">
+                                            Please enter number phone
+                                        </div>
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
                                         <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="useremail" placeholder="Enter email address" required>
@@ -68,20 +82,21 @@
                                             Please enter email
                                         </div>
                                     </div>
+
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" id="username" placeholder="Enter username" required>
-                                        @error('username')
+                                        <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" id="address" placeholder="Enter address" required>
+                                        @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
                                         <div class="invalid-feedback">
-                                            Please enter username
+                                            Please enter address
                                         </div>
                                     </div>
 
-                                    <div class="mb-2">
+                                    <div class="mb-3">
                                         <label for="userpassword" class="form-label">Password <span class="text-danger">*</span></label>
                                         <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userpassword" placeholder="Enter password" required>
                                         @error('password')
@@ -93,12 +108,26 @@
                                             Please enter password
                                         </div>
                                     </div>
-                                    <div class=" mb-4">
+
+                                    <div class="mb-3">
                                         <label for="input-password">Confirm Password</label>
                                         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" id="input-password" placeholder="Enter Confirm Password" required>
 
                                         <div class="form-floating-icon">
                                             <i data-feather="lock"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="photo" class="form-label">Your Photo <span class="text-danger">*</span></label>
+                                        <input type="file" class="form-control @error('photo') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" id="photo" placeholder="Upload your photo" required>
+                                        @error('avatar')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <div class="invalid-feedback">
+                                            Upload your photo
                                         </div>
                                     </div>
 

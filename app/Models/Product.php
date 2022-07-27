@@ -25,11 +25,6 @@ class Product extends Model
         'description',
     ];
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
-
     public function category()
     {
         return $this->belongsTo(ProductCategory::class, 'category_id', 'id');
@@ -43,5 +38,10 @@ class Product extends Model
     public function cooperative()
     {
         return $this->belongsTo(Cooperative::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

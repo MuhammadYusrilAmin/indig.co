@@ -131,14 +131,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link py-3 Delivered" data-bs-toggle="tab" id="Delivered" href="#delivered" role="tab" aria-selected="false">
-                                <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Delivered
-                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Delivered')) != 0): ?>
-                                <span class="badge bg-secondary align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Delivered'))); ?></span>
-                                <?php endif; ?>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link py-3 Pickups" data-bs-toggle="tab" id="Pickups" href="#pickups" role="tab" aria-selected="false">
                                 <i class="ri-truck-line me-1 align-bottom"></i> Pickups
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pickups')) != 0): ?>
@@ -216,17 +208,18 @@
                                         <span class="badge <?php echo e($data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-warning' : ($data->status == 'Delivered' ? 'badge-soft-secondary' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : ($data->status == 'Received' ? 'badge-soft-success' : 'badge-soft-danger')))))); ?> text-uppercase"><?php echo e($data->status); ?></span>
                                     </td>
                                     <td class="customer_name">
-                                        <?php $items = App\Models\OrderDetail::all(); ?>
-                                        <?php if($data->status == 'Received' && $data->items[0]->rating_id == null): ?>
+                                        <?php
+                                        $items = App\Models\OrderDetail::all();
+                                        $ratings = App\Models\Rating::where('order_detail_id', $data->items[0]->id)->get();
+                                        ?>
+                                        <?php if($data->status == 'Received' && count($ratings) == null): ?>
                                         <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#reviewNow<?php echo e($data->id); ?>">Review Now</button>
-                                        <?php elseif($data->status == 'Received' && $data->items[0]->rating_id != null): ?>
+                                        <?php elseif($data->status == 'Received'): ?>
                                         <button type="button" class="btn btn-light btn-sm">
                                             <i class="lab las la-star text-warning"></i>
-                                            <?php echo e($data->items[0]->rating->rating); ?>
+                                            <?php echo e($ratings[0]->rating); ?>
 
                                         </button>
-                                        <?php else: ?>
-                                        <button type="button" class="btn btn-light btn-sm" disabled>Review Now</button>
                                         <?php endif; ?>
                                     </td>
                                     <td>

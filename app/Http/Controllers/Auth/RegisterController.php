@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -51,10 +52,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:13'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'avatar' => ['required', 'image' ,'mimes:jpg,jpeg,png','max:1024'],
         ]);
     }
 
@@ -64,24 +65,39 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    public function create(Request $request)
     {
-        // return request()->file('avatar');
-        // if (request()->has('avatar')) {
-        //     $avatar = request()->file('avatar');
-        //     $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-        //     $avatarPath = public_path('/images/');
-        //     $avatar->move($avatarPath, $avatarName);
-        // }
-
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
-            'avatar' =>  'avatar-11.png',
-            'role' =>  'User',
-            // 'avatar' =>  $avatarName,
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:13'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'address' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'avatar' => 'required',
         ]);
+
+        $image = $request->file('avatar');
+        $new_image = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('assets/images/users'), $new_image);
+
+        if ($request->hasfile('avatar')) {
+            $user = User::create([
+                'name' => $request['name'],
+                'phone' => $request['phone'],
+                'email' => $request['email'],
+                'address' => $request['address'],
+                'address' => $request['address'],
+                'password' => Hash::make($request['password']),
+                'role' =>  'User',
+                'status' =>  'Active',
+                'avatar' =>  $new_image,
+            ]);
+        }
+
+        if ($user) {
+            return redirect('login')->with('successfully', 'User added successfully');
+        } else {
+            return redirect('login')->with('error', 'User failed to add');
+        }
     }
 }

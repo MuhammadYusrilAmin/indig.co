@@ -70,6 +70,34 @@ unset($__errorArgs, $__bag); ?>
                                             Please enter full name
                                         </div>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Number Phone <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control <?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="phone" value="<?php echo e(old('phone')); ?>" id="phone" placeholder="Enter phone" required>
+                                        <?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                        <div class="invalid-feedback">
+                                            Please enter number phone
+                                        </div>
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
                                         <input type="email" class="form-control <?php $__errorArgs = ['email'];
@@ -96,17 +124,18 @@ unset($__errorArgs, $__bag); ?>
                                             Please enter email
                                         </div>
                                     </div>
+
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control <?php $__errorArgs = ['username'];
+                                        <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control <?php $__errorArgs = ['address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="username" value="<?php echo e(old('username')); ?>" id="username" placeholder="Enter username" required>
-                                        <?php $__errorArgs = ['username'];
+unset($__errorArgs, $__bag); ?>" name="address" value="<?php echo e(old('address')); ?>" id="address" placeholder="Enter address" required>
+                                        <?php $__errorArgs = ['address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -119,11 +148,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                         <div class="invalid-feedback">
-                                            Please enter username
+                                            Please enter address
                                         </div>
                                     </div>
 
-                                    <div class="mb-2">
+                                    <div class="mb-3">
                                         <label for="userpassword" class="form-label">Password <span class="text-danger">*</span></label>
                                         <input type="password" class="form-control <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -149,7 +178,8 @@ unset($__errorArgs, $__bag); ?>
                                             Please enter password
                                         </div>
                                     </div>
-                                    <div class=" mb-4">
+
+                                    <div class="mb-3">
                                         <label for="input-password">Confirm Password</label>
                                         <input type="password" class="form-control <?php $__errorArgs = ['password_confirmation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -162,6 +192,33 @@ unset($__errorArgs, $__bag); ?>" name="password_confirmation" id="input-password
 
                                         <div class="form-floating-icon">
                                             <i data-feather="lock"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="photo" class="form-label">Your Photo <span class="text-danger">*</span></label>
+                                        <input type="file" class="form-control <?php $__errorArgs = ['photo'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="avatar" value="<?php echo e(old('avatar')); ?>" id="photo" placeholder="Upload your photo" required>
+                                        <?php $__errorArgs = ['avatar'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                        <div class="invalid-feedback">
+                                            Upload your photo
                                         </div>
                                     </div>
 

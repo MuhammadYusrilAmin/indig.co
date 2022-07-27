@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
@@ -15,7 +16,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $datas = Employee::all()->sortByDesc('updated_at');
+        $datas = User::where('role', 'Employee')->get()->sortByDesc('updated_at');
 
         return view(
             'admin.employee.index',
@@ -41,17 +42,32 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $employee = Employee::create([
-            'user_id' => 1,
-            'cooperative_id' => 1,
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'joining_date' => $request->joining_date,
-            'status' => $request->status,
-            'password' => Hash::make('Employee' . date('dmy')), // Empolyee180722
-            'avatar' => 'https://ui-avatars.com/api/?name=' . $request->name . '&background=random',
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'avatar' => 'required',
+            'status' => 'required',
+            'address' => 'required',
         ]);
+
+        $image = $request->file('avatar');
+        $new_image = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('assets/images/users'), $new_image);
+
+        if ($request->hasfile('avatar')) {
+            $employee = User::create([
+                'cooperative_id' => $request->cooperative_id,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => Hash::make('Employee' . date('dmy')), // Empolyee180722
+                'avatar' => $new_image,
+                'role' => 'Employee',
+                'status' => $request->status,
+                'address' => $request->address,
+            ]);
+        }
 
         if ($employee) {
             return redirect('employees')->with('successfully', 'Employee added successfully');
@@ -91,14 +107,38 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = Employee::find($id);
-        $employee->name = $request->name;
-        $employee->email = $request->email;
-        $employee->phone = $request->phone;
-        $employee->joining_date = $request->joining_date;
-        $employee->status = $request->status;
-        $employee->avatar = 'https://ui-avatars.com/api/?name=' . $request->name . '&background=random';
-        $employee->update();
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'status' => 'required',
+            'address' => 'required',
+        ]);
+
+        if ($request->hasfile('avatar')) {
+            $image = $request->file('avatar');
+            $new_image = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('assets/images/users'), $new_image);
+
+            $employee = User::find($id);
+            $employee->cooperative_id = $request->cooperative_id;
+            $employee->name = $request->name;
+            $employee->email = $request->email;
+            $employee->phone = $request->phone;
+            $employee->avatar = $request->avatar;
+            $employee->status = $request->status;
+            $employee->address = $request->address;
+            $employee->update();
+        } else {
+            $employee = User::find($id);
+            $employee->cooperative_id = $request->cooperative_id;
+            $employee->name = $request->name;
+            $employee->email = $request->email;
+            $employee->phone = $request->phone;
+            $employee->status = $request->status;
+            $employee->address = $request->address;
+            $employee->update();
+        }
 
         if ($employee) {
             return redirect('employees')->with('successfully', 'Employee updated successfully');
@@ -115,7 +155,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $product = Employee::find($id);
+        $product = User::find($id);
         $product->delete();
         return redirect('employees')->with('successfully', 'Employee deleted successfully');
     }

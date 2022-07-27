@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\RegisterCooperativeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -36,10 +38,17 @@ Route::post('/update-password/{id}', [HomeController::class, 'updatePassword'])-
 Route::get('/', [HomeController::class, 'root'])->name('root');
 Route::get('/sellers/{id}', [HomeController::class, 'showSeller'])->name('showSeller');
 
+Route::post('register', [RegisterController::class, 'create']);
 Route::resource('register-cooperative', RegisterCooperativeController::class);
 
-// DASHBOARD
+// DAHBOARD SUPER ADMIN
+Route::resource('dashboard-admin', SuperAdminController::class);
+Route::post('reject-cooperative/{id}', [SuperAdminController::class, 'reject']);
+
+// DASHBOARD COOPERATIVE
 Route::resource('dashboard', DashboardController::class);
+
+Route::resource('search', SearchController::class);
 
 Route::resource('products', ProductController::class)->middleware('auth');
 Route::get('detail_products', [ProductController::class, 'show'])->middleware('auth');
@@ -71,10 +80,6 @@ Route::get('faqs', function () {
 Route::get('chat', function () {
     return view('profile.chat');
 });
-
-// SUPER ADMIN
-Route::resource('dashboard-admin', SuperAdminController::class);
-Route::post('reject-cooperative/{id}', [SuperAdminController::class, 'reject']);
 
 // beberapa fungsi endpoint resource yang perlu kita ketahui:
 // 1. Route get => nama_route => menjalankan fungsi index

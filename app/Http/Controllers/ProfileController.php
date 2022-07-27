@@ -85,7 +85,9 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         $user->name = $request->name;
+        $user->phone = $request->phone;
         $user->email = $request->email;
+        $user->address = $request->address;
         $user->update();
 
         if ($user) {

@@ -25,7 +25,7 @@
         </button>
     </div>
 
-    <div id="scrollbar">
+    <div id="scrollbar" style="<?php echo e(Auth::user()->role == 'User' || Auth::user()->role == 'Super Admin' ? 'display: none' :''); ?>">
         <div class="container-fluid">
             <div id="two-column-menu">
             </div>
@@ -64,7 +64,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" style="<?php echo e(Auth::user()->role == 'Employee' ? 'display: none' :''); ?>">
                     <a class="nav-link" href="<?php echo e(url('employees')); ?>">
                         <i class="las la-users-cog"></i>
                         <span>Employees</span>

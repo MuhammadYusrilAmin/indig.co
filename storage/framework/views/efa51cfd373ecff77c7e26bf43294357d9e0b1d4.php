@@ -17,7 +17,7 @@
                             <div class="flex-grow-1 overflow-hidden ms-3">
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Cooperative Has Not Been Verified</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="825"><?php echo e(count($notverified)); ?></span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="<?php echo e(count($notverified)); ?>">0</span></h4>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                             <div class="flex-grow-1 ms-3">
                                 <p class="text-uppercase fw-medium text-muted mb-3">Cooperative Verified</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?php echo e(count($verified)); ?></span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="<?php echo e(count($verified)); ?>">0</span></h4>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Cooperative Rejected</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <?php $rejected = App\Models\Cooperative::where('status', 'rejected')->get(); ?>
-                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?php echo e(count($rejected)); ?></span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="<?php echo e(count($rejected)); ?>">0</span></h4>
                                 </div>
                             </div>
                         </div>
@@ -314,26 +314,15 @@
         <!-- end card -->
     </div>
 </div>
-<!-- end row -->
-
+<!-- end row -->>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-
-
-<!-- JAVASCRIPT -->
-<script src="<?php echo e(URL::asset('/assets/libs/bootstrap/bootstrap.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/libs/simplebar/simplebar.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/libs/node-waves/node-waves.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/libs/feather-icons/feather-icons.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/pages/plugins/lord-icon-2.1.0.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/js/plugins.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/libs/prismjs/prismjs.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/libs/list.js/list.js.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('/assets/libs/list.pagination.js/list.pagination.js.min.js')); ?>"></script>
-
-<!-- listjs init -->
-<script src="<?php echo e(URL::asset('/assets/js/pages/listjs.init.js')); ?>"></script>
-
+<!-- apexcharts -->
+<script src="<?php echo e(URL::asset('/assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
+<!-- dashboard init -->
+<script src="<?php echo e(URL::asset('/assets/js/pages/dashboard-ecommerce.init.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\saas\resources\views/super-admin/index.blade.php ENDPATH**/ ?>

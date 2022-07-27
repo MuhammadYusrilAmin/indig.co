@@ -78,6 +78,7 @@
                                         </div>
                                     </th>
 
+                                    <th class="sort" data-sort="">Photo</th>
                                     <th class="sort" data-sort="customer_name">Name</th>
                                     <th class="sort" data-sort="email">Email</th>
                                     <th class="sort" data-sort="phone">Phone</th>
@@ -94,11 +95,16 @@
                                             <input class="form-check-input" type="checkbox" name="checkAll" value="option1">
                                         </div>
                                     </th>
+                                    <td>
+                                        <a href="{{ url('assets/images/users/' . $data->avatar) }}" target="_blank">
+                                            <img src="{{ 'assets/images/users/' . $data->avatar }}" alt="{{ $data->title }}" width="60">
+                                        </a>
+                                    </td>
                                     <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">{{ $data->id }}</a></td>
                                     <td class="customer_name">{{ $data->name }}</td>
                                     <td class="email">{{ $data->email }}</td>
                                     <td class="phone">{{ $data->phone }}</td>
-                                    <td class="date">{{ $data->joining_date }}</td>
+                                    <td class="date">{{ $data->created_at }}</td>
                                     <td class="status"><span class="badge {{ $data->status == 'Active' ? 'badge-soft-success' : 'badge-soft-danger' }} text-uppercase">{{ $data->status }}</span>
                                     </td>
                                     <td>
@@ -129,6 +135,11 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
+                                                    <div class="mb-3" style="display: none;">
+                                                        <label for="id-field" class="form-label">ID</label>
+                                                        <input type="text" id="id-field" class="form-control" placeholder="Enter id" required name="cooperative_id" value="{{ Auth::user()->cooperative_id }}">
+                                                    </div>
+
                                                     <div class="mb-3">
                                                         <label for="customername-field" class="form-label">Employee Name</label>
                                                         <input type="text" id="customername-field" class="form-control" placeholder="Enter name" required name="name" value="{{ $data->name }}">
@@ -146,15 +157,15 @@
 
                                                     <div class="mb-3">
                                                         <label for="phone-field" class="form-label">Phone</label>
-                                                        <input type="text" id="phone-field" class="form-control" placeholder="Enter phone number" required name="phone" value="{{ $data->phone }}">
+                                                        <input type="number" id="phone-field" class="form-control" placeholder="Enter phone number" required name="phone" value="{{ $data->phone }}"">
                                                     </div>
 
-                                                    <div class="mb-3">
-                                                        <label for="date-field" class="form-label">Joining Date</label>
-                                                        <input type="date" id="date-field" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" required placeholder="Select date" name="joining_date" value="{{ $data->joining_date }}">
+                                                    <div class=" mb-3">
+                                                        <label for="address-field" class="form-label">Address</label>
+                                                        <input type="text" id="address-field" class="form-control" placeholder="Enter address" required name="address" value="{{ $data->address }}"">
                                                     </div>
 
-                                                    <div>
+                                                    <div class=" mb-3">
                                                         <label for="status-field" class="form-label">Status</label>
                                                         <select class="form-control" name="status" id="status-field">
                                                             @if ($data->status == 'Active')
@@ -165,6 +176,19 @@
                                                             <option value="Block" selected>Block</option>
                                                             @endif
                                                         </select>
+                                                    </div>
+
+                                                    <div>
+                                                        <label for="photo" class="form-label">Upload Photo</label>
+                                                        <input type="file" class="form-control @error('photo') is-invalid @enderror" name="avatar" value="{{ old('photo') }}" id="photo">
+                                                        @error('photo')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                        <div class="invalid-feedback">
+                                                            Upload your photo
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -238,9 +262,14 @@
                                 <h5 class="modal-title" id="addModalLabel">Add Employee</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{ route('employees.store') }}" method="POST">
+                            <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
+                                    <div class="mb-3" style="display: none;">
+                                        <label for="id-field" class="form-label">ID</label>
+                                        <input type="text" id="id-field" class="form-control" placeholder="Enter id" required name="cooperative_id" value="{{ Auth::user()->cooperative_id }}">
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="customername-field" class="form-label">Employee Name</label>
                                         <input type="text" id="customername-field" class="form-control" placeholder="Enter name" required name="name" />
@@ -258,20 +287,33 @@
 
                                     <div class="mb-3">
                                         <label for="phone-field" class="form-label">Phone</label>
-                                        <input type="text" id="phone-field" class="form-control" placeholder="Enter phone number" required name="phone" />
+                                        <input type="number" id="phone-field" class="form-control" placeholder="Enter phone number" required name="phone" />
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="date-field" class="form-label">Joining Date</label>
-                                        <input type="date" id="date-field" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" required placeholder="Select date" name="joining_date" />
+                                        <label for="address-field" class="form-label">Address</label>
+                                        <input type="text" id="address-field" class="form-control" placeholder="Enter address" required name="address" />
                                     </div>
 
-                                    <div>
+                                    <div class="mb-3">
                                         <label for="status-field" class="form-label">Status</label>
                                         <select class="form-control" name="status" id="status-field">
                                             <option value="Active" selected>Active</option>
                                             <option value="Block">Block</option>
                                         </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="photo" class="form-label">Upload Photo</label>
+                                        <input type="file" class="form-control @error('photo') is-invalid @enderror" name="avatar" value="{{ old('photo') }}" id="photo" required>
+                                        @error('photo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <div class="invalid-feedback">
+                                            Upload your photo
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

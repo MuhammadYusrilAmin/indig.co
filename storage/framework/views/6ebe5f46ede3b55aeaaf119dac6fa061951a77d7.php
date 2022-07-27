@@ -40,8 +40,16 @@
                                 <td class="text-muted"><?php echo e(Auth::user()->name); ?></td>
                             </tr>
                             <tr>
+                                <th class="ps-0" scope="row">Number Phone :</th>
+                                <td class="text-muted"><?php echo e(Auth::user()->phone); ?></td>
+                            </tr>
+                            <tr>
                                 <th class="ps-0" scope="row">E-mail :</th>
                                 <td class="text-muted"><?php echo e(Auth::user()->email); ?></td>
+                            </tr>
+                            <tr>
+                                <th class="ps-0" scope="row">Address :</th>
+                                <td class="text-muted"><?php echo e(Auth::user()->address); ?></td>
                             </tr>
                             <tr>
                                 <th class="ps-0" scope="row">Joining Date</th>
@@ -89,9 +97,22 @@
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <label for="emailInput" class="form-label">Email
-                                            Address</label>
+                                        <label for="fullphoneInput" class="form-label">Number Phone</label>
+                                        <input type="number" class="form-control" id="fullphoneInput" placeholder="Enter your number phone" value="<?php echo e(Auth::user()->phone); ?>" name="phone">
+                                    </div>
+                                </div>
+                                <!--end col-->
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label for="emailInput" class="form-label">Email Address</label>
                                         <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" value="<?php echo e(Auth::user()->email); ?>" name="email">
+                                    </div>
+                                </div>
+                                <!--end col-->
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label for="addressInput" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="addressInput" placeholder="Enter your address" value="<?php echo e(Auth::user()->address); ?>" name="address">
                                     </div>
                                 </div>
                                 <!--end col-->

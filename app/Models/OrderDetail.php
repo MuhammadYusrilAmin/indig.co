@@ -12,7 +12,7 @@ class OrderDetail extends Model
     protected $fillable = [
         'order_id',
         'product_id',
-        'rating_id',
+        'cooperative_id',
         'quantity',
         'price',
         'request',
@@ -30,6 +30,6 @@ class OrderDetail extends Model
 
     public function rating()
     {
-        return $this->belongsTo(Rating::class);
+        return $this->hasOne(Rating::class);
     }
 }

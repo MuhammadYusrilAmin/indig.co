@@ -89,14 +89,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link py-3 Delivered" data-bs-toggle="tab" id="Delivered" href="#delivered" role="tab" aria-selected="false">
-                                <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Delivered
-                                @if (count($datas->where('status', 'Delivered')) != 0)
-                                <span class="badge bg-secondary align-middle ms-1">{{ count($datas->where('status', 'Delivered')) }}</span>
-                                @endif
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link py-3 Pickups" data-bs-toggle="tab" id="Pickups" href="#pickups" role="tab" aria-selected="false">
                                 <i class="ri-truck-line me-1 align-bottom"></i> Pickups
                                 @if (count($datas->where('status', 'Pickups')) != 0)
