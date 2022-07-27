@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
@@ -49,8 +50,16 @@ class OrderDetailController extends Controller
             'cities_id'        => $request->cities_id
         ]);
 
+        $address = Address::where('user_id', Auth::user()->id)->first();
+        $id_address = null;
+        if ($address == null) {
+            $id_address = 1;
+        } else {
+            $id_address = $address->regencies_id;
+        }
+
         if ($order) {
-            return redirect()->route('transaction.show', $id);
+            return redirect()->route('transaction.show', $id . '?id=' . $id_address);
         } else {
             return redirect('/');
         }

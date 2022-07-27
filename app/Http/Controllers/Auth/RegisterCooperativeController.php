@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cooperative;
+use App\Models\User;
+use Dipantry\Rajaongkir\Models\ROProvince;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterCooperativeController extends Controller
 {
@@ -14,7 +19,10 @@ class RegisterCooperativeController extends Controller
      */
     public function index()
     {
-        return view('auth.register-cooperative');
+        $provinces  = ROProvince::all();
+        return view('auth.register-cooperative')->with([
+            'provinces' =>  $provinces
+        ]);
     }
 
     /**
@@ -36,6 +44,10 @@ class RegisterCooperativeController extends Controller
     public function store(Request $request)
     {
         $id = mt_rand(1000, 9999);
+        return Validator::make($request, [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'avatar' => ['required', 'image' ,'mimes:jpg,jpeg,png','max:1024'],
+        ]);
 
         $cooperative = Cooperative::create([
             'id' => $id,
@@ -59,7 +71,7 @@ class RegisterCooperativeController extends Controller
             'cooperative_id' => $id,
             'name' => $request->owner_name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'photo' =>  'avatar-11.png',
             'avatar' =>  'avatar-11.png',
             'role' =>  'Admin', // user photo

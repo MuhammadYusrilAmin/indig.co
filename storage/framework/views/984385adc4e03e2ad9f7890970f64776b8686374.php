@@ -1,15 +1,15 @@
-@extends('layouts.master')
-@section('title') Product Detail @endsection
-@section('css')
+
+<?php $__env->startSection('title'); ?> Product Detail <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
 <link href="assets/libs/swiper/swiper.min.css" rel="stylesheet" type="text/css" />
 
-@endsection
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title')Product Detail @endslot
-@endcomponent
-@php $id = $showDetail->id; @endphp
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?>Product Detail <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php $id = $showDetail->id; ?>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -21,11 +21,11 @@
                                 <div class="swiper-wrapper">
                                     <?php
                                     $kategory = \App\Models\ProductGallery::where('product_id', $showDetail->id)->orderBy('created_at', 'desc')->get(); ?>
-                                    @foreach($kategory as $value)
+                                    <?php $__currentLoopData = $kategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="swiper-slide">
-                                        <img src="{{ $value->photo_url }}" alt="" class="img-fluid d-block" />
+                                        <img src="<?php echo e($value->photo_url); ?>" alt="" class="img-fluid d-block" />
                                     </div>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                                 <div class="swiper-button-next"></div>
                                 <div class="swiper-button-prev"></div>
@@ -33,13 +33,13 @@
                             <!-- end swiper thumbnail slide -->
                             <div class="swiper product-nav-slider mt-2">
                                 <div class="swiper-wrapper">
-                                    @foreach($kategory as $value)
+                                    <?php $__currentLoopData = $kategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="swiper-slide">
                                         <div class="nav-slide-item ">
-                                            <img src="{{$value->photo_url }}" alt="" class="img-fluid d-block" />
+                                            <img src="<?php echo e($value->photo_url); ?>" alt="" class="img-fluid d-block" />
                                         </div>
                                     </div>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
                             <!-- end swiper nav slide -->
@@ -51,7 +51,7 @@
                         <div class="mt-xl-0 mt-5">
                             <div class="d-flex">
                                 <div class="flex-grow-1">
-                                    <h4>{{ $showDetail->title }}</h4>
+                                    <h4><?php echo e($showDetail->title); ?></h4>
                                     <div class="hstack gap-3 flex-wrap">
                                         <div><a href="#" class="text-primary d-block">Tommy
                                                 Hilfiger</a></div>
@@ -59,7 +59,7 @@
                                         <div class="text-muted">Seller : <span class="text-body fw-medium">Zoetic Fashion</span>
                                         </div>
                                         <div class="vr"></div>
-                                        <div class="text-muted">Published : <span class="text-body fw-medium">{{ $showDetail->tanggal }}</span>
+                                        <div class="text-muted">Published : <span class="text-body fw-medium"><?php echo e($showDetail->tanggal); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -67,24 +67,24 @@
                                     <div>
                                         <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
                                         <?php $favorit = \App\Models\Wishlist::whereRaw('product_id = ' . $showDetail->id . ' AND user_id = ' . Illuminate\Support\Facades\Auth::user()->id)->first(); ?>
-                                        @if($showDetail->cooperative_id != Auth::user()->cooperative_id)
-                                        @if($favorit != null)
-                                        <form action="{{route('whistlist.destroy', $favorit->id)}}" method="post" class="d-flex justify-content-center">
-                                            @method('delete')
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{$showDetail->id}}">
-                                            <input type="hidden" name="url" value="{{$url}}">
+                                        <?php if($showDetail->cooperative_id != Auth::user()->cooperative_id): ?>
+                                        <?php if($favorit != null): ?>
+                                        <form action="<?php echo e(route('whistlist.destroy', $favorit->id)); ?>" method="post" class="d-flex justify-content-center">
+                                            <?php echo method_field('delete'); ?>
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                            <input type="hidden" name="url" value="<?php echo e($url); ?>">
                                             <button type="submit" class="card-link link-danger btn btn-transparent">Remove Wishlist<i class="bx bx bx-heart align-middle ms-1 lh-1"></i></button>
                                         </form>
-                                        @else
-                                        <form action="{{route('whistlist.store')}}" method="post" class="d-flex justify-content-center">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{$showDetail->id}}">
-                                            <input type="hidden" name="url" value="{{$url}}">
+                                        <?php else: ?>
+                                        <form action="<?php echo e(route('whistlist.store')); ?>" method="post" class="d-flex justify-content-center">
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                            <input type="hidden" name="url" value="<?php echo e($url); ?>">
                                             <button type="submit" class="card-link link-success btn btn-transparent">Add to Wishlist<i class="bx bx bx-heart align-middle ms-1 lh-1"></i></button>
                                         </form>
-                                        @endif
-                                        @endif
+                                        <?php endif; ?>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <p class="text-muted mb-1">Price :</p>
-                                                <h5 class="mb-0">{{ "Rp " . number_format($showDetail->price , 2, ",", ".") }}</h5>
+                                                <h5 class="mb-0"><?php echo e("Rp " . number_format($showDetail->price , 2, ",", ".")); ?></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -143,66 +143,66 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <p class="text-muted mb-1">Available Stocks :</p>
-                                                <h5 class="mb-0">{{$showDetail->stock}}</h5>
+                                                <h5 class="mb-0"><?php echo e($showDetail->stock); ?></h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- end col -->
                             </div>
-                            @if($showDetail->cooperative_id != Auth::user()->cooperative_id)
+                            <?php if($showDetail->cooperative_id != Auth::user()->cooperative_id): ?>
                             <div class=" mt-4">
-                                <form action="{{route('orderDetail.store')}}" id="input-cart2" method="post">
-                                    @csrf
+                                <form action="<?php echo e(route('orderDetail.store')); ?>" id="input-cart2" method="post">
+                                    <?php echo csrf_field(); ?>
                                     <h5 class="fs-14">Request :</h5>
                                     <input type="text" class="form-control" id="request" name="request2" placeholder="Enter request (size, color, etc)">
                             </div>
-                            @endif
+                            <?php endif; ?>
 
                             <div class="mt-4 text-muted">
                                 <h5 class="fs-14">Description :</h5>
-                                <p>{{ $showDetail->description }}</p>
+                                <p><?php echo e($showDetail->description); ?></p>
                             </div>
-                            @if($showDetail->cooperative_id != Auth::user()->cooperative_id)
+                            <?php if($showDetail->cooperative_id != Auth::user()->cooperative_id): ?>
                             <div class="mt-4 text-muted">
-                                <input type="hidden" name="id" value="{{$showDetail->id}}">
-                                <input type="hidden" name="cities_id" value="{{$showDetail->cooperative->cities_id}}">
-                                <input type="hidden" id="price3" name="price" value="{{$showDetail->price}}">
+                                <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                <input type="hidden" name="cities_id" value="<?php echo e($showDetail->cooperative->cities_id); ?>">
+                                <input type="hidden" id="price3" name="price" value="<?php echo e($showDetail->price); ?>">
                                 <div class="input-step">
-                                    @if($showDetail->stock != 0)
+                                    <?php if($showDetail->stock != 0): ?>
                                     <button type="button" id="minus">–</button>
                                     <input type="number" id="quantity" name="quantity" value="1" min="1" max="100">
                                     <button type="button" id="plus">+</button>
-                                    @else
+                                    <?php else: ?>
                                     <button disabled type="button" id="minus">–</button>
                                     <input readonly type="number" value="1" min="1" name="quantity" max="100" id="quantity">
                                     <button disabled type="button" id="plus">+</button>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="mt-4 text-muted">
-                                @if($showDetail->stock != 0)
+                                <?php if($showDetail->stock != 0): ?>
                                 <button onclick="InputCart2()" class="btn btn-success">Buy Now</button>
                                 </form>
-                                @else
+                                <?php else: ?>
                                 <button disabled class="btn btn-success">Buy Now</button>
-                                @endif
-                                @if($showDetail->stock != 0)
+                                <?php endif; ?>
+                                <?php if($showDetail->stock != 0): ?>
                                 <button onclick="InputCart()" class="btn btn-primary">Add to Cart</button>
-                                @else
+                                <?php else: ?>
                                 <button disabled class="btn btn-primary">Add to Cart</button>
-                                @endif
-                                <form action="{{route('cart.store')}}" id="input-cart" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{$showDetail->id}}">
-                                    <input type="hidden" name="cities_id" value="{{$showDetail->cooperative->cities_id}}">
-                                    <input type="hidden" id="price2" name="price" value="{{$showDetail->price}}">
+                                <?php endif; ?>
+                                <form action="<?php echo e(route('cart.store')); ?>" id="input-cart" method="post">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="id" value="<?php echo e($showDetail->id); ?>">
+                                    <input type="hidden" name="cities_id" value="<?php echo e($showDetail->cooperative->cities_id); ?>">
+                                    <input type="hidden" id="price2" name="price" value="<?php echo e($showDetail->price); ?>">
                                     <input type="hidden" name="request2" id="request2" value="">
                                     <input type="hidden" name="quantity" id="demo2" value="1" required>
                                 </form>
                             </div>
-                            @endif
+                            <?php endif; ?>
 
                             <div class="product-content mt-5">
                                 <h5 class="fs-14 mb-3">Product Description :</h5>
@@ -225,7 +225,7 @@
                                                         <th scope="row" style="width: 200px;">
                                                             Category</th>
                                                         <?php $kategory = \App\Models\ProductCategory::where('id', $showDetail->category_id)->first(); ?>
-                                                        <td>{{$kategory->name}}</td>
+                                                        <td><?php echo e($kategory->name); ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Brand</th>
@@ -241,7 +241,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Weight</th>
-                                                        <td>{{$showDetail->weight}} Gram</td>
+                                                        <td><?php echo e($showDetail->weight); ?> Gram</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -417,7 +417,7 @@
 
                                             <div class="me-lg-n3 pe-lg-4" data-simplebar style="max-height: 225px;">
                                                 <ul class="list-unstyled mb-0">
-                                                    @for ($i = 0; $i < 5; $i++) <li class="py-2">
+                                                    <?php for($i = 0; $i < 5; $i++): ?> <li class="py-2">
                                                         <div class="border border-dashed rounded p-3">
                                                             <div class="d-flex align-items-start mb-3">
                                                                 <div class="hstack gap-3">
@@ -447,7 +447,7 @@
                                                             </div>
                                                         </div>
                                                         </li>
-                                                        @endfor
+                                                        <?php endfor; ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -470,8 +470,8 @@
     <!-- end col -->
 </div>
 <!-- end row -->
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script src="assets/libs/swiper/swiper.min.js"></script>
 <script>
     function InputCart() {
@@ -548,5 +548,6 @@
     });
 </script>
 <script src="assets/js/pages/ecommerce-product-details.init.js"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\KMIPN PROJECT\indigco4\resources\views/admin/product/detail.blade.php ENDPATH**/ ?>

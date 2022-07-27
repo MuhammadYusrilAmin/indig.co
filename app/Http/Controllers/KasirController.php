@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use App\Models\OrderDetail;
-use App\Models\Product;
-use App\Models\ProductGallery;
-use App\Models\Wishlist;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Address;
+use App\Models\Cart;
+use App\Models\Kasir;
+use App\Models\ProductGallery;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class KasirController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,15 +20,13 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        $wishlists = Wishlist::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $kasir = Kasir::whereRaw('user_id =' . Auth::user()->id)->orderBy('created_at', 'desc')->get();
         $product = Product::all();
         $galleries = ProductGallery::get();
 
         return view(
-            'user.transaction.cart',
-            compact('carts'),
-            compact('wishlists'),
+            'admin.transaction.kasir',
+            compact('kasir'),
             compact('product'),
         );
     }
@@ -51,21 +50,20 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $id = mt_rand(1000, 99999);
-        $order = Cart::create([
+        $product = Product::where('id', $request->id)->first();
+        $order = Kasir::create([
             'id'                => $id,
             'user_id'           => Auth::user()->id,
-            'product_id'        => $request->id,
-            'quantity'          => $request->quantity,
-            'price'             => $request->price,
-            'request'           => $request->request2,
-            'cities_id'        => $request->cities_id
+            'product_id'        => $product->id,
+            'quantity'          => '1',
+            'price'             => $product->price,
         ]);
 
 
         if ($order) {
-            return redirect('/cart');
+            return redirect('/kasir');
         } else {
-            return redirect('/');
+            return redirect('/kasir');
         }
     }
 
@@ -77,6 +75,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
@@ -87,9 +86,9 @@ class CartController extends Controller
      */
     public function edit($id)
     {
-        $cart = Cart::where('user_id', $id);
+        $cart = Kasir::where('user_id', $id);
         $cart->delete();
-        return redirect('/cart');
+        return redirect('/kasir');
     }
 
     /**
@@ -112,51 +111,51 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $cart = Cart::find($id);
-        $product = Product::find($cart->product_id);
-        $product->stock =  $product->stock + $cart->quantity;
+        $kasir = Kasir::find($id);
+        $product = Product::find($kasir->product_id);
+        $product->stock =  $product->stock + $kasir->quantity;
         $product->update();
-        $cart->delete();
-        return redirect('/cart');
+        $kasir->delete();
+        return redirect('/kasir');
     }
 
 
     public function minus_quantity(Request $request)
     {
-        $id_cart = $request->id_cart;
-        $cart = Cart::where('id', $id_cart)->first();
-        if ($cart->quantity == 1) {
-            $cart->quantity = $cart->quantity;
-            $cart->update();
-            echo "$cart->quantity";
+        $id_kasirs = $request->id_kasirs;
+        $kasir = Kasir::where('id', $id_kasirs)->first();
+        if ($kasir->quantity == 1) {
+            $kasir->quantity = $kasir->quantity;
+            $kasir->update();
+            echo "$kasir->quantity";
         } else {
-            $product = Product::find($cart->product_id);
+            $product = Product::find($kasir->product_id);
             $product->stock = $product->stock + 1;
             $product->update();
-            $cart->quantity = $cart->quantity - 1;
-            $cart->price = $cart->price - $product->price;
-            $cart->update();
-            echo $cart->quantity;
+            $kasir->quantity = $kasir->quantity - 1;
+            $kasir->price = $kasir->price - $product->price;
+            $kasir->update();
+            echo $kasir->quantity;
         }
     }
 
 
     public function plus_quantity(Request $request)
     {
-        $id_cart = $request->id_cart;
-        $cart = Cart::where('id', $id_cart)->first();
-        $product = Product::find($cart->product_id);
-        if ($cart->quantity == $cart->quantity + $product->stock) {
-            $cart->quantity = $cart->quantity;
-            $cart->update();
-            echo "$cart->quantity";
+        $id_kasirs = $request->id_kasirs;
+        $kasir = Kasir::where('id', $id_kasirs)->first();
+        $product = Product::find($kasir->product_id);
+        if ($kasir->quantity == $kasir->quantity + $product->stock) {
+            $kasir->quantity = $kasir->quantity;
+            $kasir->update();
+            echo "$kasir->quantity";
         } else {
             $product->stock = $product->stock - 1;
             $product->update();
-            $cart->quantity = $cart->quantity + 1;
-            $cart->price = $cart->price + $product->price;
-            $cart->update();
-            echo $cart->quantity;
+            $kasir->quantity = $kasir->quantity + 1;
+            $kasir->price = $kasir->price + $product->price;
+            $kasir->update();
+            echo $kasir->quantity;
         }
     }
 }
