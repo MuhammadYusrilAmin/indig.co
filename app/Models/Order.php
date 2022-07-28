@@ -23,6 +23,7 @@ class Order extends Model
         'midtrans_url',
         'midtrans_booking code',
         'note',
+        'resi',
         'canceled',
     ];
 

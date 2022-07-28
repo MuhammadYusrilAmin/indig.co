@@ -74,6 +74,8 @@ Route::resource('dashboard', DashboardController::class)->middleware('auth');
 Route::resource('kasir', KasirController::class)->middleware('auth');
 Route::post('/kasir_minus_quantity',  [\App\Http\Controllers\KasirController::class, 'minus_quantity'])->middleware('auth');
 Route::post('/kasir_plus_quantity',  [\App\Http\Controllers\KasirController::class, 'plus_quantity'])->middleware('auth');
+Route::get('/export-pdf',  [\App\Http\Controllers\TransactionController::class, 'pdf'])->middleware('auth');
+Route::get('/export-printer',  [\App\Http\Controllers\KasirController::class, 'printer'])->middleware('auth');
 
 //midtrans gateway
 Route::get('payment/success', [OrderController::class, 'midtransCallBack'])->middleware('auth');

@@ -76,23 +76,22 @@ class RegisterController extends Controller
             'avatar' => 'required',
         ]);
 
-        $image = $request->file('avatar');
-        $new_image = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('assets/images/users'), $new_image);
-
         if ($request->hasfile('avatar')) {
-            $user = User::create([
-                'name' => $request['name'],
-                'phone' => $request['phone'],
-                'email' => $request['email'],
-                'address' => $request['address'],
-                'address' => $request['address'],
-                'password' => Hash::make($request['password']),
-                'role' =>  'User',
-                'status' =>  'Active',
-                'avatar' =>  $new_image,
-            ]);
+            $image = $request->file('avatar');
+            $new_image = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('assets/images/users'), $new_image);
         }
+
+        $user = User::create([
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'address' => $request['address'],
+            'password' => Hash::make($request['password']),
+            'role' =>  'User',
+            'status' =>  'Active',
+            'avatar' =>  $new_image,
+        ]);
 
         if ($user) {
             return redirect('login')->with('successfully', 'User added successfully');

@@ -10,17 +10,23 @@ class Cooperative extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'cooperatives';
     protected $fillable = [
-        'user_id',
+        'id',
+        'cities_id',
+        'provinces_id',
+        'nik',
         'name',
         'since_year',
         'owner_name',
         'company_name',
         'email',
+        'password',
         'website',
         'contact',
         'fax',
         'location',
+        'status',
         'avatar',
     ];
 

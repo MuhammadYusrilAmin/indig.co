@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function root()
     {
-        $products = Product::limit(5)->get()->sortByDesc('updated_at');
+        $products = Product::where('cooperative_id', '!=', Auth::user()->cooperative_id)->limit(5)->orderBy('created_at', 'desc')->get();
         $cooperatives = Cooperative::limit(8)->get()->sortByDesc('updated_at');
         $productcoops = Product::all();
 

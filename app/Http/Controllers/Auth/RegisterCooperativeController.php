@@ -43,41 +43,42 @@ class RegisterCooperativeController extends Controller
      */
     public function store(Request $request)
     {
-        $id = mt_rand(1000, 9999);
-        return Validator::make($request, [
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'avatar' => ['required', 'image' ,'mimes:jpg,jpeg,png','max:1024'],
+        // $id = mt_rand(1000, 9999);
+        // return Validator::make($request->password,  ['required', 'string', 'min:8', 'confirmed']);
+        $request->validate([
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $cooperative = Cooperative::create([
+        $id = mt_rand(1000, 9999);
+        if ($request->hasFile('logo')) {
+            $image = $request->file('logo');
+            $new_image = rand() . '.' . $image->getClientOriginalExtension();
+
+            $image->move(public_path('assets/images/users/'), $new_image);
+        }
+        $koprasi = Cooperative::create([
             'id' => $id,
-            'cities_id' => 1,
-            'provinces_id' => 1,
+            'cities_id' => $request->kabupaten,
+            'provinces_id' => $request->provinsi,
             'nik' => $request->nik,
             'name' => $request->name,
             'since_year' => $request->since_year,
             'owner_name' => $request->owner_name,
             'company_name' => $request->company_name,
             'email' => $request->email,
+            'password' => Hash::make($request->password),
             'website' => $request->website,
             'contact' => $request->contact,
             'fax' => $request->fax,
-            'location' => $request->location,
-            'status' =>  'notverified',
-            'avatar' =>  'avatar-11.png', // logo cooperative
+            'location' => "Indonesia",
+            'status' => "notverified",
+            'avatar' => $new_image,
         ]);
-
-        $user = User::create([
-            'cooperative_id' => $id,
-            'name' => $request->owner_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'photo' =>  'avatar-11.png',
-            'avatar' =>  'avatar-11.png',
-            'role' =>  'Admin', // user photo
-        ]);
-
-        return $user;
+        if ($koprasi) {
+            return redirect('/login');
+        } else {
+            return redirect('/register-cooperative');
+        }
     }
 
     /**

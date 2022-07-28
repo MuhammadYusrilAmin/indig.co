@@ -251,7 +251,7 @@
                                     </div>
                                     <div class="flex-shrink-0">
                                         <div>
-                                            <img class="image avatar-xs rounded-circle" alt="" src="{{ url($data->avatar) }}">
+                                            <img class="image avatar-xs rounded-circle" alt="" src="{{ URL::asset('assets/images/users/' . $data->avatar) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +295,7 @@
                                     </div>
                                     <div class="flex-shrink-0">
                                         <div>
-                                            <img class="image avatar-xs rounded-circle" alt="" src="{{ url($data->avatar) }}">
+                                            <img class="image avatar-xs rounded-circle" alt="" src="{{ URL::asset('assets/images/users/' . $data->avatar) }}">>
                                         </div>
                                     </div>
                                 </div>

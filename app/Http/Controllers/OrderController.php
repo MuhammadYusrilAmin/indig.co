@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Str;
 use Midtrans;
-
 class OrderController extends Controller
 {
 
@@ -97,6 +96,7 @@ class OrderController extends Controller
                 'id'                => mt_rand(1000, 99999),
                 'order_id'          => $id_order,
                 'product_id'        => $order->product_id,
+                'cooperative_id'    => $product->cooperative_id,
                 'quantity'          => $order->quantity,
                 'price'             => $product->price * $order->quantity,
                 'request'          => $order->request
@@ -111,6 +111,7 @@ class OrderController extends Controller
                     'id'                => mt_rand(1000, 99999),
                     'order_id'          => $id_order,
                     'product_id'        => $cart1->product_id,
+                    'cooperative_id'    => $product->cooperative_id,
                     'quantity'          => $cart1->quantity,
                     'price'             => $product->price * $cart1->quantity,
                     'request'          => $cart1->request
@@ -120,6 +121,8 @@ class OrderController extends Controller
             }
         }
         $this->getSnapRedirect($id_order);
+
+        return redirect('/orders');
         // ID = ICO - date(ddmmyyhms) - 4 acak - iduser
     }
 

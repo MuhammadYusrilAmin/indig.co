@@ -10,19 +10,20 @@
     <div class="col-xxl-12">
         <div class="row">
             <?php
-            $orders = App\Models\OrderDetail::where('cooperative_id', Auth::user()->cooperative_id)->get();
+            date_default_timezone_set('Asia/Jakarta');
+            $orders = App\Models\OrderDetail::whereRaw('MONTH(created_at) = ' . date('m') . ' AND cooperative_id=' . Auth::user()->cooperative_id)->get();
 
             $totalquantitythismonth = 0;
             $totalincomesthismonth = 0;
-            $thismonth = date('m');
-            // foreach ($orders->where('MONTH(created_at)', $thismonth) as $order) {
-            //     $totalquantitythismonth += $order->quantity;
-            //     $totalincomesthismonth += $order->price;
-            // }
+            foreach ($orders as $order) {
+                $totalquantitythismonth += $order->quantity;
+                $totalincomesthismonth += $order->price;
+            }
 
+            $orders2 = App\Models\OrderDetail::whereRaw('cooperative_id=' . Auth::user()->cooperative_id)->get();
             $totalquantity = 0;
             $totalincomes = 0;
-            foreach ($orders as $order) {
+            foreach ($orders2 as $order) {
                 $totalquantity += $order->quantity;
                 $totalincomes += $order->price;
             }
@@ -39,7 +40,7 @@
                             <div class="flex-grow-1 overflow-hidden ms-3">
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Active Incomes</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0">IDR <span class="counter-value" data-target="{{ $totalquantitythismonth }}">0</span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0">IDR <span class="counter-value" data-target="{{ $totalincomesthismonth  }}">0</span></h4>
                                 </div>
                                 <p class="text-muted text-truncate mb-0">Incomes this month</p>
                             </div>
@@ -60,7 +61,7 @@
                             <div class="flex-grow-1 overflow-hidden ms-3">
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Purchased</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ $totalquantity }}">0</span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ $totalincomesthismonth }}">0</span></h4>
                                 </div>
                                 <p class="text-muted text-truncate mb-0">Purchased this month</p>
                             </div>

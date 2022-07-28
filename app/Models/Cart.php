@@ -17,6 +17,7 @@ class Cart extends Model
         'price',
         'request',
         'cities_id',
+        'discount_id',
     ];
 
     public function user()
