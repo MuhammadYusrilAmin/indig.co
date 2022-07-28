@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-layout="horizontal" data-topbar="dark" data-sidebar-size="lg">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" data-layout="horizontal" data-topbar="dark" data-sidebar-size="lg">
 
 <head>
     <meta charset="utf-8" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') | Indig.co - Indonesian Digital Cooperative</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <title><?php echo $__env->yieldContent('title'); ?> | Indig.co - Indonesian Digital Cooperative</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="<?php echo e(URL::asset('assets/images/favicon.ico')); ?>">
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
@@ -19,60 +19,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    @include('layouts.head-css')
+    <?php echo $__env->make('layouts.head-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </head>
 
-@section('body')
-@include('layouts.body')
-@show
+<?php $__env->startSection('body'); ?>
+<?php echo $__env->make('layouts.body', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->yieldSection(); ?>
 <!-- Begin page -->
 <div id="layout-wrapper">
-    @include('layouts.topbar')
-    @include('layouts.sidebar')
+    <?php echo $__env->make('layouts.topbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('layouts.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
-                @yield('content')
+                <?php echo $__env->yieldContent('content'); ?>
             </div>
             <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
-        @include('layouts.footer')
-        @include('sweetalert::alert')
+        <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
     <!-- end main content-->
 </div>
 
-@if(session('error'))
+<?php if(session('error')): ?>
 <script>
     Swal.fire({
         icon: 'error',
-        title: '{{session("error")}}',
+        title: '<?php echo e(session("error")); ?>',
         showConfirmButton: false,
         timer: 1500
     })
 </script>
-@endif
+<?php endif; ?>
 
-@if(session('success'))
+<?php if(session('success')): ?>
 <script>
     Swal.fire({
         icon: 'success',
-        title: '{{session("success")}}',
+        title: '<?php echo e(session("success")); ?>',
         showConfirmButton: false,
         timer: 1500
     })
 </script>
-@endif
+<?php endif; ?>
 <!-- END layout-wrapper -->
 
-@include('layouts.customizer')
+<?php echo $__env->make('layouts.customizer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <!-- JAVASCRIPT -->
-@include('layouts.vendor-scripts')
+<?php echo $__env->make('layouts.vendor-scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </body>
 
-</html>
+</html><?php /**PATH D:\KMIPN PROJECT\indigco6\resources\views/layouts/master.blade.php ENDPATH**/ ?>

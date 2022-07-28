@@ -1,20 +1,20 @@
-@extends('layouts.master-without-nav')
-@section('title')
-@lang('translation.signin')
-@endsection
-@section('content')
+
+<?php $__env->startSection('title'); ?>
+<?php echo app('translator')->get('translation.signin'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 
-@if(session('error'))
+<?php if(session('error')): ?>
 <script>
     Swal.fire({
         icon: 'error',
-        title: '{{session("error")}}',
+        title: '<?php echo e(session("error")); ?>',
         showConfirmButton: false,
         timer: 1500
     })
 </script>
-@endif
+<?php endif; ?>
 <div class="auth-page-wrapper pt-5">
     <!-- auth page bg -->
     <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
@@ -53,22 +53,43 @@
                                 <p class="text-muted">Sign in to continue to indigco.</p>
                             </div>
                             <div class="p-2 mt-4">
-                                @error('error')
+                                <?php $__errorArgs = ['error'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong><?php echo e($message); ?></strong>
                                 </span>
-                                @enderror
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
-                                <form action="{{ route('login') }}" method="POST">
-                                    @csrf
+                                <form action="<?php echo e(route('login')); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
                                     <div class="mb-3">
                                         <label for="Email" class="form-label">Email</label>
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="username" name="email" placeholder="Enter Email">
-                                        @error('email')
+                                        <input type="email" class="form-control <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('email')); ?>" id="username" name="email" placeholder="Enter Email">
+                                        <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong><?php echo e($message); ?></strong>
                                         </span>
-                                        @enderror
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="mb-3">
@@ -77,13 +98,27 @@
                                         </div> -->
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" class="form-control pe-5 @error('password') is-invalid @enderror" name="password" placeholder="Enter password" id="password-input">
+                                            <input type="password" class="form-control pe-5 <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="password" placeholder="Enter password" id="password-input">
                                             <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                            @error('password')
+                                            <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong><?php echo e($message); ?></strong>
                                             </span>
-                                            @enderror
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                         </div>
                                     </div>
 
@@ -142,10 +177,11 @@
     </footer>
     <!-- end Footer -->
 </div>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script src="assets/libs/particles.js/particles.js.min.js"></script>
 <script src="assets/js/pages/particles.app.js"></script>
 <script src="assets/js/pages/password-addon.init.js"></script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master-without-nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\KMIPN PROJECT\indigco6\resources\views/auth/login.blade.php ENDPATH**/ ?>

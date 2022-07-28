@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -53,7 +54,7 @@ class EmployeeController extends Controller
 
         $image = $request->file('avatar');
         $new_image = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('assets/images/users'), $new_image);
+        $image->move(public_path('assets/images/outrusers'), $new_image);
 
         if ($request->hasfile('avatar')) {
             $employee = User::create([
@@ -70,7 +71,7 @@ class EmployeeController extends Controller
         }
 
         if ($employee) {
-            return redirect('employees')->with(['success' => 'Employee added successfully']);
+            return redirect()->route('employees.index')->with('success', 'Employee added successfully');
         } else {
             return redirect('employees')->with('error', 'Employee failed to add');
         }
@@ -141,7 +142,7 @@ class EmployeeController extends Controller
         }
 
         if ($employee) {
-            return redirect('employees')->with('successfully', 'Employee updated successfully');
+            return redirect('employees')->with('success', 'Employee updated successfully');
         } else {
             return redirect('employees')->with('error', 'Employee failed to updated');
         }
@@ -155,8 +156,12 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $product = User::find($id);
-        $product->delete();
-        return redirect('employees')->with(['success' => 'Employee deleted successfully']);
+        $user = User::find($id);
+        $location = 'assets/images/outrusers' . $user->avatar;
+        if (File::exists($location)) {
+            File::delete($location);
+        }
+        $user->delete();
+        return redirect()->route('employees.index')->with('success', 'Data Barang Berhasil Di Hapus');
     }
 }

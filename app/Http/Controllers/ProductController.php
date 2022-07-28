@@ -105,7 +105,7 @@ class ProductController extends Controller
         }
 
         if ($product) {
-            return redirect('products')->with('successfully', 'Product added successfully');
+            return redirect('products')->with('success', 'Product added successfully');
         } else {
             return redirect('products')->with('error', 'Product failed to add');
         }
@@ -168,7 +168,7 @@ class ProductController extends Controller
         $product->update();
 
         if ($product) {
-            return redirect('products')->with('successfully', 'Product updated successfully');
+            return redirect('products')->with('success', 'Product updated successfully');
         } else {
             return redirect('products')->with('error', 'Product failed to updated');
         }
@@ -192,6 +192,6 @@ class ProductController extends Controller
         }
         ProductGallery::where('product_id', $id)->delete();
         $product->delete();
-        return redirect('products')->with('successfully', 'Product added successfully');
+        return redirect('products')->with('success', 'Product added successfully');
     }
 }
