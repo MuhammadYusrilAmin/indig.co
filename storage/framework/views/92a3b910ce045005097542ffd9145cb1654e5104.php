@@ -41,6 +41,19 @@
                                 <p class="text-muted">Sign in to continue to indigco.</p>
                             </div>
                             <div class="p-2 mt-4">
+                                <?php $__errorArgs = ['error'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong><?php echo e($message); ?></strong>
+                                </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+
                                 <form action="<?php echo e(route('login')); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <div class="mb-3">

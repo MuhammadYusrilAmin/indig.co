@@ -139,7 +139,7 @@
                                             <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                         </div>
                                     </th>
-                                    <th class="sort" data-sort="id">Order ID</th>
+                                    <th class="sort" data-sort="id">Receipt Number</th>
                                     <th class="sort" data-sort="customer_name">Customer</th>
                                     <th class="sort" data-sort="product_name">Product</th>
                                     <th class="sort" data-sort="date">Order Date</th>
@@ -156,12 +156,18 @@
                                             <input class="form-check-input" type="checkbox" name="checkAll" value="option1">
                                         </div>
                                     </th>
-                                    <td class="id"><a href="{{ url('orders/'.$data->id) }}" class="fw-medium link-primary">{{ $data->order_id }}</a></td>
+                                    <td class="id">
+                                        @if ($data->resi != null)
+                                        <a href="{{ url('orders/'.$data->id) }}" class="fw-medium link-primary">{{ $data->resi }}</a>
+                                        @else
+                                        Belum dikirim
+                                        @endif
+                                    </td>
                                     <td class="customer_name">{{ $data->user->name }}</td>
                                     <td class="product_name">{{ $data->items[0]->product->title }}</td>
                                     <td>{{ $data->created_at }}</td>
                                     <td class="amount">{{ "Rp" . number_format($data->total_payment, 2, ",", ".") }}</td>
-                                    <td class="payment">{{ $data->sender.', '.$data->payment_method }}</td>
+                                    <td class="payment">{{ $data->sender }}</td>
                                     <td class="status">
                                         <span class="badge {{ $data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-warning' : ($data->status == 'Delivered' ? 'badge-soft-secondary' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : ($data->status == 'Received' ? 'badge-soft-success' : 'badge-soft-danger'))))) }} text-uppercase">{{ $data->status }}</span>
                                     </td>
@@ -192,17 +198,52 @@
                                             @endif
                                             @if ($data->status == 'Inprogress')
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Send Order">
-                                                <form action="{{ url('send-order', $data->id) }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary btn-sm" id="delete-record"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</button>
-                                                </form>
-                                                </a>
+                                                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#sendOrder{{ $data->id }}"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</a>
                                             </li>
                                             @endif
                                         </ul>
                                     </td>
                                     @endif
                                 </tr>
+
+                                <!-- Send Order Modal -->
+                                <div class="modal fade flip" id="sendOrder{{ $data->id }}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <form action="{{ url('send-order', $data->id) }}" method="POST">
+                                                @csrf
+                                                <div class="modal-header">
+                                                    <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:70px;height:70px"></lord-icon>
+                                                    <h5 class="modal-title" id="CancellOrder{{ $data->id }}Label">Please enter receipt number</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <div class="mb-3">
+                                                            <label for="resi" class="form-label">Receipt Number <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control @error('resi') is-invalid @enderror" name="resi" value="{{ old('resi') }}" id="resi" placeholder="Enter receipt number" required>
+                                                            @error('resi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                            <div class="invalid-feedback">
+                                                                Please enter resi
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="hstack gap-2 justify-content-end">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" id="delete-record"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end modal -->
 
                                 <!-- Modal -->
                                 <div class="modal fade flip" id="deleteOrder{{ $data->id }}" tabindex="-1" aria-hidden="true">

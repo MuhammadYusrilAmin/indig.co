@@ -20,14 +20,12 @@ class ProductController extends Controller
         $user = User::all();
         $category = ProductCategory::all();
         $galleries = ProductGallery::get();
-        $orderdetails = OrderDetail::get();
 
         return view(
             'admin.product.index',
             compact('datas'),
             compact('user'),
             compact('category'),
-            compact('orderdetails'),
         );
     }
 
@@ -57,7 +55,6 @@ class ProductController extends Controller
             'stock' => 'required',
             'publish' => 'required',
             'category_id' => 'required',
-            'tags' => 'required',
             'foto' => 'required',
             'description' => 'required'
         ]);
@@ -131,7 +128,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $category = ProductCategory::all();
+
+        return view(
+            'admin.product.edit',
+            compact('product'),
+            compact('category'),
+        );
     }
 
     /**
@@ -143,7 +147,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+            'weight' => 'required',
+            'stock' => 'required',
+            'publish' => 'required',
+            'category_id' => 'required',
+            'description' => 'required'
+        ]);
+
+        $product = Product::find($id);
+        $product->title = $request->title;
+        $product->price = $request->price;
+        $product->weight = $request->weight;
+        $product->stock = $request->stock;
+        $product->status = $request->publish;
+        $product->category_id = $request->category_id;
+        $product->description = $request->description;
+        $product->update();
+
+        if ($product) {
+            return redirect('products')->with('successfully', 'Product updated successfully');
+        } else {
+            return redirect('products')->with('error', 'Product failed to updated');
+        }
     }
 
     /**

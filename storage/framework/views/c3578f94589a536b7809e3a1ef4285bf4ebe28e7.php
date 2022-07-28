@@ -72,7 +72,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo e(url('cart')); ?>">
+                    <a class="nav-link" href="<?php echo e(url('kasir')); ?>">
                         <i class="las la-shopping-cart"></i>
                         <span>Transactions</span>
                     </a>

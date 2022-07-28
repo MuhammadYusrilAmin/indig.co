@@ -41,6 +41,12 @@
                                 <p class="text-muted">Sign in to continue to indigco.</p>
                             </div>
                             <div class="p-2 mt-4">
+                                @error('error')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
                                 <form action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">

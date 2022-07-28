@@ -70,7 +70,7 @@ class EmployeeController extends Controller
         }
 
         if ($employee) {
-            return redirect('employees')->with('successfully', 'Employee added successfully');
+            return redirect('employees')->with(['success' => 'Employee added successfully']);
         } else {
             return redirect('employees')->with('error', 'Employee failed to add');
         }
@@ -157,6 +157,6 @@ class EmployeeController extends Controller
     {
         $product = User::find($id);
         $product->delete();
-        return redirect('employees')->with('successfully', 'Employee deleted successfully');
+        return redirect('employees')->with(['success' => 'Employee deleted successfully']);
     }
 }

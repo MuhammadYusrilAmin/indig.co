@@ -61,270 +61,6 @@
                 </div>
             </div>
             <!--end card-body-->
-            <div class="card-body border-top border-top-dashed p-4">
-                <div>
-                    <h6 class="text-muted text-uppercase fw-semibold mb-4">Customer Reviews</h6>
-                    <div>
-                        <div>
-                            <div class="bg-light px-3 py-2 rounded-2 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <div class="fs-16 align-middle text-warning">
-                                            <i class="ri-star-fill"></i>
-                                            <i class="ri-star-fill"></i>
-                                            <i class="ri-star-fill"></i>
-                                            <i class="ri-star-fill"></i>
-                                            <i class="ri-star-half-fill"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <h6 class="mb-0">4.5 out of 5</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-muted">Total <span class="fw-medium">5.50k</span>
-                                    reviews</div>
-                            </div>
-                        </div>
-
-                        <div class="mt-3">
-                            <div class="row align-items-center g-2">
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0">5 star</h6>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="p-1">
-                                        <div class="progress animated-progress progress-sm">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50.16%" aria-valuenow="50.16" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0 text-muted">2758</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <div class="row align-items-center g-2">
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0">4 star</h6>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="p-1">
-                                        <div class="progress animated-progress progress-sm">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 29.32%" aria-valuenow="29.32" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0 text-muted">1063</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <div class="row align-items-center g-2">
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0">3 star</h6>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="p-1">
-                                        <div class="progress animated-progress progress-sm">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 18.12%" aria-valuenow="18.12" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0 text-muted">997</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <div class="row align-items-center g-2">
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0">2 star</h6>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="p-1">
-                                        <div class="progress animated-progress progress-sm">
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 4.98%" aria-valuenow="4.98" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0 text-muted">227</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <div class="row align-items-center g-2">
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0">1 star</h6>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="p-1">
-                                        <div class="progress animated-progress progress-sm">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 7.42%" aria-valuenow="7.42" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="p-1">
-                                        <h6 class="mb-0 text-muted">408</h6>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end card-body-->
-            <div class="card-body p-4 border-top border-top-dashed">
-                <h6 class="text-muted text-uppercase fw-semibold mb-4">Products Reviews</h6>
-                <!-- Swiper -->
-                <div class="swiper vertical-swiper" style="height: 248px;">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="card border border-dashed shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0 avatar-sm">
-                                            <div class="avatar-title bg-light rounded">
-                                                <img src="{{ URL::asset('assets/images/companies/img-1.png') }}" alt="" height="30">
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <div>
-                                                <p class="text-muted mb-1 fst-italic">" Great
-                                                    product and looks great, lots of features. "</p>
-                                                <div class="fs-11 align-middle text-warning">
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                </div>
-                                            </div>
-                                            <div class="text-end mb-0 text-muted">
-                                                - by <cite title="Source Title">Force
-                                                    Medicines</cite>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card border border-dashed shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar-sm rounded">
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <div>
-                                                <p class="text-muted mb-1 fst-italic">" Amazing
-                                                    template, very easy to understand and
-                                                    manipulate. "</p>
-                                                <div class="fs-11 align-middle text-warning">
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-half-fill"></i>
-                                                </div>
-                                            </div>
-                                            <div class="text-end mb-0 text-muted">
-                                                - by <cite title="Source Title">Henry Baird</cite>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card border border-dashed shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0 avatar-sm">
-                                            <div class="avatar-title bg-light rounded">
-                                                <img src="{{ URL::asset('assets/images/companies/img-8.png') }}" alt="" height="30">
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <div>
-                                                <p class="text-muted mb-1 fst-italic">"Very
-                                                    beautiful product and Very helpful customer
-                                                    service."</p>
-                                                <div class="fs-11 align-middle text-warning">
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-line"></i>
-                                                    <i class="ri-star-line"></i>
-                                                </div>
-                                            </div>
-                                            <div class="text-end mb-0 text-muted">
-                                                - by <cite title="Source Title">Zoetic
-                                                    Fashion</cite>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card border border-dashed shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-sm rounded">
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <div>
-                                                <p class="text-muted mb-1 fst-italic">" The product
-                                                    is very beautiful. I like it. "</p>
-                                                <div class="fs-11 align-middle text-warning">
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-fill"></i>
-                                                    <i class="ri-star-half-fill"></i>
-                                                    <i class="ri-star-line"></i>
-                                                </div>
-                                            </div>
-                                            <div class="text-end mb-0 text-muted">
-                                                - by <cite title="Source Title">Nancy Martino</cite>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-3">
-                    <a href="javascript:void(0)" class="link-primary">View All Reviews <i class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                </div>
-            </div>
             <div class="card-body p-4 border-top border-top-dashed">
                 <h6 class="text-muted text-uppercase fw-semibold mb-4">Contact Support</h6>
                 <form action="#">
@@ -332,8 +68,7 @@
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Enter your messages..."></textarea>
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary"><i class="ri-mail-send-line align-bottom me-1"></i> Send
-                            Messages</button>
+                        <button type="submit" class="btn btn-primary"><i class="ri-mail-send-line align-bottom me-1"></i> Send Messages</button>
                     </div>
                 </form>
             </div>
@@ -389,18 +124,35 @@
                                 <td>{{ $data->stock }}</td>
                                 <td>{{ "Rp" . number_format($data->price, 2, ",", ".") }}</td>
                                 <?php
+                                $orderdetails = App\Models\OrderDetail::where('product_id', $data->id)->get();
                                 $orders = 0;
 
-                                // foreach ($orderdetails as $orderdetail) {
-                                //     $orders += $orderdetail->quantity;
-                                // }
+                                foreach ($orderdetails as $orderdetail) {
+                                    $orders += $orderdetail->quantity;
+                                }
                                 ?>
-                                <td>{{ $orders }} (belum dibenerin)</td>
+                                <td>{{ $orders . 'x purchased' }}</td>
                                 <td>
-                                    <div class="fw-normal badge bg-light text-dark fs-6">
+                                    <?php
+                                    $ratings = App\Models\Rating::where('product_id', $data->id)->get();
+                                    $total = 0;
+
+                                    foreach ($ratings as $rating) {
+                                        $total += $rating->rating;
+                                    }
+
+                                    if (count($ratings) != null) {
+                                        $rata2 = $total / count($ratings);
+                                    }
+                                    ?>
+                                    @if (count($ratings) == null)
+                                    <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                    @else
+                                    <button type="button" class="btn btn-light btn-sm">
                                         <i class="lab las la-star text-warning"></i>
-                                        {{ 'belum diperbarui' }}
-                                    </div>
+                                        {{ $rata2 }}
+                                    </button>
+                                    @endif
                                 </td>
                                 <td>{{ $data->updated_at }}</td>
                             </tr>

@@ -96,24 +96,44 @@
                                     </a>
                                 </td>
                                 <td>
+                                    <a href="{{url('detail_products?id='. $data->id )}}" class="text-primary d-inline-block">
+                                        {{ $data->title }}
+                                    </a>
                                     <br>
                                     <small>Category: {{ $data->category->name }}</small>
                                 </td>
                                 <td>{{ $data->stock }}</td>
                                 <td>{{ "Rp" . number_format($data->price, 2, ",", ".") }}</td>
                                 <?php
+                                $orderdetails = App\Models\OrderDetail::where('product_id', $data->id)->get();
                                 $orders = 0;
 
-                                // foreach ($orderdetails as $orderdetail) {
-                                //     $orders += $orderdetail->quantity;
-                                // }
+                                foreach ($orderdetails as $orderdetail) {
+                                    $orders += $orderdetail->quantity;
+                                }
                                 ?>
-                                <td>{{ $orders }} (belum dibenerin)</td>
+                                <td>{{ $orders . 'x purchased' }}</td>
                                 <td>
-                                    <div class="fw-normal badge bg-light text-dark fs-6">
+                                    <?php
+                                    $ratings = App\Models\Rating::where('product_id', $data->id)->get();
+                                    $total = 0;
+
+                                    foreach ($ratings as $rating) {
+                                        $total += $rating->rating;
+                                    }
+
+                                    if (count($ratings) != null) {
+                                        $rata2 = $total / count($ratings);
+                                    }
+                                    ?>
+                                    @if (count($ratings) == null)
+                                    <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                    @else
+                                    <button type="button" class="btn btn-light btn-sm">
                                         <i class="lab las la-star text-warning"></i>
-                                        {{ 'belum diperbarui' }}
-                                    </div>
+                                        {{ $rata2 }}
+                                    </button>
+                                    @endif
                                 </td>
                                 <td>{{ $data->tanggal }}</td>
                                 <td>
@@ -187,24 +207,44 @@
                                     </a>
                                 </td>
                                 <td>
+                                    <a href="{{url('detail_products?id='. $data->id )}}" class="text-primary d-inline-block">
+                                        {{ $data->title }}
+                                    </a>
                                     <br>
                                     <small>Category: {{ $data->category->name }}</small>
                                 </td>
                                 <td>{{ $data->stock }}</td>
                                 <td>{{ "Rp" . number_format($data->price, 2, ",", ".") }}</td>
                                 <?php
+                                $orderdetails = App\Models\OrderDetail::where('product_id', $data->id)->get();
                                 $orders = 0;
 
-                                // foreach ($orderdetails as $orderdetail) {
-                                //     $orders += $orderdetail->quantity;
-                                // }
+                                foreach ($orderdetails as $orderdetail) {
+                                    $orders += $orderdetail->quantity;
+                                }
                                 ?>
-                                <td>{{ $orders }} (belum dibenerin)</td>
+                                <td>{{ $orders . 'x purchased' }}</td>
                                 <td>
-                                    <div class="fw-normal badge bg-light text-dark fs-6">
+                                    <?php
+                                    $ratings = App\Models\Rating::where('product_id', $data->id)->get();
+                                    $total = 0;
+
+                                    foreach ($ratings as $rating) {
+                                        $total += $rating->rating;
+                                    }
+
+                                    if (count($ratings) != null) {
+                                        $rata2 = $total / count($ratings);
+                                    }
+                                    ?>
+                                    @if (count($ratings) == null)
+                                    <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                    @else
+                                    <button type="button" class="btn btn-light btn-sm">
                                         <i class="lab las la-star text-warning"></i>
-                                        {{ 'belum diperbarui' }}
-                                    </div>
+                                        {{ $rata2 }}
+                                    </button>
+                                    @endif
                                 </td>
                                 <td>{{ $data->tanggal }}</td>
                                 <td>
@@ -282,24 +322,44 @@
                                     </a>
                                 </td>
                                 <td>
+                                    <a href="{{url('detail_products?id='. $data->id )}}" class="text-primary d-inline-block">
+                                        {{ $data->title }}
+                                    </a>
                                     <br>
                                     <small>Category: {{ $data->category->name }}</small>
                                 </td>
                                 <td>{{ $data->stock }}</td>
                                 <td>{{ "Rp" . number_format($data->price, 2, ",", ".") }}</td>
                                 <?php
+                                $orderdetails = App\Models\OrderDetail::where('product_id', $data->id)->get();
                                 $orders = 0;
 
-                                // foreach ($orderdetails as $orderdetail) {
-                                //     $orders += $orderdetail->quantity;
-                                // }
+                                foreach ($orderdetails as $orderdetail) {
+                                    $orders += $orderdetail->quantity;
+                                }
                                 ?>
-                                <td>{{ $orders }} (belum dibenerin)</td>
+                                <td>{{ $orders . 'x purchased' }}</td>
                                 <td>
-                                    <div class="fw-normal badge bg-light text-dark fs-6">
+                                    <?php
+                                    $ratings = App\Models\Rating::where('product_id', $data->id)->get();
+                                    $total = 0;
+
+                                    foreach ($ratings as $rating) {
+                                        $total += $rating->rating;
+                                    }
+
+                                    if (count($ratings) != null) {
+                                        $rata2 = $total / count($ratings);
+                                    }
+                                    ?>
+                                    @if (count($ratings) == null)
+                                    <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                    @else
+                                    <button type="button" class="btn btn-light btn-sm">
                                         <i class="lab las la-star text-warning"></i>
-                                        {{ 'belum diperbarui' }}
-                                    </div>
+                                        {{ $rata2 }}
+                                    </button>
+                                    @endif
                                 </td>
                                 <td>{{ $data->tanggal }}</td>
                                 <td>
@@ -386,15 +446,12 @@
 </div><!-- /.modal -->
 @endforeach
 
-
-
 @endsection
 @section('script')
 <script src="{{ URL::asset('assets/libs/nouislider/nouislider.min.js') }}"></script>
 <script src="{{ URL::asset('assets/libs/wnumb/wnumb.min.js') }}"></script>
 <script src="assets/libs/gridjs/gridjs.min.js"></script>
 <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
-
 
 <!-- <script src="{{ URL::asset('assets/js/pages/ecommerce-product-list.init.js') }}"></script> -->
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>

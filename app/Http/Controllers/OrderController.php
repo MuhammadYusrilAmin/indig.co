@@ -170,9 +170,9 @@ class OrderController extends Controller
         $order->update();
 
         if ($order) {
-            return redirect('orders')->with('successfully', 'Order accepted successfully');
+            return redirect('orders-admin')->with('successfully', 'Order accepted successfully');
         } else {
-            return redirect('orders')->with('error', 'Order failed to accepted');
+            return redirect('orders-admin')->with('error', 'Order failed to accepted');
         }
     }
 
@@ -184,22 +184,27 @@ class OrderController extends Controller
         $order->update();
 
         if ($order) {
-            return redirect('orders')->with('successfully', 'Order rejected successfully');
+            return redirect('orders-admin')->with('successfully', 'Order rejected successfully');
         } else {
-            return redirect('orders')->with('error', 'Order failed to rejected');
+            return redirect('orders-admin')->with('error', 'Order failed to rejected');
         }
     }
 
-    public function sendOrder($id)
+    public function sendOrder(Request $request, $id)
     {
+        $request->validate([
+            'resi' => 'required',
+        ]);
+
         $order = Order::find($id);
         $order->status = 'Pickups';
+        $order->resi = $request->resi;
         $order->update();
 
         if ($order) {
-            return redirect('orders')->with('successfully', 'Order rejected successfully');
+            return redirect('orders-admin')->with('successfully', 'Order rejected successfully');
         } else {
-            return redirect('orders')->with('error', 'Order failed to rejected');
+            return redirect('orders-admin')->with('error', 'Order failed to rejected');
         }
     }
 

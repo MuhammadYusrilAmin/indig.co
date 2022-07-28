@@ -38,9 +38,9 @@ class LoginController extends Controller
         ];
 
         if (auth()->attempt($login)) {
-            if ($data->role == "Admin" || $data->role == "Employee") {
+            if ($data->role == 'Admin' || $data->role == 'Employee') {
                 return redirect('dashboard');
-            } else if ($data->role == "Super Admin") {
+            } else if ($data->role == 'Super Admin') {
                 return redirect('dashboard-admin');
             } else {
                 return redirect('/');

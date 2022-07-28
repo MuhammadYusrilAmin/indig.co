@@ -187,7 +187,7 @@ Register as a Cooperative
                                                     Please enter fax
                                                 </div>
                                             </div>
-                                            <div class="mb-2">
+                                            <div class="mb-3">
                                                 <label for="userpassword" class="form-label">Password <span class="text-danger">*</span></label>
                                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userpassword" placeholder="Enter password" required>
                                                 @error('password')
@@ -199,7 +199,7 @@ Register as a Cooperative
                                                     Please enter password
                                                 </div>
                                             </div>
-                                            <div class=" mb-4">
+                                            <div class="mb-3">
                                                 <label for="input-password">Confirm Password</label>
                                                 <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" id="input-password" placeholder="Enter Confirm Password" required>
 

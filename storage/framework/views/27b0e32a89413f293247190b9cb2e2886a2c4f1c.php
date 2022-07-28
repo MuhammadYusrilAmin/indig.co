@@ -16,20 +16,20 @@
                 <div class="row justify-content-center mb-4">
                     <div class="col-lg-6">
                         <div class="row g-2">
-                            <div class="col">
-                                <div class="position-relative mb-3">
-                                    <input type="text" class="form-control form-control-lg bg-light border-light" placeholder="Search here.." value="Admin Dashboard">
-                                    <a class="btn btn-link link-success btn-lg position-absolute end-0 top-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="ri-mic-fill"></i></a>
+                            <form action="<?php echo e(route('search.store')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <div class="col mt-3">
+                                    <div class="position-relative mb-3">
+                                        <input type="text" class="form-control form-control-lg bg-light border-light" placeholder="Search here.." name="search" value="<?php echo e($search); ?>">
+                                        <!-- <a class="btn btn-link link-success btn-lg position-absolute end-0 top-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="ri-mic-fill"></i></a> -->
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary btn-lg waves-effect waves-light"><i class="mdi mdi-magnify me-1"></i> Search</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <!--end col-->
                     <div class="col-lg-12">
-                        <h5 class="fs-16 fw-semibold text-center mb-0">Showing results for "<span class="text-primary fw-medium fst-italic">Admin Dashboard</span> "</h5>
+                        <h5 class="fs-16 fw-semibold text-center mb-0">Showing results for "<span class="text-primary fw-medium fst-italic"><?php echo e($search); ?></span> "</h5>
                     </div>
                 </div>
                 <!--end row-->
@@ -94,33 +94,35 @@
                         <div class="gallery-light">
                             <div class="row">
                                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="col-xl-3 col-lg-4 col-sm-6">
-                                    <div class="gallery-box card">
+                                <div class="col-xl-2 col-lg-3 col-sm-5">
+                                    <div class="gallery-box card" style="cursor: pointer;">
                                         <div class="gallery-container">
-                                            <a href="<?php echo e(url('products/'.$data->id)); ?>">
+                                            <a href="<?php echo e(url('/detail_products?id='.$data->id)); ?>">
                                                 <?php $galleries = App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
-                                                <img class="gallery-img img-fluid mx-auto" src="<?php echo e(URL::asset('assets/images/small/img-1.jpg')); ?>" alt="" />
+                                                <div class="text-center">
+                                                    <img class="gallery-img img-fluid mx-auto" src="<?php echo e($galleries->photo_url); ?>" alt="" style="height: 150px; object-fit: cover;">
+                                                </div>
                                                 <div class="gallery-overlay">
                                                     <h5 class="overlay-caption"><?php echo e($data->title); ?>
 
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="box-content">
-                                            <div class="d-flex align-items-center mt-2">
-                                                <div class="flex-grow-1 text-muted">by <a href="" class="text-body text-truncate"><?php echo e($data->cooperative->name); ?></a></div>
-                                                <div class="flex-shrink-0">
-                                                    <div class="d-flex gap-3">
-                                                        <?php
-                                                        $orders = App\Models\OrderDetail::where('product_id', $data->id)->get();
+                                        <div class="box-content mt-3">
+                                            <div class="flex-grow-1 text-muted">
+                                                by <span class="text-body text-truncate"><?php echo e($data->cooperative->name); ?></span>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <div class="d-flex gap-3">
+                                                    <?php
+                                                    $orders = App\Models\OrderDetail::where('product_id', $data->id)->get();
 
-                                                        $totalpurchased = 0;
-                                                        foreach ($orders as $result) {
-                                                            $totalpurchased += $result->quantity;
-                                                        }
-                                                        ?>
-                                                        <span><?php echo e($totalpurchased); ?>x purchased</span>
-                                                    </div>
+                                                    $totalpurchased = 0;
+                                                    foreach ($orders as $result) {
+                                                        $totalpurchased += $result->quantity;
+                                                    }
+                                                    ?>
+                                                    <span><?php echo e($totalpurchased); ?>x purchased</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,32 +134,40 @@
                             <!--end row-->
                         </div>
                     </div>
+                    <!--end tab-pane-->
                     <div class="tab-pane" id="products" role="tabpanel">
                         <div class="gallery-light">
                             <div class="row">
                                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="col-xl-3 col-lg-4 col-sm-6">
+                                <div class="col-xl-2 col-lg-3 col-sm-5">
                                     <div class="gallery-box card">
                                         <div class="gallery-container">
-                                            <a href="#">
-                                                <img class="gallery-img img-fluid mx-auto" src="<?php echo e(URL::asset('assets/images/small/img-1.jpg')); ?>" alt="" />
+                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();">
+                                                <?php $galleries = App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
+                                                <div class="text-center">
+                                                    <img class="gallery-img img-fluid mx-auto" src="<?php echo e($galleries->photo_url); ?>" alt="" style="height: 150px; object-fit: cover;">
+                                                </div>
                                                 <div class="gallery-overlay">
-                                                    <h5 class="overlay-caption">Glasses and laptop from above</h5>
+                                                    <h5 class="overlay-caption"><?php echo e($data->title); ?>
+
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="box-content">
-                                            <div class="d-flex align-items-center mt-2">
-                                                <div class="flex-grow-1 text-muted">by <a href="" class="text-body text-truncate">Ron Mackie</a></div>
-                                                <div class="flex-shrink-0">
-                                                    <div class="d-flex gap-3">
-                                                        <button type="button" class="btn btn-sm fs-12 btn-link text-body text-decoration-none px-0">
-                                                            <i class="ri-thumb-up-fill text-muted align-bottom me-1"></i> 2.2K
-                                                        </button>
-                                                        <button type="button" class="btn btn-sm fs-12 btn-link text-body text-decoration-none px-0">
-                                                            <i class="ri-question-answer-fill text-muted align-bottom me-1"></i> 1.3K
-                                                        </button>
-                                                    </div>
+                                        <div class="box-content mt-3">
+                                            <div class="flex-grow-1 text-muted">
+                                                by <a href="" class="text-body text-truncate"><?php echo e($data->cooperative->name); ?></a>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <div class="d-flex gap-3">
+                                                    <?php
+                                                    $orders = App\Models\OrderDetail::where('product_id', $data->id)->get();
+
+                                                    $totalpurchased = 0;
+                                                    foreach ($orders as $result) {
+                                                        $totalpurchased += $result->quantity;
+                                                    }
+                                                    ?>
+                                                    <span><?php echo e($totalpurchased); ?>x purchased</span>
                                                 </div>
                                             </div>
                                         </div>

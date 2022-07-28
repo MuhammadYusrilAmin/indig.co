@@ -16,10 +16,10 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
-                        <label class="form-label" for="product-title-input">Product Title</label>
+                        <label class="form-label" for="product-title-input">Product Code</label>
                         <div class="row">
                             <div class="col-10">
-                                <input type="text" id="id_barang" name="id_barang" autofocus required class="form-control {{ $errors->get('title') ? 'is-invalid' : '' }}" id="product-title-input" placeholder="Enter product title" name="title">
+                                <input type="text" id="id_barang" name="id_barang" autofocus required class="form-control {{ $errors->get('title') ? 'is-invalid' : '' }}" id="product-title-input" placeholder="Enter product code" name="title">
                             </div>
                             <div class="col-2">
                                 <button type="button" onclick="random_code()" class="btn btn-success w-xs">Random Code</button>

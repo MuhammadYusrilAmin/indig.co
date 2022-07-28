@@ -182,7 +182,7 @@
                                             <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                         </div>
                                     </th>
-                                    <th class="sort" data-sort="id">Order ID</th>
+                                    <th class="sort" data-sort="id">Receipt Number</th>
                                     <th class="sort" data-sort="product_name">Product</th>
                                     <th class="sort" data-sort="date">Order Date</th>
                                     <th class="sort" data-sort="amount">Amount</th>
@@ -203,11 +203,17 @@
                                         </div>
                                     </th>
                                     <?php $items = App\Models\OrderDetail::all(); ?>
-                                    <td class="id"><a href="{{ url('orders/'.$data->id) }}" class="fw-medium link-primary">{{ $data->id }}</a></td>
+                                    <td class="id">
+                                        @if ($data->resi != null)
+                                        <a href="{{ url('orders/'.$data->id) }}" class="fw-medium link-primary">{{ $data->resi }}</a>
+                                        @else
+                                        Belum dikirim
+                                        @endif
+                                    </td>
                                     <td class="product_name">{{ $data->items[0]->product->title }}</td>
                                     <td>{{ $data->created_at }}</td>
                                     <td class="amount">{{ "Rp" . number_format($data->total_payment, 2, ",", ".") }}</td>
-                                    <td class="payment">{{ $data->sender.', '.$data->payment_method }}</td>
+                                    <td class="payment">{{ $data->sender }}</td>
                                     <td class="status">
                                         <span class="badge {{ $data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-warning' : ($data->status == 'Delivered' ? 'badge-soft-secondary' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : ($data->status == 'Received' ? 'badge-soft-success' : 'badge-soft-danger'))))) }} text-uppercase">{{ $data->status }}</span>
                                     </td>

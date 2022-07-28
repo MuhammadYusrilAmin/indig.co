@@ -138,7 +138,7 @@
                                             <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                         </div>
                                     </th>
-                                    <th class="sort" data-sort="id">Order ID</th>
+                                    <th class="sort" data-sort="id">Receipt Number</th>
                                     <th class="sort" data-sort="customer_name">Customer</th>
                                     <th class="sort" data-sort="product_name">Product</th>
                                     <th class="sort" data-sort="date">Order Date</th>
@@ -155,12 +155,18 @@
                                             <input class="form-check-input" type="checkbox" name="checkAll" value="option1">
                                         </div>
                                     </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->order_id); ?></a></td>
+                                    <td class="id">
+                                        <?php if($data->resi != null): ?>
+                                        <a href="<?php echo e(url('orders/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->resi); ?></a>
+                                        <?php else: ?>
+                                        Belum dikirim
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="customer_name"><?php echo e($data->user->name); ?></td>
                                     <td class="product_name"><?php echo e($data->items[0]->product->title); ?></td>
                                     <td><?php echo e($data->created_at); ?></td>
                                     <td class="amount"><?php echo e("Rp" . number_format($data->total_payment, 2, ",", ".")); ?></td>
-                                    <td class="payment"><?php echo e($data->sender.', '.$data->payment_method); ?></td>
+                                    <td class="payment"><?php echo e($data->sender); ?></td>
                                     <td class="status">
                                         <span class="badge <?php echo e($data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-warning' : ($data->status == 'Delivered' ? 'badge-soft-secondary' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : ($data->status == 'Received' ? 'badge-soft-success' : 'badge-soft-danger')))))); ?> text-uppercase"><?php echo e($data->status); ?></span>
                                     </td>
@@ -191,17 +197,66 @@
                                             <?php endif; ?>
                                             <?php if($data->status == 'Inprogress'): ?>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Send Order">
-                                                <form action="<?php echo e(url('send-order', $data->id)); ?>" method="POST">
-                                                    <?php echo csrf_field(); ?>
-                                                    <button type="submit" class="btn btn-primary btn-sm" id="delete-record"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</button>
-                                                </form>
-                                                </a>
+                                                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#sendOrder<?php echo e($data->id); ?>"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</a>
                                             </li>
                                             <?php endif; ?>
                                         </ul>
                                     </td>
                                     <?php endif; ?>
                                 </tr>
+
+                                <!-- Send Order Modal -->
+                                <div class="modal fade flip" id="sendOrder<?php echo e($data->id); ?>" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <form action="<?php echo e(url('send-order', $data->id)); ?>" method="POST">
+                                                <?php echo csrf_field(); ?>
+                                                <div class="modal-header">
+                                                    <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:70px;height:70px"></lord-icon>
+                                                    <h5 class="modal-title" id="CancellOrder<?php echo e($data->id); ?>Label">Please enter receipt number</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <div class="mb-3">
+                                                            <label for="resi" class="form-label">Receipt Number <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control <?php $__errorArgs = ['resi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="resi" value="<?php echo e(old('resi')); ?>" id="resi" placeholder="Enter receipt number" required>
+                                                            <?php $__errorArgs = ['resi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong><?php echo e($message); ?></strong>
+                                                            </span>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                            <div class="invalid-feedback">
+                                                                Please enter resi
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="hstack gap-2 justify-content-end">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" id="delete-record"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end modal -->
 
                                 <!-- Modal -->
                                 <div class="modal fade flip" id="deleteOrder<?php echo e($data->id); ?>" tabindex="-1" aria-hidden="true">

@@ -51,6 +51,7 @@ class SearchController extends Controller
         return view('pages-search-results', [
             'products' => $products,
             'cooperatives' => $cooperatives,
+            'search' => $search,
         ]);
     }
 
@@ -62,7 +63,11 @@ class SearchController extends Controller
      */
     public function show($id)
     {
-        //
+        $id = $_GET['id'];
+        $showDetail = Product::find($id);
+        return view('admin.product.detail', compact(
+            'showDetail'
+        ));
     }
 
     /**

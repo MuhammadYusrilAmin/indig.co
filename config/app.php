@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
         Dipantry\Rajaongkir\ServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Package Service Providers...

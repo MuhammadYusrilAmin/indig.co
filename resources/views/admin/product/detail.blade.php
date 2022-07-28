@@ -35,7 +35,7 @@
                                 <div class="swiper-wrapper">
                                     @foreach($kategory as $value)
                                     <div class="swiper-slide">
-                                        <div class="nav-slide-item ">
+                                        <div class="nav-slide-item">
                                             <img src="{{$value->photo_url }}" alt="" class="img-fluid d-block" />
                                         </div>
                                     </div>
@@ -53,10 +53,9 @@
                                 <div class="flex-grow-1">
                                     <h4>{{ $showDetail->title }}</h4>
                                     <div class="hstack gap-3 flex-wrap">
-                                        <div><a href="#" class="text-primary d-block">Tommy
-                                                Hilfiger</a></div>
+                                        <div><a href="#" class="text-primary d-block">{{ $showDetail->cooperative->owner_name }}</a></div>
                                         <div class="vr"></div>
-                                        <div class="text-muted">Seller : <span class="text-body fw-medium">Zoetic Fashion</span>
+                                        <div class="text-muted">Seller : <span class="text-body fw-medium">{{ $showDetail->cooperative->name }}</span>
                                         </div>
                                         <div class="vr"></div>
                                         <div class="text-muted">Published : <span class="text-body fw-medium">{{ $showDetail->tanggal }}</span>
@@ -90,14 +89,27 @@
                             </div>
 
                             <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
+                                <?php
+                                $ratings = App\Models\Rating::where('product_id', $showDetail->id)->get();
+                                $total = 0;
+
+                                foreach ($ratings as $rating) {
+                                    $total += $rating->rating;
+                                }
+
+                                if (count($ratings) != null) {
+                                    $rata2 = $total / count($ratings);
+                                }
+                                ?>
+                                @if (count($ratings) == null)
+                                <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                @else
                                 <div class="text-muted fs-16">
-                                    <span class="mdi mdi-star text-warning"></span>
-                                    <span class="mdi mdi-star text-warning"></span>
-                                    <span class="mdi mdi-star text-warning"></span>
-                                    <span class="mdi mdi-star text-warning"></span>
-                                    <span class="mdi mdi-star text-warning"></span>
+                                    <i class="lab las la-star text-warning"></i>
+                                    {{ $rata2 }}
                                 </div>
-                                <div class="text-muted">( 5.50k Customer Review )</div>
+                                <div class="text-muted">( {{ count($ratings) }} Customer Review )</div>
+                                @endif
                             </div>
 
                             <div class="row mt-4">
@@ -126,8 +138,16 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
+                                                <?php
+                                                $orderdetails = App\Models\OrderDetail::where('product_id', $showDetail->id)->get();
+                                                $orders = 0;
+
+                                                foreach ($orderdetails as $orderdetail) {
+                                                    $orders += $orderdetail->quantity;
+                                                }
+                                                ?>
                                                 <p class="text-muted mb-1">No. of Orders :</p>
-                                                <h5 class="mb-0">2,234</h5>
+                                                <h5 class="mb-0">{{$orders}}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +179,7 @@
                             </div>
                             @endif
 
-                            <div class="mt-4 text-muted">
+                            <div class="mt-5 text-muted">
                                 <h5 class="fs-14">Description :</h5>
                                 <p>{{ $showDetail->description }}</p>
                             </div>
@@ -204,70 +224,6 @@
                             </div>
                             @endif
 
-                            <div class="product-content mt-5">
-                                <h5 class="fs-14 mb-3">Product Description :</h5>
-                                <nav>
-                                    <ul class="nav nav-tabs nav-tabs-custom nav-primary" id="nav-tab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="nav-speci-tab" data-bs-toggle="tab" href="#nav-speci" role="tab" aria-controls="nav-speci" aria-selected="true">Specification</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="nav-detail-tab" data-bs-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="false">Details</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                <div class="tab-content border border-top-0 p-4" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-speci" role="tabpanel" aria-labelledby="nav-speci-tab">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row" style="width: 200px;">
-                                                            Category</th>
-                                                        <?php $kategory = \App\Models\ProductCategory::where('id', $showDetail->category_id)->first(); ?>
-                                                        <td>{{$kategory->name}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Brand</th>
-                                                        <td>Tommy Hilfiger</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Color</th>
-                                                        <td>Blue</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Material</th>
-                                                        <td>Cotton</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Weight</th>
-                                                        <td>{{$showDetail->weight}} Gram</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">
-                                        <div>
-                                            <h5 class="font-size-16 mb-3">Tommy Hilfiger Sweatshirt for Men (Pink)</h5>
-                                            <p>Tommy Hilfiger men striped pink sweatshirt. Crafted
-                                                with cotton. Material composition is 100% organic
-                                                cotton. This is one of the world’s leading designer
-                                                lifestyle brands and is internationally recognized
-                                                for celebrating the essence of classic American cool
-                                                style, featuring preppy with a twist designs.</p>
-                                            <div>
-                                                <p class="mb-2"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i>Machine Wash</p>
-                                                <p class="mb-2"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i>Fit Type: Regular</p>
-                                                <p class="mb-2"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i>100% Cotton</p>
-                                                <p class="mb-0"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i>Long sleeve</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- product-content -->
-
                             <div class="mt-5">
                                 <div>
                                     <h5 class="fs-14 mb-3">Ratings & Reviews</h5>
@@ -279,21 +235,19 @@
                                                 <div class="bg-light px-3 py-2 rounded-2 mb-2">
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-grow-1">
-                                                            <div class="fs-16 align-middle text-warning">
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-half-fill"></i>
-                                                            </div>
+                                                            <h6 class="mb-0">Rating</h6>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <h6 class="mb-0">4.5 out of 5</h6>
+                                                            @if (count($ratings) == null)
+                                                            <h6 class="mb-0">0 out of 5</h6>
+                                                            @else
+                                                            <h6 class="mb-0">{{ $rata2 }} out of 5</h6>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="text-center">
-                                                    <div class="text-muted">Total <span class="fw-medium">5.50k</span> reviews
+                                                    <div class="text-muted">Total <span class="fw-medium">{{ count($ratings) }} reviews</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -307,14 +261,24 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="p-2">
+                                                            <?php
+                                                            $ratingnow = count($ratings->where('rating', 5));
+                                                            $ratingall = count($ratings);
+
+                                                            if ($ratingnow == null) {
+                                                                $result = 0;
+                                                            } else {
+                                                                $result = ($ratingnow / $ratingall) * 100;
+                                                            }
+                                                            ?>
                                                             <div class="progress animated-progress progress-sm">
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 50.16%" aria-valuenow="50.16" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $result }}%" aria-valuenow="{{ $result }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-auto">
                                                         <div class="p-2">
-                                                            <h6 class="mb-0 text-muted">2758</h6>
+                                                            <h6 class="mb-0 text-muted">@if ($ratings->where('rating', 5)) {{ count($ratings->where('rating', 5)) }} @endif</h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -328,14 +292,24 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="p-2">
+                                                            <?php
+                                                            $ratingnow = count($ratings->where('rating', 4));
+                                                            $ratingall = count($ratings);
+
+                                                            if ($ratingnow == null) {
+                                                                $result = 0;
+                                                            } else {
+                                                                $result = ($ratingnow / $ratingall) * 100;
+                                                            }
+                                                            ?>
                                                             <div class="progress animated-progress progress-sm">
-                                                                <div class="progress-bar bg-success" role="progressbar" style="width: 19.32%" aria-valuenow="19.32" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $result }}%" aria-valuenow="{{ $result }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-auto">
                                                         <div class="p-2">
-                                                            <h6 class="mb-0 text-muted">1063</h6>
+                                                            <h6 class="mb-0 text-muted">@if ($ratings->where('rating', 4)) {{ count($ratings->where('rating', 4)) }} @endif</h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -349,14 +323,24 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="p-2">
+                                                            <?php
+                                                            $ratingnow = count($ratings->where('rating', 3));
+                                                            $ratingall = count($ratings);
+
+                                                            if ($ratingnow == null) {
+                                                                $result = 0;
+                                                            } else {
+                                                                $result = ($ratingnow / $ratingall) * 100;
+                                                            }
+                                                            ?>
                                                             <div class="progress animated-progress progress-sm">
-                                                                <div class="progress-bar bg-secondary" role="progressbar" style="width: 18.12%" aria-valuenow="18.12" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ $result }}%" aria-valuenow="{{ $result }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-auto">
                                                         <div class="p-2">
-                                                            <h6 class="mb-0 text-muted">997</h6>
+                                                            <h6 class="mb-0 text-muted">@if ($ratings->where('rating', 3)) {{ count($ratings->where('rating', 3)) }} @endif</h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -370,15 +354,25 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="p-2">
+                                                            <?php
+                                                            $ratingnow = count($ratings->where('rating', 2));
+                                                            $ratingall = count($ratings);
+
+                                                            if ($ratingnow == null) {
+                                                                $result = 0;
+                                                            } else {
+                                                                $result = ($ratingnow / $ratingall) * 100;
+                                                            }
+                                                            ?>
                                                             <div class="progress animated-progress progress-sm">
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 7.42%" aria-valuenow="7.42" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $result }}%" aria-valuenow="{{ $result }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-auto">
                                                         <div class="p-2">
-                                                            <h6 class="mb-0 text-muted">408</h6>
+                                                            <h6 class="mb-0 text-muted">@if ($ratings->where('rating', 2)) {{ count($ratings->where('rating', 2)) }} @endif</h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -392,14 +386,24 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="p-2">
+                                                            <?php
+                                                            $ratingnow = count($ratings->where('rating', 1));
+                                                            $ratingall = count($ratings);
+
+                                                            if ($ratingnow == null) {
+                                                                $result = 0;
+                                                            } else {
+                                                                $result = ($ratingnow / $ratingall) * 100;
+                                                            }
+                                                            ?>
                                                             <div class="progress animated-progress progress-sm">
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 4.98%" aria-valuenow="4.98" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $result }}%" aria-valuenow="{{ $result }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-auto">
                                                         <div class="p-2">
-                                                            <h6 class="mb-0 text-muted">274</h6>
+                                                            <h6 class="mb-0 text-muted">@if ($ratings->where('rating', 1)) {{ count($ratings->where('rating', 1)) }} @endif</h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -417,37 +421,39 @@
 
                                             <div class="me-lg-n3 pe-lg-4" data-simplebar style="max-height: 225px;">
                                                 <ul class="list-unstyled mb-0">
-                                                    @for ($i = 0; $i < 5; $i++) <li class="py-2">
+                                                    @foreach ($ratings as $data)
+                                                    @if ($data->review != null)
+                                                    <li class="py-2">
                                                         <div class="border border-dashed rounded p-3">
                                                             <div class="d-flex align-items-start mb-3">
                                                                 <div class="hstack gap-3">
                                                                     <div class="badge rounded-pill bg-primary mb-0">
                                                                         <i class="mdi mdi-star"></i>
-                                                                        4.0
+                                                                        {{ $data->rating }}
                                                                     </div>
                                                                     <div class="vr"></div>
                                                                     <div class="flex-grow-1">
-                                                                        <p class="text-muted mb-0">
-                                                                            Great at this price,
-                                                                            Product quality and look
-                                                                            is awesome.</p>
+                                                                        <p class="text-muted mb-0">{{ $data->review }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex align-items-end">
                                                                 <div class="flex-grow-1">
-                                                                    <h5 class="fs-14 mb-0">Nancy
-                                                                    </h5>
+                                                                    <h5 class="fs-14 mb-0">{{ $data->orderDetail->order->user->name }}</h5>
                                                                 </div>
 
                                                                 <div class="flex-shrink-0">
-                                                                    <p class="text-muted fs-13 mb-0">
-                                                                        06 Jul, 21</p>
+                                                                    <p class="text-muted fs-13 mb-0">{{ $data->orderDetail->created_at }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        </li>
-                                                        @endfor
+                                                    </li>
+                                                    @endif
+                                                    @endforeach
+
+                                                    @if (count($ratings) == null)
+                                                    <h4 class="mt-5 pt-5 text-center text-secondary">No Rewiew</h4>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>

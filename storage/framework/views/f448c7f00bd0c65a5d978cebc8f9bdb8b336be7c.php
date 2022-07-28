@@ -1,48 +1,48 @@
-@extends('layouts.master')
-@section('title') @lang('Kasir Koperasi') @endsection
 
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title') Kasir Koperasi @endslot
-@endcomponent
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('Kasir Koperasi'); ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Kasir Koperasi <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 <div class="row mb-3">
     <div class="col-xl-8">
         <div class="row align-items-center gy-3 mb-3">
-            @if(count($kasir) != 0)
+            <?php if(count($kasir) != 0): ?>
             <div class="col-sm-auto">
                 <a href="#" class="d-block p-1 px-2 btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove All</a>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
-        @foreach ($kasir as $kasirs)
+        <?php $__currentLoopData = $kasir; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kasirs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="card product">
             <div class="card-body">
                 <div class="row gy-3">
                     <div class="col-sm-auto">
                         <div class="avatar-lg bg-light rounded p-1">
                             <?php $galleries = \App\Models\ProductGallery::where('product_id', $kasirs->product_id)->first(); ?>
-                            <img src="{{ $galleries->photo_url }}" alt="" class="img-fluid d-block">
+                            <img src="<?php echo e($galleries->photo_url); ?>" alt="" class="img-fluid d-block">
                         </div>
                     </div>
                     <div class="col-sm">
                         <?php $product = \App\Models\Product::where('id', $kasirs->product_id)->first(); ?>
-                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">{{ $product->title }}</a></h5>
+                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark"><?php echo e($product->title); ?></a></h5>
                         <ul class="list-inline text-muted">
-                            <li class="list-inline-item">Request : <span class="fw-medium">{{ $kasirs->request }}</span></li>
+                            <li class="list-inline-item">Request : <span class="fw-medium"><?php echo e($kasirs->request); ?></span></li>
                         </ul>
 
                         <div class="input-step">
-                            <input type="hidden" id="id_kasirs_{{$kasirs->id}}" value="{{$kasirs->id}}">
-                            <button type="button" id="minus_{{$kasirs->id}}" class="minus">–</button>
-                            <input type="number" id="quantity_{{$kasirs->id}}" readonly value="{{ $kasirs->quantity }}" min="0" max="100">
-                            <button type="button" id="plus_{{$kasirs->id}}" class="plus">+</button>
+                            <input type="hidden" id="id_kasirs_<?php echo e($kasirs->id); ?>" value="<?php echo e($kasirs->id); ?>">
+                            <button type="button" id="minus_<?php echo e($kasirs->id); ?>" class="minus">–</button>
+                            <input type="number" id="quantity_<?php echo e($kasirs->id); ?>" readonly value="<?php echo e($kasirs->quantity); ?>" min="0" max="100">
+                            <button type="button" id="plus_<?php echo e($kasirs->id); ?>" class="plus">+</button>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="text-lg-end">
                             <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14"><span id="ticket_price" class="product-price">{{ "Rp " . number_format( $product->price, 2, ",", ".") }}</span></h5>
+                            <h5 class="fs-14"><span id="ticket_price" class="product-price"><?php echo e("Rp " . number_format( $product->price, 2, ",", ".")); ?></span></h5>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="col-sm">
                         <div class="d-flex flex-wrap my-n1">
                             <div>
-                                <a href="{{route('kasir.destroy',$kasirs->id)}}" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
+                                <a href="<?php echo e(route('kasir.destroy',$kasirs->id)); ?>" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</a>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="d-flex align-items-center gap-2 text-muted">
                             <div>Total :</div>
                             <h5 class="fs-14 mb-0">
-                                <div class="product-line-price" id="total_{{$kasirs->id}}">{{ "Rp " . number_format($kasirs->price, 2, ",", ".") }}</div>
+                                <div class="product-line-price" id="total_<?php echo e($kasirs->id); ?>"><?php echo e("Rp " . number_format($kasirs->price, 2, ",", ".")); ?></div>
                             </h5>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
 
                         $.ajax({
                             type: 'POST',
-                            url: "{{url('kasir_minus_quantity')}}",
+                            url: "<?php echo e(url('kasir_minus_quantity')); ?>",
                             data: {
                                 id_kasirs: id_kasirs
                             },
@@ -142,7 +142,7 @@
 
                         $.ajax({
                             type: 'POST',
-                            url: "{{url('kasir_plus_quantity')}}",
+                            url: "<?php echo e(url('kasir_plus_quantity')); ?>",
                             data: {
                                 id_kasirs: id_kasirs
                             },
@@ -160,20 +160,20 @@
                 });
             });
         </script>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <!-- end card -->
 
-        @if(count($kasir) != 0)
+        <?php if(count($kasir) != 0): ?>
         <div class="text-end mb-4">
             <?php
             $cek_destination = App\Models\Address::where('user_id', Illuminate\Support\Facades\Auth::user()->id)->orderBy('created_at', 'desc')->first(); ?>
-            @if($cek_destination == null)
-            <a href="{{ url('transaction?id=1') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
-            @else
-            <a href="{{ url('transaction?id='.$cek_destination->regencies_id) }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
-            @endif
+            <?php if($cek_destination == null): ?>
+            <a href="<?php echo e(url('transaction?id=1')); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <?php else: ?>
+            <a href="<?php echo e(url('transaction?id='.$cek_destination->regencies_id)); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <?php endif; ?>
         </div>
-        @endif
+        <?php endif; ?>
     </div>
     <!-- end col -->
 
@@ -188,12 +188,12 @@
                         <h6 class="mb-2">Scan the product or enter the item code</h6>
                     </div>
                     <div class="">
-                        <form action="{{route('kasir.store')}}" method="POST">
+                        <form action="<?php echo e(route('kasir.store')); ?>" method="POST">
                             <div class="input-group my-2 pt-2">
                                 <input id="id_barang" name='id' class="form-control" autofocus type="text" placeholder="Enter item code" aria-label="Add product here..." required>
                                 <button type="submit" class="btn btn-success w-xs">Add</button>
                             </div>
-                            @csrf
+                            <?php echo csrf_field(); ?>
                         </form>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                    <a href="{{route('kasir.edit', Auth::user()->id)}}"><button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button></a>
+                    <a href="<?php echo e(route('kasir.edit', Auth::user()->id)); ?>"><button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button></a>
                 </div>
             </div>
 
@@ -229,9 +229,10 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <form action="" id="delete-form2" method="POST">
-    @method('delete')
-    @csrf
+    <?php echo method_field('delete'); ?>
+    <?php echo csrf_field(); ?>
 </form>
-@endsection
-@section('script')
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\saas\resources\views/admin/transaction/kasir.blade.php ENDPATH**/ ?>

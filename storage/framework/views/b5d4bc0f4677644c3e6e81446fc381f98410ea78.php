@@ -45,11 +45,6 @@
                                 <td><?php echo e($item->quantity); ?></td>
                                 <td>
                                     <a href="#tampilmodal">Review</a>
-                                    <!-- <div class="fw-normal badge bg-light text-dark fs-6">
-                                        <i class="lab las la-star text-warning"></i>
-                                        <?php echo e($item->rating->rating); ?>
-
-                                    </div> -->
                                 </td>
                                 <td class="fw-medium text-end">
                                     <?php echo e("Rp" . number_format($item->price, 2, ",", ".")); ?>

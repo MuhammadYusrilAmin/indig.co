@@ -42,13 +42,13 @@ Register as a Cooperative
                                 <p class="text-muted">Get your free cooperative account now</p>
                             </div>
                             <div class="p-2 mt-4">
-                                <form class="needs-validation" method="POST" action="<?php echo e(route('login')); ?>">
+                                <form class="needs-validation" method="POST" action="<?php echo e(route('register-cooperative.store')); ?>">
                                     <?php echo csrf_field(); ?>
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="nik" class="form-label">NIK <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control <?php $__errorArgs = ['nik'];
+                                                <input required type="number" class="form-control <?php $__errorArgs = ['nik'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -74,7 +74,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Cooperative Name<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control <?php $__errorArgs = ['name'];
+                                                <input required type="text" class="form-control <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -100,7 +100,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="since_year" class="form-label">Since Year <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control <?php $__errorArgs = ['since_year'];
+                                                <input required type="number" class="form-control <?php $__errorArgs = ['since_year'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -126,7 +126,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="owner_name" class="form-label">Owner Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control <?php $__errorArgs = ['owner_name'];
+                                                <input required type="text" class="form-control <?php $__errorArgs = ['owner_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -152,7 +152,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="company_name" class="form-label">Company Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control <?php $__errorArgs = ['company_name'];
+                                                <input required type="text" class="form-control <?php $__errorArgs = ['company_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -178,7 +178,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control <?php $__errorArgs = ['email'];
+                                                <input required type="email" class="form-control <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -204,7 +204,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="website" class="form-label">Url Website</label>
-                                                <input type="text" class="form-control <?php $__errorArgs = ['website'];
+                                                <input required type="text" class="form-control <?php $__errorArgs = ['website'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -232,7 +232,7 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="contact" class="form-label">Contact <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control <?php $__errorArgs = ['contact'];
+                                                <input required type="text" class="form-control <?php $__errorArgs = ['contact'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -258,7 +258,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="fax" class="form-label">FAX <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control <?php $__errorArgs = ['fax'];
+                                                <input required type="text" class="form-control <?php $__errorArgs = ['fax'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -283,16 +283,14 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control <?php $__errorArgs = ['location'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="location" value="<?php echo e(old('location')); ?>" id="location" placeholder="Enter location" required>
-                                                <?php $__errorArgs = ['location'];
+                                                <label class="form-label">Province <span class="text-danger">*</span></label>
+                                                <select class="form-select" name="provinsi" id="provinsi" required>
+                                                    <option selected disabled>Choose..</option>
+                                                    <?php $__currentLoopData = $provinces; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $provinsi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($provinsi->id); ?>"><?php echo e($provinsi->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                                <?php $__errorArgs = ['fax'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -305,10 +303,31 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                                 <div class="invalid-feedback">
-                                                    Please enter location
+                                                    Please enter fax
                                                 </div>
                                             </div>
-                                            <div class="mb-2">
+                                            <div class="mb-3">
+                                                <label class="form-label">Regency <span class="text-danger">*</span></label>
+                                                <select class="form-select" name="kabupaten" id="kabupaten" required>
+                                                    <option selected disabled>Choose..</option>
+                                                </select>
+                                                <?php $__errorArgs = ['fax'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($message); ?></strong>
+                                                </span>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                <div class="invalid-feedback">
+                                                    Please enter fax
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="userpassword" class="form-label">Password <span class="text-danger">*</span></label>
                                                 <input type="password" class="form-control <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -334,7 +353,7 @@ unset($__errorArgs, $__bag); ?>
                                                     Please enter password
                                                 </div>
                                             </div>
-                                            <div class=" mb-4">
+                                            <div class="mb-3">
                                                 <label for="input-password">Confirm Password</label>
                                                 <input type="password" class="form-control <?php $__errorArgs = ['password_confirmation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -350,34 +369,8 @@ unset($__errorArgs, $__bag); ?>" name="password_confirmation" id="input-password
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="photo" class="form-label">Your Photo <span class="text-danger">*</span></label>
-                                                <input type="file" class="form-control <?php $__errorArgs = ['photo'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="photo" value="<?php echo e(old('photo')); ?>" id="photo" placeholder="Upload your photo" required>
-                                                <?php $__errorArgs = ['photo'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong><?php echo e($message); ?></strong>
-                                                </span>
-                                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                                <div class="invalid-feedback">
-                                                    Upload your photo
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
                                                 <label for="logo" class="form-label">Logo Cooperative <span class="text-danger">*</span></label>
-                                                <input type="file" class="form-control <?php $__errorArgs = ['logo'];
+                                                <input required type="file" class="form-control <?php $__errorArgs = ['logo'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -442,6 +435,39 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <!-- end row -->
         </div>
+        <script type="text/javascript">
+            $(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $(function() {
+
+                    $('#provinsi').on('change', function() {
+                        let id_provinsi = $('#provinsi').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "<?php echo e(url('getkabupaten')); ?>",
+                            data: {
+                                id_provinsi: id_provinsi,
+                            },
+                            cache: false,
+
+                            success: function($msg, $id) {
+                                $("#kabupaten").html($msg);
+                            },
+                            error: function(data) {
+                                console.log('error:', data);
+                            }
+                        })
+                    });
+                });
+            });
+        </script>
+
         <!-- end container -->
     </div>
     <!-- end auth page content -->

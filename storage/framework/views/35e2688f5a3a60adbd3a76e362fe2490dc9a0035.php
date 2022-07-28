@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.orders'); ?> <?php $__env->stopSection(); ?>
 <style>
     /* Style untuk rating star */
@@ -181,14 +182,16 @@
                                             <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                         </div>
                                     </th>
-                                    <th class="sort" data-sort="id">Order ID</th>
+                                    <th class="sort" data-sort="id">Receipt Number</th>
                                     <th class="sort" data-sort="product_name">Product</th>
                                     <th class="sort" data-sort="date">Order Date</th>
                                     <th class="sort" data-sort="amount">Amount</th>
                                     <th class="sort" data-sort="payment">Sender</th>
                                     <th class="sort" data-sort="status">Delivery Status</th>
                                     <th class="sort" data-sort="customer_name">Review</th>
+                                    <?php if(Auth::user()->role == "Admin"): ?>
                                     <th class="sort" data-sort="city">Action</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
@@ -199,11 +202,18 @@
                                             <input class="form-check-input" type="checkbox" name="checkAll" value="option1">
                                         </div>
                                     </th>
-                                    <td class="id"><a href="<?php echo e(url('orders/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->order_id); ?></a></td>
+                                    <?php $items = App\Models\OrderDetail::all(); ?>
+                                    <td class="id">
+                                        <?php if($data->resi != null): ?>
+                                        <a href="<?php echo e(url('orders/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->resi); ?></a>
+                                        <?php else: ?>
+                                        Belum dikirim
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="product_name"><?php echo e($data->items[0]->product->title); ?></td>
                                     <td><?php echo e($data->created_at); ?></td>
                                     <td class="amount"><?php echo e("Rp" . number_format($data->total_payment, 2, ",", ".")); ?></td>
-                                    <td class="payment"><?php echo e($data->sender.', '.$data->payment_method); ?></td>
+                                    <td class="payment"><?php echo e($data->sender); ?></td>
                                     <td class="status">
                                         <span class="badge <?php echo e($data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-warning' : ($data->status == 'Delivered' ? 'badge-soft-secondary' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : ($data->status == 'Received' ? 'badge-soft-success' : 'badge-soft-danger')))))); ?> text-uppercase"><?php echo e($data->status); ?></span>
                                     </td>

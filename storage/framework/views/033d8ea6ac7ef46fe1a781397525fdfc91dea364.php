@@ -90,43 +90,60 @@
                             <tr>
                                 <td><?php echo e($i++); ?></td>
                                 <td>
-                                    <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();">
+                                    <a href="<?php echo e(url('detail_products?id='. $data->id )); ?>">
                                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $data->id)->first(); ?>
                                         <img src="<?php echo e($galleries->photo_url); ?>" alt="<?php echo e($data->title); ?>" width="60">
                                     </a>
                                 </td>
                                 <td>
+                                    <a href="<?php echo e(url('detail_products?id='. $data->id )); ?>" class="text-primary d-inline-block">
+                                        <?php echo e($data->title); ?>
+
+                                    </a>
                                     <br>
                                     <small>Category: <?php echo e($data->category->name); ?></small>
                                 </td>
                                 <td><?php echo e($data->stock); ?></td>
                                 <td><?php echo e("Rp" . number_format($data->price, 2, ",", ".")); ?></td>
                                 <?php
+                                $orderdetails = App\Models\OrderDetail::where('product_id', $data->id)->get();
                                 $orders = 0;
 
-                                // foreach ($orderdetails as $orderdetail) {
-                                //     $orders += $orderdetail->quantity;
-                                // }
+                                foreach ($orderdetails as $orderdetail) {
+                                    $orders += $orderdetail->quantity;
+                                }
                                 ?>
-                                <td><?php echo e($orders); ?> (belum dibenerin)</td>
+                                <td><?php echo e($orders . 'x purchased'); ?></td>
                                 <td>
-                                    <div class="fw-normal badge bg-light text-dark fs-6">
-                                        <i class="lab las la-star text-warning"></i>
-                                        <?php echo e('belum diperbarui'); ?>
+                                    <?php
+                                    $ratings = App\Models\Rating::where('product_id', $data->id)->get();
+                                    $total = 0;
 
-                                    </div>
+                                    foreach ($ratings as $rating) {
+                                        $total += $rating->rating;
+                                    }
+
+                                    if (count($ratings) != null) {
+                                        $rata2 = $total / count($ratings);
+                                    }
+                                    ?>
+                                    <?php if(count($ratings) == null): ?>
+                                    <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                    <?php else: ?>
+                                    <button type="button" class="btn btn-light btn-sm">
+                                        <i class="lab las la-star text-warning"></i>
+                                        <?php echo e($rata2); ?>
+
+                                    </button>
+                                    <?php endif; ?>
                                 </td>
                                 <td><?php echo e($data->tanggal); ?></td>
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="View">
-                                            <a onclick="event.preventDefault(); document.getElementById('show-detail_<?php echo e($data->id); ?>').submit();" class="text-primary d-inline-block">
+                                            <a href="<?php echo e(url('detail_products?id='. $data->id )); ?>" class="text-primary d-inline-block">
                                                 <i class="ri-eye-fill fs-16"></i>
                                             </a>
-                                            <form action="<?php echo e(url('detail_products')); ?>" id="show-detail_<?php echo e($data->id); ?>" method="POST" style="display: none;">
-                                                <input type="hidden" name="id" value="<?php echo e($data->id); ?>">
-                                                <?php echo csrf_field(); ?>
-                                            </form>
                                         </li>
                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
                                             <a href="<?php echo e(url('products/'.$data->id.'/edit')); ?>" class="text-secondary d-inline-block edit-item-btn">
@@ -192,25 +209,46 @@
                                     </a>
                                 </td>
                                 <td>
+                                    <a href="<?php echo e(url('detail_products?id='. $data->id )); ?>" class="text-primary d-inline-block">
+                                        <?php echo e($data->title); ?>
+
+                                    </a>
                                     <br>
                                     <small>Category: <?php echo e($data->category->name); ?></small>
                                 </td>
                                 <td><?php echo e($data->stock); ?></td>
                                 <td><?php echo e("Rp" . number_format($data->price, 2, ",", ".")); ?></td>
                                 <?php
+                                $orderdetails = App\Models\OrderDetail::where('product_id', $data->id)->get();
                                 $orders = 0;
 
-                                // foreach ($orderdetails as $orderdetail) {
-                                //     $orders += $orderdetail->quantity;
-                                // }
+                                foreach ($orderdetails as $orderdetail) {
+                                    $orders += $orderdetail->quantity;
+                                }
                                 ?>
-                                <td><?php echo e($orders); ?> (belum dibenerin)</td>
+                                <td><?php echo e($orders . 'x purchased'); ?></td>
                                 <td>
-                                    <div class="fw-normal badge bg-light text-dark fs-6">
-                                        <i class="lab las la-star text-warning"></i>
-                                        <?php echo e('belum diperbarui'); ?>
+                                    <?php
+                                    $ratings = App\Models\Rating::where('product_id', $data->id)->get();
+                                    $total = 0;
 
-                                    </div>
+                                    foreach ($ratings as $rating) {
+                                        $total += $rating->rating;
+                                    }
+
+                                    if (count($ratings) != null) {
+                                        $rata2 = $total / count($ratings);
+                                    }
+                                    ?>
+                                    <?php if(count($ratings) == null): ?>
+                                    <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                    <?php else: ?>
+                                    <button type="button" class="btn btn-light btn-sm">
+                                        <i class="lab las la-star text-warning"></i>
+                                        <?php echo e($rata2); ?>
+
+                                    </button>
+                                    <?php endif; ?>
                                 </td>
                                 <td><?php echo e($data->tanggal); ?></td>
                                 <td>
@@ -288,25 +326,46 @@
                                     </a>
                                 </td>
                                 <td>
+                                    <a href="<?php echo e(url('detail_products?id='. $data->id )); ?>" class="text-primary d-inline-block">
+                                        <?php echo e($data->title); ?>
+
+                                    </a>
                                     <br>
                                     <small>Category: <?php echo e($data->category->name); ?></small>
                                 </td>
                                 <td><?php echo e($data->stock); ?></td>
                                 <td><?php echo e("Rp" . number_format($data->price, 2, ",", ".")); ?></td>
                                 <?php
+                                $orderdetails = App\Models\OrderDetail::where('product_id', $data->id)->get();
                                 $orders = 0;
 
-                                // foreach ($orderdetails as $orderdetail) {
-                                //     $orders += $orderdetail->quantity;
-                                // }
+                                foreach ($orderdetails as $orderdetail) {
+                                    $orders += $orderdetail->quantity;
+                                }
                                 ?>
-                                <td><?php echo e($orders); ?> (belum dibenerin)</td>
+                                <td><?php echo e($orders . 'x purchased'); ?></td>
                                 <td>
-                                    <div class="fw-normal badge bg-light text-dark fs-6">
-                                        <i class="lab las la-star text-warning"></i>
-                                        <?php echo e('belum diperbarui'); ?>
+                                    <?php
+                                    $ratings = App\Models\Rating::where('product_id', $data->id)->get();
+                                    $total = 0;
 
-                                    </div>
+                                    foreach ($ratings as $rating) {
+                                        $total += $rating->rating;
+                                    }
+
+                                    if (count($ratings) != null) {
+                                        $rata2 = $total / count($ratings);
+                                    }
+                                    ?>
+                                    <?php if(count($ratings) == null): ?>
+                                    <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#" disabled>No Rating</button>
+                                    <?php else: ?>
+                                    <button type="button" class="btn btn-light btn-sm">
+                                        <i class="lab las la-star text-warning"></i>
+                                        <?php echo e($rata2); ?>
+
+                                    </button>
+                                    <?php endif; ?>
                                 </td>
                                 <td><?php echo e($data->tanggal); ?></td>
                                 <td>
@@ -393,15 +452,12 @@
 </div><!-- /.modal -->
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-
-
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('assets/libs/nouislider/nouislider.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/wnumb/wnumb.min.js')); ?>"></script>
 <script src="assets/libs/gridjs/gridjs.min.js"></script>
 <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
-
 
 <!-- <script src="<?php echo e(URL::asset('assets/js/pages/ecommerce-product-list.init.js')); ?>"></script> -->
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>

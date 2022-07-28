@@ -8,9 +8,10 @@
 @slot('li_1') Ecommerce @endslot
 @slot('title') Edit Product @endslot
 @endcomponent
-<form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
 
+    @method('PUT')
     <div class="row">
         <div class="col-lg-8">
             <div class="card">
