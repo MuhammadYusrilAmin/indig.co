@@ -42,13 +42,13 @@ Register as a Cooperative
                                 <p class="text-muted">Get your free cooperative account now</p>
                             </div>
                             <div class="p-2 mt-4">
-                                <form class="needs-validation" method="POST" action="{{ route('register-cooperative.store') }}">
+                                <form class="needs-validation" method="POST" action="{{ route('register-cooperative.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="nik" class="form-label">NIK <span class="text-danger">*</span></label>
-                                                <input required type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" id="nik" placeholder="Enter nik" required>
+                                                <input required autofocus type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" id="nik" placeholder="Enter nik">
                                                 @error('nik')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Cooperative Name<span class="text-danger">*</span></label>
-                                                <input required type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" id="name" placeholder="Enter cooperative name" required>
+                                                <input required autofocus type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" id="name" placeholder="Enter cooperative name">
                                                 @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -72,7 +72,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="since_year" class="form-label">Since Year <span class="text-danger">*</span></label>
-                                                <input required type="number" class="form-control @error('since_year') is-invalid @enderror" name="since_year" value="{{ old('since_year') }}" id="since_year" placeholder="Enter since year" required>
+                                                <input required autofocus type="number" class="form-control @error('since_year') is-invalid @enderror" name="since_year" value="{{ old('since_year') }}" id="since_year" placeholder="Enter since year">
                                                 @error('since_year')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -84,7 +84,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="owner_name" class="form-label">Owner Name <span class="text-danger">*</span></label>
-                                                <input required type="text" class="form-control @error('owner_name') is-invalid @enderror" name="owner_name" value="{{ old('owner_name') }}" id="owner_name" placeholder="Enter owner name" required>
+                                                <input required autofocus type="text" class="form-control @error('owner_name') is-invalid @enderror" name="owner_name" value="{{ old('owner_name') }}" id="owner_name" placeholder="Enter owner name">
                                                 @error('owner_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -96,7 +96,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="company_name" class="form-label">Company Name <span class="text-danger">*</span></label>
-                                                <input required type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="{{ old('company_name') }}" id="company_name" placeholder="Enter company name" required>
+                                                <input required autofocus type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="{{ old('company_name') }}" id="company_name" placeholder="Enter company name">
                                                 @error('company_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -108,7 +108,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input required type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="useremail" placeholder="Enter email address" required>
+                                                <input required autofocus type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="useremail" placeholder="Enter email address">
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -120,7 +120,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="website" class="form-label">Url Website</label>
-                                                <input required type="text" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ old('website') }}" id="website" placeholder="Enter url website" required>
+                                                <input autofocus type="text" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ old('website') }}" id="website" placeholder="Enter url website">
                                                 @error('website')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -134,7 +134,7 @@ Register as a Cooperative
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label for="contact" class="form-label">Contact <span class="text-danger">*</span></label>
-                                                <input required type="text" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" id="contact" placeholder="Enter contact" required>
+                                                <input required autofocus type="text" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" id="contact" placeholder="Enter contact">
                                                 @error('contact')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -146,7 +146,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="fax" class="form-label">FAX <span class="text-danger">*</span></label>
-                                                <input required type="text" class="form-control @error('fax') is-invalid @enderror" name="fax" value="{{ old('fax') }}" id="fax" placeholder="Enter fax" required>
+                                                <input required autofocus type="text" class="form-control @error('fax') is-invalid @enderror" name="fax" value="{{ old('fax') }}" id="fax" placeholder="Enter fax">
                                                 @error('fax')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -189,7 +189,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-2">
                                                 <label for="userpassword" class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userpassword" placeholder="Enter password" required>
+                                                <input required autofocus type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userpassword" placeholder="Enter password">
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -201,7 +201,7 @@ Register as a Cooperative
                                             </div>
                                             <div class=" mb-4">
                                                 <label for="input-password">Confirm Password</label>
-                                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" id="input-password" placeholder="Enter Confirm Password" required>
+                                                <input required autofocus type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" id="input-password" placeholder="Enter Confirm Password">
 
                                                 <div class="form-floating-icon">
                                                     <i data-feather="lock"></i>
@@ -209,7 +209,7 @@ Register as a Cooperative
                                             </div>
                                             <div class="mb-3">
                                                 <label for="logo" class="form-label">Logo Cooperative <span class="text-danger">*</span></label>
-                                                <input required type="file" class="form-control @error('logo') is-invalid @enderror" name="logo" value="{{ old('logo') }}" id="logo" placeholder="Upload logo" required>
+                                                <input required autofocus type="file" class="form-control @error('logo') is-invalid @enderror" name="logo" value="{{ old('logo') }}" id="logo" placeholder="Upload logo">
                                                 @error('logo')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

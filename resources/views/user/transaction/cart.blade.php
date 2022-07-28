@@ -22,12 +22,14 @@
         </div>
 
         @if(count($carts) == 0)
+        @php $discount_id = null; @endphp
         <div class="text-center mt-5 pt-3">
             <h3>Empty Cart</h3>
             <a href="{{ url('/') }}" class="btn btn-primary mt-2">Go Shopping</a>
         </div>
         @else
         @foreach ($carts as $cart)
+        @php $discount_id =$cart->discount_id; @endphp
         <div class="card product">
             <div class="card-body">
                 <div class="row gy-3">
@@ -154,6 +156,7 @@
                             success: function(msg) {
                                 $("#quantity_<?= $cart->id ?>").val(msg);
                                 $("#total_<?= $cart->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                                $("#cart-subtotal").html(formatCurrency(<?= $product->price ?> * msg));
                             },
                             error: function(data) {
                                 console.log('error:', data);
@@ -272,36 +275,25 @@
                         <table class="table table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td>Sub Total :</td>
+                                    <!-- <td>Sub Total :</td>
                                     <?php
                                     $subTotal = 0;
-                                    $shippingCharge = 22000;
 
                                     foreach ($carts as $cart) {
-                                        $subTotal += $cart->price * $cart->quantity;
+                                        $subTotal += $cart->price;
                                     }
 
                                     $discount = $subTotal * 10.1 / 100;
-                                    $totalPayment = $subTotal + $shippingCharge - $discount;
+                                    $totalPayment = $subTotal - $discount;
                                     ?>
-                                    <td class="text-end" id="cart-subtotal">{{ "Rp" . number_format($subTotal, 2, ",", ".") }}</td>
-                                </tr>
+                                </tr> -->
+                                    @if($discount_id !=null)
                                 <tr>
                                     <td>Discount : </td>
                                     <td class="text-end" id="cart-discount">- {{ "Rp" . number_format($discount, 2, ",", ".") }}</td>
                                 </tr>
-                                <tr>
-                                    <td>Shipping Charge :</td>
-                                    <td class="text-end" id="cart-shipping">{{ "Rp" . number_format($shippingCharge, 2, ",", ".") }}</td>
-                                </tr>
-                                <tr class="table-active">
-                                    <th>Total Payment (IDR) :</th>
-                                    <td class="text-end">
-                                        <span class="fw-semibold" id="cart-total">
-                                            {{ "Rp" . number_format($totalPayment, 2, ",", ".") }}
-                                        </span>
-                                    </td>
-                                </tr>
+                                @endif
+
                             </tbody>
                         </table>
                     </div>
@@ -339,6 +331,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 <form action="" id="delete-form2" method="POST">
     @method('delete')
     @csrf

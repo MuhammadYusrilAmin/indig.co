@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "azishapidin/indoregion": "^3.0",
+        "barryvdh/laravel-dompdf": "^2.0",
         "dipantry/rajaongkir": "^1.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -18,6 +19,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "midtrans/midtrans-php": "2.*",
+        "mike42/escpos-php": "^4.0",
         "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {

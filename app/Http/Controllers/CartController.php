@@ -51,21 +51,31 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $id = mt_rand(1000, 99999);
-        $order = Cart::create([
-            'id'                => $id,
-            'user_id'           => Auth::user()->id,
-            'product_id'        => $request->id,
-            'quantity'          => $request->quantity,
-            'price'             => $request->price,
-            'request'           => $request->request2,
-            'cities_id'        => $request->cities_id
-        ]);
+        $cart = Cart::where('product_id', $request->id)->first();
+        $product = Product::where('id', $request->id)->first();
+        if ($cart  == null) {
+            $order = Cart::create([
+                'id'                => $id,
+                'user_id'           => Auth::user()->id,
+                'product_id'        => $request->id,
+                'quantity'          => $request->quantity,
+                'price'             => $request->price,
+                'request'           => $request->request2,
+                'cities_id'        => $request->cities_id
+            ]);
 
 
-        if ($order) {
-            return redirect('/cart');
+            if ($order) {
+                return redirect('/cart');
+            } else {
+                return redirect('/');
+            }
         } else {
-            return redirect('/');
+            $cart->quantity =  $cart->quantity + 1;
+            $cart->price =  $cart->price + $product->price;
+            $cart->update();
+
+            return redirect('/cart');
         }
     }
 

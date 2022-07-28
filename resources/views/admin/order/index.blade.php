@@ -55,7 +55,6 @@
                 <div class="d-flex align-items-center">
                     <h5 class="card-title mb-0 flex-grow-1">Order History</h5>
                     <div class="flex-shrink-0">
-                        <button type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
                     </div>
                 </div>
             </div>
@@ -189,9 +188,7 @@
                                     <th class="sort" data-sort="payment">Sender</th>
                                     <th class="sort" data-sort="status">Delivery Status</th>
                                     <th class="sort" data-sort="customer_name">Review</th>
-                                    @if(Auth::user()->role == "Admin")
                                     <th class="sort" data-sort="city">Action</th>
-                                    @endif
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
@@ -232,34 +229,20 @@
                                                 <button type="button" data-bs-toggle="modal" class="btn btn-success btn-sm" disabled>
                                                     <i class="ri-checkbox-circle-line align-bottom me-1"></i> Accepted
                                                 </button>
-                                                <a href="#showModal" data-bs-toggle="modal" class="btn btn-info btn-sm">
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </a>
                                             </li>
                                             @elseif ($data->status == 'Pickups')
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
                                                 <a href="#acceptOrder{{ $data->id }}" data-bs-toggle="modal" class="btn btn-success btn-sm">
                                                     <i class="ri-checkbox-circle-line align-bottom me-1"></i> Accepted
                                                 </a>
-                                                <a href="#showModal" data-bs-toggle="modal" class="btn btn-info btn-sm">
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </a>
                                             </li>
                                             @elseif ($data->status == 'Pending')
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
-                                                <button type="button" data-bs-toggle="modal" class="btn btn-info btn-sm" disabled>
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </button>
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#CancellOrder{{ $data->id }}">
                                                     <i class="ri-close-line align-middle me-1"></i> Cancel
                                                 </button>
                                             </li>
                                             @elseif ($data->status == 'Inprogress' || $data->status == 'Received')
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
-                                                <a href="#showModal" data-bs-toggle="modal" class="btn btn-info btn-sm">
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </a>
-                                            </li>
                                             @endif
                                             @if ($data->status == 'Returns' || $data->status == 'Cancelled' || $data->status == 'Rejected')
                                             <li class="list-inline-item">

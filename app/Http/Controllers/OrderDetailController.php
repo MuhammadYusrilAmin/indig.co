@@ -39,29 +39,37 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
-        $id = mt_rand(1000, 99999);
-        $order = Cart::create([
-            'id'                => $id,
-            'user_id'           => Auth::user()->id,
-            'product_id'        => $request->id,
-            'quantity'          => $request->quantity,
-            'price'             => $request->price,
-            'request'           => $request->request2,
-            'cities_id'        => $request->cities_id
-        ]);
+        $cart = Cart::where('product_id', $request->id)->first();
+        if ($cart  == null) {
+            $id = mt_rand(1000, 99999);
+            $order = Cart::create([
+                'id'                => $id,
+                'user_id'           => Auth::user()->id,
+                'product_id'        => $request->id,
+                'quantity'          => $request->quantity,
+                'price'             => $request->price,
+                'request'           => $request->request2,
+                'cities_id'        => $request->cities_id
+            ]);
 
-        $address = Address::where('user_id', Auth::user()->id)->first();
-        $id_address = null;
-        if ($address == null) {
-            $id_address = 1;
-        } else {
-            $id_address = $address->regencies_id;
-        }
+            $address = Address::where('user_id', Auth::user()->id)->first();
+            $id_address = null;
+            if ($address == null) {
+                $id_address = 1;
+            } else {
+                $id_address = $address->regencies_id;
+            }
 
-        if ($order) {
-            return redirect()->route('transaction.show', $id . '?id=' . $id_address);
+            if ($order) {
+                return redirect()->route('transaction.show', $id . '?id=' . $id_address);
+            } else {
+                return redirect('/');
+            }
         } else {
-            return redirect('/');
+            $cart->quantity =  $cart->quantity + 1;
+            $cart->update();
+
+            return redirect('/cart');
         }
     }
 

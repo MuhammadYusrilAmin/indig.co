@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\Cooperative;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Province;
 use Dipantry\Rajaongkir\Models\RajaongkirCourier;
 use Dipantry\Rajaongkir\Models\ROProvince;
+use Illuminate\Support\Facades\DB;
 use Rajaongkir;
+use PDF;
+
 
 class TransactionController extends Controller
 {
@@ -88,5 +93,19 @@ class TransactionController extends Controller
             'provinces' => $provinces,
             'data2' => $data2,
         ]);
+    }
+
+    public function pdf()
+    {
+        $order = DB::table('orders as o')
+            ->join('order_details as od', 'o.id', '=', 'od.order_id')
+            ->select('o.*', 'od.*')
+            ->whereRaw('od.cooperative_id =' . Auth::user()->cooperative_id . ' AND o.status = "Received" ')
+            ->groupBy('od.cooperative_id')
+            ->orderBy('o.created_at', 'desc')
+            ->get();
+        $pdf = PDF::loadView('admin.order.export-pdf', compact('order'));
+        $cooperative = Cooperative::where('id', Auth::user()->cooperative_id)->first();
+        return $pdf->download('laporan order' . $cooperative->name . '.pdf');
     }
 }

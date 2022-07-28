@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cooperative;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -14,14 +15,15 @@ class SuperAdminController extends Controller
      */
     public function index()
     {
-        $notverified = Cooperative::where('status', 'notverified')->get();
-        $verified = Cooperative::where('status', 'verified')->get();
+        $notverified = Cooperative::where('status', 'notverified')->orderBy('created_at', 'desc')->get();
+        $verified = Cooperative::where('status', 'verified')->orderBy('created_at', 'desc')->get();
+        $rejected = Cooperative::where('status', 'rejected')->orderBy('created_at', 'desc')->get();
 
-        return view(
-            'super-admin.index',
-            compact('notverified'),
-            compact('verified'),
-        );
+        return view('super-admin.index')->with([
+            'rejected'      => $rejected,
+            'notverified'   => $notverified,
+            'verified'      => $verified
+        ]);
     }
 
     /**
@@ -78,12 +80,29 @@ class SuperAdminController extends Controller
     {
         $cooperative = Cooperative::find($id);
         $cooperative->status = 'verified';
-        $cooperative->update();
 
-        if ($cooperative) {
-            return redirect('dashboard-admin')->with('successfully', 'Cooperative verified successfully');
+        $cek_email = User::where('email', $cooperative->email)->first();
+        if ($cek_email == null) {
+            $user = User::create([
+                'cooperative_id' => $id,
+                'name' => $cooperative->name,
+                'email' => $cooperative->email,
+                'password' => $cooperative->password,
+                'avatar' => $cooperative->avatar,
+                'role' =>  'Admin',
+                'phone' => $cooperative->contact,
+                'address' => $cooperative->location,
+                'status' =>  'Active',
+            ]);
+            
+        $cooperative->update();
+            if ($user) {
+                return redirect('dashboard-admin')->with('successfully', 'Cooperative verified successfully');
+            } else {
+                return redirect('dashboard-admin')->with('error', 'Cooperative failed to verified');
+            }
         } else {
-            return redirect('dashboard-admin')->with('error', 'Cooperative failed to verified');
+            return redirect('dashboard-admin')->with('error', 'Email Koprasi Sudah Pernah di gunakan');
         }
     }
 

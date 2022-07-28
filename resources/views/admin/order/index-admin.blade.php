@@ -12,7 +12,7 @@
                 <div class="d-flex align-items-center">
                     <h5 class="card-title mb-0 flex-grow-1">Order History</h5>
                     <div class="flex-shrink-0">
-                        <button type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
+                        <a href="{{url('export-pdf')}}" type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</a>
                     </div>
                 </div>
             </div>
@@ -168,13 +168,6 @@
                                     @if (Auth::user()->role == 'Admin')
                                     <td>
                                         <ul class="list-inline hstack gap-2 mb-0">
-                                            @if ($data->status == 'Received' || $data->status == 'Delivered' || $data->status == 'Pickups')
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Print Invoice">
-                                                <a href="#showModal" data-bs-toggle="modal" class="btn btn-info btn-sm">
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </a>
-                                            </li>
-                                            @endif
                                             @if ($data->status == 'Returns' || $data->status == 'Cancelled' || $data->status == 'Rejected')
                                             <li class="list-inline-item">
                                                 <p class="text-danger">{{ $data->canceled }}</p>
