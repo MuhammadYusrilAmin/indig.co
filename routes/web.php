@@ -10,6 +10,7 @@ use App\Http\Controllers\KasirController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TransactionController;
@@ -61,6 +62,8 @@ Route::post('/kasir_plus_quantity',  [\App\Http\Controllers\KasirController::cla
 Route::get('/export-printer',  [\App\Http\Controllers\KasirController::class, 'printer'])->middleware('auth');
 
 Route::get('/export-pdf',  [\App\Http\Controllers\TransactionController::class, 'pdf'])->middleware('auth');
+
+Route::resource('ratings', RatingController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'root'])->name('root')->middleware('auth');
 Route::get('/sellers/{id}', [HomeController::class, 'showSeller'])->name('showSeller')->middleware('auth');
