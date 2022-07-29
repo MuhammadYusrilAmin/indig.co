@@ -10,6 +10,7 @@ use App\Http\Controllers\KasirController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TransactionController;
@@ -64,6 +65,9 @@ Route::post('/minus_quantity',  [\App\Http\Controllers\CartController::class, 'm
 Route::post('/plus_quantity',  [\App\Http\Controllers\CartController::class, 'plus_quantity'])->middleware('auth');
 Route::resource('/whistlist', \App\Http\Controllers\WhishlistController::class)->middleware('auth');
 Route::resource('/address',  \App\Http\Controllers\AddressController::class);
+
+
+Route::resource('ratings', RatingController::class)->middleware('auth');
 
 // ROLE Admin
 Route::resource('products', ProductController::class)->middleware('auth');

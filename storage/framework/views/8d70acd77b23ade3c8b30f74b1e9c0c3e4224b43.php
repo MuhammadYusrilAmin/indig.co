@@ -1,64 +1,64 @@
-@extends('layouts.master')
-@section('title') @lang('translation.shopping-cart') @endsection
 
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') INDIGCO @endslot
-@slot('title') Keranjang Saya @endslot
-@endcomponent
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.shopping-cart'); ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> INDIGCO <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Keranjang Saya <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 <div class="row mb-3">
     <div class="col-xl-8">
         <div class="row align-items-center gy-3 mb-3">
             <div class="col-sm">
                 <div>
-                    <h5 class="fs-14 mb-0">Keranjang Saya({{ count($carts) }} items)</h5>
+                    <h5 class="fs-14 mb-0">Keranjang Saya(<?php echo e(count($carts)); ?> items)</h5>
                 </div>
             </div>
-            @if(count($carts) != 0)
+            <?php if(count($carts) != 0): ?>
             <div class="col-sm-auto">
                 <a href="#" class="d-block p-1 px-2 btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-1"></i> Hapus Semua</a>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
 
-        @if(count($carts) == 0)
-        @php $discount_id = null; @endphp
+        <?php if(count($carts) == 0): ?>
+        <?php $discount_id = null; ?>
         <div class="text-center mt-5 pt-3">
             <h3>Oppss.. keranjang kamu masih kosong !!</h3>
-            <a href="{{ url('/') }}" class="btn btn-primary mt-2">Ayo Belanja</a>
+            <a href="<?php echo e(url('/')); ?>" class="btn btn-primary mt-2">Ayo Belanja</a>
         </div>
-        @else
-        @php $i = 1; $price = 0; @endphp
-        @foreach ($carts as $cart)
-        @php $price += $cart->price; @endphp
-        @php $discount_id =$cart->discount_id; @endphp
+        <?php else: ?>
+        <?php $i = 1; $price = 0; ?>
+        <?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php $price += $cart->price; ?>
+        <?php $discount_id =$cart->discount_id; ?>
         <div class="card product">
             <div class="card-body">
                 <div class="row gy-3">
                     <div class="col-sm-auto">
                         <div class="avatar-lg bg-light rounded p-1">
                             <?php $galleries = \App\Models\ProductGallery::where('product_id', $cart->product_id)->first(); ?>
-                            <img src="{{ $galleries->photo_url }}" alt="" class="img-fluid d-block">
+                            <img src="<?php echo e($galleries->photo_url); ?>" alt="" class="img-fluid d-block">
                         </div>
                     </div>
                     <div class="col-sm">
                         <?php $product = \App\Models\Product::where('id', $cart->product_id)->first(); ?>
-                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark">{{ $product->title }}</a></h5>
+                        <h5 class="fs-14 text-truncate"><a href="ecommerce-product-detail" class="text-dark"><?php echo e($product->title); ?></a></h5>
                         <ul class="list-inline text-muted">
-                            <li class="list-inline-item">Request : <span class="fw-medium">{{ $cart->request }}</span></li>
+                            <li class="list-inline-item">Request : <span class="fw-medium"><?php echo e($cart->request); ?></span></li>
                         </ul>
 
                         <div class="input-step">
-                            <input type="hidden" id="id_cart_{{$cart->id}}" value="{{$cart->id}}">
-                            <button type="button" id="minus_{{$cart->id}}" class="minus">–</button>
-                            <input type="number" id="quantity_{{$cart->id}}" readonly value="{{ $cart->quantity }}" min="0" max="100">
-                            <button type="button" id="plus_{{$cart->id}}" class="plus">+</button>
+                            <input type="hidden" id="id_cart_<?php echo e($cart->id); ?>" value="<?php echo e($cart->id); ?>">
+                            <button type="button" id="minus_<?php echo e($cart->id); ?>" class="minus">–</button>
+                            <input type="number" id="quantity_<?php echo e($cart->id); ?>" readonly value="<?php echo e($cart->quantity); ?>" min="0" max="100">
+                            <button type="button" id="plus_<?php echo e($cart->id); ?>" class="plus">+</button>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="text-lg-end">
                             <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14"><span id="ticket_price" class="product-price">{{ "Rp " . number_format( $product->price, 2, ",", ".") }}</span></h5>
+                            <h5 class="fs-14"><span id="ticket_price" class="product-price"><?php echo e("Rp " . number_format( $product->price, 2, ",", ".")); ?></span></h5>
                         </div>
                     </div>
                 </div>
@@ -69,21 +69,21 @@
                     <div class="col-sm">
                         <div class="d-flex flex-wrap my-n1">
                             <div>
-                                <a href="{{route('cart.destroy',$cart->id)}}" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Hapus</a>
+                                <a href="<?php echo e(route('cart.destroy',$cart->id)); ?>" onclick="notificationforDelete2(event, this)" class="d-block text-danger p-1 px-2"><i class="ri-delete-bin-fill align-bottom me-1"></i> Hapus</a>
                             </div>
                             <div>
                                 <?php $wishlist = \App\Models\Wishlist::where('product_id', $cart->product_id)->get(); ?>
-                                @if(count($wishlist) != 0)
+                                <?php if(count($wishlist) != 0): ?>
                                 <button class="d-block text-body p-1 px-2 btn btn-transparent " onclick="event.preventDefault(); document.getElementById('remove-whistlist').submit();"><i class="ri-star-fill text-danger align-bottom me-1"></i> <b class="text-danger" style="font-weight: normal;">Remove Wishlist</b></button>
-                                @else
+                                <?php else: ?>
                                 <button class="d-block text-body p-1 px-2 btn btn-transparent" onclick="event.preventDefault(); document.getElementById('add-whistlist').submit();"><i class="ri-star-fill text-muted align-bottom me-1"></i> Favorit</button>
-                                @endif
+                                <?php endif; ?>
 
                                 <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
-                                <form action="{{route('whistlist.store')}}" method="post" id="add-whistlist" class="d-flex justify-content-center">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{$cart->product_id}}">
-                                    <input type="hidden" name="url" value="{{$url}}">
+                                <form action="<?php echo e(route('whistlist.store')); ?>" method="post" id="add-whistlist" class="d-flex justify-content-center">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="id" value="<?php echo e($cart->product_id); ?>">
+                                    <input type="hidden" name="url" value="<?php echo e($url); ?>">
                                 </form>
                             </div>
                         </div>
@@ -92,8 +92,8 @@
                         <div class="d-flex align-items-center gap-2 text-muted">
                             <div>Total :</div>
                             <h5 class="fs-14 mb-0">
-                                <div class="product-line-price" id="total_{{$cart->id}}">{{ "Rp " . number_format($cart->price, 2, ",", ".") }}</div>
-                                <input class="product-line-price" type="hidden" id="total_{{$i}}" value="{{$cart->price}}">
+                                <div class="product-line-price" id="total_<?php echo e($cart->id); ?>"><?php echo e("Rp " . number_format($cart->price, 2, ",", ".")); ?></div>
+                                <input class="product-line-price" type="hidden" id="total_<?php echo e($i); ?>" value="<?php echo e($cart->price); ?>">
                             </h5>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
 
                         $.ajax({
                             type: 'POST',
-                            url: "{{url('minus_quantity')}}",
+                            url: "<?php echo e(url('minus_quantity')); ?>",
                             data: {
                                 id_cart: id_cart
                             },
@@ -182,7 +182,7 @@
 
                         $.ajax({
                             type: 'POST',
-                            url: "{{url('plus_quantity')}}",
+                            url: "<?php echo e(url('plus_quantity')); ?>",
                             data: {
                                 id_cart: id_cart
                             },
@@ -208,11 +208,11 @@
                 });
             });
         </script>
-        @endforeach
-        @endif
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
         <!-- end card -->
 
-        @if(count($carts) != 0)
+        <?php if(count($carts) != 0): ?>
 
         <div class="card product">
             <div class="card-body">
@@ -223,7 +223,7 @@
                             <tbody class="">
                                 <tr>
                                     <td class="">Sub Total</td>
-                                    <td class="text-end" id="total_price">{{ "Rp " . number_format($price, 2, ",", ".") }}</td>
+                                    <td class="text-end" id="total_price"><?php echo e("Rp " . number_format($price, 2, ",", ".")); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="">Diskon</td>
@@ -231,17 +231,17 @@
                                 </tr>
                                 <tr class="fw-bold">
                                     <td class="">Total Pembayaran</td>
-                                    <td class="text-end" id="total_price2">{{ "Rp " . number_format($price, 2, ",", ".") }}</td>
+                                    <td class="text-end" id="total_price2"><?php echo e("Rp " . number_format($price, 2, ",", ".")); ?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-end">
                                         <?php
                                         $cek_destination = App\Models\Address::where('user_id', Illuminate\Support\Facades\Auth::user()->id)->orderBy('created_at', 'desc')->first(); ?>
-                                        @if($cek_destination == null)
-                                        <a href="{{ url('transaction?id=1') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
-                                        @else
-                                        <a href="{{ url('transaction?id='.$cek_destination->regencies_id) }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
-                                        @endif
+                                        <?php if($cek_destination == null): ?>
+                                        <a href="<?php echo e(url('transaction?id=1')); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+                                        <?php else: ?>
+                                        <a href="<?php echo e(url('transaction?id='.$cek_destination->regencies_id)); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             </tbody>
@@ -250,7 +250,7 @@
                 </div>
             </div>
         </div>
-        @endif
+        <?php endif; ?>
 
 
         <!-- WISHLIST -->
@@ -260,41 +260,41 @@
             </div>
 
             <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 pb-4">
-                @foreach ($wishlists as $wishlist)
+                <?php $__currentLoopData = $wishlists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wishlist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col">
                     <div class="card" style="height: 450px;">
                         <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
-                        @if($galleries == null)
-                        @else
-                        <img class="card-img-top img-fluid" src="{{ $galleries->photo_url }}" alt="Card image cap">
+                        <?php if($galleries == null): ?>
+                        <?php else: ?>
+                        <img class="card-img-top img-fluid" src="<?php echo e($galleries->photo_url); ?>" alt="Card image cap">
                         <div class="card-body">
                             <?php $galleries = \App\Models\ProductGallery::where('product_id', $wishlist->product_id)->first(); ?>
-                            <h5 class="card-title mb-2"><a href="{{ url('products-detail') }}" class="link-dark">{{ $wishlist->product->title }}</a></h4>
+                            <h5 class="card-title mb-2"><a href="<?php echo e(url('products-detail')); ?>" class="link-dark"><?php echo e($wishlist->product->title); ?></a></h4>
                         </div>
                         <div class="card-footer">
                             <button href="#" class="card-link link-danger btn btn-transparent" onclick="event.preventDefault(); document.getElementById('remove-whistlist').submit();"><i class="ri-delete-bin-fill align-bottom me-1"></i> Remove</button>
-                            <button onclick="event.preventDefault(); document.getElementById('input-cart_{{$wishlist->product->id}}').submit();" class="btn btn-transparent card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></button>
+                            <button onclick="event.preventDefault(); document.getElementById('input-cart_<?php echo e($wishlist->product->id); ?>').submit();" class="btn btn-transparent card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle ms-1 lh-1"></i></button>
 
                             <?php $url = Illuminate\Support\Facades\Request::segment(1); ?>
-                            <form action="{{route('cart.store')}}" id="input-cart_{{$wishlist->product->id}}" method="POST" style="display: none;">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$wishlist->product->id}}">
+                            <form action="<?php echo e(route('cart.store')); ?>" id="input-cart_<?php echo e($wishlist->product->id); ?>" method="POST" style="display: none;">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="id" value="<?php echo e($wishlist->product->id); ?>">
                                 <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="cities_id" value="{{$wishlist->product->cooperative->cities_id}}">
-                                <input type="hidden" name="url" value="{{$url}}">
-                                <input type="hidden" name="price" value="{{$wishlist->product->price}}">
+                                <input type="hidden" name="cities_id" value="<?php echo e($wishlist->product->cooperative->cities_id); ?>">
+                                <input type="hidden" name="url" value="<?php echo e($url); ?>">
+                                <input type="hidden" name="price" value="<?php echo e($wishlist->product->price); ?>">
                             </form>
-                            <form action="{{route('whistlist.destroy', $wishlist->id)}}" id="remove-whistlist" method="post" class="d-flex justify-content-center">
-                                @method('delete')
-                                @csrf
-                                <input type="hidden" name="id" value="{{$wishlist->product->product_id}}">
-                                <input type="hidden" name="url" value="{{$url}}">
+                            <form action="<?php echo e(route('whistlist.destroy', $wishlist->id)); ?>" id="remove-whistlist" method="post" class="d-flex justify-content-center">
+                                <?php echo method_field('delete'); ?>
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="id" value="<?php echo e($wishlist->product->product_id); ?>">
+                                <input type="hidden" name="url" value="<?php echo e($url); ?>">
                             </form>
                         </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
             <!-- end card -->
         </div>
@@ -334,12 +334,12 @@
                                     $totalPayment = $subTotal - $discount;
                                     ?>
                                 </tr> -->
-                                    @if($discount_id !=null)
+                                    <?php if($discount_id !=null): ?>
                                 <tr>
                                     <td>Discount : </td>
-                                    <td class="text-end" id="cart-discount">- {{ "Rp" . number_format($discount, 2, ",", ".") }}</td>
+                                    <td class="text-end" id="cart-discount">- <?php echo e("Rp" . number_format($discount, 2, ",", ".")); ?></td>
                                 </tr>
-                                @endif
+                                <?php endif; ?>
 
                             </tbody>
                         </table>
@@ -371,7 +371,7 @@
                 </div>
                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                    <a href="{{route('cart.edit', Auth::user()->id)}}"><button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button></a>
+                    <a href="<?php echo e(route('cart.edit', Auth::user()->id)); ?>"><button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button></a>
                 </div>
             </div>
 
@@ -380,9 +380,10 @@
 </div><!-- /.modal -->
 
 <form action="" id="delete-form2" method="POST">
-    @method('delete')
-    @csrf
+    <?php echo method_field('delete'); ?>
+    <?php echo csrf_field(); ?>
 </form>
-@endsection
-@section('script')
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\KMIPN PROJECT\indigco6\resources\views/user/transaction/cart.blade.php ENDPATH**/ ?>

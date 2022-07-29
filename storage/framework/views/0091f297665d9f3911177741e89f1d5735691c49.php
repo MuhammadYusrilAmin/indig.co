@@ -1,5 +1,5 @@
-@extends('layouts.master')
-@section('title') @lang('translation.orders') @endsection
+
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.orders'); ?> <?php $__env->stopSection(); ?>
 <style>
     /* Style untuk rating star */
     .rating {
@@ -43,11 +43,11 @@
         color: #FFED85;
     }
 </style>
-@section('content')
-@component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title') Orders @endslot
-@endcomponent
+<?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Orders <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 <div class="row">
     <div class="col-lg-12">
         <div class="card" id="orderList">
@@ -108,66 +108,66 @@
                         <li class="nav-item">
                             <a class="nav-link active All py-3" data-bs-toggle="tab" id="All" href="#home1" role="tab" aria-selected="false">
                                 <i class="ri-store-2-fill me-1 align-bottom"></i> All Orders
-                                @if (count($datas->where('user_id', Auth::user()->id)) != 0)
-                                <span class="badge bg-primary align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)) != 0): ?>
+                                <span class="badge bg-primary align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Pending" data-bs-toggle="tab" id="Pending" href="#pending" role="tab" aria-selected="true">
                                 <i class="las la-info-circle me-1 align-middle"></i>
                                 Pending
-                                @if (count($datas->where('user_id', Auth::user()->id)->where('status', 'Pending')) != 0)
-                                <span class="badge bg-warning align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)->where('status', 'Pending')) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pending')) != 0): ?>
+                                <span class="badge bg-warning align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pending'))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Inprogress" data-bs-toggle="tab" id="Inprogress" href="#inprogress" role="tab" aria-selected="true">
                                 <i class="mdi mdi-progress-clock me-1 align-bottom"></i> Inprogress
-                                @if (count($datas->where('user_id', Auth::user()->id)->where('status', 'Inprogress')) != 0)
-                                <span class="badge bg-warning align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)->where('status', 'Inprogress')) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Inprogress')) != 0): ?>
+                                <span class="badge bg-warning align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Inprogress'))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Pickups" data-bs-toggle="tab" id="Pickups" href="#pickups" role="tab" aria-selected="false">
                                 <i class="ri-truck-line me-1 align-bottom"></i> Pickups
-                                @if (count($datas->where('user_id', Auth::user()->id)->where('status', 'Pickups')) != 0)
-                                <span class="badge bg-secondary align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)->where('status', 'Pickups')) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pickups')) != 0): ?>
+                                <span class="badge bg-secondary align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pickups'))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Received" data-bs-toggle="tab" id="Received" href="#received" role="tab" aria-selected="false">
                                 <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Received
-                                @if (count($datas->where('user_id', Auth::user()->id)->where('status', 'Received')) != 0)
-                                <span class="badge bg-success align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)->where('status', 'Received')) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Received')) != 0): ?>
+                                <span class="badge bg-success align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Received'))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Returns" data-bs-toggle="tab" id="Returns" href="#returns" role="tab" aria-selected="false">
                                 <i class="ri-arrow-left-right-fill me-1 align-bottom"></i> Returns
-                                @if (count($datas->where('user_id', Auth::user()->id)->where('status', 'Returns')) != 0)
-                                <span class="badge bg-danger align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)->where('status', 'Returns')) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Returns')) != 0): ?>
+                                <span class="badge bg-danger align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Returns'))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Cancelled" data-bs-toggle="tab" id="Cancelled" href="#cancelled" role="tab" aria-selected="false">
                                 <i class="ri-close-circle-line me-1 align-bottom"></i> Cancelled
-                                @if (count($datas->where('user_id', Auth::user()->id)->where('status', 'Cancelled')) != 0)
-                                <span class="badge bg-danger align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)->where('status', 'Cancelled')) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Cancelled')) != 0): ?>
+                                <span class="badge bg-danger align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Cancelled'))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Rejected" data-bs-toggle="tab" id="Rejected" href="#rejected" role="tab" aria-selected="false">
                                 <i class="ri-close-circle-line me-1 align-bottom"></i> Rejected
-                                @if (count($datas->where('user_id', Auth::user()->id)->where('status', 'Rejected')) != 0)
-                                <span class="badge bg-danger align-middle ms-1">{{ count($datas->where('user_id', Auth::user()->id)->where('status', 'Rejected')) }}</span>
-                                @endif
+                                <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Rejected')) != 0): ?>
+                                <span class="badge bg-danger align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Rejected'))); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                     </ul>
@@ -192,7 +192,7 @@
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
-                                @foreach ($datas->where('user_id', Auth::user()->id) as $data)
+                                <?php $__currentLoopData = $datas->where('user_id', Auth::user()->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <th scope="row">
                                         <div class="form-check">
@@ -201,18 +201,18 @@
                                     </th>
                                     <?php $items = App\Models\OrderDetail::all(); ?>
                                     <td class="id">
-                                        @if ($data->resi != null)
-                                        <a href="{{ url('orders/'.$data->id) }}" class="fw-medium link-primary">{{ $data->resi }}</a>
-                                        @else
+                                        <?php if($data->resi != null): ?>
+                                        <a href="<?php echo e(url('orders/'.$data->id)); ?>" class="fw-medium link-primary"><?php echo e($data->resi); ?></a>
+                                        <?php else: ?>
                                         Belum dikirim
-                                        @endif
+                                        <?php endif; ?>
                                     </td>
-                                    <td class="product_name">{{ $data->items[0]->product->title }}</td>
-                                    <td>{{ $data->created_at }}</td>
-                                    <td class="amount">{{ "Rp" . number_format($data->total_payment, 2, ",", ".") }}</td>
-                                    <td class="payment">{{ $data->sender }}</td>
+                                    <td class="product_name"><?php echo e($data->items[0]->product->title); ?></td>
+                                    <td><?php echo e($data->created_at); ?></td>
+                                    <td class="amount"><?php echo e("Rp" . number_format($data->total_payment, 2, ",", ".")); ?></td>
+                                    <td class="payment"><?php echo e($data->sender); ?></td>
                                     <td class="status">
-                                        <span class="badge {{ $data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-warning' : ($data->status == 'Delivered' ? 'badge-soft-secondary' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : ($data->status == 'Received' ? 'badge-soft-success' : 'badge-soft-danger'))))) }} text-uppercase">{{ $data->status }}</span>
+                                        <span class="badge <?php echo e($data->status == 'Pending' ? 'badge-soft-warning' : ($data->status == 'Inprogress' ? 'badge-soft-warning' : ($data->status == 'Delivered' ? 'badge-soft-secondary' : ($data->status == 'Pickups' ? 'badge-soft-info' : ($data->status == 'Return' ? 'badge-soft-primary' : ($data->status == 'Received' ? 'badge-soft-success' : 'badge-soft-danger')))))); ?> text-uppercase"><?php echo e($data->status); ?></span>
                                     </td>
                                     <td class="customer_name">
                                         <?php
@@ -228,68 +228,69 @@
 
                                         $rata2rating = round($rating2 / $bintang, 1);
                                         ?>
-                                        @if ($data->status == 'Received' && count($ratings) == null)
-                                        <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#reviewNow{{$data->id}}">Review Now</button>
-                                        @elseif ($data->status == 'Received')
+                                        <?php if($data->status == 'Received' && count($ratings) == null): ?>
+                                        <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#reviewNow<?php echo e($data->id); ?>">Review Now</button>
+                                        <?php elseif($data->status == 'Received'): ?>
                                         <button type="button" class="btn btn-light btn-sm">
                                             <i class="lab las la-star text-warning"></i>
-                                            {{ $rata2rating }}
+                                            <?php echo e($rata2rating); ?>
+
                                         </button>
-                                        @endif
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <ul class="list-inline hstack gap-2 mb-0">
-                                            @if ($data->status == 'Delivered')
+                                            <?php if($data->status == 'Delivered'): ?>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
                                                 <button type="button" data-bs-toggle="modal" class="btn btn-success btn-sm" disabled>
                                                     <i class="ri-checkbox-circle-line align-bottom me-1"></i> Accepted
                                                 </button>
                                             </li>
-                                            @elseif ($data->status == 'Pickups')
+                                            <?php elseif($data->status == 'Pickups'): ?>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
-                                                <a href="#acceptOrder{{ $data->id }}" data-bs-toggle="modal" class="btn btn-success btn-sm">
+                                                <a href="#acceptOrder<?php echo e($data->id); ?>" data-bs-toggle="modal" class="btn btn-success btn-sm">
                                                     <i class="ri-checkbox-circle-line align-bottom me-1"></i> Accepted
                                                 </a>
                                             </li>
-                                            @elseif ($data->status == 'Pending')
+                                            <?php elseif($data->status == 'Pending'): ?>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
-                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#CancellOrder{{ $data->id }}">
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#CancellOrder<?php echo e($data->id); ?>">
                                                     <i class="ri-close-line align-middle me-1"></i> Cancel
                                                 </button>
                                             </li>
-                                            @elseif ($data->status == 'Inprogress' || $data->status == 'Received')
-                                            @endif
-                                            @if ($data->status == 'Returns' || $data->status == 'Cancelled' || $data->status == 'Rejected')
+                                            <?php elseif($data->status == 'Inprogress' || $data->status == 'Received'): ?>
+                                            <?php endif; ?>
+                                            <?php if($data->status == 'Returns' || $data->status == 'Cancelled' || $data->status == 'Rejected'): ?>
                                             <li class="list-inline-item">
-                                                <p class="text-danger">{{ $data->canceled }}</p>
+                                                <p class="text-danger"><?php echo e($data->canceled); ?></p>
                                             </li>
-                                            @endif
+                                            <?php endif; ?>
                                         </ul>
                                     </td>
                                 </tr>
 
                                 <!-- Cancel Modal -->
-                                <div class="modal fade fadeFlip" id="CancellOrder{{ $data->id }}" tabindex="-1" aria-labelledby="CancellOrder{{ $data->id }}Label" aria-modal="true">
+                                <div class="modal fade fadeFlip" id="CancellOrder<?php echo e($data->id); ?>" tabindex="-1" aria-labelledby="CancellOrder<?php echo e($data->id); ?>Label" aria-modal="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
-                                            <form action="{{ url('cancell-order', $data->id) }}" method="POST">
-                                                @csrf
+                                            <form action="<?php echo e(url('cancell-order', $data->id)); ?>" method="POST">
+                                                <?php echo csrf_field(); ?>
                                                 <div class="modal-header">
                                                     <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:70px;height:70px"></lord-icon>
-                                                    <h5 class="modal-title" id="CancellOrder{{ $data->id }}Label">Why did you cancel the order?</h5>
+                                                    <h5 class="modal-title" id="CancellOrder<?php echo e($data->id); ?>Label">Why did you cancel the order?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="canceled" id="radio1{{  $data->id }}" value="Ingin Mengganti Alamat Tujuan" checked>
-                                                            <label class="form-check-label" for="radio1{{  $data->id }}">
+                                                            <input class="form-check-input" type="radio" name="canceled" id="radio1<?php echo e($data->id); ?>" value="Ingin Mengganti Alamat Tujuan" checked>
+                                                            <label class="form-check-label" for="radio1<?php echo e($data->id); ?>">
                                                                 Ingin Mengganti Alamat Tujuan
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="canceled" value="Salah Memilih Produk" id="radio2{{ $data->id }}">
-                                                            <label class="form-check-label" for="radio2{{ $data->id }}">
+                                                            <input class="form-check-input" type="radio" name="canceled" value="Salah Memilih Produk" id="radio2<?php echo e($data->id); ?>">
+                                                            <label class="form-check-label" for="radio2<?php echo e($data->id); ?>">
                                                                 Salah Memilih Produk
                                                             </label>
                                                         </div>
@@ -307,7 +308,7 @@
                                 </div>
 
                                 <!-- Accepted Modal -->
-                                <div class="modal fade flip" id="acceptOrder{{ $data->id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal fade flip" id="acceptOrder<?php echo e($data->id); ?>" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body p-5 text-center">
@@ -315,8 +316,8 @@
                                                 <div class="mt-4 text-center">
                                                     <h4>Have you received the order ?</h4>
                                                     <div class="hstack gap-2 justify-content-center mt-4">
-                                                        <form action="{{ url('accept-order', $data->id) }}" method="POST">
-                                                            @csrf
+                                                        <form action="<?php echo e(url('accept-order', $data->id)); ?>" method="POST">
+                                                            <?php echo csrf_field(); ?>
                                                             <button type="button" class="btn btn-link link-primary fw-medium text-decoration-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i>No</button>
                                                             <button type="submit" data-bs-toggle="modal" class="btn btn-success">
                                                                 <i class="ri-checkbox-circle-line align-bottom me-1"></i> Yes
@@ -330,7 +331,7 @@
                                 </div>
 
                                 <!-- Rating Modal -->
-                                <div class="modal fade" id="reviewNow{{$data->id}}" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="false">
+                                <div class="modal fade" id="reviewNow<?php echo e($data->id); ?>" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="false">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -338,32 +339,32 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <?php $i = 1 ?>
-                                            <form class="" style="margin-right: 28%;" method="POST" id="give-rating{{$data->id}}" action="{{route('ratings.store')}}">
-                                                @csrf
+                                            <form class="" style="margin-right: 28%;" method="POST" id="give-rating<?php echo e($data->id); ?>" action="<?php echo e(route('ratings.store')); ?>">
+                                                <?php echo csrf_field(); ?>
                                                 <div class="modal-body">
-                                                    @php $id =0 @endphp
-                                                    @foreach ($items->where('order_id', $data->id) as $item)
-                                                    <h6>{{ $i++.'. '.$item->product->title }}</h6>
+                                                    <?php $id =0 ?>
+                                                    <?php $__currentLoopData = $items->where('order_id', $data->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <h6><?php echo e($i++.'. '.$item->product->title); ?></h6>
                                                     <div class="rating fs-3">
-                                                        <input type="radio" id="star5{{ $data->id.$item->id }}" name="{{$item->id}}" value="5">
-                                                        <label class="full" for="star5{{ $data->id.$item->id }}"></label>
+                                                        <input type="radio" id="star5<?php echo e($data->id.$item->id); ?>" name="<?php echo e($item->id); ?>" value="5">
+                                                        <label class="full" for="star5<?php echo e($data->id.$item->id); ?>"></label>
 
-                                                        <input type="radio" id="star4{{ $data->id.$item->id }}" name="{{$item->id}}" value="4">
-                                                        <label class="full" for="star4{{ $data->id.$item->id }}"></label>
+                                                        <input type="radio" id="star4<?php echo e($data->id.$item->id); ?>" name="<?php echo e($item->id); ?>" value="4">
+                                                        <label class="full" for="star4<?php echo e($data->id.$item->id); ?>"></label>
 
-                                                        <input type="radio" id="star3{{ $data->id.$item->id }}" name="{{$item->id}}" value="3">
-                                                        <label class="full" for="star3{{ $data->id.$item->id }}"></label>
+                                                        <input type="radio" id="star3<?php echo e($data->id.$item->id); ?>" name="<?php echo e($item->id); ?>" value="3">
+                                                        <label class="full" for="star3<?php echo e($data->id.$item->id); ?>"></label>
 
-                                                        <input type="radio" id="star2{{ $data->id.$item->id }}" name="{{$item->id}}" value="2">
-                                                        <label class="full" for="star2{{ $data->id.$item->id }}"></label>
+                                                        <input type="radio" id="star2<?php echo e($data->id.$item->id); ?>" name="<?php echo e($item->id); ?>" value="2">
+                                                        <label class="full" for="star2<?php echo e($data->id.$item->id); ?>"></label>
 
-                                                        <input type="radio" id="star1{{ $data->id.$item->id }}" name="{{$item->id}}" value="1">
-                                                        <label class="full" for="star1{{ $data->id.$item->id }}"></label>
+                                                        <input type="radio" id="star1<?php echo e($data->id.$item->id); ?>" name="<?php echo e($item->id); ?>" value="1">
+                                                        <label class="full" for="star1<?php echo e($data->id.$item->id); ?>"></label>
                                                     </div>
-                                                    <input type="hidden" name="id" value="{{$item->order_id}}">
-                                                    <textarea class="form-control mb-3" placeholder="Leave your review" rows="3" name="deskripsi{{$item->id}}"></textarea>
-                                                    @php $id++ @endphp
-                                                    @endforeach
+                                                    <input type="hidden" name="id" value="<?php echo e($item->order_id); ?>">
+                                                    <textarea class="form-control mb-3" placeholder="Leave your review" rows="3" name="deskripsi<?php echo e($item->id); ?>"></textarea>
+                                                    <?php $id++ ?>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -375,7 +376,7 @@
                                     </div>
                                 </div>
                     </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                     </table>
                     <div class="noresult" style="display: none">
@@ -408,13 +409,14 @@
 <!--end col-->
 </div>
 <!--end row-->
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script src="assets/libs/list.js/list.js.min.js"></script>
 <script src="assets/libs/list.pagination.js/list.pagination.js.min.js"></script>
 
 <!--ecommerce-customer init js -->
 <script src="assets/js/pages/ecommerce-order.init.js"></script>
 
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\KMIPN PROJECT\indigco6\resources\views/admin/order/index.blade.php ENDPATH**/ ?>

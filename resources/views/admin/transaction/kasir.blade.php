@@ -3,11 +3,35 @@
 
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
+@slot('li_1') INDIGCO @endslot
 @slot('title') Kasir Koperasi @endslot
 @endcomponent
 <div class="row mb-3">
     <div class="col-xl-8">
+        @if(Auth::user()->kode_printer == null )
+        <div class="col-xl-12">
+            <div class="sticky-side-div">
+                <div class="card">
+                    <div class="card-header border-bottom-dashed">
+                        <h5 class="card-title mb-0">Masukkan Kode Printer</h5>
+                    </div>
+                    <div class="card-header bg-soft-light border-bottom-dashed">
+                        <div class="">
+                            <form action="{{route('kasir.update',Auth::user()->id)}}" method="POST">
+                                @method('PUT')
+                                <div class="input-group my-2 pt-2">
+                                    <input id="id_barang" name='kode_printer' class="form-control" autofocus type="text" placeholder="Enter item code" aria-label="Kode Printer" required>
+                                    <button type="submit" class="btn btn-success w-xs">Tambah</button>
+                                </div>
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end stickey -->
+        </div>
+        @else
         <div class="row align-items-center gy-3 mb-3">
             @if(count($kasir) != 0)
             <div class="col-sm-auto">
@@ -15,7 +39,11 @@
             </div>
             @endif
         </div>
+        @php $i = 1; $price = 0; @endphp
+        @if(count($kasir) == null )
+        @else
         @foreach ($kasir as $kasirs)
+        @php $price += $kasirs->price; @endphp
         <div class="card product">
             <div class="card-body">
                 <div class="row gy-3">
@@ -42,7 +70,7 @@
                     <div class="col-sm-auto">
                         <div class="text-lg-end">
                             <p class="text-muted mb-1">Item Price:</p>
-                            <h5 class="fs-14"><span id="ticket_price" class="product-price">{{ "Rp " . number_format( $product->price, 2, ",", ".") }}</span></h5>
+                            <h5 class="fs-14"><span id="ticket_price" class="product-price">{{ "Rp " . number_format( $kasirs->product->price, 2, ",", ".") }}</span></h5>
                         </div>
                     </div>
                 </div>
@@ -62,6 +90,7 @@
                             <div>Total :</div>
                             <h5 class="fs-14 mb-0">
                                 <div class="product-line-price" id="total_{{$kasirs->id}}">{{ "Rp " . number_format($kasirs->price, 2, ",", ".") }}</div>
+                                <input class="product-line-price" type="hidden" id="total_{{$i}}" value="{{$kasirs->price}}">
                             </h5>
                         </div>
                     </div>
@@ -127,6 +156,13 @@
                             success: function(msg) {
                                 $("#quantity_<?= $kasirs->id ?>").val(msg);
                                 $("#total_<?= $kasirs->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                                $("#total_<?= $i ?>").val(<?= $product->price ?> * msg);
+                                var total = 0;
+                                for (let i = 1; i <= <?= count($kasir) ?>; i++) {
+                                    var price = $('#total_' + i).val();
+                                    total += parseInt(price);
+                                }
+                                $("#total_price").html(formatCurrency(total));
                             },
                             error: function(data) {
                                 console.log('error:', data);
@@ -151,6 +187,14 @@
                             success: function(msg) {
                                 $("#quantity_<?= $kasirs->id ?>").val(msg);
                                 $("#total_<?= $kasirs->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                                $("#total_<?= $i ?>").val(<?= $product->price ?> * msg);
+                                var total = 0;
+                                for (let i = 1; i <= <?= count($kasir) ?>; i++) {
+                                    var price = $('#total_' + i).val();
+                                    total += parseInt(price);
+                                }
+                                $("#total_price").html(formatCurrency(total));
+
                             },
                             error: function(data) {
                                 console.log('error:', data);
@@ -160,19 +204,42 @@
                 });
             });
         </script>
+        @php $i++ @endphp
         @endforeach
-        <!-- end card -->
 
-        @if(count($kasir) != 0)
-        <div class="text-end mb-4">
-            <?php
-            $cek_destination = App\Models\Address::where('user_id', Illuminate\Support\Facades\Auth::user()->id)->orderBy('created_at', 'desc')->first(); ?>
-            @if($cek_destination == null)
-            <a href="{{ url('/export-printer') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Cetak</a>
-            @else
-            <a href="{{ url('/export-printer') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Cetak</a>
-            @endif
+        <div class="card product">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-7"></div>
+                    <div class="col">
+                        <table class="table table-borderless mb-0">
+                            <tbody class="">
+                                <tr class="fw-bold">
+                                    <td class="">Total Pembayaran</td>
+                                    <td class="text-end" id="total_price">{{ "Rp " . number_format($price, 2, ",", ".") }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-end">
+                                        @if(count($kasir) != 0)
+                                        <div class="text-end mb-4">
+                                            <?php
+                                            $cek_destination = App\Models\Kasir::where('user_id', Illuminate\Support\Facades\Auth::user()->id)->orderBy('created_at', 'desc')->first(); ?>
+                                            @if($cek_destination == null)
+                                            <a href="{{ url('/export-printer') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Cetak</a>
+                                            @else
+                                            <a href="{{ url('/export-printer') }}" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Cetak</a>
+                                            @endif
+                                        </div>
+                                        @endif
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
+        @endif
         @endif
     </div>
     <!-- end col -->
@@ -181,11 +248,11 @@
         <div class="sticky-side-div">
             <div class="card">
                 <div class="card-header border-bottom-dashed">
-                    <h5 class="card-title mb-0">Add another product</h5>
+                    <h5 class="card-title mb-0">Masukkan Produk</h5>
                 </div>
                 <div class="card-header bg-soft-light border-bottom-dashed">
                     <div class="text-center">
-                        <h6 class="mb-2">Scan the product or enter the item code</h6>
+                        <h6 class="mb-2">Lakukan Scan Atau Masukkan Kode Produk</h6>
                     </div>
                     <div class="">
                         <form action="{{route('kasir.store')}}" method="POST">
