@@ -155,7 +155,7 @@
                             @foreach ($employees->where('cooperative_id', Auth::user()->cooperative_id) as $employee)
                             <tr>
                                 <td class="d-flex">
-                                    <img src="{{ url('assets/images/users/'.$employee->avatar) }}" alt="" class="avatar-xs rounded-3 me-2">
+                                    <img src="{{ URL::asset('assets/images/users/'.$employee->avatar) }}" alt="" class="avatar-xs rounded-3 me-2">
                                     <div>
                                         <h5 class="fs-13 mb-0">{{ $employee->name }}</h5>
                                         <p class="fs-12 mb-0 text-muted">{{ $employee->status }}</p>

@@ -17,7 +17,7 @@
                 <div>
                     <div class="flex-shrink-0 avatar-md mx-auto">
                         <div class="avatar-title bg-light rounded">
-                            <img src="{{ url($cooperative->avatar) }}" alt="" height="50" />
+                            <img src="{{ URL::asset('assets/images/companies/'.$cooperative->avatar) }}" alt="" height="50" />
                         </div>
                     </div>
                     <div class="mt-4 text-center">

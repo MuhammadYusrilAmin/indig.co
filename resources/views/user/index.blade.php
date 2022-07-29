@@ -89,7 +89,7 @@
             <div class="card-body text-center p-4">
                 <!-- <div class="ribbon ribbon-info ribbon-shape trending-ribbon"><i class="ri-flashlight-fill text-white align-bottom"></i> <span class="trending-ribbon-text">Trending</span></div> -->
 
-                <img src="{{ $coop->avatar }}" alt="" height="45">
+                <img src="{{ URL::asset('assets/images/companies/'.$coop->avatar) }}" alt="" height="45">
                 <h5 class="mb-1 mt-4"><a href="{{ url('seller-details') }}" class="link-primary">{{ $coop->name }}</a></h5>
                 <p class="text-muted mb-4">{{ $coop->owner_name }}</p>
                 <div class="row justify-content-center">

@@ -54,7 +54,7 @@ class RegisterCooperativeController extends Controller
             $image = $request->file('logo');
             $new_image = rand() . '.' . $image->getClientOriginalExtension();
 
-            $image->move(public_path('assets/images/users/'), $new_image);
+            $image->move(public_path('assets/images/companies/'), $new_image);
         }
         $koprasi = Cooperative::create([
             'id' => $id,

@@ -217,8 +217,8 @@
                                     <td class="customer_name">
                                         <?php
                                         $items = App\Models\OrderDetail::all();
-                                        $ratings = App\Models\Rating::where('order_detail_id', $data->items[0]->order_id)->get();
-                                        $rating2 = \App\Models\Rating::where('order_detail_id', $data->items[0]->order_id)->sum('rating');
+                                        $ratings = App\Models\Rating::where('order_id', $data->items[0]->id)->get();
+                                        $rating2 = \App\Models\Rating::where('order_id', $data->items[0]->id)->sum('rating');
                                         $bintang = 0;
                                         if (count($ratings) != 0) {
                                             $bintang = count($ratings);
@@ -414,5 +414,5 @@
 <!--ecommerce-customer init js -->
 <script src="assets/js/pages/ecommerce-order.init.js"></script>
 
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<script src="assets/js/app.min.js"></script>
 @endsection

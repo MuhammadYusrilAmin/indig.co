@@ -80,7 +80,7 @@
                                         <div class="swiper-slide">
                                             <div class="d-flex align-items-center border border-dashed rounded p-2">
                                                 <div class="flex-shrink-0">
-                                                    <img src="{{ URL::asset($data->avatar) }}" alt="" width="60" class="rounded" />
+                                                    <img src="{{ URL::asset('assets/images/companies/'.$data->avatar) }}" alt="" width="60" class="rounded" />
                                                 </div>
                                                 <div class="flex-grow-1 ms-2">
                                                     <a href="{{ url('sellers/'.$data->id) }}" class="stretched-link fw-medium">{{ $data->name }}</a>
@@ -187,7 +187,7 @@
                                     <div class="card-body">
                                         <div class="d-sm-flex">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ URL::asset($data->avatar) }}" alt="" width="80" class="rounded-1" />
+                                                <img src="{{ URL::asset('assets/images/companies/'.$data->avatar) }}" alt="" width="80" class="rounded-1" />
                                             </div>
                                             <div class="flex-grow-1 ms-sm-4 mt-3 mt-sm-0">
                                                 <ul class="list-inline mb-2">

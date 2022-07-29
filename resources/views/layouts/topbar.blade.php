@@ -1,4 +1,4 @@
-<header id="page-topbar">
+<header id="page-topbar" style="background-color: #350e5f;">
     <div class="layout-width">
         <div class="navbar-header">
             <div class="d-flex">
@@ -71,7 +71,7 @@
                     </button>
                 </div>
 
-                <div class="dropdown ms-sm-3 header-item topbar-user">
+                <div class="dropdown ms-sm-3 header-item topbar-user" style="background-color: rgb(72, 28, 119);">
                     <?php
                     $carts = App\Models\Cart::all();
                     $history = App\Models\Order::all();

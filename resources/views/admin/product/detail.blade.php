@@ -433,17 +433,17 @@
                                                                     </div>
                                                                     <div class="vr"></div>
                                                                     <div class="flex-grow-1">
-                                                                        <p class="text-muted mb-0">{{ $data->review }}</p>
+                                                                        <p class="text-dark mb-0">{{ $data->review }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex align-items-end">
                                                                 <div class="flex-grow-1">
-                                                                    <h5 class="fs-14 mb-0">{{ $data->orderDetail->order->user->name }}</h5>
+                                                                    <h5 class="fs-14 mb-0">{{ $data->order->user->name }}</h5>
                                                                 </div>
 
                                                                 <div class="flex-shrink-0">
-                                                                    <p class="text-muted fs-13 mb-0">{{ $data->orderDetail->created_at }}</p>
+                                                                    <p class="text-muted fs-13 mb-0">{{ $data->order->created_at }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>

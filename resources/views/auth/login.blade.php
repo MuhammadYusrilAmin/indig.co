@@ -18,7 +18,7 @@
 <div class="auth-page-wrapper pt-5">
     <!-- auth page bg -->
     <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
-        <div class="bg-overlay"></div>
+        <div class="bg-overlay" style=""></div>
 
         <div class="shape">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
@@ -49,7 +49,7 @@
 
                         <div class="card-body p-4">
                             <div class="text-center mt-2">
-                                <h5 class="text-primary">Welcome Back !</h5>
+                                <h5 class="text-secondary">Welcome Back !</h5>
                                 <p class="text-muted">Sign in to continue to indigco.</p>
                             </div>
                             <div class="p-2 mt-4">
@@ -93,19 +93,7 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <button class="btn btn-success w-100" type="submit">Sign In</button>
-                                    </div>
-
-                                    <div class="mt-4 text-center">
-                                        <div class="signin-other-title">
-                                            <h5 class="fs-13 mb-4 title">Sign In with</h5>
-                                        </div>
-                                        <div>
-                                            <button type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></button>
-                                            <button type="button" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></button>
-                                            <button type="button" class="btn btn-dark btn-icon waves-effect waves-light"><i class="ri-github-fill fs-16"></i></button>
-                                            <button type="button" class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-twitter-fill fs-16"></i></button>
-                                        </div>
+                                        <button class="btn btn-secondary w-100" type="submit">Sign In</button>
                                     </div>
                                 </form>
                             </div>
@@ -115,7 +103,7 @@
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Don't have an account ? <a href="register" class="fw-semibold text-primary text-decoration-underline"> Signup </a> </p>
+                        <p class="mb-0">Don't have an account ? <a href="register" class="fw-semibold text-secondary text-decoration-underline"> Signup </a> </p>
                     </div>
 
                 </div>

@@ -44,7 +44,7 @@ class RatingController extends Controller
             $ratings = Rating::create([
                 'id'                => mt_rand(1000, 99999),
                 'product_id'        => $rating1->product_id,
-                'order_detail_id'   => $rating1->order_id,
+                'order_id'   => $rating1->order_id,
                 'rating'            => $request->$rating_product,
                 'review'            => $request->$description
             ]);
