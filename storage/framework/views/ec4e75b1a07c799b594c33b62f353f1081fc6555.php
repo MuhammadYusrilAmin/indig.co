@@ -22,12 +22,14 @@
         </div>
 
         <?php if(count($carts) == 0): ?>
+        <?php $discount_id = null; ?>
         <div class="text-center mt-5 pt-3">
             <h3>Empty Cart</h3>
             <a href="<?php echo e(url('/')); ?>" class="btn btn-primary mt-2">Go Shopping</a>
         </div>
         <?php else: ?>
         <?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php $discount_id =$cart->discount_id; ?>
         <div class="card product">
             <div class="card-body">
                 <div class="row gy-3">
@@ -154,6 +156,7 @@
                             success: function(msg) {
                                 $("#quantity_<?= $cart->id ?>").val(msg);
                                 $("#total_<?= $cart->id ?>").html(formatCurrency(<?= $product->price ?> * msg));
+                                $("#cart-subtotal").html(formatCurrency(<?= $product->price ?> * msg));
                             },
                             error: function(data) {
                                 console.log('error:', data);
@@ -272,37 +275,25 @@
                         <table class="table table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td>Sub Total :</td>
+                                    <!-- <td>Sub Total :</td>
                                     <?php
                                     $subTotal = 0;
-                                    $shippingCharge = 22000;
 
                                     foreach ($carts as $cart) {
-                                        $subTotal += $cart->price * $cart->quantity;
+                                        $subTotal += $cart->price;
                                     }
 
                                     $discount = $subTotal * 10.1 / 100;
-                                    $totalPayment = $subTotal + $shippingCharge - $discount;
+                                    $totalPayment = $subTotal - $discount;
                                     ?>
-                                    <td class="text-end" id="cart-subtotal"><?php echo e("Rp" . number_format($subTotal, 2, ",", ".")); ?></td>
-                                </tr>
+                                </tr> -->
+                                    <?php if($discount_id !=null): ?>
                                 <tr>
                                     <td>Discount : </td>
                                     <td class="text-end" id="cart-discount">- <?php echo e("Rp" . number_format($discount, 2, ",", ".")); ?></td>
                                 </tr>
-                                <tr>
-                                    <td>Shipping Charge :</td>
-                                    <td class="text-end" id="cart-shipping"><?php echo e("Rp" . number_format($shippingCharge, 2, ",", ".")); ?></td>
-                                </tr>
-                                <tr class="table-active">
-                                    <th>Total Payment (IDR) :</th>
-                                    <td class="text-end">
-                                        <span class="fw-semibold" id="cart-total">
-                                            <?php echo e("Rp" . number_format($totalPayment, 2, ",", ".")); ?>
+                                <?php endif; ?>
 
-                                        </span>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -340,11 +331,19 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 <form action="" id="delete-form2" method="POST">
     <?php echo method_field('delete'); ?>
     <?php echo csrf_field(); ?>
 </form>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
+<script src="assets/libs/list.js/list.js.min.js"></script>
+<script src="assets/libs/list.pagination.js/list.pagination.js.min.js"></script>
+
+<!--ecommerce-customer init js -->
+<script src="assets/js/pages/ecommerce-order.init.js"></script>
+
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\saas\resources\views/user/transaction/cart.blade.php ENDPATH**/ ?>

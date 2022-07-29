@@ -5,8 +5,8 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title') Edit Product @endslot
+@slot('li_1') INDIGCO @endslot
+@slot('title') Edit Produk @endslot
 @endcomponent
 <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
-                        <label class="form-label" for="product-title-input">Product Title</label>
+                        <label class="form-label" for="product-title-input">Nama Produk</label>
                         <input type="text" class="form-control {{ $errors->get('title') ? 'is-invalid' : '' }}" id="product-title-input" placeholder="Enter product title" name="title" value="{{ $product->title }}">
                         @foreach ($errors->get('title') as $msg)
                         <div class="invalid-feed text-danger">
@@ -26,7 +26,7 @@
                         @endforeach
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="product-price-input">Price</label>
+                        <label class="form-label" for="product-price-input">Harga</label>
                         <input type="number" class="form-control {{ $errors->get('price') ? 'is-invalid' : '' }}" id="product-price-input" placeholder="Enter price" name="price" value="{{ $product->price }}">
                         @foreach ($errors->get('price') as $msg)
                         <div class="invalid-feed text-danger">
@@ -35,7 +35,7 @@
                         @endforeach
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="product-weight-input">Weight</label>
+                        <label class="form-label" for="product-weight-input">Berat</label>
                         <input type="number" class="form-control {{ $errors->get('weight') ? 'is-invalid' : '' }}" id="product-weight-input" placeholder="Enter weight (gram)" name="weight" value="{{ $product->weight }}">
                         @foreach ($errors->get('weight') as $msg)
                         <div class="invalid-feed text-danger">
@@ -44,7 +44,7 @@
                         @endforeach
                     </div>
                     <div>
-                        <label class="form-label" for="product-stock-input">Stock</label>
+                        <label class="form-label" for="product-stock-input">Stok</label>
                         <input type="number" class="form-control {{ $errors->get('stock') ? 'is-invalid' : '' }}" id="product-stock-input" placeholder="Enter stock" name="stock" value="{{ $product->stock }}">
                         @foreach ($errors->get('stock') as $msg)
                         <div class="invalid-feed text-danger">
@@ -58,12 +58,11 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Gallery</h5>
+                    <h5 class="card-title mb-0">Unggah Foto Produk</h5>
                 </div>
                 <div class="card-body">
                     <div class="mb-4">
-                        <h5 class="fs-13 mb-1">Product Image</h5>
-                        <p class="text-muted">Add Product main Image.</p>
+                        <h5 class="fs-13 mb-1">Foto Produk Utama</h5>
                         <input class="form-control {{ $errors->get('galleries_id') ? 'is-invalid' : '' }}" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="foto">
                         @foreach ($errors->get('galleries_id') as $msg)
                         <div class="invalid-feed text-danger">
@@ -72,8 +71,7 @@
                         @endforeach
                     </div>
                     <div>
-                        <h5 class="fs-13 mb-1">Product Gallery</h5>
-                        <p class="text-muted">Add Product Gallery Images.</p>
+                        <h5 class="fs-13 mb-1">Galeri Produk</h5>
 
                         <div class="dropzone">
                             <div class="fallback">
@@ -145,10 +143,9 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Categories</h5>
+                    <h5 class="card-title mb-0">Kategori Produk</h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-2">Select product category</p>
                     <select class="form-select {{ $errors->get('category_id') ? 'is-invalid' : '' }}" id="choices-category-input" data-choices data-choices-search-false name="category_id">
                         @foreach($category as $value)
                         @if($value->name == 'All')
@@ -168,7 +165,7 @@
             <!-- end card -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Tags</h5>
+                    <h5 class="card-title mb-0">Catatan</h5>
                 </div>
                 <div class="card-body">
                     <div class="hstack gap-3 align-items-start">
@@ -188,10 +185,10 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Short Description</h5>
+                    <h5 class="card-title mb-0">Deskripsi Produk</h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-2">Add short description for product</p>
+                    <p class="text-muted mb-2">Tambahkan deskripsi singkat untuk produk</p>
                     <textarea class="form-control {{ $errors->get('description') ? 'is-invalid' : '' }}" placeholder="Enter short description for product" rows="3" name="description">{{ $product->description }}</textarea>
                     @foreach ($errors->get('description') as $msg)
                     <div class="invalid-feed text-danger">

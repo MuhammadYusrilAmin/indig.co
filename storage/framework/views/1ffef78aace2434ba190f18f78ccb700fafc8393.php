@@ -5,8 +5,8 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Create Product <?php $__env->endSlot(); ?>
+<?php $__env->slot('li_1'); ?> INDIGCO <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Tambah Produk <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 <form action="<?php echo e(route('products.store')); ?>" method="POST" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
@@ -16,13 +16,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
-                        <label class="form-label" for="product-title-input">Product Code</label>
+                        <label class="form-label" for="product-title-input">Kode Produk</label>
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" id="id_barang" name="id_barang" autofocus required class="form-control <?php echo e($errors->get('title') ? 'is-invalid' : ''); ?>" id="product-title-input" placeholder="Enter product code" name="title">
                             </div>
                             <div class="col-2">
-                                <button type="button" onclick="random_code()" class="btn btn-success w-xs">Random Code</button>
+                                <button type="button" onclick="random_code()" class="btn btn-success w-100">Kode Acak</button>
                             </div>
                         </div>
                         <script>
@@ -40,7 +40,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="product-title-input">Product Title</label>
+                        <label class="form-label" for="product-title-input">Nama Produk</label>
                         <input type="text" class="form-control <?php echo e($errors->get('title') ? 'is-invalid' : ''); ?>" id="product-title-input" placeholder="Enter product title" name="title">
                         <?php $__currentLoopData = $errors->get('title'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
@@ -50,7 +50,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="product-price-input">Price</label>
+                        <label class="form-label" for="product-price-input">Harga</label>
                         <input type="number" class="form-control <?php echo e($errors->get('price') ? 'is-invalid' : ''); ?>" id="product-price-input" placeholder="Enter price" name="price">
                         <?php $__currentLoopData = $errors->get('price'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
@@ -60,7 +60,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="product-weight-input">Weight</label>
+                        <label class="form-label" for="product-weight-input">Berat</label>
                         <input type="number" class="form-control <?php echo e($errors->get('weight') ? 'is-invalid' : ''); ?>" id="product-weight-input" placeholder="Enter weight (gram)" name="weight">
                         <?php $__currentLoopData = $errors->get('weight'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
@@ -70,7 +70,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div>
-                        <label class="form-label" for="product-stock-input">Stock</label>
+                        <label class="form-label" for="product-stock-input">Stok</label>
                         <input type="number" class="form-control <?php echo e($errors->get('stock') ? 'is-invalid' : ''); ?>" id="product-stock-input" placeholder="Enter stock" name="stock">
                         <?php $__currentLoopData = $errors->get('stock'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
@@ -85,12 +85,11 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Gallery</h5>
+                    <h5 class="card-title mb-0">Unggah Foto Produk</h5>
                 </div>
                 <div class="card-body">
                     <div class="mb-4">
-                        <h5 class="fs-13 mb-1">Product Image</h5>
-                        <p class="text-muted">Add Product main Image.</p>
+                        <h5 class="fs-13 mb-1">Foto Produk Utama</h5>
                         <input class="form-control <?php echo e($errors->get('galleries_id') ? 'is-invalid' : ''); ?>" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg" name="foto">
                         <?php $__currentLoopData = $errors->get('galleries_id'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
@@ -100,8 +99,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div>
-                        <h5 class="fs-13 mb-1">Product Gallery</h5>
-                        <p class="text-muted">Add Product Gallery Images.</p>
+                        <h5 class="fs-13 mb-1">Galeri Produk</h5>
 
                         <div class="dropzone">
                             <div class="fallback">
@@ -115,31 +113,6 @@
                                 <h5>Drop files here or click to upload.</h5>
                             </div>
                         </div>
-
-                        <!-- <ul class="list-unstyled mb-0" id="dropzone-preview">
-                            <li class="mt-2" id="dropzone-preview-list">
-                                <div class="border rounded">
-                                    <div class="d-flex p-2">
-                                        <div class="flex-shrink-0 me-3">
-                                            <div class="avatar-sm bg-light rounded">
-                                                <img data-dz-thumbnail class="img-fluid rounded d-block" src="#" alt="Product-Image" />
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <div class="pt-1">
-                                                <h5 class="fs-13 mb-1" data-dz-name>&nbsp;</h5>
-                                                <p class="fs-13 text-muted mb-0" data-dz-size></p>
-                                                <strong class="error text-danger" data-dz-errormessage></strong>
-                                            </div>
-                                        </div>
-                                        <div class="flex-shrink-0 ms-3">
-                                            <button data-dz-remove class="btn btn-sm btn-danger">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul> -->
-                        <!-- end dropzon-preview -->
                     </div>
                 </div>
             </div>
@@ -174,7 +147,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Categories</h5>
+                    <h5 class="card-title mb-0">Kategori Produk</h5>
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-2">Select product category</p>
@@ -198,7 +171,7 @@
             <!-- end card -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Tags</h5>
+                    <h5 class="card-title mb-0">Catatan</h5>
                 </div>
                 <div class="card-body">
                     <div class="hstack gap-3 align-items-start">
@@ -219,10 +192,10 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Product Short Description</h5>
+                    <h5 class="card-title mb-0">Deskripsi Produk</h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-2">Add short description for product</p>
+                    <p class="text-muted mb-2">Tambahkan deskripsi singkat untuk produk</p>
                     <textarea class="form-control <?php echo e($errors->get('description') ? 'is-invalid' : ''); ?>" placeholder="Enter short description for product" rows="3" name="description"></textarea>
                     <?php $__currentLoopData = $errors->get('description'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="invalid-feed text-danger">

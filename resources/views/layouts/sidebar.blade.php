@@ -2,24 +2,22 @@
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
     <div class="navbar-brand-box">
-        <!-- Dark Logo-->
-        <a href="index" class="logo logo-dark">
-            <span class="logo-sm">
-                <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="{{ URL::asset('assets/images/logo-dark.png') }}" alt="" height="17">
-            </span>
+        @if (Auth::user()->role == 'Super Admin')
+        <a href="{{ url('#') }}" class="logo logo-light">
+            <h1 style="color: white;" class="mt-3">INDIG.CO</h1>
         </a>
-        <!-- Light Logo-->
-        <a href="index" class="logo logo-light">
-            <span class="logo-sm">
-                <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="17">
-            </span>
+        <a href="{{ url('#') }}" class="logo logo-dark">
+            <h1 style="color: black;" class="mt-3">INDIG.CO</h1>
         </a>
+        @else
+        <a href="{{ url('/') }}" class="logo logo-light">
+            <h1 style="color: white;" class="mt-3">INDIG.CO</h1>
+        </a>
+        <a href="{{ url('/') }}" class="logo logo-dark">
+            <h1 style="color: black;" class="mt-3">INDIG.CO</h1>
+        </a>
+        @endif
+
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>

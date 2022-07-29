@@ -54,7 +54,7 @@ class EmployeeController extends Controller
 
         $image = $request->file('avatar');
         $new_image = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('assets/images/outrusers'), $new_image);
+        $image->move(public_path('assets/images/users'), $new_image);
 
         if ($request->hasfile('avatar')) {
             $employee = User::create([

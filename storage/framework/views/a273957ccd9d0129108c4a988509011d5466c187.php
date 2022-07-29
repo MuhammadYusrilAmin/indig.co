@@ -5,8 +5,8 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Edit Product <?php $__env->endSlot(); ?>
+<?php $__env->slot('li_1'); ?> INDIGCO <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Edit Produk <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 <form action="<?php echo e(route('products.update', $product->id)); ?>" method="POST" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
-                        <label class="form-label" for="product-title-input">Product Title</label>
+                        <label class="form-label" for="product-title-input">Nama Produk</label>
                         <input type="text" class="form-control <?php echo e($errors->get('title') ? 'is-invalid' : ''); ?>" id="product-title-input" placeholder="Enter product title" name="title" value="<?php echo e($product->title); ?>">
                         <?php $__currentLoopData = $errors->get('title'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">
@@ -27,7 +27,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="product-price-input">Price</label>
+                        <label class="form-label" for="product-price-input">Harga</label>
                         <input type="number" class="form-control <?php echo e($errors->get('price') ? 'is-invalid' : ''); ?>" id="product-price-input" placeholder="Enter price" name="price" value="<?php echo e($product->price); ?>">
                         <?php $__currentLoopData = $errors->get('price'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="invalid-feed text-danger">

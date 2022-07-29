@@ -30,71 +30,75 @@ Auth::routes();
 //Language Translation
 Route::get('index/{locale}', [HomeController::class, 'lang']);
 
-//Update User Details
-Route::post('/update-profile/{id}', [HomeController::class, 'updateProfile'])->name('updateProfile');
-Route::post('/update-password/{id}', [HomeController::class, 'updatePassword'])->name('updatePassword');
-
 // Route::get('{any}', [HomeController::class, 'index'])->name('index');
-
-Route::get('/', [HomeController::class, 'root'])->name('root');
-Route::get('/sellers/{id}', [HomeController::class, 'showSeller'])->name('showSeller');
 
 Route::post('register', [RegisterController::class, 'create']);
 Route::resource('register-cooperative', RegisterCooperativeController::class);
 
-// DAHBOARD SUPER ADMIN
-Route::resource('dashboard-admin', SuperAdminController::class);
-Route::post('reject-cooperative/{id}', [SuperAdminController::class, 'reject']);
+Route::middleware(['auth', 'role:Super Admin'])->group(function () {
+    Route::resource('dashboard-admin', SuperAdminController::class);
+    Route::post('reject-cooperative/{id}', [SuperAdminController::class, 'reject']);
+});
 
-// DASHBOARD COOPERATIVE
-Route::resource('dashboard', DashboardController::class);
+Route::middleware(['auth', 'role:Admin'])->group(function () {
+    Route::resource('employees', EmployeeController::class);
+});
 
-Route::resource('search', SearchController::class);
+Route::resource('dashboard', DashboardController::class)->middleware('auth');
 
 Route::resource('products', ProductController::class)->middleware('auth');
 Route::get('detail_products', [ProductController::class, 'show'])->middleware('auth');
-Route::resource('orders', OrderController::class)->middleware('auth');
+
 Route::post('reject-order/{id}', [OrderController::class, 'reject'])->middleware('auth');
 Route::post('accept-order/{id}', [OrderController::class, 'acceptOrder'])->middleware('auth');
 Route::post('cancell-order/{id}', [OrderController::class, 'cancellOrder'])->middleware('auth');
-Route::resource('transaction', TransactionController::class)->middleware('auth');
-Route::resource('cart',  \App\Http\Controllers\CartController::class)->middleware('auth');
-Route::resource('orderDetail',  \App\Http\Controllers\OrderDetailController::class)->middleware('auth');
-Route::post('/minus_quantity',  [\App\Http\Controllers\CartController::class, 'minus_quantity'])->middleware('auth');
-Route::post('/plus_quantity',  [\App\Http\Controllers\CartController::class, 'plus_quantity'])->middleware('auth');
-Route::resource('/whistlist', \App\Http\Controllers\WhishlistController::class)->middleware('auth');
-Route::resource('/address',  \App\Http\Controllers\AddressController::class);
-
-// ROLE Admin
-Route::resource('products', ProductController::class)->middleware('auth');
 Route::get('orders-admin', [OrderController::class, 'orders'])->middleware('auth');
 Route::post('send-order/{id}', [OrderController::class, 'sendOrder'])->middleware('auth');
-Route::resource('employees', EmployeeController::class)->middleware('auth');
-Route::resource('dashboard', DashboardController::class)->middleware('auth');
+
 Route::resource('kasir', KasirController::class)->middleware('auth');
 Route::post('/kasir_minus_quantity',  [\App\Http\Controllers\KasirController::class, 'minus_quantity'])->middleware('auth');
 Route::post('/kasir_plus_quantity',  [\App\Http\Controllers\KasirController::class, 'plus_quantity'])->middleware('auth');
-Route::get('/export-pdf',  [\App\Http\Controllers\TransactionController::class, 'pdf'])->middleware('auth');
 Route::get('/export-printer',  [\App\Http\Controllers\KasirController::class, 'printer'])->middleware('auth');
+
+Route::get('/export-pdf',  [\App\Http\Controllers\TransactionController::class, 'pdf'])->middleware('auth');
+
+Route::get('/', [HomeController::class, 'root'])->name('root')->middleware('auth');
+Route::get('/sellers/{id}', [HomeController::class, 'showSeller'])->name('showSeller')->middleware('auth');
+
+Route::resource('orders', OrderController::class)->middleware('auth');
+
+Route::resource('orderDetail',  \App\Http\Controllers\OrderDetailController::class)->middleware('auth');
+
+Route::resource('search', SearchController::class)->middleware('auth');
+
+Route::resource('transaction', TransactionController::class);
+
+Route::resource('cart',  \App\Http\Controllers\CartController::class)->middleware('auth');
+Route::post('/minus_quantity',  [\App\Http\Controllers\CartController::class, 'minus_quantity'])->middleware('auth');
+Route::post('/plus_quantity',  [\App\Http\Controllers\CartController::class, 'plus_quantity'])->middleware('auth');
+
+Route::resource('/whistlist', \App\Http\Controllers\WhishlistController::class)->middleware('auth');
+
+Route::resource('/address',  \App\Http\Controllers\AddressController::class)->middleware('auth');
 
 //midtrans gateway
 Route::get('payment/success', [OrderController::class, 'midtransCallBack'])->middleware('auth');
 Route::post('payment/success', [OrderController::class, 'midtransCallBack'])->middleware('auth');
 
 // get Wilayah
-Route::post('/getkabupaten',  [IndoRegionController::class, 'getkabupaten']);
-Route::post('/getkecamatan',  [IndoRegionController::class, 'getkecamatan']);
-Route::post('/getdesa',  [IndoRegionController::class, 'getdesa']);
+Route::post('/getkabupaten',  [IndoRegionController::class, 'getkabupaten'])->middleware('auth');
+Route::post('/getkecamatan',  [IndoRegionController::class, 'getkecamatan'])->middleware('auth');
+Route::post('/getdesa',  [IndoRegionController::class, 'getdesa'])->middleware('auth');
 
 // PROFILE
-Route::resource('profile', ProfileController::class);
-Route::post('change-password/{id}', [ProfileController::class, 'changePassword']);
+Route::resource('profile', ProfileController::class)->middleware('auth');
+Route::post('change-password/{id}', [ProfileController::class, 'changePassword'])->middleware('auth');
 Route::get('faqs', function () {
     return view('profile.faqs');
-});
+})->middleware('auth');
 Route::get('chat', function () {
     return view('profile.chat');
-});
+})->middleware('auth');
 
 // beberapa fungsi endpoint resource yang perlu kita ketahui:
 // 1. Route get => nama_route => menjalankan fungsi index

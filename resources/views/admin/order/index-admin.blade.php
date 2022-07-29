@@ -2,17 +2,17 @@
 @section('title') @lang('translation.orders') @endsection
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title') Orders @endslot
+@slot('li_1') INDIGCO @endslot
+@slot('title') Pesanan @endslot
 @endcomponent
 <div class="row">
     <div class="col-lg-12">
         <div class="card" id="orderList">
             <div class="card-header  border-0">
                 <div class="d-flex align-items-center">
-                    <h5 class="card-title mb-0 flex-grow-1">Order History</h5>
+                    <h5 class="card-title mb-0 flex-grow-1">Manajemen Pesanan</h5>
                     <div class="flex-shrink-0">
-                        <a href="{{url('export-pdf')}}" type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</a>
+                        <a href="{{url('export-pdf')}}" type="button" class="btn btn-soft-danger"><i class="ri-file-download-line align-bottom me-1"></i> PDF</a>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                     <div class="row g-3">
                         <div class="col-xxl-12 col-sm-6">
                             <div class="search-box">
-                                <input type="text" class="form-control search" placeholder="Search for order ID, customer, order status or something...">
+                                <input type="text" class="form-control search" placeholder="Cari pesanan...">
                                 <i class="ri-search-line search-icon"></i>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                     <ul class="nav nav-tabs nav-tabs-custom nav-primary mb-3" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active All py-3" data-bs-toggle="tab" id="All" href="#home1" role="tab" aria-selected="false">
-                                <i class="ri-store-2-fill me-1 align-bottom"></i> All Orders
+                                <i class="ri-store-2-fill me-1 align-bottom"></i> Semua Pesanan
                                 @if (count($datas) != 0)
                                 <span class="badge bg-primary align-middle ms-1">{{ count($datas) }}</span>
                                 @endif
@@ -74,7 +74,7 @@
                         <li class="nav-item">
                             <a class="nav-link py-3 Pending" data-bs-toggle="tab" id="Pending" href="#pending" role="tab" aria-selected="true">
                                 <i class="las la-info-circle me-1 align-middle"></i>
-                                New Orders
+                                Orderan Baru
                                 @if (count($datas->where('status', 'Pending')) != 0)
                                 <span class="badge bg-warning align-middle ms-1">{{ count($datas->where('status', 'Pending')) }}</span>
                                 @endif
@@ -82,7 +82,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Inprogress" data-bs-toggle="tab" id="Inprogress" href="#inprogress" role="tab" aria-selected="true">
-                                <i class="mdi mdi-progress-clock me-1 align-bottom"></i> Inprogress
+                                <i class="mdi mdi-progress-clock me-1 align-bottom"></i> Dikemas
                                 @if (count($datas->where('status', 'Inprogress')) != 0)
                                 <span class="badge bg-warning align-middle ms-1">{{ count($datas->where('status', 'Inprogress')) }}</span>
                                 @endif
@@ -90,7 +90,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Pickups" data-bs-toggle="tab" id="Pickups" href="#pickups" role="tab" aria-selected="false">
-                                <i class="ri-truck-line me-1 align-bottom"></i> Pickups
+                                <i class="ri-truck-line me-1 align-bottom"></i> Dikirim
                                 @if (count($datas->where('status', 'Pickups')) != 0)
                                 <span class="badge bg-secondary align-middle ms-1">{{ count($datas->where('status', 'Pickups')) }}</span>
                                 @endif
@@ -98,7 +98,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Received" data-bs-toggle="tab" id="Received" href="#received" role="tab" aria-selected="false">
-                                <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Received
+                                <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Diterima
                                 @if (count($datas->where('status', 'Received')) != 0)
                                 <span class="badge bg-success align-middle ms-1">{{ count($datas->where('status', 'Received')) }}</span>
                                 @endif
@@ -106,7 +106,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Returns" data-bs-toggle="tab" id="Returns" href="#returns" role="tab" aria-selected="false">
-                                <i class="ri-arrow-left-right-fill me-1 align-bottom"></i> Returns
+                                <i class="ri-arrow-left-right-fill me-1 align-bottom"></i> Dikembalikan
                                 @if (count($datas->where('status', 'Returns')) != 0)
                                 <span class="badge bg-danger align-middle ms-1">{{ count($datas->where('status', 'Returns')) }}</span>
                                 @endif
@@ -114,7 +114,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Cancelled" data-bs-toggle="tab" id="Cancelled" href="#cancelled" role="tab" aria-selected="false">
-                                <i class="ri-close-circle-line me-1 align-bottom"></i> Cancelled
+                                <i class="ri-close-circle-line me-1 align-bottom"></i> Dibatalkan
                                 @if (count($datas->where('status', 'Cancelled')) != 0)
                                 <span class="badge bg-danger align-middle ms-1">{{ count($datas->where('status', 'Cancelled')) }}</span>
                                 @endif
@@ -122,7 +122,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Rejected" data-bs-toggle="tab" id="Rejected" href="#rejected" role="tab" aria-selected="false">
-                                <i class="ri-close-circle-line me-1 align-bottom"></i> Rejected
+                                <i class="ri-close-circle-line me-1 align-bottom"></i> Ditolak
                                 @if (count($datas->where('status', 'Rejected')) != 0)
                                 <span class="badge bg-danger align-middle ms-1">{{ count($datas->where('status', 'Rejected')) }}</span>
                                 @endif
@@ -139,14 +139,14 @@
                                             <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                         </div>
                                     </th>
-                                    <th class="sort" data-sort="id">Receipt Number</th>
-                                    <th class="sort" data-sort="customer_name">Customer</th>
-                                    <th class="sort" data-sort="product_name">Product</th>
-                                    <th class="sort" data-sort="date">Order Date</th>
-                                    <th class="sort" data-sort="amount">Amount</th>
-                                    <th class="sort" data-sort="payment">Sender</th>
-                                    <th class="sort" data-sort="status">Delivery Status</th>
-                                    <th class="sort" data-sort="city">Action</th>
+                                    <th class="sort" data-sort="id">No. Resi</th>
+                                    <th class="sort" data-sort="customer_name">Pelanggan</th>
+                                    <th class="sort" data-sort="product_name">Produk</th>
+                                    <th class="sort" data-sort="date">Tanggal Pesan</th>
+                                    <th class="sort" data-sort="amount">Total Bayar</th>
+                                    <th class="sort" data-sort="payment">Metode Pengiriman</th>
+                                    <th class="sort" data-sort="status">Status Pengiriman</th>
+                                    <th class="sort" data-sort="city">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
@@ -184,14 +184,14 @@
                                                 <form action="{{ route('orders.update', $data->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
-                                                    <button type="submit" class="btn btn-primary btn-sm">Accept</button>
-                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#deleteOrder{{ $data->id }}">Reject</a>
+                                                    <button type="submit" class="btn btn-primary btn-sm">Terima</button>
+                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#deleteOrder{{ $data->id }}">Tolak</a>
                                                 </form>
                                             </li>
                                             @endif
                                             @if ($data->status == 'Inprogress')
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Send Order">
-                                                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#sendOrder{{ $data->id }}"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</a>
+                                                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#sendOrder{{ $data->id }}"><i class="ri-truck-line me-1 align-bottom"></i> Kirim Sekarang</a>
                                             </li>
                                             @endif
                                         </ul>
@@ -207,21 +207,21 @@
                                                 @csrf
                                                 <div class="modal-header">
                                                     <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:70px;height:70px"></lord-icon>
-                                                    <h5 class="modal-title" id="CancellOrder{{ $data->id }}Label">Please enter receipt number</h5>
+                                                    <h5 class="modal-title" id="CancellOrder{{ $data->id }}Label">Silahkan Masukkan Nomor Resi</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div>
                                                         <div class="mb-3">
-                                                            <label for="resi" class="form-label">Receipt Number <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control @error('resi') is-invalid @enderror" name="resi" value="{{ old('resi') }}" id="resi" placeholder="Enter receipt number" required>
+                                                            <label for="resi" class="form-label">Nomor Resi <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control @error('resi') is-invalid @enderror" name="resi" value="{{ old('resi') }}" id="resi" placeholder="Enter nomor resi" required>
                                                             @error('resi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                             @enderror
                                                             <div class="invalid-feedback">
-                                                                Please enter resi
+                                                                Masukkan nomor resi dengan benar
                                                             </div>
                                                         </div>
                                                     </div>
@@ -229,7 +229,7 @@
                                                 <div class="modal-footer">
                                                     <div class="hstack gap-2 justify-content-end">
                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary" id="delete-record"><i class="ri-truck-line me-1 align-bottom"></i> Send Now</button>
+                                                        <button type="submit" class="btn btn-primary" id="delete-record"><i class="ri-truck-line me-1 align-bottom"></i> Kirim Sekarang</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -246,7 +246,7 @@
                                                 @csrf
                                                 <div class="modal-header">
                                                     <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:70px;height:70px"></lord-icon>
-                                                    <h5 class="modal-title" id="CancellOrder{{ $data->id }}Label">Why did you cancel the order?</h5>
+                                                    <h5 class="modal-title" id="CancellOrder{{ $data->id }}Label">Kenapa anda ingin membatalkan pesanan?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -267,8 +267,8 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="hstack gap-2 justify-content-end">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary">Kirim</button>
                                                     </div>
                                                 </div>
                                             </form>

@@ -338,4 +338,11 @@
 </form>
 @endsection
 @section('script')
+<script src="assets/libs/list.js/list.js.min.js"></script>
+<script src="assets/libs/list.pagination.js/list.pagination.js.min.js"></script>
+
+<!--ecommerce-customer init js -->
+<script src="assets/js/pages/ecommerce-order.init.js"></script>
+
+<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection

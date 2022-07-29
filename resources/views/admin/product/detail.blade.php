@@ -6,8 +6,8 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title')Product Detail @endslot
+@slot('li_1') INDIGCO @endslot
+@slot('title')Detail Produk @endslot
 @endcomponent
 @php $id = $showDetail->id; @endphp
 <div class="row">
@@ -55,10 +55,10 @@
                                     <div class="hstack gap-3 flex-wrap">
                                         <div><a href="#" class="text-primary d-block">{{ $showDetail->cooperative->owner_name }}</a></div>
                                         <div class="vr"></div>
-                                        <div class="text-muted">Seller : <span class="text-body fw-medium">{{ $showDetail->cooperative->name }}</span>
+                                        <div class="text-muted">Penjual : <span class="text-body fw-medium">{{ $showDetail->cooperative->name }}</span>
                                         </div>
                                         <div class="vr"></div>
-                                        <div class="text-muted">Published : <span class="text-body fw-medium">{{ $showDetail->tanggal }}</span>
+                                        <div class="text-muted">Diterbitkan : <span class="text-body fw-medium">{{ $showDetail->tanggal }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <p class="text-muted mb-1">Price :</p>
+                                                <p class="text-muted mb-1">Harga :</p>
                                                 <h5 class="mb-0">{{ "Rp " . number_format($showDetail->price , 2, ",", ".") }}</h5>
                                             </div>
                                         </div>
@@ -146,7 +146,7 @@
                                                     $orders += $orderdetail->quantity;
                                                 }
                                                 ?>
-                                                <p class="text-muted mb-1">No. of Orders :</p>
+                                                <p class="text-muted mb-1">Terjual :</p>
                                                 <h5 class="mb-0">{{$orders}}</h5>
                                             </div>
                                         </div>
@@ -162,7 +162,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <p class="text-muted mb-1">Available Stocks :</p>
+                                                <p class="text-muted mb-1">Stok Ditemukan :</p>
                                                 <h5 class="mb-0">{{$showDetail->stock}}</h5>
                                             </div>
                                         </div>
@@ -174,13 +174,13 @@
                             <div class=" mt-4">
                                 <form action="{{route('orderDetail.store')}}" id="input-cart2" method="post">
                                     @csrf
-                                    <h5 class="fs-14">Request :</h5>
+                                    <h5 class="fs-14">Catatan :</h5>
                                     <input type="text" class="form-control" id="request" name="request2" placeholder="Enter request (size, color, etc)">
                             </div>
                             @endif
 
                             <div class="mt-5 text-muted">
-                                <h5 class="fs-14">Description :</h5>
+                                <h5 class="fs-14">Deskripsi :</h5>
                                 <p>{{ $showDetail->description }}</p>
                             </div>
                             @if($showDetail->cooperative_id != Auth::user()->cooperative_id)
@@ -203,15 +203,15 @@
 
                             <div class="mt-4 text-muted">
                                 @if($showDetail->stock != 0)
-                                <button onclick="InputCart2()" class="btn btn-success">Buy Now</button>
+                                <button onclick="InputCart2()" class="btn btn-success">Beli Sekarang</button>
                                 </form>
                                 @else
-                                <button disabled class="btn btn-success">Buy Now</button>
+                                <button disabled class="btn btn-success">Beli Sekarang</button>
                                 @endif
                                 @if($showDetail->stock != 0)
-                                <button onclick="InputCart()" class="btn btn-primary">Add to Cart</button>
+                                <button onclick="InputCart()" class="btn btn-primary">Tambahkan ke Keranjang</button>
                                 @else
-                                <button disabled class="btn btn-primary">Add to Cart</button>
+                                <button disabled class="btn btn-primary">Tambahkan ke Keranjang</button>
                                 @endif
                                 <form action="{{route('cart.store')}}" id="input-cart" method="post">
                                     @csrf
@@ -226,7 +226,7 @@
 
                             <div class="mt-5">
                                 <div>
-                                    <h5 class="fs-14 mb-3">Ratings & Reviews</h5>
+                                    <h5 class="fs-14 mb-3">Penilaian dan Ulasan</h5>
                                 </div>
                                 <div class="row gy-4 gx-0">
                                     <div class="col-lg-4">
@@ -235,7 +235,7 @@
                                                 <div class="bg-light px-3 py-2 rounded-2 mb-2">
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-grow-1">
-                                                            <h6 class="mb-0">Rating</h6>
+                                                            <h6 class="mb-0">Penilaian</h6>
                                                         </div>
                                                         <div class="flex-shrink-0">
                                                             @if (count($ratings) == null)
@@ -416,7 +416,7 @@
                                     <div class="col-lg-8">
                                         <div class="ps-lg-4">
                                             <div class="d-flex flex-wrap align-items-start gap-3">
-                                                <h5 class="fs-14">Reviews: </h5>
+                                                <h5 class="fs-14">Ulasan: </h5>
                                             </div>
 
                                             <div class="me-lg-n3 pe-lg-4" data-simplebar style="max-height: 225px;">
@@ -452,7 +452,7 @@
                                                     @endforeach
 
                                                     @if (count($ratings) == null)
-                                                    <h4 class="mt-5 pt-5 text-center text-secondary">No Rewiew</h4>
+                                                    <h4 class="mt-5 pt-5 text-center text-secondary">Belum ada ulasan</h4>
                                                     @endif
                                                 </ul>
                                             </div>

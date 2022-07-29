@@ -2,8 +2,8 @@
 @section('title') Employees @endsection
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title') Employees @endslot
+@slot('li_1') INDIGCO @endslot
+@slot('title') Data Karyawan @endslot
 @endcomponent
 <div class="row">
     <div class="col-lg-12">
@@ -13,13 +13,12 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-sm">
                         <div>
-                            <h5 class="card-title mb-0">Employee List <span class="badge bg-secondary align-middle ms-1">{{ count($datas) }}</span></h5>
+                            <h5 class="card-title mb-0">Data Karyawan <span class="badge bg-secondary align-middle ms-1">{{ count($datas) }}</span></h5>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="hstack gap-2">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="ri-add-line align-bottom me-1"></i> Add Employee</button>
-                            <button type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="ri-add-line align-bottom me-1"></i> Tambah Karyawan</button>
                         </div>
                     </div>
                 </div>
@@ -27,41 +26,13 @@
             <div class="card-body border-bottom-dashed border-bottom">
                 <form>
                     <div class="row g-3">
-                        <div class="col-xl-6">
+                        <div class="col-xl-12">
                             <div class="search-box">
-                                <input type="text" class="form-control search" placeholder="Search for employee, email, phone, status or something...">
+                                <input type="text" class="form-control search" placeholder="Cari nama karyawan">
                                 <i class="ri-search-line search-icon"></i>
                             </div>
                         </div>
                         <!--end col-->
-                        <div class="col-xl-6">
-                            <div class="row g-3">
-                                <div class="col-sm-4">
-                                    <div class="">
-                                        <input type="text" class="form-control" id="datepicker-range" data-provider="flatpickr" data-date-format="d M, Y" data-range-date="true" placeholder="Select date">
-                                    </div>
-                                </div>
-                                <!--end col-->
-                                <div class="col-sm-4">
-                                    <div>
-                                        <select class="form-control" data-plugin="choices" data-choices data-choices-search-false name="choices-single-default" id="idStatus">
-                                            <option value="">Status</option>
-                                            <option value="all" selected>All</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Block">Block</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!--end col-->
-
-                                <div class="col-sm-4">
-                                    <div>
-                                        <button type="button" class="btn btn-secondary w-100" onclick="SearchData();"> <i class="ri-equalizer-fill me-2 align-bottom"></i>Filters</button>
-                                    </div>
-                                </div>
-                                <!--end col-->
-                            </div>
-                        </div>
                     </div>
                     <!--end row-->
                 </form>
@@ -78,13 +49,13 @@
                                         </div>
                                     </th>
 
-                                    <th class="sort" data-sort="">Photo</th>
-                                    <th class="sort" data-sort="customer_name">Name</th>
+                                    <th class="sort" data-sort="">Foto</th>
+                                    <th class="sort" data-sort="customer_name">Nama</th>
                                     <th class="sort" data-sort="email">Email</th>
-                                    <th class="sort" data-sort="phone">Phone</th>
-                                    <th class="sort" data-sort="date">Joining Date</th>
+                                    <th class="sort" data-sort="phone">No. Telepon</th>
+                                    <th class="sort" data-sort="date">Tanggal Bergabung</th>
                                     <th class="sort" data-sort="status">Status</th>
-                                    <th class="sort" data-sort="action">Action</th>
+                                    <th class="sort" data-sort="action">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
@@ -128,7 +99,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="editModalLabel{{ $data->id }}">Edit Employee</h5>
+                                                <h5 class="modal-title" id="editModalLabel{{ $data->id }}">Perbarui Data Karyawan</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <form action="{{ route('employees.update', $data->id) }}" method="POST">
@@ -137,17 +108,17 @@
                                                 <div class="modal-body">
                                                     <div class="mb-3" style="display: none;">
                                                         <label for="id-field" class="form-label">ID</label>
-                                                        <input type="text" id="id-field" class="form-control" placeholder="Enter id" required name="cooperative_id" value="{{ Auth::user()->cooperative_id }}">
+                                                        <input type="text" id="id-field" class="form-control" placeholder="Masukkan id" required name="cooperative_id" value="{{ Auth::user()->cooperative_id }}">
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="customername-field" class="form-label">Employee Name</label>
-                                                        <input type="text" id="customername-field" class="form-control" placeholder="Enter name" required name="name" value="{{ $data->name }}">
+                                                        <label for="customername-field" class="form-label">Nama Karyawan</label>
+                                                        <input type="text" id="customername-field" class="form-control" placeholder="Masukkan nama karyawan" required name="name" value="{{ $data->name }}">
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="email-field" class="form-label">Email</label>
-                                                        <input type="email" id="email-field" class="form-control" placeholder="Enter email" required name="email" value="{{ $data->email }}">
+                                                        <input type="email" id="email-field" class="form-control" placeholder="Masukkan email" required name="email" value="{{ $data->email }}">
                                                         @foreach ($errors->get('email') as $msg)
                                                         <div class="invalid-feed text-danger">
                                                             {{ $msg }}
@@ -156,13 +127,13 @@
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="phone-field" class="form-label">Phone</label>
-                                                        <input type="number" id="phone-field" class="form-control" placeholder="Enter phone number" required name="phone" value="{{ $data->phone }}"">
+                                                        <label for="phone-field" class="form-label">No. Telepon</label>
+                                                        <input type="number" id="phone-field" class="form-control" placeholder="Masukkan nomor telepon" required name="phone" value="{{ $data->phone }}"">
                                                     </div>
 
                                                     <div class=" mb-3">
-                                                        <label for="address-field" class="form-label">Address</label>
-                                                        <input type="text" id="address-field" class="form-control" placeholder="Enter address" required name="address" value="{{ $data->address }}"">
+                                                        <label for="address-field" class="form-label">Alamat Lengkap</label>
+                                                        <input type="text" id="address-field" class="form-control" placeholder="Masukkan alamat lengkap" required name="address" value="{{ $data->address }}"">
                                                     </div>
 
                                                     <div class=" mb-3">
@@ -179,7 +150,7 @@
                                                     </div>
 
                                                     <div>
-                                                        <label for="photo" class="form-label">Upload Photo</label>
+                                                        <label for="photo" class="form-label">Unggah Foto Profil</label>
                                                         <input type="file" class="form-control @error('photo') is-invalid @enderror" name="avatar" value="{{ old('photo') }}" id="photo">
                                                         @error('photo')
                                                         <span class="invalid-feedback" role="alert">
@@ -187,14 +158,14 @@
                                                         </span>
                                                         @enderror
                                                         <div class="invalid-feedback">
-                                                            Upload your photo
+                                                            Unggah foto profilmu
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="hstack gap-2 justify-content-end">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="submit" class="btn btn-primary" id="add-btn">Submit</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary" id="add-btn">Kirim</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -213,16 +184,16 @@
                                                 <div class="mt-2 text-center">
                                                     <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#25a0e2,secondary:#00bd9d" style="width:100px;height:100px"></lord-icon>
                                                     <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                                                        <h4>Are you sure ?</h4>
-                                                        <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record ?</p>
+                                                        <h4>Apakah kamu yakin?</h4>
+                                                        <p class="text-muted mx-4 mb-0">Apakah Anda yakin ingin menghapus data ini?</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Tidak</button>
                                                     <form action="{{route('employees.destroy', $data->id)}}" method="POST">
                                                         @method('delete')
                                                         @csrf
-                                                        <button type="submit" class="btn w-sm btn-danger " id="delete-product">Yes, Delete It!</button>
+                                                        <button type="submit" class="btn w-sm btn-danger " id="delete-product">Ya, hapus sekarang!</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -259,7 +230,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="addModalLabel">Add Employee</h5>
+                                <h5 class="modal-title" id="addModalLabel">Tambah Karyawan</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
@@ -267,17 +238,17 @@
                                 <div class="modal-body">
                                     <div class="mb-3" style="display: none;">
                                         <label for="id-field" class="form-label">ID</label>
-                                        <input type="text" id="id-field" class="form-control" placeholder="Enter id" required name="cooperative_id" value="{{ Auth::user()->cooperative_id }}">
+                                        <input type="text" id="id-field" class="form-control" placeholder="Masukkan id" required name="cooperative_id" value="{{ Auth::user()->cooperative_id }}">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="customername-field" class="form-label">Employee Name</label>
-                                        <input type="text" id="customername-field" class="form-control" placeholder="Enter name" required name="name" />
+                                        <label for="customername-field" class="form-label">Nama Karyawan</label>
+                                        <input type="text" id="customername-field" class="form-control" placeholder="Masukkan nama karyawan" required name="name" />
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="email-field" class="form-label">Email</label>
-                                        <input type="email" id="email-field" class="form-control" placeholder="Enter email" required name="email" />
+                                        <input type="email" id="email-field" class="form-control" placeholder="Masukkan email" required name="email" />
                                         @foreach ($errors->get('email') as $msg)
                                         <div class="invalid-feed text-danger">
                                             {{ $msg }}
@@ -286,13 +257,13 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="phone-field" class="form-label">Phone</label>
-                                        <input type="number" id="phone-field" class="form-control" placeholder="Enter phone number" required name="phone" />
+                                        <label for="phone-field" class="form-label">No. Telepon</label>
+                                        <input type="number" id="phone-field" class="form-control" placeholder="Masukkan nomor telepon" required name="phone" />
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="address-field" class="form-label">Address</label>
-                                        <input type="text" id="address-field" class="form-control" placeholder="Enter address" required name="address" />
+                                        <label for="address-field" class="form-label">Alamat Lengkap</label>
+                                        <input type="text" id="address-field" class="form-control" placeholder="Masukkan alamat lengkap" required name="address" />
                                     </div>
 
                                     <div class="mb-3">
@@ -304,7 +275,7 @@
                                     </div>
 
                                     <div>
-                                        <label for="photo" class="form-label">Upload Photo</label>
+                                        <label for="photo" class="form-label">Unggah Foto Profil</label>
                                         <input type="file" class="form-control @error('photo') is-invalid @enderror" name="avatar" value="{{ old('photo') }}" id="photo" required>
                                         @error('photo')
                                         <span class="invalid-feedback" role="alert">
@@ -312,14 +283,14 @@
                                         </span>
                                         @enderror
                                         <div class="invalid-feedback">
-                                            Upload your photo
+                                            Unggah foto profilmu
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div class="hstack gap-2 justify-content-end">
-                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary" id="add-btn">Submit</button>
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary" id="add-btn">Kirim</button>
                                     </div>
                                 </div>
                             </form>

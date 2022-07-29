@@ -7,21 +7,21 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title')Products @endslot
+@slot('li_1') INDIGCO @endslot
+@slot('title') Data Produk @endslot
 @endcomponent
 <div class="card">
     <div class="card-header border-0">
         <div class="row g-4">
             <div class="col-sm-auto">
                 <div>
-                    <a href="{{ route('products.create') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Add Product</a>
+                    <a href="{{ route('products.create') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Tambah Produk</a>
                 </div>
             </div>
             <div class="col-sm">
                 <div class="d-flex justify-content-sm-end">
                     <div class="search-box ms-2">
-                        <input type="text" class="form-control" placeholder="Search Products...">
+                        <input type="text" class="form-control" placeholder="Cari Produk...">
                         <i class="ri-search-line search-icon"></i>
                     </div>
                 </div>
@@ -34,14 +34,12 @@
             <div class="col">
                 <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all" role="tab">
-                            All <span class="badge badge-soft-danger align-middle rounded-pill ms-1">{{ count($datas) }}</span>
+                        <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all" role="tab">Semua <span class="badge badge-soft-danger align-middle rounded-pill ms-1">{{ count($datas) }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <?php $publish = \App\Models\Product::where('status', 'Published')->orderBy('created_at', 'DESC')->get(); ?>
-                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published" role="tab">
-                            Published <span class="badge badge-soft-danger align-middle rounded-pill ms-1">{{count($publish)}}</span>
+                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published" role="tab">Diterbitkan <span class="badge badge-soft-danger align-middle rounded-pill ms-1">{{count($publish)}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -74,14 +72,14 @@
                         <thead class="text-muted table-light">
                             <tr class="text-uppercase">
                                 <th class="sort" data-sort="">#</th>
-                                <th class="sort" data-sort="">Image</th>
-                                <th class="sort" data-sort="">Product</th>
-                                <th class="sort" data-sort="">Stock</th>
-                                <th class="sort" data-sort="">Price</th>
-                                <th class="sort" data-sort="">Orders</th>
-                                <th class="sort" data-sort="">Rating</th>
-                                <th class="sort" data-sort="">Published</th>
-                                <th class="sort" data-sort="">Action</th>
+                                <th class="sort" data-sort="">Foto</th>
+                                <th class="sort" data-sort="">Nama</th>
+                                <th class="sort" data-sort="">Stok</th>
+                                <th class="sort" data-sort="">Harga</th>
+                                <th class="sort" data-sort="">Terjual</th>
+                                <th class="sort" data-sort="">Penilaian</th>
+                                <th class="sort" data-sort="">Diterbitkan</th>
+                                <th class="sort" data-sort="">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="list form-check-all">

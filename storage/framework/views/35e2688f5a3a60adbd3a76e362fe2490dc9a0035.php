@@ -45,17 +45,16 @@
 </style>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Orders <?php $__env->endSlot(); ?>
+<?php $__env->slot('li_1'); ?> INDIGCO <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Pesanan Anda <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 <div class="row">
     <div class="col-lg-12">
         <div class="card" id="orderList">
             <div class="card-header  border-0">
                 <div class="d-flex align-items-center">
-                    <h5 class="card-title mb-0 flex-grow-1">Order History</h5>
+                    <h5 class="card-title mb-0 flex-grow-1">Pesanan Anda</h5>
                     <div class="flex-shrink-0">
-                        <button type="button" class="btn btn-soft-success"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
                     </div>
                 </div>
             </div>
@@ -64,7 +63,7 @@
                     <div class="row g-3">
                         <div class="col-xxl-12 col-sm-6">
                             <div class="search-box">
-                                <input type="text" class="form-control search" placeholder="Search for order ID, customer, order status or something...">
+                                <input type="text" class="form-control search" placeholder="Cari pesanan...">
                                 <i class="ri-search-line search-icon"></i>
                             </div>
                         </div>
@@ -108,7 +107,7 @@
                     <ul class="nav nav-tabs nav-tabs-custom nav-primary mb-3" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active All py-3" data-bs-toggle="tab" id="All" href="#home1" role="tab" aria-selected="false">
-                                <i class="ri-store-2-fill me-1 align-bottom"></i> All Orders
+                                <i class="ri-store-2-fill me-1 align-bottom"></i> Semua Pesanan
                                 <?php if(count($datas->where('user_id', Auth::user()->id)) != 0): ?>
                                 <span class="badge bg-primary align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id))); ?></span>
                                 <?php endif; ?>
@@ -117,7 +116,7 @@
                         <li class="nav-item">
                             <a class="nav-link py-3 Pending" data-bs-toggle="tab" id="Pending" href="#pending" role="tab" aria-selected="true">
                                 <i class="las la-info-circle me-1 align-middle"></i>
-                                Pending
+                                Menunggu Konfirmasi
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pending')) != 0): ?>
                                 <span class="badge bg-warning align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pending'))); ?></span>
                                 <?php endif; ?>
@@ -125,7 +124,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Inprogress" data-bs-toggle="tab" id="Inprogress" href="#inprogress" role="tab" aria-selected="true">
-                                <i class="mdi mdi-progress-clock me-1 align-bottom"></i> Inprogress
+                                <i class="mdi mdi-progress-clock me-1 align-bottom"></i> Dikemas
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Inprogress')) != 0): ?>
                                 <span class="badge bg-warning align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Inprogress'))); ?></span>
                                 <?php endif; ?>
@@ -133,7 +132,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Pickups" data-bs-toggle="tab" id="Pickups" href="#pickups" role="tab" aria-selected="false">
-                                <i class="ri-truck-line me-1 align-bottom"></i> Pickups
+                                <i class="ri-truck-line me-1 align-bottom"></i> Dikirim
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pickups')) != 0): ?>
                                 <span class="badge bg-secondary align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Pickups'))); ?></span>
                                 <?php endif; ?>
@@ -141,7 +140,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Received" data-bs-toggle="tab" id="Received" href="#received" role="tab" aria-selected="false">
-                                <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Received
+                                <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Diterima
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Received')) != 0): ?>
                                 <span class="badge bg-success align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Received'))); ?></span>
                                 <?php endif; ?>
@@ -149,7 +148,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Returns" data-bs-toggle="tab" id="Returns" href="#returns" role="tab" aria-selected="false">
-                                <i class="ri-arrow-left-right-fill me-1 align-bottom"></i> Returns
+                                <i class="ri-arrow-left-right-fill me-1 align-bottom"></i> Dikembalikan
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Returns')) != 0): ?>
                                 <span class="badge bg-danger align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Returns'))); ?></span>
                                 <?php endif; ?>
@@ -157,7 +156,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Cancelled" data-bs-toggle="tab" id="Cancelled" href="#cancelled" role="tab" aria-selected="false">
-                                <i class="ri-close-circle-line me-1 align-bottom"></i> Cancelled
+                                <i class="ri-close-circle-line me-1 align-bottom"></i> Dibatalkan
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Cancelled')) != 0): ?>
                                 <span class="badge bg-danger align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Cancelled'))); ?></span>
                                 <?php endif; ?>
@@ -165,7 +164,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link py-3 Rejected" data-bs-toggle="tab" id="Rejected" href="#rejected" role="tab" aria-selected="false">
-                                <i class="ri-close-circle-line me-1 align-bottom"></i> Rejected
+                                <i class="ri-close-circle-line me-1 align-bottom"></i> Ditolak
                                 <?php if(count($datas->where('user_id', Auth::user()->id)->where('status', 'Rejected')) != 0): ?>
                                 <span class="badge bg-danger align-middle ms-1"><?php echo e(count($datas->where('user_id', Auth::user()->id)->where('status', 'Rejected'))); ?></span>
                                 <?php endif; ?>
@@ -182,16 +181,14 @@
                                             <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                         </div>
                                     </th>
-                                    <th class="sort" data-sort="id">Receipt Number</th>
-                                    <th class="sort" data-sort="product_name">Product</th>
-                                    <th class="sort" data-sort="date">Order Date</th>
-                                    <th class="sort" data-sort="amount">Amount</th>
-                                    <th class="sort" data-sort="payment">Sender</th>
-                                    <th class="sort" data-sort="status">Delivery Status</th>
-                                    <th class="sort" data-sort="customer_name">Review</th>
-                                    <?php if(Auth::user()->role == "Admin"): ?>
-                                    <th class="sort" data-sort="city">Action</th>
-                                    <?php endif; ?>
+                                    <th class="sort" data-sort="id">No. Resi</th>
+                                    <th class="sort" data-sort="product_name">Produk</th>
+                                    <th class="sort" data-sort="date">Tanggal Pesan</th>
+                                    <th class="sort" data-sort="amount">Total Bayar</th>
+                                    <th class="sort" data-sort="payment">Metode Pengiriman</th>
+                                    <th class="sort" data-sort="status">Status Pengiriman</th>
+                                    <th class="sort" data-sort="customer_name">Penilaian</th>
+                                    <th class="sort" data-sort="city">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
@@ -223,7 +220,7 @@
                                         $ratings = App\Models\Rating::where('order_detail_id', $data->items[0]->id)->get();
                                         ?>
                                         <?php if($data->status == 'Received' && count($ratings) == null): ?>
-                                        <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#reviewNow<?php echo e($data->id); ?>">Review Now</button>
+                                        <button type="button" class="btn btn-light btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#reviewNow<?php echo e($data->id); ?>">Beri Ulasan</button>
                                         <?php elseif($data->status == 'Received'): ?>
                                         <button type="button" class="btn btn-light btn-sm">
                                             <i class="lab las la-star text-warning"></i>
@@ -237,35 +234,20 @@
                                             <?php if($data->status == 'Delivered'): ?>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
                                                 <button type="button" data-bs-toggle="modal" class="btn btn-success btn-sm" disabled>
-                                                    <i class="ri-checkbox-circle-line align-bottom me-1"></i> Accepted
+                                                    <i class="ri-checkbox-circle-line align-bottom me-1"></i> Diterima
                                                 </button>
-                                                <a href="#showModal" data-bs-toggle="modal" class="btn btn-info btn-sm">
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </a>
                                             </li>
                                             <?php elseif($data->status == 'Pickups'): ?>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
                                                 <a href="#acceptOrder<?php echo e($data->id); ?>" data-bs-toggle="modal" class="btn btn-success btn-sm">
-                                                    <i class="ri-checkbox-circle-line align-bottom me-1"></i> Accepted
-                                                </a>
-                                                <a href="#showModal" data-bs-toggle="modal" class="btn btn-info btn-sm">
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
+                                                    <i class="ri-checkbox-circle-line align-bottom me-1"></i> Diterima
                                                 </a>
                                             </li>
                                             <?php elseif($data->status == 'Pending'): ?>
                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
-                                                <button type="button" data-bs-toggle="modal" class="btn btn-info btn-sm" disabled>
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </button>
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#CancellOrder<?php echo e($data->id); ?>">
-                                                    <i class="ri-close-line align-middle me-1"></i> Cancel
+                                                    <i class="ri-close-line align-middle me-1"></i> Batalkan
                                                 </button>
-                                            </li>
-                                            <?php elseif($data->status == 'Inprogress' || $data->status == 'Received'): ?>
-                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top">
-                                                <a href="#showModal" data-bs-toggle="modal" class="btn btn-info btn-sm">
-                                                    <i class="ri-file-download-line align-bottom me-1"></i> Print Invoice
-                                                </a>
                                             </li>
                                             <?php endif; ?>
                                             <?php if($data->status == 'Returns' || $data->status == 'Cancelled' || $data->status == 'Rejected'): ?>
@@ -285,7 +267,7 @@
                                                 <?php echo csrf_field(); ?>
                                                 <div class="modal-header">
                                                     <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:70px;height:70px"></lord-icon>
-                                                    <h5 class="modal-title" id="CancellOrder<?php echo e($data->id); ?>Label">Why did you cancel the order?</h5>
+                                                    <h5 class="modal-title" id="CancellOrder<?php echo e($data->id); ?>Label">Kenapa anda membatalkan pesanan?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -306,8 +288,8 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="hstack gap-2 justify-content-end">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary">Kirim</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -322,14 +304,13 @@
                                             <div class="modal-body p-5 text-center">
                                                 <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:130px;height:130px"></lord-icon>
                                                 <div class="mt-4 text-center">
-                                                    <h4>Have you received the order ?</h4>
+                                                    <h4>Pesanan sudah anda terima?</h4>
                                                     <div class="hstack gap-2 justify-content-center mt-4">
                                                         <form action="<?php echo e(url('accept-order', $data->id)); ?>" method="POST">
                                                             <?php echo csrf_field(); ?>
-                                                            <button type="button" class="btn btn-link link-primary fw-medium text-decoration-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i>No</button>
+                                                            <button type="button" class="btn btn-link link-primary fw-medium text-decoration-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i>Belum</button>
                                                             <button type="submit" data-bs-toggle="modal" class="btn btn-success">
-                                                                <i class="ri-checkbox-circle-line align-bottom me-1"></i> Yes
-                                                            </button>
+                                                                <i class="ri-checkbox-circle-line align-bottom me-1"></i> Sudah</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -343,7 +324,7 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="addCategoryLabel">Review Now</h5>
+                                                <h5 class="modal-title" id="addCategoryLabel">Beri Ulasan</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <?php $i = 1 ?>

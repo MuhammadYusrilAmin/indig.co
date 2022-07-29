@@ -53,7 +53,7 @@
     </div><!-- end card-body -->
 </div><!-- end card -->
 
-<h1 class="card-title mt-5 mb-4">Popular Products</h1>
+<h1 class="card-title mt-5 mb-4">Produk Terpopuler</h1>
 <div class="row row-cols-1 row-cols-md-5 g-4 mb-5 pb-4">
     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="col">
@@ -81,11 +81,8 @@
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
 
-<?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Ecommerce <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?>Recommended Cooperative <?php $__env->endSlot(); ?>
-<?php echo $__env->renderComponent(); ?>
-<div class="row mt-4">
+<h1 class="card-title mt-5">Semua Koperasi</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4 mt-2">
     <?php $__currentLoopData = $cooperatives; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $coop): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="col-xl-3 col-lg-6">
         <div class="card ribbon-box right overflow-hidden">

@@ -168,9 +168,9 @@
             <?php
             $cek_destination = App\Models\Address::where('user_id', Illuminate\Support\Facades\Auth::user()->id)->orderBy('created_at', 'desc')->first(); ?>
             <?php if($cek_destination == null): ?>
-            <a href="<?php echo e(url('transaction?id=1')); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <a href="<?php echo e(url('/export-printer')); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Cetak</a>
             <?php else: ?>
-            <a href="<?php echo e(url('transaction?id='.$cek_destination->regencies_id)); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Checkout</a>
+            <a href="<?php echo e(url('/export-printer')); ?>" class="btn btn-success btn-label right ms-auto"><i class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i> Cetak</a>
             <?php endif; ?>
         </div>
         <?php endif; ?>
@@ -234,5 +234,12 @@
 </form>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
+<script src="assets/libs/list.js/list.js.min.js"></script>
+<script src="assets/libs/list.pagination.js/list.pagination.js.min.js"></script>
+
+<!--ecommerce-customer init js -->
+<script src="assets/js/pages/ecommerce-order.init.js"></script>
+
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\saas\resources\views/admin/transaction/kasir.blade.php ENDPATH**/ ?>

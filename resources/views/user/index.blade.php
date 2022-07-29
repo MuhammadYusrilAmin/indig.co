@@ -53,7 +53,7 @@
     </div><!-- end card-body -->
 </div><!-- end card -->
 
-<h1 class="card-title mt-5 mb-4">Popular Products</h1>
+<h1 class="card-title mt-5 mb-4">Produk Terpopuler</h1>
 <div class="row row-cols-1 row-cols-md-5 g-4 mb-5 pb-4">
     @foreach ($products as $product)
     <div class="col">
@@ -63,9 +63,9 @@
                 <h4 class="card-title">{{$product->title}}</h4>
             </div>
             <div class="card-footer">
-                <a href="{{url('detail_products?id='.$product->id)}}" class="card-link link-secondary">See More <i class="ri-arrow-right-s-line align-middle"></i>
+                <a href="{{url('detail_products?id='.$product->id)}}" class="card-link link-secondary">Lihat <i class="ri-arrow-right-s-line align-middle"></i>
                 </a>
-                <button onclick="event.preventDefault(); document.getElementById('input-cart_{{$product->id}}').submit();" class="btn btn-transparent card-link link-success">Add to Cart <i class="las la-shopping-cart align-middle"></i>
+                <button onclick="event.preventDefault(); document.getElementById('input-cart_{{$product->id}}').submit();" class="btn btn-transparent card-link link-success">Masukkan ke Keranjang <i class="las la-shopping-cart align-middle"></i>
                 </button>
 
                 <form action="{{route('cart.store')}}" id="input-cart_{{$product->id}}" method="POST" style="display: none;">
@@ -81,11 +81,8 @@
     @endforeach
 </div>
 
-@component('components.breadcrumb')
-@slot('li_1') Ecommerce @endslot
-@slot('title')Recommended Cooperative @endslot
-@endcomponent
-<div class="row mt-4">
+<h1 class="card-title mt-5">Semua Koperasi</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4 mt-2">
     @foreach ($cooperatives as $coop)
     <div class="col-xl-3 col-lg-6">
         <div class="card ribbon-box right overflow-hidden">

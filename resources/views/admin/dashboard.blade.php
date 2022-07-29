@@ -3,8 +3,8 @@
 @section('content')
 
 @component('components.breadcrumb')
-@slot('li_1') Dashboards @endslot
-@slot('title') Incomes @endslot
+@slot('li_1') Dashboard @endslot
+@slot('title') Pendapatan @endslot
 @endcomponent
 <div class="row project-wrapper">
     <div class="col-xxl-12">
@@ -38,11 +38,11 @@
                                 </span>
                             </div>
                             <div class="flex-grow-1 overflow-hidden ms-3">
-                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Active Incomes</p>
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Pendapatan Aktif</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0">IDR <span class="counter-value" data-target="{{ $totalincomesthismonth  }}">0</span></h4>
                                 </div>
-                                <p class="text-muted text-truncate mb-0">Incomes this month</p>
+                                <p class="text-muted text-truncate mb-0">Pendapatan bulan {{ date('M') }}</p>
                             </div>
                         </div>
                     </div><!-- end card body -->
@@ -59,11 +59,11 @@
                                 </span>
                             </div>
                             <div class="flex-grow-1 overflow-hidden ms-3">
-                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Purchased</p>
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Total produk laku</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ $totalincomesthismonth }}">0</span></h4>
                                 </div>
-                                <p class="text-muted text-truncate mb-0">Purchased this month</p>
+                                <p class="text-muted text-truncate mb-0">Dibeli pada bulan {{ date('M') }}</p>
                             </div>
                         </div>
                     </div><!-- end card body -->
@@ -80,11 +80,11 @@
                                 </span>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <p class="text-uppercase fw-medium text-muted mb-3">Total Products</p>
+                                <p class="text-uppercase fw-medium text-muted mb-3">Total Produk</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ count($products) }}">0</span></h4>
                                 </div>
-                                <p class="text-muted mb-0">All products</p>
+                                <p class="text-muted mb-0">Semua Produk</p>
                             </div>
                         </div>
                     </div><!-- end card body -->
@@ -96,36 +96,29 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header border-0 align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Incomes Overview</h4>
+                        <h4 class="card-title mb-0 flex-grow-1">Semua Pendapatan</h4>
                     </div><!-- end card header -->
 
                     <div class="card-header p-0 border-0 bg-soft-light">
                         <div class="row g-0 text-center">
-                            <div class="col-6 col-sm-3">
+                            <div class="col-6 col-sm-4">
                                 <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1">IDR <span class="counter-value" data-target="{{ $totalincomes }}">0</span></h5>
-                                    <p class="text-muted mb-0">Total Incomes</p>
+                                    <p class="text-muted mb-0">Total Pendapatan</p>
                                 </div>
                             </div>
                             <!--end col-->
-                            <div class="col-6 col-sm-3">
+                            <div class="col-6 col-sm-4">
                                 <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="{{ $totalquantity }}">0</span></h5>
-                                    <p class="text-muted mb-0">Total Purchased</p>
+                                    <p class="text-muted mb-0">Total Produk Laku</p>
                                 </div>
                             </div>
                             <!--end col-->
-                            <div class="col-6 col-sm-3">
+                            <div class="col-6 col-sm-4">
                                 <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="{{ count($orders) }}">0</span></h5>
-                                    <p class="text-muted mb-0">Total Orders</p>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                    <h5 class="mb-1 text-success">IDR <span class="counter-value" data-target="{{ $totalincomes }}">0</span></h5>
-                                    <p class="text-muted mb-0">Average monthly income</p>
+                                    <p class="text-muted mb-0">Total Pesanan</p>
                                 </div>
                             </div>
                             <!--end col-->
@@ -146,7 +139,7 @@
     <div class="col-xxl-4">
         <div class="card card-height-100">
             <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Team Members</h4>
+                <h4 class="card-title mb-0 flex-grow-1">Anggota Tim Koperasi</h4>
             </div><!-- end card header -->
 
             <div class="card-body">
